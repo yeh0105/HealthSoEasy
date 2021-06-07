@@ -1,0 +1,169 @@
+package com.soeasy.model;
+
+import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table(name = "Post")
+public class PostBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer postId;
+
+	private String postTitle;
+
+	private String postCategory;
+
+	@Column(length = 8000)
+	private String postContent;
+
+	private Blob postImg;
+
+	@Transient
+	private MultipartFile postMultiImg;
+
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+	private Timestamp postUploadTime;
+
+	private Integer postLike;
+
+	private Integer postStatus;
+	// -------------------------------
+	// 會員
+	@Transient
+	@Column(name = "fk_customerId")
+	private Integer customerId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_customerId")
+	private CustomerBean customerBean;
+
+	// 回覆(So分享)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "postBean", cascade = CascadeType.ALL)
+	Set<ReplyBean> replyBeans = new LinkedHashSet<ReplyBean>();
+
+	// ----------------------------
+	public PostBean() {
+	}
+	// ----------------------------
+
+	public Integer getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
+
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
+
+	public String getPostCategory() {
+		return postCategory;
+	}
+
+	public void setPostCategory(String postCategory) {
+		this.postCategory = postCategory;
+	}
+
+	public String getPostContent() {
+		return postContent;
+	}
+
+	public void setPostContent(String postContent) {
+		this.postContent = postContent;
+	}
+
+	public Blob getPostImg() {
+		return postImg;
+	}
+
+	public void setPostImg(Blob postImg) {
+		this.postImg = postImg;
+	}
+
+	public MultipartFile getPostMultiImg() {
+		return postMultiImg;
+	}
+
+	public void setPostMultiImg(MultipartFile postMultiImg) {
+		this.postMultiImg = postMultiImg;
+	}
+
+	public Timestamp getPostUploadTime() {
+		return postUploadTime;
+	}
+
+	public void setPostUploadTime(Timestamp postUploadTime) {
+		this.postUploadTime = postUploadTime;
+	}
+
+	public Integer getPostLike() {
+		return postLike;
+	}
+
+	public void setPostLike(Integer postLike) {
+		this.postLike = postLike;
+	}
+
+	public Integer getPostStatus() {
+		return postStatus;
+	}
+
+	public void setPostStatus(Integer postStatus) {
+		this.postStatus = postStatus;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public CustomerBean getCustomerBean() {
+		return customerBean;
+	}
+
+	public void setCustomerBean(CustomerBean customerBean) {
+		this.customerBean = customerBean;
+	}
+
+	public Set<ReplyBean> getReplyBeans() {
+		return replyBeans;
+	}
+
+	public void setReplyBeans(Set<ReplyBean> replyBeans) {
+		this.replyBeans = replyBeans;
+	}
+
+	
+}
