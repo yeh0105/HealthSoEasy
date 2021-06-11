@@ -24,9 +24,15 @@ header {
 
 header nav a {
     color: #007500;
-    padding-right: 10px;
+    padding: 5px;
     text-decoration: none;
     font-size: 20px;
+}
+
+header nav a:hover {
+    background-color: #E0E0E0;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
 #headerLinks {
@@ -42,6 +48,13 @@ header nav a {
     color: rgb(10, 10, 10);
     padding-right: 10px;
     font-size: 16px;
+    padding: 5px;
+}
+
+#headerLinks a:hover {
+    background-color: #E0E0E0;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
 #mainWrapper {
@@ -82,11 +95,19 @@ header nav a {
     text-align: center;
 }
 
-
 footer div a {
     color: rgba(146, 146, 146, 1.00);
     font-size: 18px;
     text-align: right;
     text-decoration: none;
     font-weight: 200;
+    padding: 5px;
+}
+
+footer div a:hover {
+    background-color: #C9D8BF;
+    border-radius: 5px;
+    text-decoration: none;
+    
+    
 }

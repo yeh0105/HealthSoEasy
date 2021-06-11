@@ -18,8 +18,8 @@
 				<img src="images/ICON.png">
 			</div>
 			<div id="headerLinks">
-				<a href="#" title="Login/Register">登入/註冊</a> <a href="#"
-					title="Cart">購物車</a>
+				<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 
+				<a href="#" title="Cart">購物車</a>
 			</div>
 			<nav>
 				<a href="index.jsp" title="Link">首頁</a> 
