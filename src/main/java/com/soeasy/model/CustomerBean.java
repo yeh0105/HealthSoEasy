@@ -42,6 +42,9 @@ public class CustomerBean implements Serializable {
 	private String customerName;
 
 	private String customerPassword;
+	
+	@Transient
+	private String customerCheckPassword;
 
 	private String customerPhone;
 
@@ -175,6 +178,14 @@ public class CustomerBean implements Serializable {
 
 	public void setCustomerPassword(String customerPassword) {
 		this.customerPassword = customerPassword;
+	}
+
+	public String getCustomerCheckPassword() {
+		return customerCheckPassword;
+	}
+
+	public void setCustomerCheckPassword(String customerCheckPassword) {
+		this.customerCheckPassword = customerCheckPassword;
 	}
 
 	public String getCustomerPhone() {
