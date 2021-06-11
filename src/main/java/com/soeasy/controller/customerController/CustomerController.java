@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.util.GlobalService;
 import com.soeasy.validator.CustomerBeanValidator;
 
 @Controller
@@ -45,16 +46,23 @@ public class CustomerController {
 				BindingResult result, Model model,
 				HttpServletRequest request
 			) {
+		//檢測不正當欄位並回傳提示訊息
 		CustomerBeanValidator validator = new CustomerBeanValidator();
 		validator.validate(customerBean, result);
 		if (result.hasErrors()) {
 			return "customer/customerSignInUp";
 		}
 		
+		//設定初始值
+		//初始積分為0
+		customerBean.setCustomerScore(0);
+		//帳號狀態:正常
+		customerBean.setCustomerStatus(GlobalService.CUSTOMER_STATUS_NORMAL);
+		//帳號創建時間
 		Timestamp registerTime = new Timestamp(System.currentTimeMillis());
 		customerBean.setCustomerRegisterTime(registerTime);
 		
-		// 檢查 memberId是否重複
+		// 檢查 customerEmail是否重複
 		if (customerService.emailExists(customerBean.getCustomerEmail())) {
 			result.rejectValue("customerEmail", "", "帳號已存在，請重新輸入");
 			return "customer/customerSignInUp";
