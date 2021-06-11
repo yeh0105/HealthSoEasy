@@ -62,6 +62,7 @@ public class CustomerBean implements Serializable {
 
 	private Integer customerStatus;
 
+	@Column(updatable=false)
 	private Timestamp customerRegisterTime;
 
 	//-------------------------------------------
