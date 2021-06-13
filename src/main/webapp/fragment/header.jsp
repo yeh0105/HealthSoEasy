@@ -27,7 +27,7 @@
 				<a href="#" title="Link">講座</a> 
 				<a href="#" title="Link">商城</a> 
 				<a href="postIndex.jsp" title="So Share">分享</a> 
-				<a href="#" title="Link">地圖</a> 
+				<a href="<c:url value='/sportMapController/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
 				<a href="#" title="Link">客服</a>
 			</nav>
 		</header>
