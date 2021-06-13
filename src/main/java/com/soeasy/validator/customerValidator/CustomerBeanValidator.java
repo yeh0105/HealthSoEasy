@@ -1,4 +1,4 @@
-package com.soeasy.validator;
+package com.soeasy.validator.customerValidator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

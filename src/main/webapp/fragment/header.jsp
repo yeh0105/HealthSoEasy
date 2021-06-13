@@ -7,22 +7,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- header的css -->
-<link href="css/header&footer.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<%-- 	<jsp:include page="/fragment/header.jsp" /> --%>
-	<div id="mainWrapper">
+	<div class="mainWrapper">
 		<header>
 			<div id="logo">
-				<img src="images/ICON.png">
+				<img src="${pageContext.request.contextPath}/images/ICON.png">
 			</div>
 			<div id="headerLinks">
 				<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 
 				<a href="#" title="Cart">購物車</a>
 			</div>
 			<nav>
-				<a href="index.jsp" title="Link">首頁</a> 
+				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 
 				<a href="#" title="Link">園地</a> 
 				<a href="#" title="Link">講座</a> 
 				<a href="#" title="Link">商城</a> 
@@ -31,6 +31,6 @@
 				<a href="#" title="Link">客服</a>
 			</nav>
 		</header>
-
+	</div>
 </body>
 </html>

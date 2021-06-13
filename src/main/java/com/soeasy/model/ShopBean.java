@@ -33,6 +33,9 @@ public class ShopBean implements Serializable {
 
 	private String shopPassword;
 
+	@Transient
+	private String shopCheckPassword;
+	
 	private String shopPhone;
 
 	private Blob shopImg;
@@ -85,6 +88,14 @@ public class ShopBean implements Serializable {
 	public void setShopPassword(String shopPassword) {
 		this.shopPassword = shopPassword;
 	}
+	
+	public String getShopCheckPassword() {
+		return shopCheckPassword;
+	}
+
+	public void setShopCheckPassword(String shopCheckPassword) {
+		this.shopCheckPassword = shopCheckPassword;
+	}
 
 	public String getShopPhone() {
 		return shopPhone;
@@ -118,4 +129,21 @@ public class ShopBean implements Serializable {
 		this.shopStatus = shopStatus;
 	}
 
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Set<ProductBean> getProductBeans() {
+		return productBeans;
+	}
+
+	public void setProductBeans(Set<ProductBean> productBeans) {
+		this.productBeans = productBeans;
+	}
+
+	
 }

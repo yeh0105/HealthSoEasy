@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
 </head>
 <body>
 	<!-- 引入共同的頁尾  copy這行-->
 	<%-- 	<jsp:include page="/fragment/footer.jsp" /> --%>
+	<div class="mainWrapper">
 	<footer>
 		<hr>
 		<div class="footerlinks" style="text-align: right;">

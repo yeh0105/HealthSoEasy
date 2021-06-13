@@ -18,7 +18,10 @@ public class GlobalService {
 	public static final Integer CUSTOMER_DIET_MEAT = 1;
 	public static final Integer CUSTOMER_DIET_VAGETABLE = 2;
 	
-	
+	//廠商
+	//廠商帳號狀態
+	public static final Integer SHOP_STATUS_NORMAL = 1;
+	public static final Integer SHOP_STATUS_BANNED = 2;
 	
 	//地圖
 	public static final int SPORTMAPS_PER_PAGE = 9;

@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerBean findCustomerById(Integer customerId) {
+	public CustomerBean findByCustomerId(Integer customerId) {
 		return null;
 	}
 
