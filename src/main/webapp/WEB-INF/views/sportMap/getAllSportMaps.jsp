@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,36 +11,55 @@
 <title>所有運動地點</title>
 </head>
 <body>
+	<jsp:include page="/fragment/header.jsp" />
 
-	<%-- <div id="insert"><a href="<c:url value='/_20_productMaintain/BookInsert?pageNo=${pageNo}' />" >新增紀錄</a></div> --%>
-
-
-	<table border='2' width="690">
+	<a href='add'><button>新增運動地圖</button></a>
+	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
+		
+	<table border='2' width="1000">
+		<tr>
+		
+		<td width='800' colspan='2' align='left'>
+		<table border='1' width='800'>
+			<tr>
+			<td width='200'>運動分類</td>		
+		
+			<td width='200'>運動地點名稱</td>
+			<td width='200'>地址</td>
+			<td width='200'>地點簡介</td>
+			<td width='200'>地圖	</td>
+			</tr>
+		</table>
+		</td>
+		
+		</tr>
 		<c:forEach varStatus="stVar" var="entry" items="${sportMaps_DPP}">
 			<c:set var="rowColor" value="#DEFADE" />
-<%-- 			<c:if test="${ stVar.count % 2 == 0 }"> --%>
-<%-- 				<c:set var="rowColor" value="#FFEBFF" /> --%>
-<%-- 			</c:if> --%>
-
 			<tr height='18' bgColor="${rowColor}">
-			<td width='600' colspan='2' align='left'>
-			<table border='1' width='600'>
-				<tr>
-				<td width='200' align="left">
-					運動分類：${(entry.value.sportCategoryBean.sportCategoryName)}</td>
-					<td width='600' align="left">運動地點名稱：${entry.value.}
-<%-- 					<a href="BookUpdate/${entry.value.bookId}/${pageNo}">${entry.value.title}</a> --%> --%>
-					</td>
-					
-					<td width='600' align="left">地址：${entry.value.}
-					<td width='600' align="left">地圖：${entry.value.}
-				</tr>
-			</table>
-			</td>
-			
+				<td width='800' colspan='2' align='left'>
+					<table border='1' width='800'>
+						<tr>
+							<td width='200' align="left">
+								${(entry.value.sportCategoryBean.sportCategoryName)}</td>
+							<td width='200' align="left">${entry.value.sportMapName}
+							</td>
+
+							<td width='200' align="left">${entry.value.sportMapAddress}
+							
+							<td width='200' align="left">${entry.value.sportMapInfo}
+
+							
+							<td width='200' align="left">${entry.value.sportMapMap}
+						</tr>
+					</table>
+				</td>
+			</tr>
 		</c:forEach>
 
 
 	</table>
+
+	<jsp:include page="/fragment/footer.jsp" />
+
 </body>
 </html>
