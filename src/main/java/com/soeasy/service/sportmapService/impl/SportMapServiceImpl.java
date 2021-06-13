@@ -27,37 +27,18 @@ public class SportMapServiceImpl implements SportMapService {
 
 	@Autowired
 	SportMapRepository sportMapRepository;
+	
+	
+	//新增地圖
+	@Override
+	public SportMapBean save(SportMapBean sportMapBean) {
+		return sportMapRepository.save(sportMapBean);
+	}	
+	
 
+	
 	@Transactional
 	@Override
-	public int deleteSportMap(int no) {
-		int n = 0;
-		sportMapRepository.deleteById(no);
-		n++;
-		return n;
-
-	}
-
-	@Override
-	public SportMapBean getSportMap(int sportMapId) {
-
-		return null;
-	}
-
-	@Override
-	public List<String> getSportCategory() {
-
-		return null;
-	}
-
-	@Transactional
-	@Override
-	public Integer saveSportMap(SportMapBean bean) {
-		return null;
-
-	}
-
-//	@Override
 	public Map<Integer, SportMapBean> getPageSportMaps(int pageNo) {
 
 		Map<Integer, SportMapBean> map = new LinkedHashMap<>();
@@ -72,11 +53,6 @@ public class SportMapServiceImpl implements SportMapService {
 		return map;
 	}
 
-//	@Override
-//	public Integer getRecordsPerPage() {
-//		return recordsPerPage; //記得開啟
-
-//	}
 
 	//
 	@Override
@@ -94,5 +70,11 @@ public class SportMapServiceImpl implements SportMapService {
 		
 
 	}
+	
+//	@Override
+//	public Integer getRecordsPerPage() {
+//		return recordsPerPage; //記得開啟
+
+//	}
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.soeasy.model.CustomerBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.util.GlobalService;
-import com.soeasy.validator.CustomerBeanValidator;
+import com.soeasy.validator.customerValidator.CustomerBeanValidator;
 
 @Controller
 @RequestMapping("/customerController")
@@ -25,7 +25,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
-	//表單初值
+	//表單初值--新增會員
 	@GetMapping("/addCustomer")
 	public String addCustomerSendForm(Model model) {
 		CustomerBean customerBean = new CustomerBean();
@@ -39,7 +39,7 @@ public class CustomerController {
 		return "customer/customerSignInUp";
 	}
 	
-	//送出表單
+	//送出表單--新增會員
 	@PostMapping("/addCustomer")
 	public String addCustomerProcess(
 				@ModelAttribute("customerBean") CustomerBean customerBean,

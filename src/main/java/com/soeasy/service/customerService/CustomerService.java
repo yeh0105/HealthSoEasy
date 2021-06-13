@@ -10,7 +10,7 @@ public interface CustomerService {
 	//新增會員
 	void addCustomer(CustomerBean customer);
 	//ID查詢會員
-	CustomerBean findCustomerById(Integer customerId);
+	CustomerBean findByCustomerId(Integer customerId);
 //	//Email查詢會員
 //	CustomerBean findCustomerByEmail(String customerEmail);
 	//修改基本資料
