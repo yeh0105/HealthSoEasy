@@ -21,7 +21,7 @@
 				<a href="#" title="Link">商城</a> 
 				<a href="#" title="Link">分享</a> 
 				<a href="#" title="Link">地圖</a> 
-				<a href="#" title="Link">客服</a>
+				<a href="nutritionistIndex.jsp" title="Link">客服</a>
 			</p>
 		</div>
 	</footer>
