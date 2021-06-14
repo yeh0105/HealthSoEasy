@@ -21,13 +21,18 @@
         window.onload = function () {
             const signInBtn = document.getElementById("signIn");
             const signUpBtn = document.getElementById("signUp");
-            const fistForm = document.getElementById("form1");
+            const firstForm = document.getElementById("form1");
             const secondForm = document.getElementById("form2");
             const container = document.querySelector(".container");
             const customerShopSwitch1 = document.getElementById("switchID1");
             const customerShopSwitch2 = document.getElementById("switchID2");
 
-            let signMode = "sign_up";
+            let signMode = "${signMode}";
+            if(signMode == "sign_up"){
+            	container.classList.add("right-panel-active");
+            } else if(signMode == "sign_in"){
+                container.classList.remove("right-panel-active");
+            }
 
             signInBtn.addEventListener("click", () => {
                 if(signMode == "sign_up"){
@@ -43,7 +48,7 @@
                     container.classList.add("right-panel-active");
                     signMode = "sign_up";
                 } else if(signMode == "sign_up"){
-                    fistForm.addEventListener("submit", (e) => e.preventDefault());
+                    firstForm.addEventListener("submit", (e) => e.preventDefault());
                 }
             });
 
@@ -86,10 +91,15 @@
 
         <!-- Sign In -->
         <div class="container__form container--signin">
-            <form:form method="Post" action="/" modelAttribute="customerBean" class="form" id="form2">
+            <form:form method="Post" action="customerSignIn" modelAttribute="customerSignInBean" class="form" id="form2">
                 <h2 class="form__title">Sign In</h2>
-                <form:input path="customerEmail" type="email" placeholder="Email" class="input" />
-                <form:input path="customerPassword" type="password" placeholder="Password" class="input" />
+                
+                <form:input path="customerSignInEmail" type="email" placeholder="Email" class="input" />
+                <form:errors path="customerSignInEmail" cssClass="error" />
+                
+                <form:input path="customerSignInPassword" type="password" placeholder="Password" class="input" />
+                <form:errors path="customerSignInPassword" cssClass="error" />
+
                 <a href="#" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>
             </form:form>

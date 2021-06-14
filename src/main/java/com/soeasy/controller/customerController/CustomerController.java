@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.util.GlobalService;
 import com.soeasy.validator.customerValidator.CustomerBeanValidator;
@@ -25,24 +26,32 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
-	//表單初值--新增會員
+	//表單初值--新增會員_會員登入
 	@GetMapping("/addCustomer")
 	public String addCustomerSendForm(Model model) {
 		CustomerBean customerBean = new CustomerBean();
+		CustomerSignInBean customerSignInBean = new CustomerSignInBean();
+		String signMode = "sign_up";
 		
 		customerBean.setCustomerName("許宸瑜");
 		customerBean.setCustomerEmail("Flanlove@outlook.com");
 		customerBean.setCustomerPassword("ab1234");
 		customerBean.setCustomerCheckPassword("ab1234");
 		
+		customerSignInBean.setCustomerSignInEmail("Flanlove@outlook.com");
+		customerSignInBean.setCustomerSignInPassword("ab1234");
+		
 		model.addAttribute("customerBean", customerBean);
+		model.addAttribute("customerSignInBean", customerSignInBean);
+		model.addAttribute("signMode", signMode);
 		return "customer/customerSignInUp";
 	}
 	
-	//送出表單--新增會員
+	//送出表單--新增顧客會員
 	@PostMapping("/addCustomer")
 	public String addCustomerProcess(
-				@ModelAttribute("customerBean") CustomerBean customerBean,
+				@ModelAttribute("customerBean")
+				CustomerBean customerBean,
 				BindingResult result, Model model,
 				HttpServletRequest request
 			) {
@@ -50,6 +59,12 @@ public class CustomerController {
 		CustomerBeanValidator validator = new CustomerBeanValidator();
 		validator.validate(customerBean, result);
 		if (result.hasErrors()) {
+			//重新設定隔壁表單的初值
+			CustomerSignInBean customerSignInBean = new CustomerSignInBean();
+			//鎖定頁面為註冊模式
+			String signMode = "sign_up";
+			model.addAttribute("customerSignInBean", customerSignInBean);
+			model.addAttribute("signMode", signMode);
 			return "customer/customerSignInUp";
 		}
 		
