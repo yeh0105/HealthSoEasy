@@ -5,21 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>So Share</title>
- <script type="text/javascript"
-    src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
-<link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
-    rel="stylesheet" media="screen">
-    <link href="https://fonts.googleapis.com/css2?family=Caudex&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/categoryNav.css">
-    <link href="css/header&footer.css" rel="stylesheet">
+<script type="text/javascript"
+	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
+<link
+	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
+	rel="stylesheet" media="screen">
+<link
+	href="https://fonts.googleapis.com/css2?family=Caudex&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/categoryNav.css">
+<link href="css/header&footer.css" rel="stylesheet">
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 	<div>
 		<section id="offer">
-			<!-- <img src="images/section1.png" width="100%" height="100%"> -->
 			<div style="background-color: #C9D8BF;">
 				<div style="margin: 5% auto;">
 					<h1 style="color: #1d3b2a; font-family: Caudex;">So Share</h1>
@@ -29,7 +33,9 @@
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
 						Let's Share Your Story.</p>
 				</div>
+
 			</div>
+
 		</section>
 	</div>
 
@@ -44,13 +50,16 @@
 								<div class="thumbnail">
 									<img alt="300x200" src="images/product_01.jpg" />
 									<div class="caption">
-										<h3>標題</h3>
-										<p>內文</p>
-										<p>
-											<a href="#"> <img alt="" src="images/heart-empty.png"
-												width="7%" height="7%">
-											</a>123
-										</p>
+										<h3>缩略图标题</h3>
+										<p>123456</p>
+										<div style="display: flex;">
+											<p>
+												<a href="#"> <img alt="" src="images/heart-empty.png"
+													width="7%" height="7%">
+												</a>123
+											<p style="font-size: 15px; color: grey;">By NickName</p>
+											</p>
+										</div>
 									</div>
 								</div>
 							</li>
@@ -58,13 +67,16 @@
 								<div class="thumbnail">
 									<img alt="300x200" src="images/product_01.jpg" />
 									<div class="caption">
-										<h3>標題</h3>
-										<p>內文</p>
-										<p>
-											<a href="#"> <img alt="" src="images/heart-empty.png"
-												width="7%" height="7%">
-											</a>123
-										</p>
+										<h3>缩略图标题</h3>
+										<p>123456</p>
+										<div style="display: flex;">
+											<p>
+												<a href="#"> <img alt="" src="images/heart-empty.png"
+													width="7%" height="7%">
+												</a>123
+											<p style="font-size: 15px; color: grey;">By NickName</p>
+											</p>
+										</div>
 									</div>
 								</div>
 							</li>
@@ -72,13 +84,16 @@
 								<div class="thumbnail">
 									<img alt="300x200" src="images/product_01.jpg" />
 									<div class="caption">
-										<h3>標題</h3>
-										<p>內文</p>
-										<p>
-											<a href="#"> <img alt="" src="images/heart-empty.png"
-												width="7%" height="7%">
-											</a>123
-										</p>
+										<h3>缩略图标题</h3>
+										<p>123456</p>
+										<div style="display: flex;">
+											<p>
+												<a href="#"> <img alt="" src="images/heart-empty.png"
+													width="7%" height="7%">
+												</a>123
+											<p style="font-size: 15px; color: grey;">By NickName</p>
+											</p>
+										</div>
 									</div>
 								</div>
 							</li>
@@ -131,6 +146,12 @@
 								<a href="#"> <img alt="" src="images/heart-empty.png"
 									width="7%" height="7%">
 								</a>123
+							<p style="font-size: 15px; color: grey;">
+								<br>
+								<br>
+								<br>
+								<br> By NickName
+							</p>
 							</p>
 						</div>
 					</div>
@@ -151,5 +172,6 @@
 	</div>
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
+
 </body>
 </html>
