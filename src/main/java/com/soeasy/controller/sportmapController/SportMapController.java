@@ -20,7 +20,7 @@ import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
 import com.soeasy.service.sportmapService.SportCategoryService;
 import com.soeasy.service.sportmapService.SportMapService;
-import com.soeasy.validator.SportMapBeanValidator;
+import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
 @RequestMapping("/sportMapController")
@@ -79,11 +79,14 @@ public class SportMapController {
 	SportMapBean sportMapBean,BindingResult result,
 	Model model,HttpServletRequest request){
 		System.out.println("test123123");
+		//檢驗欄位內容
 		SportMapBeanValidator validator = new SportMapBeanValidator();
 		validator.validate(sportMapBean,result);
 		if(result.hasErrors()) {
 			
-			return "sportMap/addSportMap";	 
+//			return "sportMap/addSportMap";	 
+			
+			return "redirect:/sportMapController/add"; 
 		}
 		
 		// 找出對應的SportCategory物件
@@ -97,6 +100,7 @@ public class SportMapController {
 			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "sportMap/addSportMap";	 
 
+			
 		}
 		//跳轉至查詢所有運動地點頁面(送displaySportMaps請求)
 		return "redirect:/sportMapController/displaySportMaps"; 

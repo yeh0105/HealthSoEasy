@@ -65,7 +65,6 @@
 		</fieldset>
 
 	</div>
-	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>回前頁</button></a>
 	
 	<jsp:include page="/fragment/footer.jsp" />
 	

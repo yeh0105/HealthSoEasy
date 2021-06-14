@@ -25,4 +25,16 @@ public class GlobalService {
 	
 	//地圖
 	public static final int SPORTMAPS_PER_PAGE = 9;
+	
+	//講座狀態
+	public static final Integer LECTURE_STATUS_TOBEHELD = 1;
+	public static final Integer LECTURE_STATUS_ONGOING = 2;
+	public static final Integer LECTURE_STATUS_HISTORY = 3;
+	
+	//預約狀態
+	public static final Integer RESERVATION_STATUS_SUCCESS = 1;
+	public static final Integer RESERVATION_STATUS_WAITINGLIST = 2;
+	public static final Integer RESERVATION_STATUS_CANCEL = 3;
+	public static final Integer RESERVATION_STATUS_ATTEND = 4;
+	public static final Integer RESERVATION_STATUS_ABSENCE = 5;
 }
