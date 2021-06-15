@@ -12,6 +12,9 @@ public class HomeController {
 		return "index";
 	}
 	//	/WEB-INF/views/index.jsp
-	
+	@GetMapping({"/nutritionist"})
+	public String nutritionist() {
+		return "/nutritionist/nutritionistIndex";
+	}
 	
 }
