@@ -32,7 +32,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerBean checkEmailPassword(String customerEmail, String customerPassword) {
-		return null;
+		CustomerBean customerBean = null;
+		List<CustomerBean> customerBeans = customerRepository.findByCustomerEmailAndCustomerPassword(customerEmail, customerPassword);
+		if(customerBeans.size() > 0) {
+			customerBean = customerBeans.get(0);
+		}
+		return customerBean;
 	}
 
 	@Override

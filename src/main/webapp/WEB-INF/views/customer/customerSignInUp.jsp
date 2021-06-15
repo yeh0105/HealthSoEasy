@@ -99,6 +99,7 @@
                 
                 <form:input path="customerSignInPassword" type="password" placeholder="Password" class="input" />
                 <form:errors path="customerSignInPassword" cssClass="error" />
+                <form:errors path="invalidCredentials" cssClass="error" />
 
                 <a href="#" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>

@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <title>營養師介紹</title>
 <style>
+#mainWrapper2 {
+	width: 80%;
+	padding-left: 10%;
+	padding-right:10%;
+}
+
+body * {
+	font-family: '微軟正黑體';
+}
+
 #nutrit01 {
 	float: left;
 	width: 500px;
@@ -25,39 +35,104 @@
 
 #nutrit02 {
 	float: right;
-	width: 698px;
+	width: 670px;
 	height: 450px;
-	border: blue 1px solid;
 }
 
 #nutrit03 {
 	float: left;
-	width: 300px;
-	height: 200px;
+	width: 1000px;
+	height: 400px;
+}
+
+#uk_breadcrumb {
+	flex-wrap: wrap;
+	list-style: none;
+	display: flex;
+}
+
+#dr_title {
+	color: #FF9900;
+	border-bottom: black 3px solid;
+	font-family: '微軟正黑體';
+}
+
+#slim {
+	color: #800000;
+	float: left;
+	width: 25%;
+	text-align: center;
+	font-family: '微軟正黑體';
 }
 </style>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-
-
 	<section>
-		<img src="images/nutritionistHeader.png" width="100%" height="100%">
+		<img
+			src="${pageContext.request.contextPath}/images/nutritionist/nutritionistHeader.png"
+			width="100%" height="100%">
 	</section>
-	<section>
+	<div id='mainWrapper2'>
 
-		<div id="nutrit01">
-			<img id="nutritImage01" src="images/nutritionist01.png">
-		</div>
-		<div id="nutrit02"></div>
-		<div id="nutrit03"></div>
+		<section>
 
-		<hr>
+			<div>
+				<ul id="uk_breadcrumb">
+					<li href="<c:url value='/'/>">首頁</li>
+					<li href="#">&emsp;&frasl;&emsp;營養師介紹</li>
+				</ul>
 
-	</section>
+			</div>
+			<div id="nutrit01">
+				<img id="nutritImage01"
+					src="${pageContext.request.contextPath}/images/nutritionist/nutritionist01.png">
+			</div>
+			<div id="nutrit02">
+				<h3 id="dr_title">營養師基本資料</h3>
+				<a>1. 姓名:</a><br>
+				<br> <a>2. 性別:</a><br>
+				<br> <a>3. 學位:</a><br>
+				<br> <a>4. E-mail:</a><br>
+				<br> <a>5. 專長:</a><br>
+				<br>
+			</div>
 
+			<div id="nutrit03">
+				<h3>推薦菜單</h3>
+				<div id="slim">
+					<h4>A套餐 (減肥)</h4>
+					<button type="button">
+						<img
+							src="${pageContext.request.contextPath}/images/nutritionist/food_01.png">
+					</button>
+					<br>
+					<button type="button">加入購物車</button>
+				</div>
+				<div id="slim">
+					<h4>B套餐 (健身)</h4>
+					<button type="button">
+						<img
+							src="${pageContext.request.contextPath}/images/nutritionist/food_02.png">
+					</button>
+					<br>
+					<button type="button">加入購物車</button>
+				</div>
+				<div id="slim">
+					<h4>C套餐 (加鈣)</h4>
+					<button type="button">
+						<img
+							src="${pageContext.request.contextPath}/images/nutritionist/food_03.png">
+					</button>
+					<br>
+					<button type="button">加入購物車</button>
+				</div>
+			</div>
 
+		</section>
+
+	</div>
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
 </body>

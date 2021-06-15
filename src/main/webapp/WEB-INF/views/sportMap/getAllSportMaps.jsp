@@ -13,8 +13,8 @@
 	.btn1{  border-radius: 20px 20px;
             border-color: #D7FFEE;
             background-color:#D7FFEE;
-
         }
+        
 
 </style>
 
@@ -31,6 +31,9 @@
 
 	<a href='add'><button>新增運動地圖</button></a>
 	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
+		
+		
+		
 		
 	<table border='2' width="1000">
 		<tr>
@@ -66,6 +69,10 @@
 
 							
 							<td width='200' align="left">${entry.value.sportMapMap}
+							
+
+							<td><a href="<c:url value='sportMap/${entry.value.sportMapId}' />"><button>修改運動地點</button></a></td>
+						
 						</tr>
 					</table>
 				</td>
@@ -73,7 +80,7 @@
 		</c:forEach>
 
 
-	</table>
+	</table><br>
 
 	<jsp:include page="/fragment/footer.jsp" />
 
