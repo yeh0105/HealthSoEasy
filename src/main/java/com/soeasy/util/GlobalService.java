@@ -27,16 +27,16 @@ public class GlobalService {
 	public static final int SPORTMAPS_PER_PAGE = 9;
 
 	// 講座狀態
-	public static final Integer LECTURE_STATUS_TOBEHELD = 1;
-	public static final Integer LECTURE_STATUS_ONGOING = 2;
-	public static final Integer LECTURE_STATUS_HISTORY = 3;
+	public static final Integer LECTURE_STATUS_TOBEHELD = 1;  //即將舉辦
+	public static final Integer LECTURE_STATUS_ONGOING = 2;   //進行中
+	public static final Integer LECTURE_STATUS_HISTORY = 3;   //精采回顧
 
-	// 預約狀態
-	public static final Integer RESERVATION_STATUS_SUCCESS = 1;
-	public static final Integer RESERVATION_STATUS_WAITINGLIST = 2;
-	public static final Integer RESERVATION_STATUS_CANCEL = 3;
-	public static final Integer RESERVATION_STATUS_ATTEND = 4;
-	public static final Integer RESERVATION_STATUS_ABSENCE = 5;
+	// 講座預約狀態
+	public static final Integer RESERVATION_STATUS_SUCCESS = 1;     //預約成功
+	public static final Integer RESERVATION_STATUS_WAITINGLIST = 2; //候補名單
+	public static final Integer RESERVATION_STATUS_CANCEL = 3;      //取消預約
+	public static final Integer RESERVATION_STATUS_ATTEND = 4;      //出席
+	public static final Integer RESERVATION_STATUS_ABSENCE = 5;     //缺席
 
 	// 分享
 	// 文章狀態
