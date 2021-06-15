@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +39,25 @@ public class SportMapController {
 	public String ShowSportMapIndex(Model model) {
 		
 		return "sportMap/sportMapIndex";
-	}	
+	}
+	
+	//查詢單一運動地點,
+	@GetMapping(value="/sportMap/{sportMapId}")
+	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+//		System.out.println("test get oneeeeeee");
+//		System.out.println("sportMapId="+sportMapId);
+		SportMapBean sportMapBean = sportMapService.get(sportMapId);
+//		System.out.println("test get endddd");
+		
+		model.addAttribute("sportMapBean",sportMapBean);
+		
+		System.out.println("sportMapBean="+sportMapBean);
+		
+		return "sportMap/updateSportMap";
+	}
+	
+	
+	
 	//查詢所有運動地點
 	@GetMapping("/displaySportMaps")
 	public String DisplaySportMaps(Model model, HttpServletRequest request, HttpServletResponse response,

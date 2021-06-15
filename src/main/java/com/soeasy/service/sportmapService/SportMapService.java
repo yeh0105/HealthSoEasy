@@ -9,6 +9,8 @@ public interface SportMapService {
 	//新增地圖
 	SportMapBean save(SportMapBean sportMapBean);
 	
+	//查詢單一地圖By ID
+	SportMapBean get(Integer SportMapId);	
 		
 	// 抓分頁一頁有哪些地圖
 		Map<Integer, SportMapBean> getPageSportMaps(int pageNo);
