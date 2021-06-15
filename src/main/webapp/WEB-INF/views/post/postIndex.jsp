@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +23,9 @@
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-	<div>
+	<div class="mainWrapper">
 		<section id="offer">
-			<div style="background-color: #C9D8BF;">
+			<div style="background-color: #C9D8BF; text-align: center;">
 				<div style="margin: 5% auto;">
 					<h1 style="color: #1d3b2a; font-family: Caudex;">So Share</h1>
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
@@ -39,7 +40,7 @@
 		</section>
 	</div>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="width: 80%; padding-left: 10%;">
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="row-fluid">
@@ -48,13 +49,13 @@
 						<ul class="thumbnails">
 							<li class="span4">
 								<div class="thumbnail">
-									<img alt="300x200" src="images/product_01.jpg" />
+									<img alt="300x200" src="images/post/product_01.jpg" />
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/heart-empty.png"
+												<a href="#"> <img alt="" src="images/post/heart-empty.png"
 													width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
@@ -65,13 +66,13 @@
 							</li>
 							<li class="span4">
 								<div class="thumbnail">
-									<img alt="300x200" src="images/product_01.jpg" />
+									<img alt="300x200" src="images/post/product_01.jpg" />
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/heart-empty.png"
+												<a href="#"> <img alt="" src="images/post/heart-empty.png"
 													width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
@@ -82,13 +83,13 @@
 							</li>
 							<li class="span4">
 								<div class="thumbnail">
-									<img alt="300x200" src="images/product_01.jpg" />
+									<img alt="300x200" src="images/post/product_01.jpg" />
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/heart-empty.png"
+												<a href="#"> <img alt="" src="images/post/heart-empty.png"
 													width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
@@ -124,9 +125,11 @@
 								</form>
 							</div>
 							<div class="span1 text-right">
-								<button
-									class="btn btn-success btn-large glyphicon glyphicon-plus"
-									aria-hidden="true" type="button" alt="新增文章"></button>
+								<a href="<c:url value='/PostController/addPost '/>">
+									<button
+										class="btn btn-success btn-large glyphicon glyphicon-plus"
+										aria-hidden="true" type="button"></button>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -134,7 +137,7 @@
 						<div class="span9">
 							<div class="media">
 								<a class="pull-left" href="#"><img class="media-object"
-									src="images/product_01.jpg" alt='' /></a>
+									src="images/post/product_01.jpg" alt='' /></a>
 								<div class="media-body">
 									<h4 class="media-heading">標題</h4>
 									请尽量使用HTML5兼容的视频格式和视频代码实现视频播放, 以达到更好的体验效果.
@@ -143,14 +146,11 @@
 						</div>
 						<div class="span3 text-right">
 							<p>
-								<a href="#"> <img alt="" src="images/heart-empty.png"
+								<a href="#"> <img alt="" src="images/post/heart-empty.png"
 									width="7%" height="7%">
 								</a>123
 							<p style="font-size: 15px; color: grey;">
-								<br>
-								<br>
-								<br>
-								<br> By NickName
+								<br> <br> <br> <br> By NickName
 							</p>
 							</p>
 						</div>
