@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SOEASY</title>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->

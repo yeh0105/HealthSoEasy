@@ -1,0 +1,45 @@
+/* 	.drop-down-menu a { */
+/*         position: relative; */
+/*         white-space: nowrap; */
+/*         border-right: #ccc 1px solid; */
+/*     } */
+
+/*     .drop-down-menu > a:last-child { */
+/*         border-right: none; */
+/*     } */
+
+/*     .drop-down-menu a { */
+/*         background-color: #fff; */
+/*         color: #333; */
+/*         display: block; */
+/*         padding: 0 30px; */
+/*         text-decoration: none; */
+/*         line-height: 40px; */
+
+/*     } */
+/*     .drop-down-menu a:hover { 滑鼠滑入按鈕變色 */
+/*         background-color: #ef5c28; */
+/*         color: #fff; */
+/*     } */
+/*     .drop-down-menu li:hover > a { 滑鼠移入次選單上層按鈕保持變色 */
+/*         background-color: #ef5c28; */
+/*         color: #fff; */
+/*     } */
+.drop-down-menu div {
+	position: relative;
+	z-index: 99;
+	top: 100%;
+}
+
+.drop-down-menu div a:last-child {
+	border-bottom: none;
+}
+
+/* .drop-down-menu div { */
+/* 	display: none; */
+/* } */
+
+.drop-down-menu a:hover + div > a {
+	display: flex;
+}
+

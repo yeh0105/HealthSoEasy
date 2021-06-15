@@ -2,7 +2,9 @@ package com.soeasy.controller.customerController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.member.CustomerSignInBean;
+import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.validator.customerValidator.CustomerSignInValidator;
 
 @Controller
 @RequestMapping("/customerController")
-@SessionAttributes({"SignInSuccess"}) 
+@SessionAttributes({"customerSignInSuccess"}) 
 public class CustomerSignInController {
+	
+	@Autowired
+	CustomerService customerService;
 	
 	//送出表單--登入顧客會員
 	@PostMapping("/customerSignIn")
@@ -35,16 +41,53 @@ public class CustomerSignInController {
 		CustomerSignInValidator validator = new CustomerSignInValidator();
 		validator.validate(customerSignInBean, result);
 		if (result.hasErrors()) {
-			//重新設定隔壁表單的初值
-			CustomerBean customerBean = new CustomerBean();
-			//鎖定頁面為登入模式
-			String signMode = "sign_in";
-			model.addAttribute("customerBean", customerBean);
-			model.addAttribute("signMode", signMode);
+			//重新設定表單
+			model = resetSendForm(model);
 			return "customer/customerSignInUp";
 		}
 		
-		return "redirect:/";
+		//--------------------------------------------------------------------
+		//比對帳密
+		String signInEmail = customerSignInBean.getCustomerSignInEmail();
+		String signInPassword = customerSignInBean.getCustomerSignInPassword();
+		CustomerBean customerSignInSuccess = null;
 		
+		//加密字串比對
+		try {
+			customerSignInSuccess = customerService.checkEmailPassword(signInEmail, signInPassword);
+			if(customerSignInSuccess != null) {
+				//登入成功
+				model.addAttribute("customerSignInSuccess", customerSignInSuccess);
+			} else {
+				//重新設定表單
+				model = resetSendForm(model);
+				result.rejectValue("invalidCredentials", "", "該帳號不存在或密碼錯誤");
+				return "customer/customerSignInUp";
+			}
+		} catch (RuntimeException re) {
+			//重新設定表單
+			model = resetSendForm(model);
+			result.rejectValue("invalidCredentials", "", re.getMessage());
+			re.printStackTrace();
+			return "customer/customerSignInUp";
+		}
+		
+		HttpSession session = request.getSession();
+		String nextPath = (String)session.getAttribute("servletPath");
+		if (nextPath == null) {
+			nextPath = "/";
+		}
+		return "redirect:" + nextPath;
+	}
+	
+	public Model resetSendForm(Model model) {
+		//重新設定隔壁表單的初值
+		CustomerBean customerBean = new CustomerBean();
+		//鎖定頁面為登入模式
+		String signMode = "sign_in";
+		model.addAttribute("customerBean", customerBean);
+		model.addAttribute("signMode", signMode);
+		
+		return model;
 	}
 }

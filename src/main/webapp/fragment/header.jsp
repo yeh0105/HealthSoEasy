@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- header的css -->
-<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
 </head>
+
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<%-- 	<jsp:include page="/fragment/header.jsp" /> --%>
@@ -18,7 +19,12 @@
 				<img src="${pageContext.request.contextPath}/images/ICON.png">
 			</div>
 			<div id="headerLinks">
-				<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 
+				<c:if test="${empty customerSignInSuccess}">
+					<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 			
+				</c:if>
+				<c:if test="${!empty customerSignInSuccess}">
+					<jsp:include page="/fragment/customerMenu.jsp" />
+				</c:if>
 				<a href="#" title="Cart">購物車</a>
 			</div>
 			<nav>
