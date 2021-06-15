@@ -13,5 +13,11 @@ public class HomeController {
 	}
 	//	/WEB-INF/views/index.jsp
 	
+	//從SoEasy首頁跳至post首頁
+	@GetMapping({"/postIndex"})
+	public String postIndex() {
+		return "/post/postIndex";
+	}
+	//	/WEB-INF/views/index.jsp
 	
 }
