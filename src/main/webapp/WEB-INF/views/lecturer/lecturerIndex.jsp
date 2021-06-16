@@ -13,10 +13,8 @@
 
 
 	<section>
-	</section>
-	<section>
-		<div></div>
-		<div></div>
+		<button class="btn1">查詢所有講師</button>
+		<button class="btn1">新增講師資料</button>
 	</section>
 
 
