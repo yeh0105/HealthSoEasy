@@ -3,7 +3,6 @@ package com.soeasy.service.lecturerService;
 import java.util.List;
 
 import com.soeasy.model.LecturerBean;
-import com.soeasy.model.PostBean;
 
 public interface LecturerService {
 	
@@ -21,4 +20,5 @@ public interface LecturerService {
 
 	//刪除
 	void deleteByLecturerId(Integer lecturerId);
+
 }
