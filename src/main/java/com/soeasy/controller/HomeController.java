@@ -1,6 +1,7 @@
 package com.soeasy.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -23,6 +24,13 @@ public class HomeController {
 	@GetMapping({"/nutritionist"})
 	public String nutritionist() {
 		return "/nutritionist/nutritionistIndex";
+	}
+	
+	//從SoEasy首頁跳至sportMap首頁	
+	@GetMapping("/showSportMapIndex")
+	public String ShowSportMapIndex() {
+		
+		return "sportMap/sportMapIndex";
 	}
 
 	
