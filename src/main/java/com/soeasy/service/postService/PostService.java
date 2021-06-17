@@ -5,11 +5,12 @@ import java.util.List;
 import com.soeasy.model.PostBean;
 
 public interface PostService {
+	
 	// 新增文章
 	void addPost(PostBean postBean);
 
-	// 查詢一筆
-	PostBean findByPostId(Integer postId);
+	// 查詢一筆By ID
+	PostBean findByPostId(Integer postId) ;
 	
 	// 查詢全部
 	List<PostBean> findAllByPostId();
