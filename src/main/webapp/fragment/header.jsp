@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- header的css -->
+	
 	<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
 </head>
 
@@ -16,8 +17,9 @@
 	<div class="mainWrapper">
 		<header>
 			<div id="logo">
-				<img src="${pageContext.request.contextPath}/images/ICON.png">
+				<a href="<c:url value="/"></c:url>"><img src="${pageContext.request.contextPath}/images/ICON.png"></a>
 			</div>
+			<a href="<c:url value='/admin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
 			<div id="headerLinks">
 				<c:if test="${empty customerSignInSuccess}">
 					<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 			
@@ -30,10 +32,10 @@
 			<nav>
 				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 
 				<a href="#" title="Link">園地</a> 
-				<a href="#" title="Link">講座</a> 
+				<a href="<c:url value='/lecturerController/LecturerIndex'></c:url>" title="SoLecture">講座</a> 
 				<a href="#" title="Link">商城</a> 
 				<a href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> 
-				<a href="<c:url value='/sportMapController/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
+				<a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
 				<a href="<c:url value='/nutritionist'></c:url>" title="Link">客服</a>
 			</nav>
 		</header>

@@ -14,7 +14,7 @@ import com.soeasy.service.postService.PostService;
 @Transactional
 @Service
 public class PostServiceImpl implements PostService {
-	
+
 	@Autowired
 	PostRepository postRepository;
 
@@ -28,7 +28,6 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostBean findByPostId(Integer postId) {
-//		return null;
 		return postRepository.findByPostId(postId).get(postId);
 	}
 
@@ -39,8 +38,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void updatePost(PostBean postBean) {
-		// TODO Auto-generated method stub
-		
+		postRepository.save(postBean);
 	}
 
 	@Override
@@ -48,5 +46,4 @@ public class PostServiceImpl implements PostService {
 		postRepository.deleteById(postId);
 	}
 
-	
 }
