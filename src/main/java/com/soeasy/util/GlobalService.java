@@ -42,4 +42,15 @@ public class GlobalService {
 	// 文章狀態
 	public static final Integer POST_STATUS_NORMAL = 1;
 	public static final Integer POST_STATUS_BANNED = 2;
+
+	// 營養師
+	// 性別
+	public static String NUTRITIONIST_GENDER_MALE = "男性";
+	public static String NUTRITIONIST_GENDER_FEMALE = "女性";
+
+	// 營養師
+	// 專長
+//	public static final Integer NUTRITIONIST_CATEGORY_LOSEWEIGHT = 1;
+//	public static final Integer NUTRITIONIST_CATEGORY_FITNESS = 2;
+//	public static final Integer NUTRITIONIST_CATEGORY_ADDCALCIUM = 3;
 }
