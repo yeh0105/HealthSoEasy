@@ -31,11 +31,11 @@
 			</div>
 			<nav>
 				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 
-				<a href="<c:url value='/customerController/signOut'></c:url>" title="Link">園地</a> 
-				<a href="#" title="Link">講座</a> 
+				<a href="#" title="Link">園地</a> 
+				<a href="<c:url value='/lecturerController/LecturerIndex'></c:url>" title="SoLecture">講座</a> 
 				<a href="#" title="Link">商城</a> 
 				<a href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> 
-				<a href="<c:url value='/sportMapController/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
+				<a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
 				<a href="<c:url value='/nutritionist'></c:url>" title="Link">客服</a>
 			</nav>
 		</header>

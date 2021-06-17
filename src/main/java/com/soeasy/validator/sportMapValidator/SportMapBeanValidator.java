@@ -15,14 +15,15 @@ public class SportMapBeanValidator implements Validator {
 		
 		 return b;
 	}
-	
+	@Override
 	public void validate(Object target, Errors errors){
 		SportMapBean sportMapBean = (SportMapBean)target;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"sportMapName","運動地點名稱不能空白");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"sportMapAddress","地址名稱不能空白");
+		//判斷欄位值
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"sportMapName","","運動地點名稱不能空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"sportMapInfo","","地點簡介不能空白");
 			
 		if(sportMapBean.getSportCategoryBean().getSportCategoryId()== -1) {
-			errors.rejectValue("sportCategoryBean", "必須挑選分類欄的選項");
+			errors.rejectValue("sportCategoryBean", "","必須挑選分類欄的選項");
 		}
 		
 		

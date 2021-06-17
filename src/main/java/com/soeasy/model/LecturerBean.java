@@ -22,6 +22,8 @@ public class LecturerBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer lecturerId;
+	
+	private String lecturerName;
 
 	private String lecturerTalent;
 
@@ -44,6 +46,14 @@ public class LecturerBean implements Serializable {
 
 	public void setLecturerId(Integer lecturerId) {
 		this.lecturerId = lecturerId;
+	}
+	
+	public String getLecturerName() {
+		return lecturerName;
+	}
+
+	public void setLecturerName(String lecturerName) {
+		this.lecturerName = lecturerName;
 	}
 
 	public String getLecturerTalent() {

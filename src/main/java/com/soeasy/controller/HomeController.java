@@ -35,6 +35,13 @@ public class HomeController {
 	public String nutritionist() {
 		return "/nutritionist/nutritionistIndex";
 	}
+	
+	//從SoEasy首頁跳至sportMap首頁	
+	@GetMapping("/showSportMapIndex")
+	public String ShowSportMapIndex() {
+		
+		return "sportMap/sportMapIndex";
+	}
 
 	
 }
