@@ -36,7 +36,7 @@
 /* } */
 
 .imgbg {
-	align-items: center;
+/* 	align-items: center; */
 	background-color: var(--white);
 	background: url("../images/shopSignInUp.jpg");
 	background-attachment: fixed;

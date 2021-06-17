@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +17,13 @@
 		<hr>
 		<div class="footerlinks" style="text-align: right;">
 			<p>
-				<a href="#" title="Link">首頁</a> 
+				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 
 				<a href="#" title="Link">園地</a> 
 				<a href="#" title="Link">講座</a>
 				<a href="#" title="Link">商城</a> 
-				<a href="#" title="Link">分享</a> 
-				<a href="#" title="Link">地圖</a> 
-				<a href="nutritionistIndex.jsp" title="Link">客服</a>
+				<a href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> 
+				<a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
+				<a href="<c:url value='/nutritionist'></c:url>" title="Link">客服</a>
 			</p>
 		</div>
 	</footer>

@@ -3,6 +3,7 @@ package com.soeasy.service.sportmapService.impl;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import com.soeasy.repository.sportmapRepository.SportMapRepository;
 import com.soeasy.service.sportmapService.SportMapService;
 
 @Service
+@Transactional
 public class SportMapServiceImpl implements SportMapService {
 	private static final Logger logger = LoggerFactory.getLogger(SportMapServiceImpl.class);
 
@@ -35,6 +37,22 @@ public class SportMapServiceImpl implements SportMapService {
 		return sportMapRepository.save(sportMapBean);
 	}	
 	
+	
+	
+	//查詢單一地圖By ID
+	@Override
+	public SportMapBean get(Integer sportMapId) {
+		Optional<SportMapBean> optional =sportMapRepository.findById(sportMapId);
+		SportMapBean sportMapBean = null;
+		if(optional.isPresent()) {
+			sportMapBean = optional.get();
+		}else {
+			throw new RuntimeException("SportMapBean(sportMadId="+sportMapId+")不存在");
+			
+		}
+		System.out.println("service ID="+sportMapId);
+		return sportMapBean ;
+	}
 
 	
 	@Transactional
@@ -76,5 +94,20 @@ public class SportMapServiceImpl implements SportMapService {
 //		return recordsPerPage; //記得開啟
 
 //	}
+	
+	//更新地圖資料
+	@Transactional
+	@Override
+	public void update(SportMapBean sportMapBean) {
+		sportMapRepository.save(sportMapBean);
+	}
+	
+	
+	//刪除單筆地圖
+	@Override
+	public void delete(Integer sportMapId) {
+		sportMapRepository.deleteById(sportMapId);
+	}
+	
 
 }

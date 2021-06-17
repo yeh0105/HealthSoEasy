@@ -64,6 +64,15 @@ public class PostBean implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "postBean", cascade = CascadeType.ALL)
 	Set<ReplyBean> replyBeans = new LinkedHashSet<ReplyBean>();
 
+	// 類別
+	@Transient
+	@Column(name = "fk_postCategoryId")
+	private Integer postCategoryId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_postCategoryId")
+	private PostCategoryBean PostCategoryBean;
+
 	// ----------------------------
 	public PostBean() {
 	}
@@ -165,5 +174,20 @@ public class PostBean implements Serializable {
 		this.replyBeans = replyBeans;
 	}
 
-	
+	public Integer getPostCategoryId() {
+		return postCategoryId;
+	}
+
+	public void setPostCategoryId(Integer postCategoryId) {
+		this.postCategoryId = postCategoryId;
+	}
+
+	public PostCategoryBean getPostCategoryBean() {
+		return PostCategoryBean;
+	}
+
+	public void setPostCategoryBean(PostCategoryBean postCategoryBean) {
+		PostCategoryBean = postCategoryBean;
+	}
+
 }

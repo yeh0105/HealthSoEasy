@@ -45,10 +45,23 @@
   --accent-color:#79FF79;
   --gradient-color:#C2FF68;
 }
-.menu > ol > li:nth-child(5) {
+/* .menu > ol > li:nth-child(5) {
   --accent-color:#53FF53;
   --gradient-color:#B7FF4A;
+} */
+.menu > ol > li:nth-child(5) {
+  --accent-color:#7AFEC6;
+  --gradient-color:#CCFF80;
 }
+.menu > ol > li:nth-child(6) {
+  --accent-color:#ADFEDC;
+  --gradient-color:#53FF53;
+}
+.menu > ol > li:nth-child(7) {
+  --accent-color:#C1FFE4;
+  --gradient-color:#79FF79;
+}
+
 .menu > ol > li a {
   color: #353535;
   display: block;

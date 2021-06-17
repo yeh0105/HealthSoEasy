@@ -21,14 +21,39 @@
         window.onload = function () {
             const signInBtn = document.getElementById("signIn");
             const signUpBtn = document.getElementById("signUp");
-            const fistForm = document.getElementById("form1");
+            const firstForm = document.getElementById("form1");
             const secondForm = document.getElementById("form2");
             const container = document.querySelector(".container");
             const customerShopSwitch1 = document.getElementById("switchID1");
             const customerShopSwitch2 = document.getElementById("switchID2");
+            
+            const signout_prompt = document.getElementById("signout_prompt");
+            const recent_sign_in = document.getElementById("recent_sign_in");
+			const customerSignInEmail = document.getElementById("customerSignInEmail");
+			const customerSignInPassword = document.getElementById("customerSignInPassword");
+            
+			//登入or註冊模式
+            let signMode = "${signMode}";
+            //登出告別訊息
+            let farewellMessage = "${farewellMessage}";
+            //登出者Bean
+            let customerSignOutEmailBean = "${customerSignOutEmailBean}"
 
-            let signMode = "sign_up";
-
+            if(signMode == "sign_up"){
+            	container.classList.add("right-panel-active");
+            } else if(signMode == "sign_in"){
+                container.classList.remove("right-panel-active");
+            }
+            
+            if(farewellMessage != ""){
+	            signout_prompt.innerHTML = farewellMessage;
+            	recent_sign_in.innerHTML = "最近登入";
+            }
+            
+            if(customerSignOutEmailBean != ""){
+	            customerSignInEmail.value = "${customerSignOutEmailBean}";
+            }
+            
             signInBtn.addEventListener("click", () => {
                 if(signMode == "sign_up"){
                     container.classList.remove("right-panel-active");
@@ -43,7 +68,7 @@
                     container.classList.add("right-panel-active");
                     signMode = "sign_up";
                 } else if(signMode == "sign_up"){
-                    fistForm.addEventListener("submit", (e) => e.preventDefault());
+                    firstForm.addEventListener("submit", (e) => e.preventDefault());
                 }
             });
 
@@ -86,10 +111,19 @@
 
         <!-- Sign In -->
         <div class="container__form container--signin">
-            <form:form method="Post" action="/" modelAttribute="customerBean" class="form" id="form2">
+            <form:form method="Post" action="customerSignIn" modelAttribute="customerSignInBean" class="form" id="form2">
                 <h2 class="form__title">Sign In</h2>
-                <form:input path="customerEmail" type="email" placeholder="Email" class="input" />
-                <form:input path="customerPassword" type="password" placeholder="Password" class="input" />
+                
+                <p id="signout_prompt"></p>
+                <p id="recent_sign_in"></p>                
+                
+                <form:input path="customerSignInEmail" type="email" placeholder="Email" class="input" />
+                <form:errors path="customerSignInEmail" cssClass="error" />
+                
+                <form:input path="customerSignInPassword" type="password" placeholder="Password" class="input" />
+                <form:errors path="customerSignInPassword" cssClass="error" />
+                <form:errors path="invalidCredentials" cssClass="error" />
+
                 <a href="#" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>
             </form:form>

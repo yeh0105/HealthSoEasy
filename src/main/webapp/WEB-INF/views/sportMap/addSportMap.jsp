@@ -6,6 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+
+</style>
+
+
+
 <title>新增運動地點</title>
 </head>
 <body>
@@ -18,6 +29,18 @@
 			<form:form method="POST" action ="add" modelAttribute="sportMapBean"
 				enctype='multipart/form-data'>
 			<table>
+				<tr>
+				<td>運動分類</td>
+				<td>
+				<form:select path='sportCategoryBean.sportCategoryId'>
+					<form:option label="請挑選" value="-1"/>
+					<form:options items="${sportCategoryBeanList}"
+					itemLabel='sportCategoryName' itemValue='sportCategoryId'/> 
+				</form:select> 
+				<form:errors path="sportCategoryBean" cssClass="error"/>  
+				</td>		
+				
+				</tr>
 				<tr>
 					<td>運動地點名稱：</td>
 					<td width='600'><form:input path='sportMapName' /> 
@@ -42,18 +65,6 @@
 					</td>
 				</tr>
 				<tr>
-				<td>運動分類</td>
-				<td>
-				<form:select path='sportCategoryBean.sportCategoryId'>
-					<form:option label="請挑選" value="-1"/>
-					<form:options items="${sportCategoryBeanList}"
-					itemLabel='sportCategoryName' itemValue='sportCategoryId'/> 
-				</form:select> 
-				<form:errors path="sportCategoryBean" cssClass="error"/>  
-				</td>		
-				
-				</tr>
-				<tr>
 				<td>
 					<input type='submit'>
 				</td>
@@ -65,7 +76,6 @@
 		</fieldset>
 
 	</div>
-	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>回前頁</button></a>
 	
 	<jsp:include page="/fragment/footer.jsp" />
 	
