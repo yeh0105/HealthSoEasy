@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,20 @@ public class CustomerSignInController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	//表單初值--新增會員_會員登入--登入
+		@GetMapping("/customerSignIn")
+		public String customerSignInSendForm(Model model) {
+			CustomerBean customerBean = new CustomerBean();
+			CustomerSignInBean customerSignInBean = new CustomerSignInBean();
+			String signMode = "sign_in";
+			
+			
+			model.addAttribute("customerBean", customerBean);
+			model.addAttribute("customerSignInBean", customerSignInBean);
+			model.addAttribute("signMode", signMode);
+			return "customer/customerSignInUp";
+		}
 	
 	//送出表單--登入顧客會員
 	@PostMapping("/customerSignIn")

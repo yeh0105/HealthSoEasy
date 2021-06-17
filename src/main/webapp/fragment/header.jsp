@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- header的css -->
+	
 	<link href="${pageContext.request.contextPath}/css/header&footer.css" rel="stylesheet">
 </head>
 
@@ -16,8 +17,9 @@
 	<div class="mainWrapper">
 		<header>
 			<div id="logo">
-				<img src="${pageContext.request.contextPath}/images/ICON.png">
+				<a href="<c:url value="/"></c:url>"><img src="${pageContext.request.contextPath}/images/ICON.png"></a>
 			</div>
+			<a href="<c:url value='/admin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
 			<div id="headerLinks">
 				<c:if test="${empty customerSignInSuccess}">
 					<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 			
