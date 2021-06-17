@@ -19,6 +19,7 @@ import com.soeasy.repository.sportmapRepository.SportMapRepository;
 import com.soeasy.service.sportmapService.SportMapService;
 
 @Service
+@Transactional
 public class SportMapServiceImpl implements SportMapService {
 	private static final Logger logger = LoggerFactory.getLogger(SportMapServiceImpl.class);
 
@@ -93,5 +94,20 @@ public class SportMapServiceImpl implements SportMapService {
 //		return recordsPerPage; //記得開啟
 
 //	}
+	
+	//更新地圖資料
+	@Transactional
+	@Override
+	public void update(SportMapBean sportMapBean) {
+		sportMapRepository.save(sportMapBean);
+	}
+	
+	
+	//刪除單筆地圖
+	@Override
+	public void delete(Integer sportMapId) {
+		sportMapRepository.deleteById(sportMapId);
+	}
+	
 
 }
