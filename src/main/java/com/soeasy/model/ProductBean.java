@@ -43,6 +43,8 @@ public class ProductBean  implements Serializable{
 	
 	private Integer productCalories;
 	
+	private String category;
+
 	private Blob productImg;
 	
 	@Transient
@@ -152,6 +154,14 @@ public class ProductBean  implements Serializable{
 
 	public void setShopBean(ShopBean shopBean) {
 		this.shopBean = shopBean;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	
