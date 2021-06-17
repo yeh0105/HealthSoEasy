@@ -26,7 +26,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
-	//表單初值--新增會員_會員登入
+	//表單初值--新增會員_會員登入--註冊
 	@GetMapping("/addCustomer")
 	public String addCustomerSendForm(Model model) {
 		CustomerBean customerBean = new CustomerBean();

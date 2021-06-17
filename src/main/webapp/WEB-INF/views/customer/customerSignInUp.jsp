@@ -26,14 +26,34 @@
             const container = document.querySelector(".container");
             const customerShopSwitch1 = document.getElementById("switchID1");
             const customerShopSwitch2 = document.getElementById("switchID2");
-
+            
+            const signout_prompt = document.getElementById("signout_prompt");
+            const recent_sign_in = document.getElementById("recent_sign_in");
+			const customerSignInEmail = document.getElementById("customerSignInEmail");
+			const customerSignInPassword = document.getElementById("customerSignInPassword");
+            
+			//登入or註冊模式
             let signMode = "${signMode}";
+            //登出告別訊息
+            let farewellMessage = "${farewellMessage}";
+            //登出者Bean
+            let customerSignOutEmailBean = "${customerSignOutEmailBean}"
+
             if(signMode == "sign_up"){
             	container.classList.add("right-panel-active");
             } else if(signMode == "sign_in"){
                 container.classList.remove("right-panel-active");
             }
-
+            
+            if(farewellMessage != ""){
+	            signout_prompt.innerHTML = farewellMessage;
+            	recent_sign_in.innerHTML = "最近登入";
+            }
+            
+            if(customerSignOutEmailBean != ""){
+	            customerSignInEmail.value = "${customerSignOutEmailBean}";
+            }
+            
             signInBtn.addEventListener("click", () => {
                 if(signMode == "sign_up"){
                     container.classList.remove("right-panel-active");
@@ -93,6 +113,9 @@
         <div class="container__form container--signin">
             <form:form method="Post" action="customerSignIn" modelAttribute="customerSignInBean" class="form" id="form2">
                 <h2 class="form__title">Sign In</h2>
+                
+                <p id="signout_prompt"></p>
+                <p id="recent_sign_in"></p>                
                 
                 <form:input path="customerSignInEmail" type="email" placeholder="Email" class="input" />
                 <form:errors path="customerSignInEmail" cssClass="error" />
