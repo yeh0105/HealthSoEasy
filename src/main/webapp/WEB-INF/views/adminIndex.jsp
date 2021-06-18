@@ -48,6 +48,26 @@
 			setTimeout("location.href='/soeasy/'",3000);
 		}
 		
+		let switch_moon = document.getElementById("switch_moon");
+		//	點擊日夜間模式設定session
+		switch_moon.addEventListener("click", function(){
+			document.documentElement.classList.toggle('dark');
+			switch_moon.classList.toggle('active');
+			
+			if("${switchMode}" == "" || "${switchMode}" == "sun"){
+				location.href='/soeasy/admin/switchMode?switchMode=moon';
+			} else if("${switchMode}" == "moon"){
+				location.href='/soeasy/admin/switchMode?switchMode=sun';
+			}
+		})
+		
+		
+		
+		if("${switchMode}" == "" || "${switchMode}" == "sun"){
+		} else if("${switchMode}" == "moon"){
+			document.documentElement.classList.toggle('dark');			
+		}
+		
 		document.getElementById('adminLogoutbtn').onclick = adminLouout;
 	}
 </script>
@@ -196,7 +216,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   <div class="app-content background-img">
     <div class="app-content-header">
       <h1 class="app-content-headerText">Home</h1>
-      <button class="mode-switch" title="Switch Theme">
+<!--       月亮 -->
+      <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
           <defs></defs>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
@@ -266,7 +287,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
 </div>
 <!-- partial -->
-  <script  src="${pageContext.request.contextPath}/js/adminIndex.js"></script>
+<%--   <script  src="${pageContext.request.contextPath}/js/adminIndex.js"></script> --%>
 	
 </body>
 </html>

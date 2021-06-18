@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.soeasy.model.ProductBean;
 import com.soeasy.repository.mallRepository.ProductRepository;
-import com.soeasy.repository.mallRepository.ShopRepository;
 import com.soeasy.repository.mallRepository.impl.ProductUpdateImpl;
+import com.soeasy.repository.shopRepository.ShopRepository;
 import com.soeasy.service.mallService.MallPorductService;
 import com.soeasy.util.GlobalService;
 
@@ -45,9 +45,9 @@ public class MallproductServiceImpl implements MallPorductService{
 	
 	@Transactional
 	@Override
-	public int deleteProduct(int no) {
+	public Integer deleteProduct(Integer no) {
 		
-		int n = 0;
+		Integer n = 0;
 		productRepository.deleteById(no);
 		n++;
 		return n;
@@ -55,10 +55,11 @@ public class MallproductServiceImpl implements MallPorductService{
 
 	@Transactional
 	@Override
-	public ProductBean getProduct(int productId) {
+	public ProductBean getProduct(Integer productId) {
 		ProductBean bean=productRepository.getById(productId);
 		return bean;
 	}
+
 
 	@Override
 	public List<String> getCategory() {
@@ -66,70 +67,11 @@ public class MallproductServiceImpl implements MallPorductService{
 		return null;
 	}
 
+
 	@Override
 	public String getCategoryTag() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Map<Integer, ProductBean> getPageProducts(int pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getRecordsPerPage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public long getRecordCounts() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getTotalPages() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int saveProduct(ProductBean bean) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setRecordsPerPage(int recordsPerPage) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSelected(String category) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int updateProduct(ProductBean bean, long sizeInBytes) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void truncateProductTable() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int updateProductForeignKey(Integer companyId, Integer productId) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 
@@ -138,6 +80,71 @@ public class MallproductServiceImpl implements MallPorductService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public Integer getRecordsPerPage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Long getRecordCounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer getTotalPages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer saveProduct(ProductBean bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setRecordsPerPage(Integer recordsPerPage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setSelected(String category) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Integer updateProduct(ProductBean bean, Long sizeInBytes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void truncateProductTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Integer updateProductForeignKey(Integer companyId, Integer productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 	
 }
