@@ -10,15 +10,15 @@
 <script type="text/javascript">
 	window.onload = function () {
 		
-		let customerMenu = document.getElementById("customerMenu");
-		let customerImg = document.getElementById("customerImg");
+		let shopMenu = document.getElementById("shopMenu");
+		let shopImg = document.getElementById("shopImg");
 		
 		document.addEventListener("click", function(){
-			customerMenu.style.display="none";
+			shopMenu.style.display="none";
 		}, true);
 		
-		customerImg.addEventListener("click", function(){
-			customerMenu.style.display="block";
+		shopImg.addEventListener("click", function(){
+			shopMenu.style.display="block";
 		}, true);
 	}
 
@@ -47,12 +47,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customerMenu.css">
 <body>
 <!-- 		<div class="drop-down-menu"> -->
-				<a id="customerImg" href="#" title="${customerSignInSuccess.customerName}" class="drop-down-menu">
-					${customerSignInSuccess.customerName}
+				<a id="shopImg" href="#" title="${shopSignInSuccess.shopName}" class="drop-down-menu">
+					${shopSignInSuccess.shopName}
 				</a>
 				
-				<div id="customerMenu">
-                    <a href="<c:url value='/customerController/customerPage'></c:url>">
+				<div id="shopMenu">
+                    <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

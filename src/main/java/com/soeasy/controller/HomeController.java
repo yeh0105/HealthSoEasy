@@ -14,15 +14,7 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-	//後臺首頁
-	@GetMapping({"/admin"})
-	public String admin(Model model) {
-		AdminBean adminBean = new AdminBean();
-		adminBean.setAdminName("admin");
-		adminBean.setAdminPassword("soeasy");
-		model.addAttribute("adminBean", adminBean);
-		return "adminIndex";
-	}
+	
 	
 	//從SoEasy首頁跳至post首頁
 	@GetMapping({"/postIndex"})
