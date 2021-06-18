@@ -19,13 +19,19 @@
 			<div id="logo">
 				<a href="<c:url value="/"></c:url>"><img src="${pageContext.request.contextPath}/images/ICON.png"></a>
 			</div>
-			<a href="<c:url value='/admin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
+			<a href="<c:url value='/admin/adminLogin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
 			<div id="headerLinks">
-				<c:if test="${empty customerSignInSuccess}">
+				<c:if test="${empty customerSignInSuccess && empty shopSignInSuccess && empty adminLoginSuccess}">
 					<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 			
 				</c:if>
 				<c:if test="${!empty customerSignInSuccess}">
 					<jsp:include page="/fragment/customerMenu.jsp" />
+				</c:if>
+				<c:if test="${!empty shopSignInSuccess}">
+					<jsp:include page="/fragment/shopMenu.jsp" />
+				</c:if>
+				<c:if test="${!empty adminLoginSuccess}">
+					<jsp:include page="/fragment/adminMenu.jsp" />
 				</c:if>
 				<a href="#" title="Cart">購物車</a>
 			</div>

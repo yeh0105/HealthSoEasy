@@ -1,0 +1,50 @@
+.customer-main {
+	max-width: 100%;
+	justify-content: center;
+	
+}
+
+.customer-main div{
+	max-width: 100%;
+}
+
+.customer-img {
+	background-color: rgb(29, 59, 42);
+	width: 40%;
+	height: 620px;
+	float: left;
+	margin-left: 10%;
+/* 	水平垂直置中 */
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+
+.customer-img img{
+	
+	width: 320px;
+	height: 300px;
+}
+
+.customer-information {
+	width: 40%;
+	height: 620px;
+	float: left;
+	margin-right: 10%;
+}
+
+.customer-health-information {
+	width: 40%;
+	height: 620px;
+	float: left;
+	margin-left: 10%;
+}
+
+.customer-favorite {
+	background-color: #C9D8BF;
+	width: 40%;
+	height: 620px;
+	float: left;
+	margin-right: 10%;
+}
+

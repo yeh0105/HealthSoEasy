@@ -9,6 +9,9 @@ public class AdminBean {
 	// 登入失敗
 	private String invalidCredentials;
 	
+	// 帳號衝突提示
+	private String accountConflict;
+	
 	public AdminBean() {
 		super();
 	}
@@ -35,6 +38,14 @@ public class AdminBean {
 
 	public void setInvalidCredentials(String invalidCredentials) {
 		this.invalidCredentials = invalidCredentials;
+	}
+
+	public String getAccountConflict() {
+		return accountConflict;
+	}
+
+	public void setAccountConflict(String accountConflict) {
+		this.accountConflict = accountConflict;
 	}
 
 	

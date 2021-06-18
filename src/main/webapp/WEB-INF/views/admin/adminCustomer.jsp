@@ -75,61 +75,61 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     <ul class="sidebar-list">
       <li class="sidebar-list-item">
-        <a href="<c:url value="/admin"></c:url>">
+        <a href="<c:url value="/admin/adminLogin"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> -->
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
-        <a href="<c:url value="/admin/adminCustomer"></c:url>">
+      <li class="sidebar-list-item  active">
+        <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminShop"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg> -->
           <span>廠商</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminProduct"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg> -->
           <span>商品</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminOrder"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>訂單</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>講座</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminArticle"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>文章</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminNutritionist"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>營養師</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminPost"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>分享</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
         </a>

@@ -93,4 +93,10 @@ public class CustomerController {
 		
 		return "redirect:/";
 	}
+	
+	//個人頁面
+	@GetMapping("/customerPage")
+	public String customerPage() {
+		return "/customer/customerPage";
+	}
 }
