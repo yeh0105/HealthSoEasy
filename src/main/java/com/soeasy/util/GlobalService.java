@@ -22,6 +22,10 @@ public class GlobalService {
 	// 廠商帳號狀態
 	public static final Integer SHOP_STATUS_NORMAL = 1;
 	public static final Integer SHOP_STATUS_BANNED = 2;
+	
+	//商品
+	public static int RECORDS_PER_PAGE=2;
+
 
 	// 地圖
 	public static final int SPORTMAPS_PER_PAGE = 9;

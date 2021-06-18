@@ -26,6 +26,9 @@ public class ProductBean  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue：告訴此Column的生成方式
+	//GenerationType.IDENTITY 讓資料庫自己維護
+	
 	private Integer productId;
 		
 	private String productName;

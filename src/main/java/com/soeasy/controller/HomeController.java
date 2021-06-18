@@ -42,6 +42,13 @@ public class HomeController {
 		
 		return "sportMap/sportMapIndex";
 	}
+	
+	//從SoEasy首頁跳至Mall首頁	
+		@GetMapping("/mallIndex")
+		public String MallIndex() {
+			
+			return "mall/mallIndex";
+		}
 
 	
 }
