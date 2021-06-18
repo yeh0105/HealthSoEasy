@@ -39,8 +39,8 @@
 	</div>
 
 	<section>
-		<a href="<c:url value='/lecturerController/allLecturers' />"><button class="btn1">查詢所有講師</button></a>
-		<a href='add'><button class="btn1">新增講師資料</button></a>	
+		<a href="<c:url value='/lecturerController/getAllLecturers' />"><button class="btn1">查詢所有講師</button></a>
+		<a href='<c:url value='/lecturerController/addLecturer' />'><button class="btn1">新增講師資料</button></a>	
 	</section>
 
 	<!-- 引入共同的頁尾  copy這行-->

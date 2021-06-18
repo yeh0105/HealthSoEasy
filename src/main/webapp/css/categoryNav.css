@@ -61,6 +61,14 @@
   --accent-color:#C1FFE4;
   --gradient-color:#79FF79;
 }
+.menu > ol > li:nth-child(8) {
+  --accent-color:#ADFEDC;
+  --gradient-color:#53FF53;
+}
+.menu > ol > li:nth-child(9) {
+  --accent-color:#7AFEC6;
+  --gradient-color:#CCFF80;
+}
 
 .menu > ol > li a {
   color: #353535;

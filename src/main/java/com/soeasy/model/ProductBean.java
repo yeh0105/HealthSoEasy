@@ -3,18 +3,13 @@ package com.soeasy.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,6 +26,9 @@ public class ProductBean  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue：告訴此Column的生成方式
+	//GenerationType.IDENTITY 讓資料庫自己維護
+	
 	private Integer productId;
 		
 	private String productName;

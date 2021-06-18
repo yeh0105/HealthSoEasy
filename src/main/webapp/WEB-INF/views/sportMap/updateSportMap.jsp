@@ -7,6 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+</style>
+
 <title>單筆運動地點</title>
 </head>
 <body>
@@ -32,7 +40,7 @@
 				<tr>
 				
 				<td>運動地點名稱：</td>
-				<td width ='200'><form:input path='sportMapName'/><br>
+				<td width ='200'><form:input path='sportMapName' readonly='readonly'/><br>
 				<form:errors path='sportMapName' cssClass="error"/>	
 				</tr>
 				<tr>
@@ -67,29 +75,7 @@
 			
 			
 			
-<!-- 			下面為前端頁面單一筆呈現 -->
 
-<!-- 			<table> -->
-<!-- 				<tr> -->
-<!-- 				<td>－－－－－－－前端呈現以下－－－－－－－</td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<%-- 				<td>${sportMapBean.sportMapName}</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<%-- 				<td>${sportMapBean.sportMapAddress}</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<%-- 				<td>${sportMapBean.sportMapInfo}</td>	 --%>
-<!-- 				</tr> -->
-<!-- 				<tr>					 -->
-<%-- 				<td>${sportMapBean.sportMapMap}</td> --%>
-				
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<%-- 				<td>${sportMapBean.sportCategoryId}</td> --%>
-<!-- 				</tr> -->
-<!-- 			</table> -->
 			
 				
 		</fieldset><br>

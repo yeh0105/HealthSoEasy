@@ -14,15 +14,7 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-	//後臺首頁
-	@GetMapping({"/admin"})
-	public String admin(Model model) {
-		AdminBean adminBean = new AdminBean();
-		adminBean.setAdminName("admin");
-		adminBean.setAdminPassword("soeasy");
-		model.addAttribute("adminBean", adminBean);
-		return "adminIndex";
-	}
+	
 	
 	//從SoEasy首頁跳至post首頁
 	@GetMapping({"/postIndex"})
@@ -42,6 +34,17 @@ public class HomeController {
 		
 		return "sportMap/sportMapIndex";
 	}
-
 	
+	//從SoEasy首頁跳至Mall首頁	
+		@GetMapping("/mallIndex")
+		public String MallIndex() {
+			
+			return "mall/mallIndex";
+		}
+
+	// 從SoEasy首頁跳至講座首頁(先測講師)
+	@GetMapping("/lecturerIndex")
+	public String lecturerIndex() {
+		return "/lecturer/lecturerIndex";
+	}
 }

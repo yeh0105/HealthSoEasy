@@ -234,7 +234,7 @@
 }
 
 span.error {
-	color: red;
+	color: #007500;
 	display: inline-block;
 	font-size: 8pt;
 }

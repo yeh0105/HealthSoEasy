@@ -14,12 +14,41 @@
 
 <script type="text/javascript">
 	window.onload = function(){
-		const adminbtn = document.getElementById("adminbtn");
-		const adminLoginForm = document.getElementById("adminLoginForm");
-
-		adminbtn.addEventListener("click", () => {
-			adminLoginForm.addEventListener("submit", (e) => e.preventDefault());
-		});
+		var adminLouout = function(evt){
+			location.href = "/soeasy/admin/logout";
+		}
+		
+		
+		console.log("${adminLoginSuccess.adminName}");
+		let admin_tableView = document.getElementById("admin_tableView");
+		if("${adminLoginSuccess.adminName}" != ""){
+			admin_tableView.innerHTML = 
+				'<div class="admin-header">'
+	      	+		'<div class="product-cell price" style="font-size: 20px">'
+	      	+		'您好，這裡是後台管理系統'
+	      	+		'</div>'
+	      	+	'</div>'
+				
+			+	'<div class="admin-header">'
+	    	+  		'<div class="product-cell price" style="font-size: 20px">'
+	    	+  			'登入人員：'
+			+      		'<input class="input-bar" placeholder="" type="text"  disabled="disabled" value="${adminLoginSuccess.adminName}"/>'
+	    	+  		'</div>'
+	    	+   '</div>'
+	    	
+			+	'<div class="admin-header">'
+	    	+  		'<div class="product-cell price" style="font-size: 20px">'
+	    	+  			'<button id="adminLogoutbtn" class="app-content-headerButton" >登出</button>'
+	    	+  		'</div>'
+	    	+   '</div>';
+		}
+		
+		
+		if("${customerSignInSuccess}" != "" || "${shopSignInSuccess}" != ""){
+			setTimeout("location.href='/soeasy/'",3000);
+		}
+		
+		document.getElementById('adminLogoutbtn').onclick = adminLouout;
 	}
 </script>
 
@@ -89,61 +118,61 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     <ul class="sidebar-list">
       <li class="sidebar-list-item active">
-        <a href="<c:url value="/admin"></c:url>">
+        <a href="<c:url value="/admin/adminLogin"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> -->
           <span>後台首頁</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="<c:url value="/admin/adminCustomer"></c:url>">
+        <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminShop"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg> -->
           <span>廠商</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminProduct"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg> -->
           <span>商品</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminOrder"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>訂單</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>講座</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminArticle"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>文章</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminNutritionist"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>營養師</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminPost"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>分享</span>
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a href="#">
+        <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
         </a>
@@ -181,10 +210,28 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </div>
       
     </div>
-    <div class="products-area-wrapper tableView" style="max-width: 40%;text-align: ">
+    <div id="admin_tableView" class="products-area-wrapper tableView" style="max-width: 40%;text-align: ">
     
-    
-      <form:form method="Post" action="admin/adminLogin" modelAttribute="adminBean" id="adminLoginForm">
+      <div class="admin-header">
+      	<div class="product-cell price" style="font-size: 20px">
+      		您好，這裡是後台管理系統
+      	</div>
+      </div>
+      
+      <div class="admin-header">
+      	<div class="product-cell price" style="font-size: 20px">
+      		<c:choose>
+      			<c:when test="${!empty customerSignInSuccess || !empty shopSignInSuccess}">
+      				已有其他會員帳號登入，請先登出，三秒後將回到首頁
+      			</c:when>
+      			<c:otherwise>
+		      		請先登入		
+      			</c:otherwise>
+      		</c:choose>
+      	</div>
+      </div>
+
+      <form:form method="Post" action="adminLogin" modelAttribute="adminBean" id="adminLoginForm">
       <div class="admin-header">
       	<div class="product-cell price" style="font-size: 20px">
       		帳號
@@ -198,15 +245,23 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       		密碼
 	      	<form:input path="adminPassword" class="input-bar" placeholder="請輸入後台密碼..." type="password"/>
 	      	<form:errors path="adminPassword" class="input-bar" cssClass="error"/>
+	      	<form:errors path="invalidCredentials" class="input-bar" cssClass="error"/>
       	</div>
       </div>
-
+      
+      <div class="admin-header">
+      	<div class="product-cell price">
+      		<form:errors path="accountConflict" class="input-bar" cssClass="error"/>
+      	</div>
+      </div>
+      
       <div class="admin-header">
       	<div class="product-cell price">
 		    <button id="adminbtn" class="app-content-headerButton" value="登入">登入</button>
       	</div>
       </div>
       </form:form>
+
     </div>
   </div>
 </div>

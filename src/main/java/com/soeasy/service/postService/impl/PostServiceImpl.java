@@ -1,7 +1,7 @@
 package com.soeasy.service.postService.impl;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,16 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostBean findByPostId(Integer postId) {
-		return postRepository.findByPostId(postId).get(postId);
+		Optional<PostBean> optional = postRepository.findById(postId);
+		PostBean postBean = null;
+		if (optional.isPresent()) {
+			postBean = optional.get();
+		} else {
+			throw new RuntimeException("PostBean(postId=" + postId + ")不存在");
+
+		}
+		System.out.println("service ID=" + postId);
+		return postBean;
 	}
 
 	@Override

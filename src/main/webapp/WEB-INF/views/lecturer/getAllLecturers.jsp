@@ -92,6 +92,7 @@
 	</table>
 	<br>
 
+	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
 
 </body>

@@ -17,14 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.soeasy.model.SportMapBean;
 import com.soeasy.repository.sportmapRepository.SportMapRepository;
 import com.soeasy.service.sportmapService.SportMapService;
+import com.soeasy.util.GlobalService;
 
 @Service
 @Transactional
 public class SportMapServiceImpl implements SportMapService {
 	private static final Logger logger = LoggerFactory.getLogger(SportMapServiceImpl.class);
 
-//	private int recordsPerPage = GlobalService.SPORTMAPS_PER_PAGE; // 預設值：每頁9筆
-	private int recordsPerPage = 9; // 預設值：每頁9筆
+	private int recordsPerPage = GlobalService.SPORTMAPS_PER_PAGE; // 預設值：每頁9筆
+//	private int recordsPerPage = 9; // 預設值：每頁9筆
 	private int totalPages = -1;
 
 	@Autowired

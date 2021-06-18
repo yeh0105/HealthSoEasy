@@ -19,24 +19,30 @@
 			<div id="logo">
 				<a href="<c:url value="/"></c:url>"><img src="${pageContext.request.contextPath}/images/ICON.png"></a>
 			</div>
-			<a href="<c:url value='/admin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
+			<a href="<c:url value='/admin/adminLogin'></c:url>"><button style="position: absolute; color: white; background-color: white; border: 0px">admin</button></a>
 			<div id="headerLinks">
-				<c:if test="${empty customerSignInSuccess}">
+				<c:if test="${empty customerSignInSuccess && empty shopSignInSuccess && empty adminLoginSuccess}">
 					<a href="<c:url value='/customerController/addCustomer'></c:url>" title="Login/Register">登入/註冊</a> 			
 				</c:if>
 				<c:if test="${!empty customerSignInSuccess}">
 					<jsp:include page="/fragment/customerMenu.jsp" />
+				</c:if>
+				<c:if test="${!empty shopSignInSuccess}">
+					<jsp:include page="/fragment/shopMenu.jsp" />
+				</c:if>
+				<c:if test="${!empty adminLoginSuccess}">
+					<jsp:include page="/fragment/adminMenu.jsp" />
 				</c:if>
 				<a href="#" title="Cart">購物車</a>
 			</div>
 			<nav>
 				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 
 				<a href="#" title="Link">園地</a> 
-				<a href="<c:url value='/lecturerController/LecturerIndex'></c:url>" title="SoLecture">講座</a> 
+				<a href="<c:url value='/lecturerIndex'></c:url>" title="SoLecture">講座</a> 
 				<a href="#" title="Link">商城</a> 
 				<a href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> 
 				<a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
-				<a href="<c:url value='/nutritionist'></c:url>" title="Link">客服</a>
+				<a href="<c:url value='/nutritionist'></c:url>" title="Link">營養師</a>
 			</nav>
 		</header>
 	</div>

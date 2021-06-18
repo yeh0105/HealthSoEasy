@@ -10,15 +10,14 @@ public interface LecturerService {
 	void addLecturer(LecturerBean lecturerBean);
 
 	//查詢一筆
-	LecturerBean findByLecturerId(Integer lecturerId);
+	LecturerBean getOneByLecturerId(Integer lecturerId);
 
 	//查詢全部
-	List<LecturerBean> findAllByLecturerId();
+	List<LecturerBean> getAllByLecturerId();
 
 	//修改
 	void updateLecturer(LecturerBean lecturerBean);
 
 	//刪除
 	void deleteByLecturerId(Integer lecturerId);
-
 }

@@ -47,13 +47,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customerMenu.css">
 <body>
 <!-- 		<div class="drop-down-menu"> -->
-			
 				<a id="customerImg" href="#" title="${customerSignInSuccess.customerName}" class="drop-down-menu">
 					${customerSignInSuccess.customerName}
 				</a>
 				
 				<div id="customerMenu">
-                    <a href="#">
+                    <a href="<c:url value='/customerController/customerPage'></c:url>">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

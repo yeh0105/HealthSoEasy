@@ -10,7 +10,4 @@ public interface LecturerRepository extends JpaRepository<LecturerBean, Integer>
 
 	List<LecturerBean> findByLecturerId(Integer lecturerId);
 	
-	
-	
-	
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
-import com.soeasy.repository.shopRepository.ShopRepository;
+import com.soeasy.repository.mallRepository.ShopRepository;
 import com.soeasy.service.shopService.ShopService;
 
 @Transactional
