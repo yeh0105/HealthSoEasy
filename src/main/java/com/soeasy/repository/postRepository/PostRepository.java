@@ -9,7 +9,7 @@ import com.soeasy.model.PostBean;
 
 public interface PostRepository extends JpaRepository<PostBean, Integer> {
 
-	List<PostBean> findByPostId(Integer postId);
+//	List<PostBean> findByPostId(Integer postId);
 
 	@Query("SELECT DISTINCT postCategory FROM PostBean")
 	List<String> findDistinctPostCategory();
