@@ -81,6 +81,7 @@ body * {
 			<div>
 				<ul id="uk_breadcrumb">
 					<li href="<c:url value='/'/>">首頁</li>
+					<li href="<c:url value='/getAllNutritionists' />">&emsp;&frasl;&emsp;營養師列表</li>
 					<li href="#">&emsp;&frasl;&emsp;營養師介紹</li>
 				</ul>
 
