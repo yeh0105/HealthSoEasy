@@ -30,12 +30,12 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public LecturerBean findByLecturerId(Integer lecturerId) {
+	public LecturerBean getOneByLecturerId(Integer lecturerId) {
 		return lecturerRepository.findByLecturerId(lecturerId).get(lecturerId);
 	}
 
 	@Override
-	public List<LecturerBean> findAllByLecturerId() {
+	public List<LecturerBean> getAllByLecturerId() {
 		return lecturerRepository.findAll();
 	}
 

@@ -18,7 +18,7 @@
 </style>
 
 
-<title>所有講師</title>
+<title>新增講師</title>
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
 <link
@@ -37,6 +37,7 @@
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 
+	<!-- 這邊是綠底標頭區 -->
 	<div class="mainWrapper">
 		<section id="offer">
 		<div style="background-color: #C9D8BF; text-align: center;">
@@ -50,50 +51,41 @@
 		</section>
 	</div>
 
-	<a href='add'><button>新增講師</button></a>
 
-	<table border='2' width="1000">
-		<tr>
-			<td width='1400' colspan='2' align='left'>
-				<table border='1' width='1400'>
+	<a href='allLecturers'><button>查詢所有講師</button></a>
+
+	<div>
+		<fieldset style="width: 900px;">
+			<legend>新增運動地圖</legend>
+			<div>
+			<form:form method="POST" action="add" modelAttribute="lecturerBean"
+				enctype='multipart/form-data'>
+				<table>
 					<tr>
-						<td width='200'>講師編號</td>
-						<td width='200'>講師姓名</td>
-						<td width='200'>講師專長</td>
-						<td width='200'>講師經歷</td>
-						<td width='200'>講師照片</td>
-						<td width='200'>修改</td>
-						<td width='200'>刪除</td>
+						<td>講師姓名：</td>
+						<td width='600'><form:input path='lecturerName' /> <form:errors path="lecturerName" cssClass="error" /></td>
 					</tr>
+					<tr>
+						<td>講師專長：</td>
+						<td width='600'><form:input path='lecturerTalent' /> <form:errors path="lecturerTalent" cssClass="error" /></td>
+					</tr>
+					<tr>
+						<td>講師經歷：</td>
+						<td width='600'><form:input path='lecturerExp' /> <form:errors path="lecturerExp" cssClass="error" /></td>
+					<tr>
+						<td>講師照片：</td>
+						<td width='600'><input type="file" /> <form:errors path="lecturerImg" cssClass="error" /></td>
+					</tr>
+					<tr>
+						<td><input type='submit' value="送出"></td>
+						<td><input type='reset' value="清除重填"></td>
+					<tr>
 				</table>
-			</td>
-		</tr>
-		<c:forEach varStatus="stVar" var="entry" items="${lecturer}">
-			<c:set var="rowColor" value="#DEFADE" />
-			
-			<tr height='18' bgColor="${rowColor}">
-				<td width='1400' colspan='2' align='left'>
-					<table border='1' width='1400'>
-						<tr>
-							<td width='200' align="left">${entry.value.lecturerId}</td>
-							<td width='200' align="left">${entry.value.lecturerName}</td>
-							<td width='200' align="left">${entry.value.lecturerTalent}</td>
-							<td width='200' align="left">${entry.value.lecturerExp}</td>
-							<td width='200' align="left">${entry.value.lecturerImg}</td>
-							<td><a href="<c:url value='lecturer/${entry.value.lecturerId}' />"><button>修改</button></a></td>
-							<td><a href="<c:url value='lecturer/${entry.value.lecturerId}' />"><button>刪除</button></a></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</c:forEach>
-
-
-	</table>
-	<br>
-
+			</form:form>
+			</div>
+		</fieldset>
+	</div>
+	
 	<!-- 引入共同的頁尾  copy這行-->
-	<jsp:include page="/fragment/footer.jsp" />
-
-</body>
+	<jsp:include page="/fragment/footer.jsp" /></body>
 </html>

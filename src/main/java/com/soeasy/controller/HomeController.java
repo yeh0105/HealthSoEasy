@@ -43,5 +43,9 @@ public class HomeController {
 		return "sportMap/sportMapIndex";
 	}
 
-	
+	// 從SoEasy首頁跳至講座首頁(先測講師)
+	@GetMapping("/lecturerIndex")
+	public String lecturerIndex() {
+		return "/lecturer/lecturerIndex";
+	}
 }
