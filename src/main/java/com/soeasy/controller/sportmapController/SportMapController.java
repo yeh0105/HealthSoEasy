@@ -62,7 +62,8 @@ public class SportMapController {
 		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
 			SportMapBean sportMapBean = sportMapService.get(sportMapId);			
 			model.addAttribute("sportMapBean",sportMapBean);
-			return "sportMap/updateSportMap";
+//			return "sportMap/updateSportMap"; //帶出修改資料
+			return "sportMap/getOneSportMap"; //查詢單一頁面
 		}
 		
 		
@@ -72,16 +73,15 @@ public class SportMapController {
 				@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
 				BindingResult result,Model model,@PathVariable Integer sportMapId,
 				HttpServletRequest request) {
-//			SportMapBeanValidator validator = new SportMapBeanValidator();
-//			validator.validate(sportMapBean, result);
-//			if(result.hasErrors()) {
-//				List<ObjectError>list = result.getAllErrors();
-//				for(ObjectError error: list) {
-//					System.out.println("有錯誤="+error);
-//				}
-//				return "redirect:/sportMapController/sportMap/{sportMapId}"; 
-//				return "sportMap/addSportMap";	 
-//			}
+//					
+			//檢驗欄位內容
+			SportMapBeanValidator validator = new SportMapBeanValidator();
+			validator.validate(sportMapBean,result);
+			if(result.hasErrors()) {
+				
+				return "sportMap/updateSportMap";	
+
+			}	
 			
 			//找到對應的Category物件
 			SportCategoryBean sportCategoryBean = sportCategoryService.getSportCategory(sportMapBean.getSportCategoryBean().getSportCategoryId());

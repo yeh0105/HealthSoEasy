@@ -36,10 +36,14 @@
 			
 				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="btn1">所有運動地點</button></a>
 			            
-				<a href='add'><button class="btn1">新增運動地圖</button></a>			
+<!-- 				<a href='add'><button class="btn1">新增運動地圖</button></a>	 -->
+				<a href="<c:url value='/sportMapController/add' />"><button class="btn1">新增運動地圖</button></a>
+						
             
            
        </section>
+       
+       <section><div>熱門運動地點Top 3</div></section>
 		
             
         
