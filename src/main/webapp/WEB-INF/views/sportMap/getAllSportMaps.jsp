@@ -30,7 +30,8 @@
 			<img src="${pageContext.request.contextPath}/images/MapSport1.png" width="100%" height="100%">
         </div>
 
-	<a href='add'><button>新增運動地圖</button></a>
+
+	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a>
 	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
 		
 	<form method='POST'>
@@ -69,17 +70,12 @@
 							<td width='200' align="left">${entry.value.sportMapAddress}
 							
 							<td width='200' align="left">${entry.value.sportMapInfo}
-
 							
 							<td width='200' align="left">${entry.value.sportMapMap}
 							
-
+	
 							<td><a href="<c:url value='sportMap/${entry.value.sportMapId}' />"><button>修改</button></a></td>
-<%-- 							<td><a class='deleteSportMap' href="<c:url value='/sportMapController/delete/${entry.value.sportMapId}' />"><button>刪除</button></a></td> --%>
 							<td><a class='deleteSportMap' href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}"><button>刪除</button></a></td>
-							
-
-
 					
 						</tr>						
 						
@@ -90,7 +86,8 @@
 
 
 	</table><br>
-	
+
+<!-- ----------刪除單筆資料用--------- -->	
 	<script>
 	
     $(document).ready(function() {
@@ -106,7 +103,42 @@
         });
     })
 	</script>
-	
+<!-- ------------------------------- -->
+<div ><!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
+<table border="1" id="tb1">
+	<tr align="center">
+		<td width='80' height='20'><c:if test="${pageNo > 1}">
+			<div id=""><a
+				href="<c:url value='displaySportMaps?pageNo=1#tb1' />"> <img
+				border='0' alt='第一頁' height='30' width='30'
+				/> </a></div>
+		</c:if></td>
+		<td width='80'><c:if test="${pageNo > 1}">
+			<div id=""><a
+				href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb1' />">
+			<img border='0' alt='前一頁' height='30' width='30'
+				 /></a></div>
+		</c:if></td>
+		<td width='76'>${pageNo} / ${totalPages}</td>
+		<td width='80'><c:if test="${pageNo != totalPages}">
+			<div id=""><a
+				href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb1' />">
+			<img border='0' alt='下一頁' height='30' width='30'
+				/> </a></div>
+		</c:if></td>
+		<td width='80'><c:if test="${pageNo != totalPages}">
+			<div id=""><a
+				href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb1' />">
+			<img border='0' alt='最末頁' height='30' width='30'
+				 /> </a></div>
+		</c:if></td>
+	</tr>
+</table>
+</div>
+
+<!-- ------------------------------- -->
+
+
 	
 
 	<jsp:include page="/fragment/footer.jsp" />
