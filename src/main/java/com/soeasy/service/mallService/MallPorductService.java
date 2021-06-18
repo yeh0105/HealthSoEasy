@@ -8,40 +8,40 @@ import com.soeasy.model.ProductBean;
 public interface MallPorductService {
 	
 		// 依ProductId來刪除單筆記錄
-		int deleteProduct(int no);
+		Integer deleteProduct(Integer no);
 		
 		// 依ProductId來查詢單筆記錄
-		ProductBean getProduct(int productId);
+		ProductBean getProduct(Integer productId);
 
 		// 取出所有的類型
 		List<String> getCategory();
 		
 		String getCategoryTag();
 		
-		Map<Integer, ProductBean> getPageProducts(int pageNo);
+		Map<Integer, ProductBean> getPageProducts(Integer pageNo);
 		
-//		int getPageNo();
+//		Integer getPageNo();
 		
-		int getRecordsPerPage();
+		Integer getRecordsPerPage();
 
-		long getRecordCounts();
+		Long getRecordCounts();
 		
-		int getTotalPages();
+		Integer getTotalPages();
 		
 		// 新增一筆記錄
-		int saveProduct(ProductBean bean);
+		Integer saveProduct(ProductBean bean);
 
 //		void setPageNo(int pageNo);
 
-		void setRecordsPerPage(int recordsPerPage);
+		void setRecordsPerPage(Integer recordsPerPage);
 
 		void setSelected(String category);
 		// 計算紀錄總筆數
-		int updateProduct(ProductBean bean, long sizeInBytes) ;
+		Integer updateProduct(ProductBean bean, Long sizeInBytes) ;
 
 		void truncateProductTable();
 
-		int updateProductForeignKey(Integer companyId, Integer productId);
+		Integer updateProductForeignKey(Integer companyId, Integer productId);
 
 
 	}

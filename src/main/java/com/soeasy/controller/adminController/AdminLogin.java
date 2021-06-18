@@ -1,5 +1,8 @@
 package com.soeasy.controller.adminController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
@@ -20,7 +25,7 @@ import com.soeasy.validator.adminValidator.AdminBeanValidator;
 
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes({"adminLoginSuccess", "customerSignInSuccess", "shopSignInSuccess"}) 
+@SessionAttributes({"adminLoginSuccess", "customerSignInSuccess", "shopSignInSuccess", "switchMode"}) 
 public class AdminLogin {
 
 	// 後臺首頁
@@ -84,7 +89,17 @@ public class AdminLogin {
 		}
 		System.out.println(nextPath);
 		return "redirect:" + nextPath;
+	}
+	@GetMapping(value = "/switchMode")
+	public String switchMode(@RequestParam(value = "switchMode", required = false) String switchMode, Model model) {
+		if(switchMode.equals("moon")) {
+			//設定夜間模式
+			model.addAttribute("switchMode", "moon");
+		} else if(switchMode.equals("sun")){	
+			//設定日間模式
+			model.addAttribute("switchMode", "sun");
+		}
 		
-		
+		return "redirect:/admin/adminLogin";
 	}
 }
