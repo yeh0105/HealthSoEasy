@@ -40,6 +40,8 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 		
 		if(mustLoginAdmin()) {
 			if(checkAdminLogin(request)) {	//已登入
+				HttpSession session = request.getSession();
+				session.setAttribute("servletPath", servletPath);
 				byPass = true;
 			} else {	//需登入但未登入，導向登入後台登入頁面
 				HttpSession session = request.getSession();
@@ -58,9 +60,6 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 		} else {	//不需登入
 			byPass = true;
 		}
-		
-		
-		
 		
 		return byPass;
 	}
