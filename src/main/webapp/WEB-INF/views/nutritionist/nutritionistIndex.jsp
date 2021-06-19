@@ -10,7 +10,7 @@
 #mainWrapper2 {
 	width: 80%;
 	padding-left: 10%;
-	padding-right:10%;
+	padding-right: 10%;
 }
 
 body * {
@@ -92,12 +92,9 @@ body * {
 			</div>
 			<div id="nutrit02">
 				<h3 id="dr_title">營養師基本資料</h3>
-				<a>1. 姓名:</a><br>
-				<br> <a>2. 性別:</a><br>
-				<br> <a>3. 學位:</a><br>
-				<br> <a>4. E-mail:</a><br>
-				<br> <a>5. 專長:</a><br>
-				<br>
+				<a>1. 姓名:</a><br> <br> <a>2. 性別:</a><br> <br> <a>3.
+					學位:</a><br> <br> <a>4. E-mail:</a><br> <br> <a>5.
+					專長:</a><br> <br>
 			</div>
 
 			<div id="nutrit03">
@@ -130,7 +127,16 @@ body * {
 					<button type="button">加入購物車</button>
 				</div>
 			</div>
-
+			<div>
+				<a href="<c:url value='/nutritionistController/addNutritionist'/>">
+					<button type="button">新增營養師</button>
+				</a>
+			</div>
+			<div>
+				<a href="<c:url value='/nutritionistController/getAllNutritionists'/>">
+					<button type="button">查詢全部營養師</button>
+				</a>
+			</div>
 		</section>
 
 	</div>

@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,6 +43,17 @@ public class NutritionistIdController {
 		return "nutritionist/getAllNutritionists";
 	}
 	
+	// 查詢單營養師
+	@GetMapping(value="nutritionist/{nutritionistId}")
+	public String getOneNutritionistById(@PathVariable("nutritionistId") Integer nutritionistId,Model model) {
+		NutritionistBean nutritionistBean=nutritionistService.findByNutritionistId(nutritionistId);
+		model.addAttribute("nutritionistBean",nutritionistBean);
+		
+		
+		return "nutritionist/nutritionistIndex";
+	}
+	
+	
 	
 	// 新增營養師，先送一個空白表單，並給予初值
 	@GetMapping(value = "/addNutritionist")
@@ -54,7 +66,7 @@ public class NutritionistIdController {
 		nutritionistBean.setNutritionistEmail("fatcat05@gmail.com");
 		model.addAttribute("nutritionistBean", nutritionistBean);
 
-		return "nutritionist/addNutritionist";
+		return "/nutritionist/addNutritionists";
 	}
 	
 	// 新增營養師
