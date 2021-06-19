@@ -4,142 +4,166 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<link href="css/header&footer.css" rel="stylesheet">
+<link
+	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
+	rel="stylesheet" media="screen">
+<link rel='stylesheet'
+	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Caudex&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+	rel="stylesheet">	
+<link href="${pageContext.request.contextPath}/css/sportMap_getAll.css"
+	rel="stylesheet">
+	
+	
 <style>
-	.btn1{  border-radius: 20px 20px;
-            border-color: #D7FFEE;
-            background-color:#D7FFEE;
-        }
-        
-
+.btn1 {
+	border-radius: 20px 20px;
+	border-color: #D7FFEE;
+	background-color: #D7FFEE;
+}
 </style>
-
 
 <title>所有運動地點</title>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-		
-		<div id="mainWrapper">
-			<img src="${pageContext.request.contextPath}/images/MapSport1.png" width="100%" height="100%">
-        </div>
 
+	<div class="mainWrapper">
+		<section id="offer">
+			<div style="background-color: #C9D8BF; text-align: center;">
+				<div style="margin: 5% auto;">
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Map</h1>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						揮灑你的汗水，展現你的風采</p>
 
-	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a>
-	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
-		
-	<form method='POST'>
-		<input type='hidden' name='_method' value='DELETE'>
-	</form>	
-		
-		
-	<table border='2' width="1000">
-		<tr>
-		
-		<td width='800' colspan='2' align='left'>
-		<table border='1' width='800'>
-			<tr>
-			<td width='200'>運動分類</td>		
-		
-			<td width='200'>運動地點名稱</td>
-			<td width='200'>地址</td>
-			<td width='200'>地點簡介</td>
-			<td width='200'>地圖	</td>
-			</tr>
-		</table>
-		</td>
-		
-		</tr>
-		<c:forEach varStatus="stVar" var="entry" items="${sportMaps_DPP}">
-			<c:set var="rowColor" value="#DEFADE" />
-			<tr height='18' bgColor="${rowColor}">
-				<td width='800' colspan='2' align='left'>
-					<table border='1' width='800'>
-						<tr>
-							<td width='200' align="left">
-								${(entry.value.sportCategoryBean.sportCategoryName)}</td>
-							<td width='200' align="left">${entry.value.sportMapName}
-							</td>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						運動使我們充滿活力，活力讓生命變得美麗！</p>
+				</div>
 
-							<td width='200' align="left">${entry.value.sportMapAddress}
-							
-							<td width='200' align="left">${entry.value.sportMapInfo}
-							
-							<td width='200' align="left">${entry.value.sportMapMap}
-							
+			</div>
+
+		</section>
+	</div>
 	
-							<td><a href="<c:url value='sportMap/${entry.value.sportMapId}' />"><button>修改</button></a></td>
-							<td><a class='deleteSportMap' href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}"><button>刪除</button></a></td>
-					
-						</tr>						
-						
-					</table>
-				</td>
-			</tr>
+	<!-- ------------------------------內容開始區塊--------------------------------- -->
+	
+	
+	<div class='container'>
+		<c:forEach varStatus="stVar" var="entry" items="${sportMaps_DPP}">
+
+			<div class='column'>
+				<div class='demo-title'>${(entry.value.sportCategoryBean.sportCategoryName)}</div>
+				<div class='post-module'>
+					<div class='thumbnail'>
+						<div class='date'>
+							<div class='day'>go</div>
+							<div class='month'>go</div>
+														
+							
+						</div>
+						${entry.value.sportMapMap}
+					</div>
+					<div class='post-content'>
+						<div class='category'>Map</div>
+						<h3 class='sub_title'>運動地點：${entry.value.sportMapName}</h3>
+						<h3 class='description'>地址：${entry.value.sportMapAddress}</h3>
+						<div class='post-meta'>
+							<span class='timestamp'> <i class='fa fa-clock-o'></i>
+								${(entry.value.sportCategoryBean.sportCategoryName)}
+							</span><br> 
+							<span class='comments'> <i class='fa fa-comments'></i> <a
+								href="<c:url value='sportMap/${entry.value.sportMapId}' />">詳細資訊</a>
+							</span> 
+							<span class='comments'> <i class='fa fa-comments'></i> <a
+								class='deleteSportMap'
+								href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}">刪除</a>
+							</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
 		</c:forEach>
 
+	</div>
+<!-- 	---------------------用來接delete的post--------------------------	 -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='DELETE'>
+	</form>
 
-	</table><br>
 
-<!-- ----------刪除單筆資料用--------- -->	
+<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 	<script>
-	
-    $(document).ready(function() {
-        $('.deleteSportMap').click(function() {
-        	if (confirm('確定刪除此筆紀錄? ')) {
-        		var href = $(this).attr('href');
-                $('form').attr('action', href).submit();
-                
-                console.log(href);
-        	} 
-        	return false;
-            
-        });
-    })
+		$(document).ready(function() {
+			$('.deleteSportMap').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
 	</script>
-<!-- ------------------------------- -->
-<div ><!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
-<table border="1" id="tb1">
-	<tr align="center">
-		<td width='80' height='20'><c:if test="${pageNo > 1}">
-			<div id=""><a
-				href="<c:url value='displaySportMaps?pageNo=1#tb1' />"> <img
-				border='0' alt='第一頁' height='30' width='30'
-				/> </a></div>
-		</c:if></td>
-		<td width='80'><c:if test="${pageNo > 1}">
-			<div id=""><a
-				href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb1' />">
-			<img border='0' alt='前一頁' height='30' width='30'
-				 /></a></div>
-		</c:if></td>
-		<td width='76'>${pageNo} / ${totalPages}</td>
-		<td width='80'><c:if test="${pageNo != totalPages}">
-			<div id=""><a
-				href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb1' />">
-			<img border='0' alt='下一頁' height='30' width='30'
-				/> </a></div>
-		</c:if></td>
-		<td width='80'><c:if test="${pageNo != totalPages}">
-			<div id=""><a
-				href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb1' />">
-			<img border='0' alt='最末頁' height='30' width='30'
-				 /> </a></div>
-		</c:if></td>
-	</tr>
-</table>
-</div>
+<!-- ---------------------------控制分頁用----------------------------------- -->
+	<div class='container'>
+		<table border="1" id="tb1">
+			<tr align="center">
+				<td width='80' height='20'><c:if test="${pageNo > 1}">
+						<div id="">
+							<a href="<c:url value='displaySportMaps?pageNo=1#tb1' />"> <img
+								border='0' alt='第一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='80'><c:if test="${pageNo > 1}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb1' />">
+								<img border='0' alt='前一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='76'>${pageNo}/ ${totalPages}</td>
+				<td width='80'><c:if test="${pageNo != totalPages}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb1' />">
+								<img border='0' alt='下一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='80'><c:if test="${pageNo != totalPages}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb1' />">
+								<img border='0' alt='最末頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+			</tr>
+		</table>
+	</div>
 
-<!-- ------------------------------- -->
-
-
-	
+<!-- ------------------------------內容結束區塊--------------------------------- -->
+	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a>
+	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
 
 	<jsp:include page="/fragment/footer.jsp" />
 

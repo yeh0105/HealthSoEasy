@@ -28,7 +28,7 @@ public class GlobalService {
 
 
 	// 地圖
-	public static final int SPORTMAPS_PER_PAGE = 3;
+	public static final int SPORTMAPS_PER_PAGE = 6;
 
 	// 講座狀態
 	public static final Integer LECTURE_STATUS_TOBEHELD = 1;  //即將舉辦
