@@ -22,13 +22,10 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/categoryNav.css">
-<style type="text/css">
-</style>
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
 		var likeBtn = document.getElementById("like");
 		likeBtn.addEventListener("click", function() {
-			console.log("click");
 			likeBtn.classList.toggle('red');
 		})
 	})
