@@ -37,6 +37,8 @@ public class mallProductsController {
 			) {
 		
 //		//沒登入就倒回葉面
+		
+		//hllllllllllllllll
 		CustomerBean customerbean = (CustomerBean) model.getAttribute("LoginOK");
 ////		x++;
 ////		System.out.println("x=" + x);
