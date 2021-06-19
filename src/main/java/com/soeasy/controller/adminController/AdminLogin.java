@@ -1,8 +1,5 @@
 package com.soeasy.controller.adminController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
@@ -30,11 +26,13 @@ public class AdminLogin {
 
 	// 後臺首頁
 	@GetMapping({"/", "/adminLogin"})
-	public String admin(Model model) {
+	public String admin(Model model, HttpServletRequest request) {
 		AdminBean adminBean = new AdminBean();
 		adminBean.setAdminName("admin");
 		adminBean.setAdminPassword("soeasy");
 		model.addAttribute("adminBean", adminBean);
+		HttpSession session = request.getSession();
+		session.setAttribute("servletPath", request.getServletPath());
 		return "/adminIndex";
 	}
 	
@@ -84,6 +82,7 @@ public class AdminLogin {
 		
 		HttpSession session = request.getSession();
 		String nextPath = (String)session.getAttribute("servletPath");
+		System.out.println(nextPath);
 		if (nextPath == null) {
 			nextPath = "/admin/";
 		}
@@ -91,7 +90,10 @@ public class AdminLogin {
 		return "redirect:" + nextPath;
 	}
 	@GetMapping(value = "/switchMode")
-	public String switchMode(@RequestParam(value = "switchMode", required = false) String switchMode, Model model) {
+	public String switchMode(
+			@RequestParam(value = "switchMode", required = false) String switchMode,
+			Model model,
+			HttpServletRequest request) {
 		if(switchMode.equals("moon")) {
 			//設定夜間模式
 			model.addAttribute("switchMode", "moon");
@@ -99,7 +101,12 @@ public class AdminLogin {
 			//設定日間模式
 			model.addAttribute("switchMode", "sun");
 		}
-		
-		return "redirect:/admin/adminLogin";
+		System.out.println(request.getRequestURI());
+		HttpSession session = request.getSession();
+		String nextPath = (String)session.getAttribute("servletPath");
+		if (nextPath == null) {
+			nextPath = "/admin/";
+		}
+		return "redirect:" + nextPath;
 	}
 }

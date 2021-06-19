@@ -40,9 +40,38 @@
 	<div class="customer-main">
 		<div>
 			<div class="customer-img">
-				<img alt="" src="${pageContext.request.contextPath}/images/goodcat.jpg">
+				<div>
+					<img alt="" src="${pageContext.request.contextPath}/images/goodcat.jpg">
+				</div>
 			</div>
-			<div class="customer-information" ></div>
+			<div class="customer-information" >
+				<div class="customer-information-inside">
+<!-- 					<form action=""> -->
+<!-- 						<label for="customerName"> -->
+<!-- 							姓名： -->
+<!-- 							<input id="customerName" type="text" placeholder="請輸入姓名"> -->
+<!-- 						</label> -->
+<!-- 						<label for="customerNicnkname"> -->
+<!-- 							暱稱： -->
+<!-- 							<input id="customerNicnkname" type="text" placeholder="請輸入暱稱"> -->
+<!-- 						</label> -->
+<!-- 						<label for="customerPhone"> -->
+<!-- 							電話： -->
+<!-- 							<input id="customerPhone" type="text" placeholder="請輸入電話"> -->
+<!-- 						</label> -->
+<!-- 						<label for="customerBirthDay"> -->
+<!-- 							生日： -->
+<!-- 							<input id="customerBirthDay" type="date" placeholder="請輸入姓名"> -->
+<!-- 						</label> -->
+<!-- 					</form> -->
+						<div class="customer-information-items">
+							<div>姓名：</div>
+							<div>暱稱：</div>
+							<div>電話：</div>
+							<div>生日：</div>
+						</div>
+				</div>
+			</div>
 		</div>
 		<div>
 			<div class="customer-health-information"></div>
