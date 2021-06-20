@@ -83,9 +83,9 @@
 										style="width: 100px; height: 100px;"
 										src="<c:url value='/PostController/getPicture/${post.postId}' />"
 										alt='' /> </a>
-									<div class="media-body">
-										<h4 class="media-heading">${post.postTitle}</h4>
-										${fn:substring(post.postContent,0,50)}...
+									<div class="media-body" style="line-height:30px;">
+										<h3 class="media-heading">${post.postTitle}</h3>
+										${fn:substring(post.postContent,0,100)}...
 									</div>
 								</div>
 							</div>
@@ -99,8 +99,10 @@
 									</a>${post.postLike}
 								</p>
 								<p style="font-size: 15px; color: grey;">
-									<br> <br> <br> <br>
-									${post.customerBean.customerNickname}
+									<br>
+									By ${post.customerBean.customerNickname}
+									<br> 
+									${fn:substring(post.postUploadTime,0,19)}
 								</p>
 							</div>
 						</div>
