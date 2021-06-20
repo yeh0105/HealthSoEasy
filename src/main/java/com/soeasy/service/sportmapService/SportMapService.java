@@ -1,5 +1,6 @@
 package com.soeasy.service.sportmapService;
 
+import java.util.List;
 import java.util.Map;
 
 import com.soeasy.model.SportMapBean;
@@ -9,7 +10,7 @@ public interface SportMapService {
 	//新增地圖
 	SportMapBean save(SportMapBean sportMapBean);
 	
-	//查詢單一地圖By ID
+	//查詢單一地圖By sportMapId
 	SportMapBean get(Integer SportMapId);	
 		
 	// 抓分頁一頁有哪些地圖
@@ -29,6 +30,16 @@ public interface SportMapService {
 	
 	//刪除單筆地圖
 	void delete(Integer sportMapId);
+	
+	
+	//查詢所有地圖
+	List<SportMapBean> getAllSportMaps();
+	
+	//查詢地圖By SportCategoryId(未寫完)
+//	SportMapBean getSportMapsBySportCategoryId(Integer sportCategoryId);
+	
+	
+	
 	
 	
 	

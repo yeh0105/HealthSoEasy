@@ -1,5 +1,6 @@
 package com.soeasy.controller.sportmapController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
@@ -37,7 +39,7 @@ public class SportMapController {
 	SportCategoryService sportCategoryService;
 	
 
-	//查詢所有運動地點
+	//查詢所有運動地點(前台)
 	@GetMapping("/displaySportMaps")
 	public String DisplaySportMaps(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
@@ -57,7 +59,7 @@ public class SportMapController {
 		return "sportMap/getAllSportMaps";
 	}		
 	
-	//帶出修改前單一表單
+	//帶出修改前單一表單(後台)
 		@GetMapping(value="/sportMap/{sportMapId}")
 		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
 			SportMapBean sportMapBean = sportMapService.get(sportMapId);			
@@ -95,7 +97,7 @@ public class SportMapController {
 		
 		
 	
-	//新增運動地點，先送一個空白表單
+	//新增運動地點，先送一個空白表單(後台)
 	@GetMapping(value = "/add")
 	public String showEmptyForm(Model model) {
 		SportMapBean sportMapBean = new SportMapBean();
@@ -109,7 +111,7 @@ public class SportMapController {
 		return "sportMap/addSportMap";	
 		
 	}
-	//新增運動地點
+	//新增運動地點(後台)
 	@PostMapping(value = "/add")
 	public String add(@ModelAttribute("sportMapBean") 
 	SportMapBean sportMapBean,BindingResult result,
@@ -141,7 +143,7 @@ public class SportMapController {
 		
 	}
 	
-	//產生下拉式選單
+	//產生下拉式選單(新增&修改用)
 	@ModelAttribute
 	public void commonCategory(Model model) {
 		List<SportCategoryBean> sportCategoryBeanList = sportCategoryService.getAllSportCategorys();
@@ -161,6 +163,23 @@ public class SportMapController {
 		return "redirect:/sportMapController/displaySportMaps";
 	}
 	
+		
+	
+	//查詢所有運動類別Ajax，搭配查詢所有運動地點Ajax(依分類拉出地點，未寫完)
+	@GetMapping(value="/allSportCategory.json",produces= {"application/json; charset=UTF-8" })
+	public @ResponseBody List<SportCategoryBean>getAllCategorys(){
+		List<SportCategoryBean> sportCategorys = sportCategoryService.getAllSportCategorys();
+		
+		return sportCategorys;
+	}
+	
+	//查詢所有運動地點Ajax，查詢所有運動類別Ajax(未寫完)
+//	@GetMapping("/getSportMapsBySportCategory.json")
+//	public @ResponseBody List<SportMapBean> getSportMapsBySportCategory(@RequestParam("sportCategoryId") Integer sportCategoryId){
+//		List<SportMapBean> sportMapsList = sportMapService.getSportMapsBySportCategoryId(sportCategoryId);
+//		
+//		return sportMapsList;
+//	}
 	
 	
 	
