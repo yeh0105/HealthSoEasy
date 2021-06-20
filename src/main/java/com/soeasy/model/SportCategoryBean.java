@@ -17,7 +17,8 @@ public class SportCategoryBean implements Serializable{
 	private Integer sportCategoryId;
 	
 	private String sportCategoryName;
-	//運動地圖
+	//運動地圖(加下面會爆)
+
 	
 
 	// ------------------------------------------

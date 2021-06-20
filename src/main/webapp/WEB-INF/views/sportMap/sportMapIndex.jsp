@@ -64,6 +64,11 @@
 			
 				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button
 						class="btn1">所有運動地點</button></a>
+						
+						<a href="#"><button	class="btn1">運動中心</button></a>
+						<a href="#"><button	class="btn1">市區場館</button></a>
+						<a href="#"><button	class="btn1">游泳池</button></a>
+						<a href="#"><button	class="btn1">其他戶外場地</button></a>
 			</div>
 			<%-- 				<a href="<c:url value='/sportMapController/add' />"><button class="btn1">新增運動地圖</button></a> --%>
 		</section>

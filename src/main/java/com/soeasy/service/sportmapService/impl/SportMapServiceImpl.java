@@ -101,14 +101,36 @@ public class SportMapServiceImpl implements SportMapService {
 	@Override
 	public void update(SportMapBean sportMapBean) {
 		sportMapRepository.save(sportMapBean);
-	}
-	
+	}	
+		
 	
 	//刪除單筆地圖
 	@Override
 	public void delete(Integer sportMapId) {
 		sportMapRepository.deleteById(sportMapId);
 	}
+	
+	//查詢所有地圖
+	@Override
+	public List<SportMapBean> getAllSportMaps() {
+	return sportMapRepository.findAll();
+	}
+
+
+	//查詢地圖By SportCategoryId
+//	@Override
+//	public SportMapBean getSportMapsBySportCategoryId(Integer sportCategoryId) {
+//				
+//		List<SportMapBean> list =sportMapRepository.findBySportCategoryId(sportCategoryId);
+//	
+//		return list;
+//	}
+
+
+	
+	
+	
+	
 	
 
 }
