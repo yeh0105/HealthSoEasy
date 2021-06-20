@@ -20,7 +20,7 @@
 <jsp:include page="/fragment/header.jsp" />
  
 
- 
+ <h2>建置中</h2>
  <div class="container">
  <h2 class="page-header">商品列表</h2>
  <table class="table table-border">

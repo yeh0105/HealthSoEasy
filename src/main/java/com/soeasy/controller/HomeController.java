@@ -36,7 +36,7 @@ public class HomeController {
 	}
 	
 	//從SoEasy首頁跳至Mall首頁	
-		@GetMapping("/mallIndex")
+		@GetMapping("/mall")
 		public String MallIndex() {
 			
 			return "mall/mallIndex";
