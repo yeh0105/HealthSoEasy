@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet" href="css/categoryNav.css">
-<link href="css/header&footer.css" rel="stylesheet">
+<link rel="stylesheet" href="css/header&footer.css">
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->

@@ -81,33 +81,33 @@ public class PostController {
 		String filename = "";
 		int len = 0;
 		PostBean postBean = postService.findByPostId(postId);
-		System.out.println("postBean="+postBean);
+//		System.out.println("postBean="+postBean);
 		if (postBean != null) {
 			Blob blob = postBean.getPostImg();
-			System.out.println("blob="+blob);
+//			System.out.println("blob="+blob);
 			if (blob != null) {
 				try {
 					len = (int) blob.length();
 					media = blob.getBytes(1, len);
-					System.out.println("len="+len);
-					System.out.println("media="+media);
+//					System.out.println("len="+len);
+//					System.out.println("media="+media);
 				} catch (SQLException e) {
 					throw new RuntimeException("StudentController的getPicture()發生SQLException: " + e.getMessage());
 				}
 			} else {
 				media = toByteArray(filePath);
 				filename = filePath;
-				System.out.println("blob=null ,media="+media);
-				System.out.println("blob=null ,filename="+filename);
+//				System.out.println("blob=null ,media="+media);
+//				System.out.println("blob=null ,filename="+filename);
 			}
 		} else {
 			media = toByteArray(filePath);
 			filename = filePath;
-			System.out.println("postBean=null ,media="+media);
-			System.out.println("postBean=null ,filename="+filename);
+//			System.out.println("postBean=null ,media="+media);
+//			System.out.println("postBean=null ,filename="+filename);
 		}
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
-		System.out.println("responseEntity="+responseEntity);
+//		System.out.println("responseEntity="+responseEntity);
 		return responseEntity;
 	}
 
@@ -115,18 +115,18 @@ public class PostController {
 	private byte[] toByteArray(String filepath) {
 		byte[] b = null;
 		String realPath = context.getRealPath(filepath);
-		System.out.println("realPath="+realPath);
+//		System.out.println("realPath="+realPath);
 		try {
 			File file = new File(realPath);
 			long size = file.length();
 			b = new byte[(int) size];
 			InputStream fis = context.getResourceAsStream(filepath);
-			System.out.println("file="+file);
-			System.out.println("size="+size);
-			System.out.println("byte[] b ="+b);
-			System.out.println("fis="+fis);
+//			System.out.println("file="+file);
+//			System.out.println("size="+size);
+//			System.out.println("byte[] b ="+b);
+//			System.out.println("fis="+fis);
 			fis.read(b);
-			System.out.println("fis.read(b)="+fis.read(b));
+//			System.out.println("fis.read(b)="+fis.read(b));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -163,8 +163,8 @@ public class PostController {
 		PostBeanValidator validator = new PostBeanValidator();
 		validator.validate(postBean, result);
 
-		System.out.println("result=" + result);
-		System.out.println("postBean=" + postBean);
+//		System.out.println("result=" + result);
+//		System.out.println("postBean=" + postBean);
 
 		if (result.hasErrors()) {
 			return "post/addPost";
@@ -174,21 +174,21 @@ public class PostController {
 		MultipartFile postImg = postBean.getPostMultiImg();
 //		System.out.println("postBean=" + postBean);
 
-		System.out.println("postImg=" + postBean.getPostMultiImg());
+//		System.out.println("postImg=" + postBean.getPostMultiImg());
 
 		// 取得圖片檔案名稱
 		String originalFilename = postImg.getOriginalFilename();
-		System.out.println(postImg.getOriginalFilename());
+//		System.out.println(postImg.getOriginalFilename());
 
 		// 假如圖片是空字串或空值originalFilename等於預設圖片
 		if (originalFilename == "") {
 			originalFilename = "NoPictUploaded.jpg";
-			System.out.println(originalFilename);
+//			System.out.println(originalFilename);
 		}
 
 		// 取得副檔名
 		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-		System.out.println(ext);
+//		System.out.println(ext);
 
 		// 建立Blob物件，交由 Hibernate 寫入資料庫
 		if (postImg != null && !postImg.isEmpty()) {
@@ -196,7 +196,7 @@ public class PostController {
 				byte[] b = postImg.getBytes();
 				Blob blob = new SerialBlob(b);
 				postBean.setPostImg(blob);
-				System.out.println("postBean=" + postBean);
+//				System.out.println("postBean=" + postBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
@@ -224,6 +224,8 @@ public class PostController {
 		PostCategoryBean postCategoryBean = postCategoryService
 				.getPostCategory(postBean.getPostCategoryBean().getPostCategoryId());
 		postBean.setPostCategoryBean(postCategoryBean);
+		
+		postBean.setPostCategory(postCategoryBean.getPostCategoryName());
 
 		try {
 			postService.addPost(postBean);
