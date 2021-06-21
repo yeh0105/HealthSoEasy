@@ -58,6 +58,49 @@
 		</section>
 	</div>
 	
+	<!-- ---------------------------控制分頁用----------------------------------- -->
+	<div class='container'>
+		<table border="1" id="tb2">
+			<tr align="center">
+				<td width='80' height='20'><c:if test="${pageNo > 1}#tb2">
+						<div id="">
+							<a href="<c:url value='displaySportMaps?pageNo=1' />"> <img
+								border='0' alt='第一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='80'><c:if test="${pageNo > 1}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb2' />">
+								<img border='0' alt='前一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='76'>${pageNo}/ ${totalPages}</td>
+				<td width='80'><c:if test="${pageNo != totalPages}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb2' />">
+								<img border='0' alt='下一頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+				<td width='80'><c:if test="${pageNo != totalPages}">
+						<div id="">
+							<a
+								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb2' />">
+								<img border='0' alt='最末頁' height='30' width='30' />
+							</a>
+						</div>
+					</c:if></td>
+			</tr>
+		</table>
+	</div>
+
+<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
+	
+	
 	<!-- ------------------------------內容開始區塊--------------------------------- -->
 	
 	
@@ -83,14 +126,14 @@
 						<div class='post-meta'>
 							<span class='timestamp'> <i class='fa fa-clock-o'></i>
 								${(entry.value.sportCategoryBean.sportCategoryName)}
-							</span><br> 
+							</span>
 							<span class='comments'> <i class='fa fa-comments'></i> <a
 								href="<c:url value='sportMap/${entry.value.sportMapId}' />">詳細資訊</a>
 							</span> 
-							<span class='comments'> <i class='fa fa-comments'></i> <a
-								class='deleteSportMap'
-								href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}">刪除</a>
-							</span>
+<!-- 							<span class='comments'> <i class='fa fa-comments'></i>  -->
+<!-- 							<a	class='deleteSportMap' -->
+<%-- 								href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}">刪除</a> --%>
+<!-- 							</span> -->
 						</div>
 					</div>
 				</div>
@@ -127,7 +170,8 @@
 			<tr align="center">
 				<td width='80' height='20'><c:if test="${pageNo > 1}">
 						<div id="">
-							<a href="<c:url value='displaySportMaps?pageNo=1#tb1' />"> <img
+<%-- 							<a href="<c:url value='displaySportMaps?pageNo=1#tb1' />"> <img --%>
+							<a href="<c:url value='displaySportMaps?pageNo=1#tb2' />"> <img
 								border='0' alt='第一頁' height='30' width='30' />
 							</a>
 						</div>
@@ -135,7 +179,7 @@
 				<td width='80'><c:if test="${pageNo > 1}">
 						<div id="">
 							<a
-								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb1' />">
+								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb2' />">
 								<img border='0' alt='前一頁' height='30' width='30' />
 							</a>
 						</div>
@@ -144,7 +188,7 @@
 				<td width='80'><c:if test="${pageNo != totalPages}">
 						<div id="">
 							<a
-								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb1' />">
+								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb2' />">
 								<img border='0' alt='下一頁' height='30' width='30' />
 							</a>
 						</div>
@@ -152,7 +196,7 @@
 				<td width='80'><c:if test="${pageNo != totalPages}">
 						<div id="">
 							<a
-								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb1' />">
+								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb2' />">
 								<img border='0' alt='最末頁' height='30' width='30' />
 							</a>
 						</div>
@@ -162,7 +206,7 @@
 	</div>
 
 <!-- ------------------------------內容結束區塊--------------------------------- -->
-	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a>
+<%-- 	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a> --%>
 	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
 
 	<jsp:include page="/fragment/footer.jsp" />
