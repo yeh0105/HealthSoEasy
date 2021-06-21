@@ -19,12 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.soeasy.model.ProductBean;
 import com.soeasy.service.mallService.ProductService;
 
-//@RestController
-@RequestMapping("/mall") //獲取所有產品
+
+//此頁面為測試Json - testAPI使用
 
 //@Controller他會認為你回傳的是畫面 (jsp,thymleaf等等)
 //@RestController認為你回傳的是資料 (預設是json格式)
 
+//兩隻共存會炸掉
+
+
+
+
+//@RestController
+@RequestMapping("/mall") //獲取所有產品
 public class MallController {
 	
 	@Autowired

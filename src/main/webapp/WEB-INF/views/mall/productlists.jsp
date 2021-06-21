@@ -8,7 +8,7 @@
 <head>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;charset=utf-8">
-<title>Insert title here</title>
+<title>productList</title>
 
 <link rel="stylesheet" href="<c:url value="/css/mall-bootstrap.min.css"/>" href="<c:url value="/css/mall-common.css"/>" type="text/css"">
 
@@ -23,13 +23,18 @@
  
  <div class="container">
  <h2 class="page-header">商品列表</h2>
+ 
+
+ 
+ <p class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a><p>
+
  <table class="table table-border">
 
  <thead>
 
  <tr>
 
- <th>產品ID</th>
+ <th>#ID</th>
 
  <th>產品名稱</th>
  <th>產品分類</th>
@@ -38,7 +43,7 @@
  <th>產品庫存</th>
  <th>產品價格</th>
  <th>產品上架日期</th>
-<!--  <th>產品圖片</th> -->
+ <th>產品圖片</th>
  <th>修改</th>
 
  </tr>
@@ -61,10 +66,12 @@
  <td>${product.productAmount}</td>
  <td>${product.productPrice}</td>
  <td>${product.productDate}</td>
-<%--  <td>${product.productImg}</td> --%>
- <td><a href="<c:url value='/mall/lists/${product.productId}'/>"><button>詳情</button></a></td>
-
+ <td>${product.productImg}</td>
+ <td><a href="<c:url value='/mall/lists/${product.productId}'/>"><button>詳情</button></a>
+ <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
+ <a onclick="return del(this)" href="${pageContext.request.contextPath }/mall/delete/${product.productId}"><button >刪除</button></a></td>
  </tr>
+ 
 
  </c:forEach>
 
@@ -72,6 +79,22 @@
 
  </table>
  </div>
+ 
+    <!-- 用於將 POST 請求轉換為 DELETE請求 -->
+<!--     暫時放棄 先直接用Post請求 -->
+<form action="#" method="POST">
+    <input type="hidden" value="DELETE" name="_method" />
+ </form>
+  <script type="text/javascript">
+    //將 get 請求轉換為 post 請求提交
+    function del(tag) {
+      //獲取當前請求路徑
+      var href = tag.href;
+      //提交
+      $("form").attr("action", href).submit();
+      return false;
+    }
+  </script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
