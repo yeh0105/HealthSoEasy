@@ -1,6 +1,7 @@
 package com.soeasy.service.customerService.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerBean findByCustomerId(Integer customerId) {
-		return null;
+		return customerRepository.getById(customerId);
 	}
 
 //	@Override
@@ -58,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void updateCustomerBasicInfo(CustomerBean customer) {
-
+		customerRepository.save(customer);
 	}
 
 	@Override

@@ -83,6 +83,14 @@
 	align-items: center; 
 }
 
+.customer-information-items > div > div input{
+	margin: 0px;
+	height: 70%;
+	width: 100%;
+	font-size: 28px;
+	cursor: auto;
+}
+
 
 .customer-information-items .customer-information-items-button{
 	justify-content: flex-end;
@@ -95,7 +103,8 @@
 	width: 25%;
 	height: 60%;	
 	font-size: 30px;
-	border-radius: 4px; 
+	border-radius: 4px;
+	border-color: #FFF;
 	background-color: #C9D8BF;
 	color: #fff;
 /* 	display: flex; */
@@ -154,6 +163,17 @@
 	align-items: center; 
 }
 
+.customer-health-information-items > div > div label{
+	font-size: 28px;
+}
+
+.customer-health-information-items > div > div input{
+	margin: 0px;
+	height: 70%;
+	width: 100%;
+	font-size: 28px;
+	cursor: auto;
+}
 
 .customer-health-information-items .customer-health-information-items-button{
 	justify-content: flex-end;
@@ -166,11 +186,14 @@
 	width: 25%;
 	height: 60%;	
 	font-size: 30px;
-	border-radius: 4px; 
+	border-radius: 4px;
+	border-color: #FFF;
+	background-color: #C9D8BF;
 	color: #fff;
 /* 	display: flex; */
 /*   	align-items: center; */
 /*   	justify-content: center; */
+	cursor: pointer;
 	
 	
 	cursor: pointer;
