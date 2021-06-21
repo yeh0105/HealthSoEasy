@@ -55,14 +55,20 @@
 	<div class="mainWrapper">
 
 		<section id="">
+			<div >
+				
+				<img src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png"
+					width="45%" height="45%">
+					<span class="font1">運動地點說明文字運動地點說明文字運動地點說明文字運動地點說明文字</span>
+					
+		   </div> 
+			
 			<div>
-				<img src="${pageContext.request.contextPath}/images/MapSport2.png"
-					width="40%" height="40%"> <img
-					src="${pageContext.request.contextPath}/images/MapSport4.png"
-					width="25%" height="25%">
-			
-			
-				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button
+			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
+					src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
+					width="25%" height="25%"></a>			
+			</div>
+			<div><a href="<c:url value='/sportMapController/displaySportMaps' />"><button
 						class="btn1">所有運動地點</button></a>
 						
 						<a href="#"><button	class="btn1">運動中心</button></a>

@@ -40,4 +40,11 @@ public class PostCategoryBean implements Serializable {
 		this.postCategoryName = postCategoryName;
 	}
 
+	@Override
+	public String toString() {
+		return "PostCategoryBean "
+				+ "[postCategoryId=" + postCategoryId 
+				+ ", postCategoryName=" + postCategoryName + "]";
+	}
+	
 }

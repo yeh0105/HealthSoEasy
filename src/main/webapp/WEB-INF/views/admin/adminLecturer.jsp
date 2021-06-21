@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Customer</title>
+<title>Admin Lecture</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -32,6 +32,11 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
+	
+	
+	
+	
+	
 
 </script>
 </head>
@@ -177,7 +182,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Home</h1>
+      <h1 class="app-content-headerText">講師</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -186,11 +191,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-      <button class="app-content-headerButton">Add Product</button>
+      <button class="app-content-headerButton">新增講師</button>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
-      <input class="search-bar" placeholder="Search..." type="text">
+      <input class="search-bar" placeholder="Search..." type="text">&nbsp;
+      <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>"><button class="app-content-headerButton">講座</button></a>&nbsp;
+      <button class="app-content-headerButton">講座預約</button>&nbsp;
+      <button class="app-content-headerButton">講座介紹</button>&nbsp;
+      <button class="app-content-headerButton">推薦文</button>
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -230,45 +239,40 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
-<!--    	表頭欄位 -->
+<!--  --------------------------- ----表頭欄位--------------------------- -->
       <div class="products-header">
         <div class="product-cell image">
-          Items
+          講師編號
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
-        <div class="product-cell category">Category<button class="sort-button">
+        <div class="product-cell category">講師姓名<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell status-cell">Status<button class="sort-button">
+        <div class="product-cell status-cell">講師專長<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell sales">Sales<button class="sort-button">
+        <div class="product-cell sales">講師經歷<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell stock">Stock<button class="sort-button">
+        <div class="product-cell stock">講師照片<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell price">Price<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
+        
         <div class="product-cell price">
           Update
 <!--           <button class="sort-button"> -->
 <!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
 <!--           </button> -->
         </div>
+        
         <div class="product-cell price">
-          Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
+          Delete
         </div>
       </div>
-	<!--       一筆資料內容--開始 -->
-      <div class="products-row">
+	<!--       ----------------------一筆資料內容--開始--------------------- -->
+      <div id="showS" class="products-row">
         <button class="cell-more-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
         </button>
@@ -283,34 +287,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </div>
         <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div>
         <div class="product-cell stock"><span class="cell-label">Stock:</span>36</div>
-        <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
+         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
+         <div class="product-cell price"><button class="app-content-headerButton">Delete</button></div>
+        
       </div>
-      <!--       一筆資料內容--結尾 -->
-	<!--       一筆資料內容--開始 -->
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-          <div class="product-cell image">
-            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-            <span>Sky</span>
-          </div>
-        <div class="product-cell category"><span class="cell-label">Category:</span>Bathroom</div>
-        <div class="product-cell status-cell">
-          <span class="cell-label">Status:</span>
-          <span class="status disabled">Disabled</span>
-        </div>
-        <div class="product-cell sales"><span class="cell-label">Sales:</span>22</div>
-        <div class="product-cell stock"><span class="cell-label">Stock:</span>44</div>
-        <div class="product-cell price"><span class="cell-label">Price:</span>$160</div>
-        <div class="product-cell price"><span class="cell-label">Update:</span>
-        <button class="app-content-headerButton">Update</button></div>
-        <div class="product-cell price"><span class="cell-label">Update:</span>
-        <button class="app-content-headerButton">Update</button></div>
-      </div>
-      <!--       一筆資料內容--結尾 -->
+      <!-- -------------------------一筆資料內容--結尾--------------------- -->
+	
       
     </div>
   </div>

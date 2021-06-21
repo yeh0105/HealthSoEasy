@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Customer</title>
+<title>Add SportMap</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -32,8 +34,22 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
+	
+	
+	
+	
+	
 
 </script>
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+
+</style>
+
 </head>
 <body>
 	<div class="app-container">
@@ -105,7 +121,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item  active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
@@ -153,7 +169,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>分享</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
@@ -177,7 +193,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Home</h1>
+      <h1 class="app-content-headerText">SportMap</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -186,7 +202,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-      <button class="app-content-headerButton">Add Product</button>
+      <a href="<c:url value='/admin/adminManage/adminSportMap/add' />">
+      <button class="app-content-headerButton">Add</button></a>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
@@ -230,87 +247,74 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
-<!--    	表頭欄位 -->
-      <div class="products-header">
-        <div class="product-cell image">
-          Items
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell category">Category<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell status-cell">Status<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell sales">Sales<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell stock">Stock<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell price">Price<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell price">
-          Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
-        </div>
-        <div class="product-cell price">
-          Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
-        </div>
-      </div>
-	<!--       一筆資料內容--開始 -->
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-          <div class="product-cell image">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product">
-            <span>Ocean</span>
-          </div>
-        <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-        <div class="product-cell status-cell">
-          <span class="cell-label">Status:</span>
-          <span class="status active">Active</span>
-        </div>
-        <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div>
-        <div class="product-cell stock"><span class="cell-label">Stock:</span>36</div>
-        <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-      </div>
-      <!--       一筆資料內容--結尾 -->
-	<!--       一筆資料內容--開始 -->
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-          <div class="product-cell image">
-            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-            <span>Sky</span>
-          </div>
-        <div class="product-cell category"><span class="cell-label">Category:</span>Bathroom</div>
-        <div class="product-cell status-cell">
-          <span class="cell-label">Status:</span>
-          <span class="status disabled">Disabled</span>
-        </div>
-        <div class="product-cell sales"><span class="cell-label">Sales:</span>22</div>
-        <div class="product-cell stock"><span class="cell-label">Stock:</span>44</div>
-        <div class="product-cell price"><span class="cell-label">Price:</span>$160</div>
-        <div class="product-cell price"><span class="cell-label">Update:</span>
-        <button class="app-content-headerButton">Update</button></div>
-        <div class="product-cell price"><span class="cell-label">Update:</span>
-        <button class="app-content-headerButton">Update</button></div>
-      </div>
-      <!--       一筆資料內容--結尾 -->
+<!--  --------------------------- ----內容開始--------------------------- -->
+<div>
+<a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">回上一頁</a>
+</div><br>
+<div>
+
+		<fieldset style="width: 900px;">
+			<legend>修改運動地圖</legend>
+			<form:form method="POST" action ="" modelAttribute="sportMapBean"
+				enctype='multipart/form-data'>
+			<table>
+				<tr>
+				<td>分類</td>
+				<td>
+				<form:select path='sportCategoryBean.sportCategoryId'>
+					<form:option label="請挑選" value="-1"/>
+					<form:options items="${sportCategoryBeanList}"
+					itemLabel='sportCategoryName' itemValue='sportCategoryId'/> 
+				</form:select> 
+				<form:errors path="sportCategoryBean" cssClass="error"/>  
+				</td>		
+				
+				</tr>
+				<tr>
+					<td>運動地點名稱：</td>
+					<td width='600'><form:input path='sportMapName' /> 
+					<form:errors path="sportMapName" cssClass="error" />
+					</td>
+				</tr>	
+				<tr>
+					<td>地址：</td>
+					<td width='600'><form:input path='sportMapAddress' /> 
+					<form:errors path="sportMapAddress" cssClass="error" />
+					</td>
+				</tr>
+				<tr>
+					<td>地點簡介：</td>
+					<td width='600'><form:input path='sportMapInfo' /> 
+					<form:errors path="sportMapInfo" cssClass="error" />
+					</td>
+				<tr>	
+					<td>評分：</td>
+					<td width='600'><form:input path='sportMapScore' /> 
+					<form:errors path="sportMapScore" cssClass="error" />
+					</td>
+				</tr>
+				
+				<tr>	
+					<td>地圖：</td>
+					<td width='600'><form:input path='sportMapMap' /> 
+					<form:errors path="sportMapMap" cssClass="error" />
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<input type='submit'>
+				</td>
+				<tr>
+
+			</table>
+			</form:form>
+
+		</fieldset>
+
+	</div>
+     
+<!-- --------------------------------一內容結尾---------------------------- -->
+	
       
     </div>
   </div>

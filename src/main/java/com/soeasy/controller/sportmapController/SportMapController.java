@@ -59,7 +59,7 @@ public class SportMapController {
 		return "sportMap/getAllSportMaps";
 	}		
 	
-	//帶出修改前單一表單(後台)
+	//帶出修改前單一表單
 		@GetMapping(value="/sportMap/{sportMapId}")
 		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
 			SportMapBean sportMapBean = sportMapService.get(sportMapId);			
@@ -97,7 +97,7 @@ public class SportMapController {
 		
 		
 	
-	//新增運動地點，先送一個空白表單(後台)
+	//新增運動地點，先送一個空白表單
 	@GetMapping(value = "/add")
 	public String showEmptyForm(Model model) {
 		SportMapBean sportMapBean = new SportMapBean();
@@ -111,7 +111,7 @@ public class SportMapController {
 		return "sportMap/addSportMap";	
 		
 	}
-	//新增運動地點(後台)
+	//新增運動地點
 	@PostMapping(value = "/add")
 	public String add(@ModelAttribute("sportMapBean") 
 	SportMapBean sportMapBean,BindingResult result,

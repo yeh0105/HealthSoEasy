@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+
 <title>Admin SportMap</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -32,11 +37,7 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
-	
-	
-	
-	
-	
+
 
 </script>
 </head>
@@ -110,7 +111,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item  active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
@@ -158,7 +159,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>分享</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
@@ -191,7 +192,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-      <button class="app-content-headerButton">Add Product</button>
+      <a href="<c:url value='/admin/adminManage/adminSportMap/add' />">
+      <button class="app-content-headerButton">Add</button></a>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
@@ -236,26 +238,31 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     
     <div class="products-area-wrapper tableView">
 <!--  --------------------------- ----表頭欄位--------------------------- -->
+        
       <div class="products-header">
         <div class="product-cell image">
-          地點編號
+          Id
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
-        <div class="product-cell category">地點名稱<button class="sort-button">
+        <div class="product-cell category">Name<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell status-cell">地址<button class="sort-button">
+        <div class="product-cell status-cell">Address<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell sales">地點簡介<button class="sort-button">
+        <div class="product-cell sales">Info<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button></div>
-        <div class="product-cell stock">地圖<button class="sort-button">
+<!--         <div class="product-cell stock">地圖<button class="sort-button"> -->
+<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
+<!--           </button></div> -->
+        <div class="product-cell price">Score<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell price">評分<button class="sort-button">
+          </button>
+        </div>
+          <div class="product-cell price">Category<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
@@ -272,27 +279,55 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </div>
       </div>
 	<!--       ----------------------一筆資料內容--開始--------------------- -->
-      <div id="showS" class="products-row">
+     <c:forEach var='sportMap' items='${sportMaps}'> 
+     
+      <div class="products-row">
         <button class="cell-more-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
         </button>
           <div class="product-cell image">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product">
-            <span>Ocean</span>
+            <img src="${pageContext.request.contextPath}/images/sportMap/MapSport6.png" alt="sport">
+            <span>${sportMap.sportMapId}</span>
           </div>
-        <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
+        <div class="product-cell category"><span class="cell-label">Name:</span>${sportMap.sportMapName}</div>
         <div class="product-cell status-cell">
-          <span class="cell-label">Status:</span>
-          <span class="status active">Active</span>
+          <span class="cell-label">Address</span>
+          <span class="status active">${sportMap.sportMapAddress}</span>
         </div>
-        <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div>
-        <div class="product-cell stock"><span class="cell-label">Stock:</span>36</div>
-        <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-         <div class="product-cell price"><button class="app-content-headerButton">Delete</button></div>
+        <div class="product-cell sales"><span class="cell-label">Info</span>${sportMap.sportMapInfo}</div>
+<%--         <div class="product-cell stock"><span class="cell-label">:</span>${sportMap.sportMapMap}</div> --%>
+        <div class="product-cell price"><span class="cell-label">Score</span>${sportMap.sportMapScore}</div>
+        <div class="product-cell price"><span class="cell-label">Category</span>${sportMap.sportCategoryBean.sportCategoryName}</div>
+         <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminSportMap/up/${sportMap.sportMapId}' />"><button class="app-content-headerButton">Update</button></a></div>
+                  
+         <div class="product-cell price"><a	class='deleteSportMap' href="<c:url value='/admin/adminManage/adminSportMap/del/${sportMap.sportMapId}' />"><button class="app-content-headerButton">Delete</button></a></div>
         
       </div>
-      <!-- -------------------------一筆資料內容--結尾--------------------- -->
+      
+      </c:forEach>
+    <!-- -------------------------一筆資料內容--結尾--------------------- -->
+	<!-- 	---------------------用來接delete的post-------------------- -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='DELETE'>
+	</form>
+
+
+<!-- ----------------------------刪除單筆資料用-------------------------- -->
+	<script>
+		$(document).ready(function() {
+			$('.deleteSportMap').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+	</script>
+	
 	
       
     </div>

@@ -20,7 +20,7 @@ span.error {
 	<jsp:include page="/fragment/header.jsp" />
 
 	<div>
-		<fieldset style="width: 900px;">
+		<fieldset style="width: 70%;  height: 500px;">
 			<legend>新增文章</legend>
 			<form:form method="POST" action="addPost" modelAttribute="postBean"
 				enctype='multipart/form-data'>
@@ -32,7 +32,7 @@ span.error {
 					</tr>
 					<tr>
 					<tr>
-						<td>運動分類</td>
+						<td>文章分類</td>
 						<td><form:select path='postCategoryBean.postCategoryId'>
 								<form:option label="請挑選" value="-1" />
 								<form:options items="${postCategoryBeanList}"
@@ -47,10 +47,11 @@ span.error {
 					</tr>
 					<tr>
 						<td>文章內容：</td>
-						<td width='600'><form:textarea path='postContent' /> <form:errors
-								path="postContent" cssClass="error" /></td>
+						<td width='600'><form:textarea path='postContent' style="width: 100%; height: 350px; overflow-y: scroll;"/> 
+						<form:errors path="postContent" cssClass="error" /></td>
 					<tr>
 						<td><input type='submit'></td>
+						<td><input type="reset" value="Reset"></td>
 					<tr>
 				</table>
 			</form:form>

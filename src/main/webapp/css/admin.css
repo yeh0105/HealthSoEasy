@@ -478,6 +478,7 @@ body {
   font-size: 14px;
   display: flex;
   align-items: center;
+/*   border: 1px black solid; */
 }
 .tableView .product-cell img {
   width: 32px;

@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Customer</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css"
@@ -185,8 +187,6 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
 				</button>
-				<!--       新增 -->
-				<button class="app-content-headerButton">Add Post</button>
 			</div>
 			<div class="app-content-actions">
 				<!--     搜尋 -->
@@ -386,12 +386,16 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							<span class="cell-label">Author:</span>${post.customerBean.customerNickname}
 						</div>
 						<div class="product-cell price">
-							<span class="cell-label">Update:</span>
-							<button class="app-content-headerButton">Update</button>
+							<button class="app-content-headerButton">
+								<a href="<c:url value='/admin/adminManage/adminPost/adminPostUpdate/${post.postId}' /> "
+									style="text-decoration: none; color: white;">Update</a>
+							</button>
 						</div>
 						<div class="product-cell price">
-							<span class="cell-label">Delete:</span>
-							<button class="app-content-headerButton">Delete</button>
+							<button class="app-content-headerButton">
+								<a id="deletePost" href="<c:url value='/admin/adminManage/adminPost/adminPostDelete/${post.postId}' /> "
+									style="text-decoration: none; color: white;">Delete</a>
+							</button>
 						</div>
 					</div>
 				</c:forEach>
@@ -402,6 +406,28 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 	</div>
 	<!-- partial -->
 	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
+	<!-- 	---------------------用來接delete的post--------------------------	 -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='DELETE'>
+	</form>
+
+
+	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
+	<script>
+		//將 get 請求轉換為 post 請求提交
+		$(document).ready(function() {
+			$('#deletePost').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+	</script>
 
 </body>
 </html>
