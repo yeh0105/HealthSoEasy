@@ -5,6 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript"
+	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript"
+	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
+<link
+	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
+	rel="stylesheet" media="screen">
+<script type="text/javascript"
+	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+
 <title>營養師介紹</title>
 <style>
 #mainWrapper2 {
@@ -49,6 +59,12 @@ body * {
 	flex-wrap: wrap;
 	list-style: none;
 	display: flex;
+	font-size:18px;
+}
+
+#uk_breadcrumb li a{
+	text-decoration: none;
+	size:20;
 }
 
 #dr_title {
@@ -77,14 +93,13 @@ body * {
 	<div id='mainWrapper2'>
 
 		<section>
-
+			<br>
 			<div>
 				<ul id="uk_breadcrumb">
-					<li href="<c:url value='/'/>">首頁</li>
-					<li href="<c:url value='/getAllNutritionists' />">&emsp;&frasl;&emsp;營養師列表</li>
-					<li href="#">&emsp;&frasl;&emsp;營養師介紹</li>
+					<li><a href='<c:url value='/'></c:url>'>首頁</a></li>
+					<li><a href='<c:url value='/nutritionistController/getAllNutritionists' />'>&emsp;&frasl;&emsp;營養師列表</a></li>
+					<li><a>&emsp;&frasl;&emsp;營養師介紹</a></li>
 				</ul>
-
 			</div>
 			<div id="nutrit01">
 				<img id="nutritImage01"
@@ -92,9 +107,11 @@ body * {
 			</div>
 			<div id="nutrit02">
 				<h3 id="dr_title">營養師基本資料</h3>
-				<a>1. 姓名:</a><br> <br> <a>2. 性別:</a><br> <br> <a>3.
-					學位:</a><br> <br> <a>4. E-mail:</a><br> <br> <a>5.
-					專長:</a><br> <br>
+				<a>1. 姓名:</a><br> <br> 
+				<a>2. 性別:</a><br> <br> 
+				<a>3. 學位:</a><br> <br> 
+				<a>4. E-mail:</a><br> <br> 
+				<a>5. 專長:</a><br> <br>
 			</div>
 
 			<div id="nutrit03">
@@ -133,7 +150,8 @@ body * {
 				</a>
 			</div>
 			<div>
-				<a href="<c:url value='/nutritionistController/getAllNutritionists'/>">
+				<a
+					href="<c:url value='/nutritionistController/getAllNutritionists'/>">
 					<button type="button">查詢全部營養師</button>
 				</a>
 			</div>
