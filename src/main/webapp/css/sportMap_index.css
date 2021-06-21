@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
-/* .centerDiv { */
-/* 	width: 100%; */
-/* 	margin:0 auto; */
-/* 	float: left; */
-/* } */
+.centerDiv {
+ float: left;
+   
+}
+
+.font1{
+	color:green;
+}
