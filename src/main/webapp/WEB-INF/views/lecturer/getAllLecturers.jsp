@@ -37,6 +37,7 @@
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 
+	<!-- 綠底表頭區 -->
 	<div class="mainWrapper">
 		<section id="offer">
 		<div style="background-color: #C9D8BF; text-align: center;">
@@ -49,7 +50,8 @@
 		</div>
 		</section>
 	</div>
-
+	
+	<!-- 內容開始 -->
 	<a href='add'><button>新增講師</button></a>
 
 	<table border='2' width="1000">
@@ -80,8 +82,8 @@
 							<td width='200' align="left">${entry.value.lecturerTalent}</td>
 							<td width='200' align="left">${entry.value.lecturerExp}</td>
 							<td width='200' align="left">${entry.value.lecturerImg}</td>
-							<td><a href="<c:url value='lecturer/${entry.value.lecturerId}' />"><button>修改</button></a></td>
-							<td><a href="<c:url value='lecturer/${entry.value.lecturerId}' />"><button>刪除</button></a></td>
+							<td><a href="<c:url value='lecturerController/updateLecturer/${entry.value.lecturerId}' />"><button>修改</button></a></td>
+							<td><a href="<c:url value='lecturerController/deleteLecturer/${entry.value.lecturerId}' />"><button>刪除</button></a></td>
 						</tr>
 					</table>
 				</td>
@@ -90,7 +92,6 @@
 
 
 	</table>
-	<br>
 
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
