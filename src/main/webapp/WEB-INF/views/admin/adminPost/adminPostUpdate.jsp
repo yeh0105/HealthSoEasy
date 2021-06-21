@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css"
 	rel="stylesheet">
-
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+</style>
 <script type="text/javascript">
 	window.onload = function() {
 		let switch_moon = document.getElementById("switch_moon");
@@ -185,8 +192,6 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
 				</button>
-				<!--       新增 -->
-				<button class="app-content-headerButton">Add Post</button>
 			</div>
 			<div class="app-content-actions">
 				<!--     搜尋 -->
@@ -252,9 +257,52 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					</button>
 				</div>
 			</div>
+			<div style="padding:3% 5%;">
+				<fieldset style="width: 90%; height: 100%;">
+					<legend>新增文章</legend>
+					<form:form method="POST" modelAttribute="postBean"
+						enctype='multipart/form-data'>
+						<table>
+							<tr>
+								<td>文章標題：</td>
+								<td width='600'><form:input path='postTitle' type="text" />
+									<form:errors path="postTitle" cssClass="error" /></td>
+							</tr>
+							<tr>
+							<tr>
+								<td>文章分類</td>
+								<td><form:select path='postCategoryBean.postCategoryId'>
+										<form:option label="請挑選" value="-1" />
+										<form:options items="${postCategoryBeanList}"
+											itemLabel='postCategoryName' itemValue='postCategoryId' />
+									</form:select> <form:errors path="postCategoryBean" cssClass="error" /></td>
 
-	<!-- partial -->
-	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
-
+							</tr>
+							<tr>
+								<td>文章狀態：</td>
+								<td width='600'><form:input path='postStatus' type="text" />
+									<form:errors path="postStatus" cssClass="error" /></td>
+							</tr>
+							<tr>
+								<td>文章圖片：</td>
+								<td width='600'><form:input path='postMultiImg' type="file" />
+									<form:errors path="postMultiImg" cssClass="error" /></td>
+							</tr>
+							<tr>
+								<td>文章內容：</td>
+								<td width='600'><form:textarea path='postContent'
+										style="width: 140%; height: 310px; overflow-y: scroll;" /> <form:errors
+										path="postContent" cssClass="error" /></td>
+							<tr>
+								<td><input type='submit'></td>
+								<td><input type="reset" value="Reset"></td>
+							<tr>
+						</table>
+					</form:form>
+				</fieldset>
+			</div>
+			<!-- partial -->
+			<script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </body>
-</html>
+</ht
+							ml>

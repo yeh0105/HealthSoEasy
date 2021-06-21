@@ -84,7 +84,7 @@
 										src="<c:url value='/PostController/getPicture/${post.postId}' />"
 										alt='' /> </a>
 									<div class="media-body" style="line-height:30px;">
-										<h3 class="media-heading">${post.postTitle}</h3>
+										<h3 class="media-heading">${post.postTitle} &nbsp; <button class="btn-success">${post.postCategory}</button></h3>
 										${fn:substring(post.postContent,0,100)}...
 									</div>
 								</div>

@@ -5,8 +5,9 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.soeasy.model.PostBean;
+import com.soeasy.model.PostUpdateBean;
 
-public class PostBeanValidator implements Validator {
+public class PostUpdateBeanValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -18,19 +19,16 @@ public class PostBeanValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		PostBean postBean = (PostBean) target;
+		PostUpdateBean postUpdateBean = (PostUpdateBean) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postTitle", "", "文章標題不能空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postContent", "", "文章內容不能空白");
-		
-		System.out.println(postBean.getPostCategoryBean().getPostCategoryId());
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postStatus", "", "文章狀態不能空白");
 
-		if (postBean.getPostCategoryBean().getPostCategoryId() == -1) {
+		if (postUpdateBean.getPostCategoryBean().getPostCategoryId() == -1) {
 			errors.rejectValue("postCategoryBean", "", "必須挑選分類欄的選項");
 		}
-
-		if (postBean.getPostMultiImg().isEmpty()) {
-			errors.rejectValue("postMultiImg", "", "必須挑選圖片");
-		}
+		
+		System.out.println(postUpdateBean.getPostCategoryBean().getPostCategoryId());
 
 	}
 
