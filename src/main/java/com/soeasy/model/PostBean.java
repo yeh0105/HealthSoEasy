@@ -190,4 +190,15 @@ public class PostBean implements Serializable {
 		PostCategoryBean = postCategoryBean;
 	}
 
+	@Override
+	public String toString() {
+		return "PostBean [postId=" + postId + ", postTitle=" + postTitle + ", postCategory=" + postCategory
+				+ ", postContent=" + postContent + ", postImg=" + postImg + ", postMultiImg=" + postMultiImg
+				+ ", postUploadTime=" + postUploadTime + ", postLike=" + postLike + ", postStatus=" + postStatus
+				+ ", customerId=" + customerId + ", customerBean=" + customerBean + ", replyBeans=" + replyBeans
+				+ ", postCategoryId=" + postCategoryId + ", PostCategoryBean=" + PostCategoryBean + "]";
+	}
+	
+	
+
 }

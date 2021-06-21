@@ -26,7 +26,7 @@ public class PostCategoryServiceImpl implements PostCategoryService {
 		if (optional.isPresent()) {
 			postCategoryBean = optional.get();
 		} else {
-			throw new RuntimeException("PostCategoryBean(id=" + postCategoryId + ")不存在");
+//			throw new RuntimeException("PostCategoryBean(id=" + postCategoryId + ")不存在");
 		}
 		return postCategoryBean;
 	}
