@@ -34,6 +34,10 @@ public class GlobalService {
 	public static final Integer LECTURE_STATUS_TOBEHELD = 1;  //即將舉辦
 	public static final Integer LECTURE_STATUS_ONGOING = 2;   //進行中
 	public static final Integer LECTURE_STATUS_HISTORY = 3;   //精采回顧
+	
+	// 講座分類
+	public static final Integer LECTURE_CATEGORY_EAT = 1;       //飲食
+	public static final Integer LECTURE_CATEGORY_EXERCISE = 2;  //運動
 
 	// 講座預約狀態
 	public static final Integer RESERVATION_STATUS_SUCCESS = 1;     //預約成功

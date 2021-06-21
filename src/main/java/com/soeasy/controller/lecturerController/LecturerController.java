@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -62,4 +63,14 @@ public class LecturerController {
 		// 如果新增成功就跳轉至查詢所有講師
 		return "redirect:/lecturerController/getAllLecturers";
 	}
+	
+	// 刪除講師
+		@PostMapping("/deleteLecturer/{lecturerId}")
+		public String delete(@PathVariable("lecturerId") Integer lecturerId) {
+			System.out.println("抓到了抓到了");
+			lecturerService.deleteLecturer(lecturerId);
+			
+			// 跳轉至查詢所有講師
+			return "redirect:/lecturerController/getAllLecturers";
+		}
 }
