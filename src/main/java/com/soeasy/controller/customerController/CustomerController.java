@@ -1,13 +1,18 @@
 package com.soeasy.controller.customerController;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +21,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.CustomerHealthBean;
@@ -140,13 +147,11 @@ public class CustomerController {
 		//為原始物件設定傳入的欄位值
 		originalBean.setCustomerName(customerBean.getCustomerName());
 		originalBean.setCustomerNickname(customerBean.getCustomerNickname());
+		originalBean.setCustomerPhone(customerBean.getCustomerPhone());
 		originalBean.setCustomerBirthDay(customerBean.getCustomerBirthDay());
 		
-		originalBean.setCustomerHealthBean(null);
-		
-		
 		//save原始物件
-		customerService.updateCustomerBasicInfo(originalBean);
+		customerService.updateCustomer(originalBean);
 		
 		//將更新資料設定給session
 		model.addAttribute("customerSignInSuccess", originalBean);
@@ -157,37 +162,68 @@ public class CustomerController {
 		return updateMessage;
 	}
 	
-	//修改個人基本資料
+		//修改個人健康資料
 		@PostMapping(value = "/updateCustomerHealthInfo", produces = { "application/json; charset=UTF-8" })
 		
 		public @ResponseBody Map<String, String> updateCustomerHealthInfo(@RequestBody CustomerBean customerBean, Model model){
 			//以傳入的ID搜尋原始的會員物件
-			CustomerBean originalBean = customerService.findByCustomerId(customerBean.getCustomerId());
-			
+			CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+			CustomerHealthBean updateCustomerHealthBean = customerBean.getCustomerHealthBean();
 			//更新檢查訊息
 			Map<String, String> updateHealthMessage = new HashMap<String, String>();
 			
-			if(customerBean.getCustomerName() == null) {
-				updateHealthMessage.put("updateHealthMessage", "名字不得為空");
-			}
 			
 			
 			//為原始物件設定傳入的欄位值
-			originalBean.setCustomerNickname(customerBean.getCustomerNickname());
-			originalBean.setCustomerBirthDay(customerBean.getCustomerBirthDay());
+			originalCustomer.setCustomerHealthBean(updateCustomerHealthBean);
 			
-			originalBean.setCustomerHealthBean(null);
-			
-			
+//			System.out.println(updateCustomerHealthBean.getCustomerGender());
+//			System.out.println(updateCustomerHealthBean.getCustomerDiet());
+//			System.out.println(updateCustomerHealthBean.getCustomerExerciseHabits());
 			//save原始物件
-			customerService.updateCustomerBasicInfo(originalBean);
+			customerService.updateCustomer(originalCustomer);
 			
 			//將更新資料設定給session
-			model.addAttribute("customerSignInSuccess", originalBean);
+			model.addAttribute("customerSignInSuccess", originalCustomer);
 			
 			//更新成功訊息
-			updateHealthMessage.put("updateMessage", "更新成功");
+			updateHealthMessage.put("updateHealthMessage", "更新成功");
 			
 			return updateHealthMessage;
+		}
+		
+		//上傳個人頭像
+		@PostMapping("/uploadCustomerImg")
+		public String uploadCustomerImg(@RequestParam("customerImgUpload")MultipartFile customerMultiImg, Model model) {
+			
+			CustomerBean customerSignInSuccess = (CustomerBean)model.getAttribute("customerSignInSuccess");
+			CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
+			
+			//處理圖片MultipartFile --> Blob
+			if(customerMultiImg != null && !customerMultiImg.isEmpty()) {
+				try {
+					byte[] bImg = customerMultiImg.getBytes();
+					Blob blob = new SerialBlob(bImg);
+					originalCustomer.setCustomerImg(blob);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//save原始物件
+			customerService.updateCustomer(originalCustomer);
+			
+			return "/customer/customerPage";
+		}
+		
+		//取得上傳頭像
+		@GetMapping("/getCustomerImg")
+		public ResponseEntity<byte[]> getCustomerImg(Model model) {
+			Integer customerId = ((CustomerBean)model.getAttribute("customerSignInSuccess")).getCustomerId();
+			CustomerBean originalCustomer = customerService.findByCustomerId(customerId);
+			
+			Blob customerImg = originalCustomer.getCustomerImg();
+			
+			return null;
 		}
 }

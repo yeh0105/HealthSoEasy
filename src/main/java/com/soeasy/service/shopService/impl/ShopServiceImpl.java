@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
 
 	@Autowired
 	ShopRepository shopRepository;
-	
+
 	@Override
 	public Boolean emailExists(String shopEmail) {
 		List<ShopBean> shopBeans = shopRepository.findByShopEmail(shopEmail);
@@ -30,33 +30,36 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public CustomerBean checkEmailPassword(String shopEmail, String shopPassword) {
-		// TODO Auto-generated method stub
-		return null;
+	public ShopBean checkEmailPassword(String shopEmail, String shopPassword) {
+		ShopBean shopBean = null;
+		List<ShopBean> shopBeans = shopRepository.findByShopEmailAndShopPassword(shopEmail, shopPassword);
+		if(shopBeans.size() > 0) {
+			shopBean = shopBeans.get(0);
+		}
+		return shopBean;
 	}
 
 	@Override
 	public void addShop(ShopBean shop) {
 		shopRepository.save(shop);
-		
 	}
 
 	@Override
-	public CustomerBean findByShopId(Integer shopId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ShopBean findByShopId(Integer shopId) {
+		return shopRepository.getById(shopId);
 	}
 
 	@Override
-	public void updateCustomerBasicInfo(CustomerBean customer) {
-		// TODO Auto-generated method stub
-		
+	public void updateShopBasicInfo(ShopBean shop) {
+		shopRepository.save(shop);
 	}
 
 	@Override
-	public void updateCustomerStatus(CustomerBean customer, Integer customerStatus) {
+	public void updateShopStatus(ShopBean shop, Integer shopStatus) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

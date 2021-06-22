@@ -1,6 +1,5 @@
 package com.soeasy.service.shopService;
 
-import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
 
 public interface ShopService {
@@ -9,17 +8,17 @@ public interface ShopService {
 	Boolean emailExists(String shopEmail);
 
 	// 檢查帳密是否正確
-	CustomerBean checkEmailPassword(String shopEmail, String shopPassword);
+	ShopBean checkEmailPassword(String shopEmail, String shopPassword);
 
 	// 新增會員
 	void addShop(ShopBean shop);
 
 	// ID查詢會員
-	CustomerBean findByShopId(Integer shopId);
+	ShopBean findByShopId(Integer shopId);
 	
 	// 修改基本資料
-	void updateCustomerBasicInfo(CustomerBean customer);
+	void updateShopBasicInfo(ShopBean shop);
 
 	// 變更會員狀態
-	void updateCustomerStatus(CustomerBean customer, Integer customerStatus);
+	void updateShopStatus(ShopBean shop, Integer shopStatus);
 }

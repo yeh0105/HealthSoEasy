@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
 //	}
 
 	@Override
-	public void updateCustomerBasicInfo(CustomerBean customer) {
+	public void updateCustomer(CustomerBean customer) {
 		customerRepository.save(customer);
 	}
 
