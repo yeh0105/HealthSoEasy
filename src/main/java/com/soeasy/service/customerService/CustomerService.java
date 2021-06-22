@@ -14,7 +14,7 @@ public interface CustomerService {
 //	//Email查詢會員
 //	CustomerBean findCustomerByEmail(String customerEmail);
 	//修改基本資料
-	void updateCustomerBasicInfo(CustomerBean customer);
+	void updateCustomer(CustomerBean customer);
 	//變更會員狀態
 	void updateCustomerStatus(CustomerBean customer, Integer customerStatus);
 	//會員積分花費&增加

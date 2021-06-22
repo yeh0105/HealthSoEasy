@@ -55,7 +55,6 @@
             }
             
             signInBtn.addEventListener("click", () => {
-            	console.log(1);
                 if(signMode == "sign_up"){
                     container.classList.remove("right-panel-active");
                     signMode = "sign_in";
