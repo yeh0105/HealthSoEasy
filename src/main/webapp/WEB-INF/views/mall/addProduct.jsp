@@ -28,7 +28,7 @@
  <div class="well" >
 <%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
  
- <form:form  modelAttribute='productbean'  enctype="multipart/form-data" >
+ <form:form  modelAttribute='product'  enctype="multipart/form-data" >
  
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -84,8 +84,8 @@
 
  <div class="form-group">
  <label >圖片上傳</label>
- <form:input path='productImg' type="file"/>
-  <form:errors path="productImg" Class="form-control" />
+ <form:input path='productMultiImg' type="file"/>
+  <form:errors path="productMultiImg" Class="error" />
  </div>
  
  <p class="text-center">

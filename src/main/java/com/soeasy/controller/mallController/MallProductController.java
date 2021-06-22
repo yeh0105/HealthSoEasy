@@ -1,6 +1,7 @@
 package com.soeasy.controller.mallController;
 
 import java.sql.Blob;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.ProductBean;
 import com.soeasy.service.mallService.ProductService;
+import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
 @RequestMapping("/mall")
@@ -25,6 +28,15 @@ public class MallProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	
+	
+	//前端測試用跳轉
+	
+	@GetMapping("/mallindex")
+	 public String getIndex(Model model) {
+	            return "mall/mallDetai";
+	    }
 	
 
 	@GetMapping("/lists")
@@ -34,7 +46,6 @@ public class MallProductController {
 	            return "mall/productlists";
 	       
 	    }
-	
 	
 	//使用ID查詢單一產品
 	@GetMapping("/lists/{productId}")
@@ -65,8 +76,6 @@ public class MallProductController {
 		return "mall/addProduct";
 	}
 	
-
-	
 //	=========================
 
 	// 當使用者填妥資料按下Submit按鈕後，本方法接收將瀏覽器送來的會員資料，新進行資料的檢查，
@@ -77,21 +86,31 @@ public class MallProductController {
 			@ModelAttribute("product") /* @Valid */ ProductBean product, 
 			BindingResult result, Model model,
 			HttpServletRequest request) {
-			productService.save(product);
 			
-//		ProductBeanValidator validator = new ProductBeanValidator();
-//		// 呼叫Validate進行資料檢查
-//		validator.validate(product, result);
-//		if (result.hasErrors()) {
-////          下列敘述可以理解Spring MVC如何處理錯誤			
-////			List<ObjectError> list = result.getAllErrors();
-////			for (ObjectError error : list) {
-////				System.out.println("有錯誤：" + error);
-////			}
-//			return "mall/addProduct";
-//		}
+		ProductBeanValidator validator = new ProductBeanValidator();
+		// 呼叫Validate進行資料檢查
+		validator.validate(product, result);
+		if (result.hasErrors()) {
+//          下列敘述可以理解Spring MVC如何處理錯誤			
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError error : list) {
+				System.out.println("有錯誤：" + error);
+			}
+			return "mall/addProduct";
+		}
 		
+			// 取得addProduct.jsp所送來的圖片資訊
 		MultipartFile picture = product.getProductMultiImg();
+		// 取得圖片檔案名稱
+		String originalFilename = picture.getOriginalFilename();
+		
+		// 假如圖片是空字串或空值originalFilename等於預設圖片
+		if (originalFilename == "") {
+			originalFilename = "NoPictUploaded.jpg";
+			}
+		
+		// 取得副檔名
+				String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
 		
 		// 建立Blob物件，交由 Hibernate 寫入資料庫
 		if (picture != null && !picture.isEmpty()) {
@@ -104,10 +123,15 @@ public class MallProductController {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-	
+		// 跳轉至查詢所有頁面(送getAllPost請求)
 		return "redirect:/mall/lists";
+	
 	}
 	
+		
+	
+		
+		
 	// 刪除一筆紀錄
 	//送不出DELETE 先用POST
 		@PostMapping("/delete/{productId}")
@@ -120,6 +144,7 @@ public class MallProductController {
 	// 修改時，送回含有會員資料的表單，讓使用者進行修改
 	// 由這個方法送回修改記錄的表單...
 		@GetMapping("/update/{productId}")
+		// 取得原始的PostBean物件
 		public String showDataForm(@PathVariable("productId") Integer productId, Model model) {
 			ProductBean product = productService.findProductById(productId);
       		model.addAttribute("product", product);
