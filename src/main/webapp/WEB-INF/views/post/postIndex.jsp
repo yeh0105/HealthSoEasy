@@ -125,7 +125,7 @@
 								</form>
 							</div>
 							<div class="span1 text-right">
-								<a href="<c:url value='/PostController/addPost '/>">
+								<a href="<c:url value='/PostNeedLoginController/addPost '/>">
 									<button
 										class="btn btn-success btn-large glyphicon glyphicon-plus"
 										aria-hidden="true" type="button"></button>

@@ -177,7 +177,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 		</div>
 		<div class="app-content">
 			<div class="app-content-header">
-				<h1 class="app-content-headerText">Home</h1>
+				<h1 class="app-content-headerText">Post</h1>
 				<!--       月亮 -->
 				<button class="mode-switch" title="Switch Theme" id="switch_moon">
 					<svg class="moon" fill="none" stroke="currentColor"
@@ -190,7 +190,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 			</div>
 			<div class="app-content-actions">
 				<!--     搜尋 -->
-				<input class="search-bar" placeholder="Search..." type="text">
+				<input class="search-bar" placeholder="Search..." type="text">&nbsp;
+<%-- 				<a href="<c:url value="/admin/adminManage/adminPost"></c:url>"><button class="app-content-headerButton">Posts</button></a>&nbsp; --%>
+				<button class="app-content-headerButton">Replies</button>&nbsp;
 				<div class="app-content-actions-wrapper">
 					<div class="filter-button-wrapper">
 						<!--         過濾器 -->
@@ -393,7 +395,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 						</div>
 						<div class="product-cell price">
 							<button class="app-content-headerButton">
-								<a id="deletePost" href="<c:url value='/admin/adminManage/adminPost/adminPostDelete/${post.postId}' /> "
+								<a class='deletePost' href="<c:url value='/admin/adminManage/adminPost/adminPostDelete/${post.postId}' /> "
 									style="text-decoration: none; color: white;">Delete</a>
 							</button>
 						</div>
@@ -407,16 +409,16 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 	<!-- partial -->
 	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
 	<!-- 	---------------------用來接delete的post--------------------------	 -->
+	
 	<form method='POST'>
 		<input type='hidden' name='_method' value='DELETE'>
 	</form>
-
 
 	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 	<script>
 		//將 get 請求轉換為 post 請求提交
 		$(document).ready(function() {
-			$('#deletePost').click(function() {
+			$('.deletePost').click(function() {
 				if (confirm('確定刪除此筆紀錄? ')) {
 					var href = $(this).attr('href');
 					$('form').attr('action', href).submit();
@@ -428,6 +430,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 			});
 		})
 	</script>
+	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 
 </body>
 </html>
