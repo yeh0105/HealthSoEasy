@@ -42,7 +42,7 @@
 				<a href="<c:url value='/mall'></c:url>" title="Mall">商城</a> 
 				<a href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> 
 				<a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap">地圖</a> 
-				<a href="<c:url value='/nutritionist'></c:url>" title="Link">營養師</a>
+				<a href="<c:url value='/nutritionistController/getAllNutritionists'></c:url>" title="Link">營養師</a>
 			</nav>
 		</header>
 	</div>
