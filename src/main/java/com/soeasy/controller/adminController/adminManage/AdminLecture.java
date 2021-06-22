@@ -20,14 +20,14 @@ public class AdminLecture {
 	//後台講座首頁
 	@GetMapping("/adminLecture")
 	public String adminLectureIndex() {
-		return "/admin/adminLecture";
+		return "/admin/adminLecture/adminLecture";
 	}
 	
 	//顯示所有講座
 	@GetMapping("/allLecture")
 		public String list(Model model) {
 //			model.addAttribute("lecture",lectureService.getAllByLectureId());
-			return "/admin/adminLecture";
+			return "/admin/adminLecture/adminLecture";
 		
 		}
 	
@@ -41,5 +41,5 @@ public class AdminLecture {
 //			return map;
 //		
 //	}
-
+	
 }
