@@ -259,7 +259,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 				enctype='multipart/form-data'>
 			<table>
 				<tr>
-				<td>分類</td>
+				<td>地點分類</td>
 				<td>
 				<form:select path='sportCategoryBean.sportCategoryId'>
 					<form:option label="請挑選" value="-1"/>
@@ -272,19 +272,22 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 				</tr>
 				<tr>
 					<td>運動地點名稱：</td>
-					<td width='600'><form:input path='sportMapName' /> 
+					<td width='600'><form:input path='sportMapName' 
+					style="width:80%" /> 
 					<form:errors path="sportMapName" cssClass="error" />
 					</td>
 				</tr>	
 				<tr>
 					<td>地址：</td>
-					<td width='600'><form:input path='sportMapAddress' /> 
+					<td width='600'><form:input path='sportMapAddress'
+					style="width:80%" /> 
 					<form:errors path="sportMapAddress" cssClass="error" />
 					</td>
 				</tr>
 				<tr>
 					<td>地點簡介：</td>
-					<td width='600'><form:input path='sportMapInfo' /> 
+					<td width='600'><form:textarea path='sportMapInfo'
+					style="width: 100%; height: 100px; overflow-y: scroll;" /> 
 					<form:errors path="sportMapInfo" cssClass="error" />
 					</td>
 				<tr>	
@@ -293,10 +296,17 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 					<form:errors path="sportMapScore" cssClass="error" />
 					</td>
 				</tr>
+				<tr>	
+					<td>分類：</td>
+					<td width='600'><form:input path='sportMapCategory' /> 
+					<form:errors path="sportMapCategory" cssClass="error" />
+					</td>
+				</tr>
 				
 				<tr>	
 					<td>地圖：</td>
-					<td width='600'><form:input path='sportMapMap' /> 
+					<td width='600'><form:textarea path='sportMapMap'
+					style="width:100%;height:100px;overflow-y: scroll;" /> 
 					<form:errors path="sportMapMap" cssClass="error" />
 					</td>
 				</tr>

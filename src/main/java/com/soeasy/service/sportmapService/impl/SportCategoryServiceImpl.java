@@ -42,6 +42,25 @@ public class SportCategoryServiceImpl implements SportCategoryService {
 		return (List<SportCategoryBean>) sportCategoryRepository.findAll();
 	}
 
+	//新增分類
+	@Override
+	public SportCategoryBean save(SportCategoryBean sportCategoryBean) {
+				
+		return sportCategoryRepository.save(sportCategoryBean);
+	}
+
+	//更新分類資料
+	@Override
+	public void updateSportCategory(SportCategoryBean sportCategoryBean) {
+		sportCategoryRepository.save(sportCategoryBean);
+	}
+
+	//刪除單筆分類，連動分類底下所有地圖
+	@Override
+	public void deleteSportCategory(Integer sportCategoryId) {
+		sportCategoryRepository.deleteById(sportCategoryId);
+	}
+
 
 	
 	

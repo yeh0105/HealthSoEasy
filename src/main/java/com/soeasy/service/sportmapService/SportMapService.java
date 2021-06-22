@@ -21,7 +21,7 @@ public interface SportMapService {
 	// 總共有幾頁
 	Integer getTotalPages();
 		
-		// 抓一頁有幾張地圖
+	// 抓一頁有幾張地圖
 //		Integer getRecordsPerPage();
 		
 		

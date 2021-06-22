@@ -28,7 +28,7 @@
 
             <p class="read-more">
                 <a class='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/${sportMapBean.sportMapId}">
-                    收藏</a>
+                    點我收藏</a>
             </p>
             <h1>${sportMapBean.sportMapName}</h1>
             <h2>${sportMapBean.sportMapAddress}</h2>
@@ -38,16 +38,22 @@
             <p class="read-more">
                 來個評分吧！
                 <a class='getScore1Link'
-                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"> １</a>
+                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"> 
+                    <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar1.png"></a>
                 <a class='getScore2Link'
-                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/2"> ２</a>
+                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/2"> 
+                    <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar2.png"></a>
                 <a class='getScore3Link'
-                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/3"> ３</a>
+                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/3"> 
+                    <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar3.png"></a>
                 <a class='getScore4Link'
-                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/4"> ４</a>
+                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/4"> 
+                    <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar4.png"></a>
                 <a class='getScore5Link'
-                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/5"> ５</a>
+                    href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/5"> 
+                    <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar5.png"></a>
 
+            	<span>，目前累積分數：${sportMapBean.sportMapScore}分</span>
             </p>
         </div>
     </div>
