@@ -29,7 +29,7 @@ body * {
 
 #nutrit01 {
 	float: left;
-	width: 500px;
+	width: 510px;
 	height: 450px;
 	background-color: #1d3b2a;
 	display: flex;
@@ -39,7 +39,8 @@ body * {
 
 #nutritImage01 {
 	width: auto;
-	height: 300px;
+	width:80%;
+	height: 70%;
 	border: black 1px solid;
 }
 
@@ -55,16 +56,21 @@ body * {
 	height: 400px;
 }
 
+#content1 {
+	text-decoration:none;
+	color: #008000;
+}
+
 #uk_breadcrumb {
 	flex-wrap: wrap;
 	list-style: none;
 	display: flex;
-	font-size:18px;
+	font-size: 18px;
 }
 
-#uk_breadcrumb li a{
+#uk_breadcrumb li a {
 	text-decoration: none;
-	size:20;
+	size: 20;
 }
 
 #dr_title {
@@ -97,21 +103,23 @@ body * {
 			<div>
 				<ul id="uk_breadcrumb">
 					<li><a href='<c:url value='/'></c:url>'>首頁</a></li>
-					<li><a href='<c:url value='/nutritionistController/getAllNutritionists' />'>&emsp;&frasl;&emsp;營養師列表</a></li>
-					<li><a>&emsp;&frasl;&emsp;營養師介紹</a></li>
+					<li><a
+						href='<c:url value='/nutritionistController/getAllNutritionists' />'>&emsp;&frasl;&emsp;營養師列表</a></li>
+					<li>&emsp;&frasl;&emsp;營養師介紹</li>
 				</ul>
 			</div>
+
 			<div id="nutrit01">
 				<img id="nutritImage01"
-					src="${pageContext.request.contextPath}/images/nutritionist/nutritionist01.png">
+					src="<c:url value='/nutritionistController/getImage/${nutritionistBean.nutritionistId}' />">
 			</div>
 			<div id="nutrit02">
-				<h3 id="dr_title">營養師基本資料</h3>
-				<a>1. 姓名:</a><br> <br> 
-				<a>2. 性別:</a><br> <br> 
-				<a>3. 學位:</a><br> <br> 
-				<a>4. E-mail:</a><br> <br> 
-				<a>5. 專長:</a><br> <br>
+				<h2 id="dr_title">營養師基本資料</h2>
+				<font size="5">1. 姓名 : <a id='content1'>${nutritionistBean.nutritionistName} </a></font><br><br> 
+				<font size="5">2. 性別 : <a id='content1'>${nutritionistBean.nutritionistGender == 'F' ? "女性" : "男性"}</a></font><br><br> 
+				<font size="5">3. 學位 : <a id='content1'>${nutritionistBean.nutritionistDegree}</a></font><br> <br> 
+				<font size="5">4. E-mail : <a id='content1'>${nutritionistBean.nutritionistEmail}</a></font><br> <br> 
+				<font size="5">5. 專長 : <a id='content1'>${nutritionistBean.nutritionistCategory}</a></font><br> <br>
 			</div>
 
 			<div id="nutrit03">
@@ -143,17 +151,6 @@ body * {
 					<br>
 					<button type="button">加入購物車</button>
 				</div>
-			</div>
-			<div>
-				<a href="<c:url value='/nutritionistController/addNutritionist'/>">
-					<button type="button">新增營養師</button>
-				</a>
-			</div>
-			<div>
-				<a
-					href="<c:url value='/nutritionistController/getAllNutritionists'/>">
-					<button type="button">查詢全部營養師</button>
-				</a>
 			</div>
 		</section>
 

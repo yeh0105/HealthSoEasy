@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>POST</title>
+<title>Add Share</title>
 <style>
 span.error {
 	color: red;

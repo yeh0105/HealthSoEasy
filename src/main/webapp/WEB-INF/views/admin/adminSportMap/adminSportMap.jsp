@@ -197,7 +197,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
-      <input class="search-bar" placeholder="Search..." type="text">
+      <input class="search-bar" placeholder="Search..." type="text">&nbsp;
+      <a href="<c:url value="/admin/adminManage/adminSportCategory"></c:url>"><button class="app-content-headerButton">所有分類</button></a>
+      
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->

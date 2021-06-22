@@ -182,7 +182,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 		</div>
 		<div class="app-content">
 			<div class="app-content-header">
-				<h1 class="app-content-headerText">Home</h1>
+				<h1 class="app-content-headerText">Post</h1>
 				<!--       月亮 -->
 				<button class="mode-switch" title="Switch Theme" id="switch_moon">
 					<svg class="moon" fill="none" stroke="currentColor"
@@ -257,7 +257,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					</button>
 				</div>
 			</div>
-			<div style="padding:3% 5%;">
+			<div>
+				<a href="<c:url value="/admin/adminManage/adminPost"></c:url>">回上一頁</a>
+			</div>
+			<br>
+			<div style="padding:3% 5%; margin-top: -3%;">
 				<fieldset style="width: 90%; height: 100%;">
 					<legend>新增文章</legend>
 					<form:form method="POST" modelAttribute="postBean"
@@ -280,8 +284,10 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							</tr>
 							<tr>
 								<td>文章狀態：</td>
-								<td width='600'><form:input path='postStatus' type="text" />
-									<form:errors path="postStatus" cssClass="error" /></td>
+								<td width='600'>
+								 	正常 <form:radiobutton path="postStatus" value="1"/>  
+        							禁止 <form:radiobutton path="postStatus" value="2"/>  
+								</td>
 							</tr>
 							<tr>
 								<td>文章圖片：</td>

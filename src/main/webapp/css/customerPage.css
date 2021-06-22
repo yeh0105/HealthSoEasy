@@ -154,6 +154,7 @@
 	border-color: #C9D8BF;
 	
 	display: flex;
+	justify-content: center;
 	align-items: center; 
 }
 
@@ -184,7 +185,7 @@
 .customer-health-information-items button{
 /* 	height: 35px; */
 	width: 25%;
-	height: 60%;	
+	height: 80%;	
 	font-size: 30px;
 	border-radius: 4px;
 	border-color: #FFF;
@@ -195,8 +196,10 @@
 /*   	justify-content: center; */
 	cursor: pointer;
 	
-	
-	cursor: pointer;
+}
+
+.customer-health-information-items button:hover {
+	opacity: 70%;
 }
 
 .customer-favorite {

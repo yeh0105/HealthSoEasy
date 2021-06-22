@@ -105,6 +105,9 @@
 		let customerExerciseHabits3 = document.getElementById("customerExerciseHabits3");
 		let customerHeight = document.getElementById("customerHeight");
 		let customerWeight = document.getElementById("customerWeight");
+		
+
+		
 // 		按鈕、回傳訊息欄位
 		let healthInfoMessage = document.getElementById("healthInfoMessage");
 		let healthInformationUpdate = document.getElementById("healthInformationUpdate");
@@ -144,19 +147,53 @@
 		
         //按下確認--送出JSON字串資料--關閉欄位--按鈕變成修改
         function submitCustomerHealthInfo () {
+        	
+//     		取得單選群組value
+    		let customerGender1 = document.getElementById("customerGender1");
+			let customerGender2 = document.getElementById("customerGender2");
+			let customerDiet1 = document.getElementById("customerDiet1");
+			let customerDiet2 = document.getElementById("customerDiet2");
+			let customerExerciseHabits1 = document.getElementById("customerExerciseHabits1");
+			let customerExerciseHabits2 = document.getElementById("customerExerciseHabits2");
+			let customerExerciseHabits3 = document.getElementById("customerExerciseHabits3");
+    		
+			let customerGender = null;
+			let customerDiet = null;
+			let customerExerciseHabits = null;
+			if(customerGender1.checked){
+				customerGender = customerGender1.value;
+			} else {
+				customerGender = customerGender2.value;
+			}
+        	console.log(customerGender);
+			
+			if(customerDiet1.checked){
+				customerDiet = customerDiet1.value;
+			} else {
+				customerDiet = customerDiet2.value;
+			}
+			
+			if(customerExerciseHabits1.checked){
+				customerExerciseHabits = customerExerciseHabits1.value;
+			} else if(customerExerciseHabits2.checked){
+				customerExerciseHabits = customerExerciseHabits2.value;
+			} else if(customerExerciseHabits3.checked){
+				customerExerciseHabits = customerExerciseHabits3.value;
+			}
 //         	建立一支obj，裝入input內容
 			let customerHealthInformationBean = {
 					'customerId' : ${customerSignInSuccess.customerId},
 					'customerHealthBean' : {
-							'customerGender' : customerGender.value,
-							'customerDiet' : customerDiet.value,
-							'customerExerciseHabits' : customerExerciseHabits.value,
+							'customerHealthId' : ${customerSignInSuccess.customerHealthBean.customerHealthId},
+							'customerGender' : customerGender,
+							'customerDiet' : customerDiet,
+							'customerExerciseHabits' : customerExerciseHabits,
 							'customerHeight' : customerHeight.value,
 							'customerWeight' : customerWeight.value
 					}
 			}
 //			將物件轉為JSON字串
-			let json = JSON.stringify(customerInformationBean);
+			let json = JSON.stringify(customerHealthInformationBean);
 			
 			console.log(json);
 			
@@ -166,21 +203,43 @@
 			xhr.onreadystatechange = function(){
 				if (xhr.readyState == 4 && xhr.status == 200){
 // 					接收回傳訊息，更新訊息框
-					let customerJSON = JSON.parse(xhr.responseText);
-					infoMessage.innerHTML = customerJSON.updateMessage;
-					console.log(customerJSON);
+					let customerHealthJSON = JSON.parse(xhr.responseText);
+					healthInfoMessage.innerHTML = customerHealthJSON.updateHealthMessage;
+					console.log(customerHealthJSON);
 					
 					
 					//關閉欄位--模式設定為修改
-					customerGender.disabled = "disabled";
-					customerDiet.disabled = "disabled";
-					customerExerciseHabits.disabled = "disabled";
+					customerGender1.disabled = "disabled";
+					customerGender2.disabled = "disabled";
+					customerDiet1.disabled = "disabled";
+					customerDiet2.disabled = "disabled";
+					customerExerciseHabits1.disabled = "disabled";
+					customerExerciseHabits2.disabled = "disabled";
+					customerExerciseHabits3.disabled = "disabled";
 					customerHeight.disabled = "disabled";
 					customerWeight.disabled = "disabled";
 					healthInformationUpdate.innerHTML = "修改";
 				}
 			}
         }
+        
+//         -----------------------------------------------------------------------------------
+// 		上傳頭像
+// 		上傳按鈕--圖片
+		let imgUploadbtn = document.getElementById("imgUploadbtn");
+// 		送出表單鈕
+		let customerImgUpload = document.getElementById("customerImgUpload");
+
+		imgUploadbtn.addEventListener("click", imgUpload);
+		
+		function imgUpload () {
+			customerImgUpload.click();
+			customerImgUpload.addEventListener("change", imgSubmit);
+		}
+		
+		function imgSubmit () {
+			document.getElementById("customerImgSubmit").click();			
+		}
 	})
 
 </script>
@@ -209,12 +268,18 @@
 	<div class="customer-main">
 		<div>
 			<div class="customer-img">
-				<div>
-					<img alt="" src="${pageContext.request.contextPath}/images/goodcat.jpg">
+				<div id="imgUploadbtn">
+						<img alt="" src="${pageContext.request.contextPath}/images/goodcat.jpg">
+						<form method="POST" action="uploadCustomerImg" enctype="multipart/form-data">
+							<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;">
+							<input id="customerImgSubmit" type="submit" style="display: none">
+						</form>
 				</div>
 			</div>
 			<div class="customer-information" >
 				<div class="customer-information-inside">
+			<fieldset style="width: 500px; height: 500px">
+				<legend>基本資料</legend>
 						<div class="customer-information-items">
 							<div>
 								<div style="width: 20%">姓名：</div>
@@ -245,40 +310,105 @@
 								<button id="informationUpdate">修改</button>
 							</div>
 						</div>
+			</fieldset>
 				</div>
 			</div>
+			
+			
 		</div>
 		<div>
 			<div class="customer-health-information">
 				<div class="customer-health-information-inside">
+					<fieldset style="width: 500px; height: 500px">
+						<legend>健康調查表</legend>
 						<div class="customer-health-information-items">
 							<div>
 								<div style="width: 20%">性別：</div>
-								<div style="width: 80%">
-										<input style="height: 40%" id='customerGender1' value='1' disabled="disabled" type='radio' name="customerGender">
-										<label for="customerGender1">男</label>
-										<input style="height: 40%" id='customerGender2' value='2' disabled="disabled" type='radio' name="customerGender">
-										<label for="customerGender2">女</label>
+								<div style="width: 80%;">
+										<c:choose>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerGender == 1}">
+												<input style="height: 40%" id='customerGender1' checked="checked" value='1' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender1">男</label>
+												<input style="height: 40%" id='customerGender2' value='2' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender2">女</label>
+											</c:when>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerGender == 2}">
+												<input style="height: 40%" id='customerGender1' value='1' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender1">男</label>
+												<input style="height: 40%" id='customerGender2' checked="checked" value='2' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender2">女</label>
+											</c:when>
+											<c:otherwise>
+												<input style="height: 40%" id='customerGender1' value='1' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender1">男</label>
+												<input style="height: 40%" id='customerGender2' value='2' disabled="disabled" type='radio' name="customerGender">
+												<label for="customerGender2">女</label>
+											</c:otherwise>
+										</c:choose>
 								</div>
 							</div>
 							<div>
 								<div style="width: 20%">飲食：</div>
 								<div style="width: 80%">
-									<input style="height: 40%" id='customerDiet1' value='1' disabled="disabled" type='radio' name="customerDiet">
-									<label for="customerDiet1">葷</label>
-									<input style="height: 40%" id='customerDiet2' value='2' disabled="disabled" type='radio' name="customerDiet">
-									<label for="customerDiet2">素</label>
+										<c:choose>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerDiet == 1}">
+												<input style="height: 40%" id='customerDiet1' checked="checked" value='1' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet1">葷</label>
+												<input style="height: 40%" id='customerDiet2' value='2' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet2">素</label>
+											</c:when>											
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerDiet == 2}">
+												<input style="height: 40%" id='customerDiet1' value='1' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet1">葷</label>
+												<input style="height: 40%" id='customerDiet2' checked="checked" value='2' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet2">素</label>
+											</c:when>
+											<c:otherwise>
+												<input style="height: 40%" id='customerDiet1' value='1' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet1">葷</label>
+												<input style="height: 40%" id='customerDiet2' value='2' disabled="disabled" type='radio' name="customerDiet">
+												<label for="customerDiet2">素</label>
+											</c:otherwise>
+										</c:choose>
 								</div>
 							</div>
 							<div>
 								<div style="width: 20%">運動：</div>
 								<div style="width: 80%">
-									<input style="height: 40%" id='customerExerciseHabits3' value='3' disabled="disabled" type='radio' name="customerExerciseHabits">
-									<label for="customerExerciseHabits3">強</label>
-									<input style="height: 40%" id='customerExerciseHabits2' value='2' disabled="disabled" type='radio' name="customerExerciseHabits">
-									<label for="customerExerciseHabits2">中</label>
-									<input style="height: 40%" id='customerExerciseHabits1' value='1' disabled="disabled" type='radio' name="customerExerciseHabits">
-									<label for="customerExerciseHabits1">弱</label>
+										<c:choose>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerExerciseHabits == 1}">
+												<input style="height: 40%" id='customerExerciseHabits3' value='3' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits3">強</label>
+												<input style="height: 40%" id='customerExerciseHabits2' value='2' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits2">中</label>
+												<input style="height: 40%" id='customerExerciseHabits1' value='1' checked="checked" disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits1">弱</label>
+											</c:when>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerExerciseHabits == 2}">
+												<input style="height: 40%" id='customerExerciseHabits3' value='3' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits3">強</label>
+												<input style="height: 40%" id='customerExerciseHabits2' value='2' checked="checked" disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits2">中</label>
+												<input style="height: 40%" id='customerExerciseHabits1' value='1' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits1">弱</label>
+											</c:when>
+											<c:when test="${customerSignInSuccess.customerHealthBean.customerExerciseHabits == 3}">
+												<input style="height: 40%" id='customerExerciseHabits3' value='3' checked="checked" disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits3">強</label>
+												<input style="height: 40%" id='customerExerciseHabits2' value='2' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits2">中</label>
+												<input style="height: 40%" id='customerExerciseHabits1' value='1' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits1">弱</label>
+											</c:when>
+											<c:otherwise>
+												<input style="height: 40%" id='customerExerciseHabits3' value='3' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits3">強</label>
+												<input style="height: 40%" id='customerExerciseHabits2' value='2' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits2">中</label>
+												<input style="height: 40%" id='customerExerciseHabits1' value='1' disabled="disabled" type='radio' name="customerExerciseHabits">
+												<label for="customerExerciseHabits1">弱</label>
+											</c:otherwise>
+										</c:choose>
 								</div>
 							</div>
 							<div>
@@ -298,6 +428,7 @@
 								<button id="healthInformationUpdate">修改</button>
 							</div>
 						</div>
+					</fieldset>
 				</div>
 			</div>
 				

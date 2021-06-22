@@ -41,9 +41,9 @@ public class CustomerSignInController {
 			return "customer/customerSignInUp";
 		}
 	
-	//送出表單--登入顧客會員
-	@PostMapping("/customerSignIn")
-	public String customerSignIn(
+		//送出表單--登入顧客會員
+		@PostMapping("/customerSignIn")
+		public String customerSignIn(
 				@ModelAttribute("customerSignInBean")
 				CustomerSignInBean customerSignInBean,
 				BindingResult result, 

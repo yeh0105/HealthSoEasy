@@ -24,6 +24,8 @@ public class SportMapBean implements Serializable {
 
 	private String sportMapName;
 	private String sportMapAddress;
+	
+	@Column(length = 1000)
 	private String sportMapInfo;
 	
 	@Column(length = 1000)
