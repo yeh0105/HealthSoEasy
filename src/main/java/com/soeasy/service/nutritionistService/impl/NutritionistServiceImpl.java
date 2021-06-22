@@ -1,6 +1,7 @@
 package com.soeasy.service.nutritionistService.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,14 @@ public class NutritionistServiceImpl implements NutritionistService{
 
 	@Override
 	public NutritionistBean findByNutritionistId(Integer nutritionistId) {
-		return nutritionistRepository.findByNutritionistId(nutritionistId).get(nutritionistId);
+		Optional<NutritionistBean> opt=nutritionistRepository.findById(nutritionistId);
+		NutritionistBean nutritionistBean=null;
+		if(opt.isPresent()) {
+			nutritionistBean=opt.get();
+		}else {
+			throw new RuntimeException("NutritionistBean(NutritionistId=" + nutritionistId + ")不存在");
+		}
+		return nutritionistBean;
 	}
 
 	@Override

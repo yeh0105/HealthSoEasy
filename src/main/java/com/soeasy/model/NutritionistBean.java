@@ -42,7 +42,7 @@ public class NutritionistBean implements Serializable {
 
 	private String nutritionistEmail;
 
-	private Integer nutritionistCategory;
+	private String nutritionistCategory;
 
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date nutritionistDate;
@@ -117,11 +117,11 @@ public class NutritionistBean implements Serializable {
 		this.nutritionistEmail = nutritionistEmail;
 	}
 
-	public Integer getNutritionistCategory() {
+	public String getNutritionistCategory() {
 		return nutritionistCategory;
 	}
 
-	public void setNutritionistCategory(Integer nutritionistCategory) {
+	public void setNutritionistCategory(String nutritionistCategory) {
 		this.nutritionistCategory = nutritionistCategory;
 	}
 

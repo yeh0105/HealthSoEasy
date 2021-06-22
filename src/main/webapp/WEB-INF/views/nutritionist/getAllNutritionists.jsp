@@ -38,10 +38,22 @@ body * {
 	text-decoration: none;
 }
 
-#h3css{
+#h3css {
 	font-family: '微軟正黑體';
-	color:	#FF4D00; ;
+	color: #FF4D00;
 }
+
+#h3css2 {
+	font-family: '微軟正黑體';
+	color: #007FFF;
+}
+
+#pcss {
+	font-family: '微軟正黑體';
+	color: #B22222;
+}
+
+
 .thumbnail {
 	float: left;
 	width: 320px;
@@ -139,21 +151,26 @@ body * {
 
 							<div class="thumbnail">
 								<img
-									src="${pageContext.request.contextPath}/images/nutritionist/a01.jpg"
+									src="<c:url value='/nutritionistController/getImage/${nutritionist.nutritionistId}' />"
 									height="500px" width="300px" />
+
 								<div class="caption">
-									<h3>姓名:${nutritionist.nutritionistName}</h3>
-									<p>專長:${nutritionist.nutritionistCategoryBean.nutritionistCategoryName}</p>
-									<p>學位:${nutritionist.nutritionistDegree}</p>
+									<h3>
+										姓名 : <font id='h3css2'>${nutritionist.nutritionistName}</font>
+									</h3>
 									<p>
-										<a class="btn btn-primary" href="#">營養師詳細資料</a>
+										專長 : <font id='pcss'>${nutritionist.nutritionistCategoryBean.nutritionistCategoryName}</font>
+									</p>
+									<p>
+										學位 : <font>${nutritionist.nutritionistDegree}</font>
+									</p>
+									<p>
+										<a class="btn btn-primary"
+											href="<c:url value='/nutritionistController/nutritionist/${nutritionist.nutritionistId}'/>">營養師詳細資料</a>
 									</p>
 								</div>
 							</div>
-
 						</c:forEach>
-
-
 					</div>
 				</div>
 			</div>
@@ -166,8 +183,7 @@ body * {
 			<br>
 
 			<div>
-				<a href="<c:url value='/getAllNutritionists' />"><button>所有營養師</button></a>
-				<a href="<c:url value='/addNutritionist' />"><button>新增營養師</button></a>
+				<a href="<c:url value='/nutritionistController/addNutritionist'/>"><button>新增營養師</button></a>
 			</div>
 
 
