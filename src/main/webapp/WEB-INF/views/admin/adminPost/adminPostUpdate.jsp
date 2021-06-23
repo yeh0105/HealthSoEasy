@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Customer</title>
+<title>Admin Post</title>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -258,7 +258,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 				</div>
 			</div>
 			<div>
-				<a href="<c:url value="/admin/adminManage/adminPost"></c:url>">回上一頁</a>
+				<a class="" href="<c:url value="/admin/adminManage/adminPost"></c:url>">回上一頁(未完成)</a>
 			</div>
 			<br>
 			<div style="padding:3% 5%; margin-top: -3%;">
@@ -285,8 +285,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							<tr>
 								<td>文章狀態：</td>
 								<td width='600'>
-								 	正常 <form:radiobutton path="postStatus" value="1"/>  
-        							禁止 <form:radiobutton path="postStatus" value="2"/>  
+								 	<form:radiobutton path="postStatus" value="1"/> 正常 
+        							<form:radiobutton path="postStatus" value="2"/> 禁止  
 								</td>
 							</tr>
 							<tr>

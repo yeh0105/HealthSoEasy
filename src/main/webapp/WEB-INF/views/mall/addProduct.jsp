@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;charset=utf-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="<c:url value="/css/mall-bootstrap.min.css"/>" href="<c:url value="/css/mall-common.css"/>" type="text/css"">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">
 
  </head>
 
@@ -28,7 +28,7 @@
  <div class="well" >
 <%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
  
- <form:form  modelAttribute='product'  enctype="multipart/form-data" >
+ <form:form  modelAttribute='product' enctype="multipart/form-data" >
  
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -74,17 +74,17 @@
  </div>
  
  
- <div class="form-group">
- <label>產品日期: </label>
- <form:input  path="productDate" type="date"/>
- <form:errors path="productDate" Class="form-control"/>
+<!--  <div class="form-group"> -->
+<!--  <label>產品日期: </label> -->
+<%--  <form:input  path="productDate" type="date"/> --%>
+<%--  <form:errors path="productDate" Class="form-control"/> --%>
  
- </div>
+<!--  </div> -->
   
 
  <div class="form-group">
  <label >圖片上傳</label>
- <form:input path='productMultiImg' type="file"/>
+ <form:input path='productMultiImg' type="file" />
   <form:errors path="productMultiImg" Class="error" />
  </div>
  
@@ -103,10 +103,10 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/mall-bootstrap.min.js" ></script>
+<script src="${pageContext.request.contextPath}/js/mall/malladmin/mall-bootstrap.min.js" ></script>
  
  <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
- <script src="js/mall-bootstrap3.js"></script>
+ <script src="${pageContext.request.contextPath}/js/mall/malladmin/mall-bootstrap3.js"></script>
 
 
  <!-- 引入共同的頁尾  copy這行-->

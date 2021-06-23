@@ -15,16 +15,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
 	rel="stylesheet">
-<link href="css/header&footer.css" rel="stylesheet">
-<link href="css/sportMap_index.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/sportMap_index.css" rel="stylesheet">
 
 <meta charset="UTF-8">
 <style>
-.btn1 {
-	border-radius: 20px 20px;
-	border-color: #D7FFEE;
-	background-color: #D7FFEE;
-}
+
 </style>
 
 <title>Sport Map</title>
@@ -52,50 +47,71 @@
 	</div>
 	<!-- ------------------------------內容開始區塊--------------------------------- -->
 
-	<div class="mainWrapper">
-
-		<section id="">
-			<div >
-				
-				<img src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png"
-					width="45%" height="45%">
-					<span class="font1">運動地點說明文字運動地點說明文字運動地點說明文字運動地點說明文字</span>
-					
-		   </div> 
-			
+	<div class="centerDiv">
+		<div>
 			<div>
+			<a href="#"><button>運動中心123</button></a> 
+			<a href="#"><button>市區場館</button></a> 
+			</div>
+			<div>
+			<a href="#"><button>游泳池</button></a>
+			<a href="#"><button>其他戶外</button></a>
+			</div>
+			<div>
+			<a href="#"><button>其他戶外場地</button></a>
+			</div>
+		</div>
+		<div>
 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
-					src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
-					width="25%" height="25%"></a>			
-			</div>
-			<div><a href="<c:url value='/sportMapController/displaySportMaps' />"><button
-						class="btn1">所有運動地點</button></a>
-						
-						<a href="#"><button	class="btn1">運動中心</button></a>
-						<a href="#"><button	class="btn1">市區場館</button></a>
-						<a href="#"><button	class="btn1">游泳池</button></a>
-						<a href="#"><button	class="btn1">其他戶外場地</button></a>
-			</div>
-			<%-- 				<a href="<c:url value='/sportMapController/add' />"><button class="btn1">新增運動地圖</button></a> --%>
-		</section>
-	
-	</div>
-	<div class="mainWrapper">	
-		<section>
-		
+				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
+				width="100%" height="100%"></a>
+		</div>
+		<div>
 			<div>
-				<a href="#">熱門運動地點Top 3</a>
+			<a href="<c:url value='/sportMapController/displaySportMaps' />"><button
+					>所有運動地點</button></a> 
+			<a href="#"><button>運動中心</button></a>
 			</div>
-			<div>				
-				<span style="border:1px solid green;height:400px;width:300px"><a href="#">Top 1</a></span>
-				<span style="border:1px solid green;height:400px;width:300px"><a href="#">Top 2</a></span>
-				<span style="border:1px solid green;height:400px;width:300px"><a href="#">Top 3</a></span>
-
+			<div>
+			<a href="#"><button>市區場館</button></a> 
+			<a href="#"><button>游泳池</button></a> 
 			</div>
-		</section>
+			<div>
+			<a href="#"><button>其他戶外場地</button></a>
+			</div>
+		</div>
 	</div>
 
-	
+	<div class="centerDiv">
+
+		<div>
+
+			<img
+				src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png"
+				width="90%" height="90%">
+		</div>
+		<div>
+			<span class="font1">運動地點說明文字運動地點說明文字運動地點說明文字運動地點說明文字</span>
+
+		</div>
+	</div>
+
+
+	<div class="centerDiv">
+		<div>
+
+			<div>熱門運動地點Top 3</div> 
+			<div id="showTop3">
+			<span style="border: 1px solid green; height: 400px; width: 300px"><a
+				href="#">Top 1</a></span> <span
+				style="border: 1px solid green; height: 400px; width: 300px"><a
+				href="#">Top 2</a></span> <span
+				style="border: 1px solid green; height: 400px; width: 300px"><a
+				href="#">Top 3</a></span>
+			</div>
+		</div>
+
+	</div>
 
 
 

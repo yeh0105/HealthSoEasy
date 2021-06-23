@@ -269,7 +269,7 @@
 		<div>
 			<div class="customer-img">
 				<div id="imgUploadbtn">
-						<img alt="" src="${pageContext.request.contextPath}/images/goodcat.jpg">
+						<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg">
 						<form method="POST" action="uploadCustomerImg" enctype="multipart/form-data">
 							<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;">
 							<input id="customerImgSubmit" type="submit" style="display: none">

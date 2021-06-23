@@ -182,9 +182,9 @@ body * {
 			</div>
 			<br>
 
-			<div>
-				<a href="<c:url value='/nutritionistController/addNutritionist'/>"><button>新增營養師</button></a>
-			</div>
+<!-- 			<div> -->
+<%-- 				<a href="<c:url value='/nutritionistController/addNutritionist'/>"><button>新增營養師</button></a> --%>
+<!-- 			</div> -->
 
 
 		</section>

@@ -6,40 +6,32 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.soeasy.model.CustomerBean;
 import com.soeasy.model.PostBean;
-import com.soeasy.model.PostCategoryBean;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
-import com.soeasy.util.GlobalService;
-import com.soeasy.validator.postValidator.PostBeanValidator;
 
 @Controller
 @RequestMapping("/PostController")
-@SessionAttributes({"customerSignInSuccess"}) 
+@SessionAttributes({ "customerSignInSuccess" })
 public class PostController {
 
 	@Autowired
@@ -50,12 +42,58 @@ public class PostController {
 
 	@Autowired
 	ServletContext context;
+//
+//	@GetMapping(value = "/pagingPostData.json", produces = { "application/json; charset=UTF-8" })
+//	public @ResponseBody Map<String, Object> getPageBook(
+//			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
+//			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
+//
+//		System.err.println("接收到/pagingPostData.json請求");
+//
+//		if (pageNo == null) {
+//			pageNo = 1; // 網址加?pageNo=測試
+//		}
+//
+//		if (totalPage == null) {
+//			totalPage = postService.getTotalPages();
+//		}
+//
+//		Map<String, Object> postmap = postService.getPagePosts(pageNo);
+//
+////		System.err.println("postmap=" + postmap);
+//
+//		postmap.put("currPage", String.valueOf(pageNo));
+//		postmap.put("totalPages", totalPage);
+//		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+//		postmap.put("post_DPP", postmap);
+//		System.err.println("newpostmap=" + postmap);
+//
+//		return postmap;
+//
+//	}
 
 	// 查詢全部文章
-	@GetMapping("/getAllPost")
-	public String getAllPostById(Model model) {
-		List<PostBean> postBean = postService.findAllByPostId();
-		model.addAttribute("postList", postBean);
+	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
+	public String getAllPosts(Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+
+		System.err.println("接收到getAllPosts請求");
+		System.err.println("pageNo=" +pageNo);
+
+		if (pageNo == null) {
+			pageNo = 1; // 網址加?pageNo=測試
+		}
+		
+		System.err.println("getAll");
+
+		Map<Integer, PostBean> postMap = postService.getPagePosts(pageNo);
+		model.addAttribute("currPage", String.valueOf(pageNo));
+		model.addAttribute("totalPages", postService.getTotalPages());
+		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+		model.addAttribute("post_DPP", postMap);
+
+//		List<PostBean> postBean = postService.findAllByPostId();
+//		model.addAttribute("postList", postBean);
 		return "post/postByCategory";
 	}
 

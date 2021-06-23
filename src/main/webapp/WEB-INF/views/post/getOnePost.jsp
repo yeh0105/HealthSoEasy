@@ -38,17 +38,17 @@
 						<div style="width: 140%; height: 310px; overflow-y: scroll;">${getOnePostBean.postContent}</div>
 					</td>
 			</table>
-			<button>Upadate</button>
-			<button>
-				<a class='deletePost'
-					href="<c:url value='/PostNeedLoginController/deletePost/${getOnePostBean.postId}' /> "
-					style="text-decoration: none; color: black">Delete</a>
-			</button>
+			<a class="deletePost"
+				href="<c:url value='/PostNeedLoginController/updatePost/${getOnePostBean.postId}' /> "
+				style="text-decoration: none; color: black">
+				<button>Upadate</button>
+			</a> <a class="deletePost"
+				href="<c:url value='/PostNeedLoginController/deletePost/${getOnePostBean.postId}' /> "
+				style="text-decoration: none; color: black">
+				<button>Delete(未完成)</button>
+			</a>
 		</fieldset>
 	</div>
-
-	<!-- 引入共同的頁尾  copy這行-->
-	<jsp:include page="/fragment/footer.jsp" />
 
 	<!-- 	---------------------用來接delete的post--------------------------	 -->
 
@@ -61,7 +61,7 @@
 		//將 get 請求轉換為 post 請求提交
 		$(document).ready(function() {
 			$('.deletePost').click(function() {
-				if (confirm('確定刪除此筆紀錄? ')) {
+				if (confirm('確定刪除此文章嗎? ')) {
 					var href = $(this).attr('href');
 					$('form').attr('action', href).submit();
 
@@ -73,5 +73,8 @@
 		})
 	</script>
 	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
+	
+	<!-- 引入共同的頁尾  copy這行-->
+	<jsp:include page="/fragment/footer.jsp" />
 </body>
 </html>

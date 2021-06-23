@@ -24,7 +24,7 @@ public class GlobalService {
 	public static final Integer SHOP_STATUS_BANNED = 2;
 	
 	//商品
-	public static int RECORDS_PER_PAGE=2;
+	public static final Integer PRODUCT_PER_PAGE=10;
 
 
 	// 地圖
@@ -50,6 +50,9 @@ public class GlobalService {
 	// 文章狀態
 	public static final Integer POST_STATUS_NORMAL = 1;
 	public static final Integer POST_STATUS_BANNED = 2;
+	// 一頁預設10篇文章
+	public static final int POSTS_PER_PAGE = 3;
+
 
 	// 營養師
 	// 性別

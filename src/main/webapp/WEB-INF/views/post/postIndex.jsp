@@ -53,10 +53,13 @@
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
+										<a
+											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
+											>>>觀看更多 </a>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/post/heart-empty.png"
-													width="7%" height="7%">
+												<a href="#"> <img alt=""
+													src="images/post/heart-empty.png" width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
 											</p>
@@ -70,10 +73,13 @@
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
+										<a
+											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
+											>>>觀看更多 </a>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/post/heart-empty.png"
-													width="7%" height="7%">
+												<a href="#"> <img alt=""
+													src="images/post/heart-empty.png" width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
 											</p>
@@ -87,10 +93,13 @@
 									<div class="caption">
 										<h3>缩略图标题</h3>
 										<p>123456</p>
+										<a
+											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
+											>>>觀看更多 </a>
 										<div style="display: flex;">
 											<p>
-												<a href="#"> <img alt="" src="images/post/heart-empty.png"
-													width="7%" height="7%">
+												<a href="#"> <img alt=""
+													src="images/post/heart-empty.png" width="7%" height="7%">
 												</a>123
 											<p style="font-size: 15px; color: grey;">By NickName</p>
 											</p>
@@ -140,7 +149,9 @@
 									src="images/post/product_01.jpg" alt='' /></a>
 								<div class="media-body">
 									<h4 class="media-heading">標題</h4>
-									请尽量使用HTML5兼容的视频格式和视频代码实现视频播放, 以达到更好的体验效果.
+									请尽量使用HTML5兼容的视频格式和视频代码实现视频播放, 以达到更好的体验效果. <a
+										href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
+										>>>觀看更多 </a>
 								</div>
 							</div>
 						</div>
@@ -154,17 +165,6 @@
 							</p>
 							</p>
 						</div>
-					</div>
-					<div class="pagination pagination-large pagination-centered">
-						<ul>
-							<li><a href="#">上一页</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">下一页</a></li>
-						</ul>
 					</div>
 				</div>
 			</div>

@@ -1,17 +1,22 @@
 package com.soeasy.controller.customerController;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +46,9 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	ServletContext servletContext;
 	
 	//表單初值--新增會員_會員登入--註冊
 	@GetMapping("/addCustomer")
@@ -216,14 +224,97 @@ public class CustomerController {
 			return "/customer/customerPage";
 		}
 		
-		//取得上傳頭像
+		//取得登入者個人上傳頭像
 		@GetMapping("/getCustomerImg")
 		public ResponseEntity<byte[]> getCustomerImg(Model model) {
+			//從session取得登入者ID
 			Integer customerId = ((CustomerBean)model.getAttribute("customerSignInSuccess")).getCustomerId();
 			CustomerBean originalCustomer = customerService.findByCustomerId(customerId);
 			
 			Blob customerImg = originalCustomer.getCustomerImg();
 			
-			return null;
+			InputStream is = null;
+			String fileName = null;
+			byte[] media = null;
+			ResponseEntity<byte[]> responseEntity = null;
+			
+			try {
+				if (customerImg != null) {
+					is = customerImg.getBinaryStream();
+				}
+				// 如果圖片的來源有問題，就送回預設圖片(/images/salad.png)	
+				if(is == null) {
+					fileName = "salad.png";
+					is = servletContext.getResourceAsStream(
+							"/images/" + fileName);
+				}
+				
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				// 由InputStream讀取位元組，然後由OutputStream寫出
+				int len = 0;
+				byte[] bytes = new byte[8192];
+				
+				while ((len = is.read(bytes)) != -1) {
+					baos.write(bytes, 0, len);
+				}
+				
+				media = baos.toByteArray();
+				responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				try {
+					if (is != null) is.close();
+				} catch(IOException e) {
+					;
+				}
+			}
+			return responseEntity;
+		}
+		
+		//以ID取得上傳頭像
+		@GetMapping("/getCustomerImgById")
+		public ResponseEntity<byte[]> getCustomerImgById(@PathParam("customerId")Integer customerId){
+			CustomerBean originalCustomer = customerService.findByCustomerId(customerId);
+			
+			Blob customerImg = originalCustomer.getCustomerImg();
+			
+			InputStream is = null;
+			String fileName = null;
+			byte[] media = null;
+			ResponseEntity<byte[]> responseEntity = null;
+			
+			try {
+				if (customerImg != null) {
+					is = customerImg.getBinaryStream();
+				}
+				// 如果圖片的來源有問題，就送回預設圖片(/images/salad.png)	
+				if(is == null) {
+					fileName = "salad.png";
+					is = servletContext.getResourceAsStream(
+							"/images/" + fileName);
+				}
+				
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				// 由InputStream讀取位元組，然後由OutputStream寫出
+				int len = 0;
+				byte[] bytes = new byte[8192];
+				
+				while ((len = is.read(bytes)) != -1) {
+					baos.write(bytes, 0, len);
+				}
+				
+				media = baos.toByteArray();
+				responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				try {
+					if (is != null) is.close();
+				} catch(IOException e) {
+					;
+				}
+			}
+			return responseEntity;
 		}
 }
