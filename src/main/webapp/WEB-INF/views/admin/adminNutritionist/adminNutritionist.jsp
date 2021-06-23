@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 
-<title>Admin SportMap</title>
+<title>Admin Nutritionist</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -192,7 +192,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-      <a href="<c:url value='/admin/adminManage/adminSportMap/add' />">
+      <a href="<c:url value='/admin/adminManage/adminNutritionist/add' />">
       <button class="app-content-headerButton">新增營養師</button></a>
     </div>
     <div class="app-content-actions">
@@ -286,7 +286,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
         </button>
           <div class="product-cell image">
-            <img src="<c:url value='/nutritionistController/getImage/${nutritionist.nutritionistId}' />" alt="sport">
+            <img src="<c:url value='/admin/adminManage/getImage/${nutritionist.nutritionistId}' />" alt="sport">
             <span>${nutritionist.nutritionistId}</span>
           </div>
         <div class="product-cell category"><span class="cell-label">Name</span>${nutritionist.nutritionistName}</div>
@@ -297,9 +297,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span class="cell-label">Category</span>
           <span class="status active">${nutritionist.nutritionistCategory}</span>
         </div>
-         <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminSportMap/up/${sportMap.sportMapId}' />"><button class="app-content-headerButton">修改</button></a></div>
+         <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminSportMap/up/${nutritionist.nutritionistId}' />"><button class="app-content-headerButton">修改</button></a></div>
                   
-         <div class="product-cell price"><a	class='deleteSportMap' href="<c:url value='/admin/adminManage/adminSportMap/del/${sportMap.sportMapId}' />"><button class="app-content-headerButton">刪除</button></a></div>
+         <div class="product-cell price"><a	class='deleteSportMap' href="<c:url value='/admin/adminManage/adminNutritionist/del/${nutritionist.nutritionistId}' />"><button class="app-content-headerButton">刪除</button></a></div>
         
       </div>
       
