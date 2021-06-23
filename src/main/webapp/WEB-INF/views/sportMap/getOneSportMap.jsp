@@ -20,23 +20,24 @@
 	<jsp:include page="/fragment/header.jsp" />
 
 <!-- ----------------------------------- -->
+ 
+ <div>
  <div class="blog-card">
-<!--  <div class=""> -->
+
         <div> ${sportMapBean.sportMapMap} </div>
 
-        <div class="description">
-
-            <p class="read-more">
-                <a class='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/${sportMapBean.sportMapId}">
-                    點我收藏</a>
-            </p>
+        <div class="rightC">
+            
+               <div class="floatR"> <a class='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/${sportMapBean.sportMapId}">
+                    點我收藏</a></div>
+          <div class="">  
             <h1>${sportMapBean.sportMapName}</h1>
-            <h2>${sportMapBean.sportMapAddress}</h2>
+            <h3>${sportMapBean.sportMapAddress}</h3>
             <p> ${sportMapBean.sportMapInfo}</p>
             <br>
             <br>
-            <p class="read-more">
-                來個評分吧！
+          </div>  
+             <div class="floatR">   來個評分吧！
                 <a class='getScore1Link'
                     href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"> 
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar1.png"></a>
@@ -53,51 +54,17 @@
                     href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/5"> 
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar5.png"></a>
 
-            	<span>，目前累積分數：${sportMapBean.sportMapScore}分</span>
-            </p>
+				</div>
+            	<div class="floatR">目前累積：${sportMapBean.sportMapScore}分</div>
+            	
+            	
+            
         </div>
     </div>
 
+</div>
 
 
-<!-- ---------------------------------------------------	 -->
-<!-- 	<table> -->
-<!-- 		<tr> -->
-<%-- 			<td>${sportMapBean.sportMapName}</td> --%>
-<!-- 		</tr> -->
-<!-- 		<tr> -->
-<%-- 			<td>${sportMapBean.sportMapMap}</td> --%>
-<!-- 		</tr> -->
-<!-- 		<tr> -->
-<%-- 			<td>${sportMapBean.sportCategoryId}</td> --%>
-<!-- 		</tr> -->
-
-<!-- 		<tr> -->
-<%-- 			<td>${sportMapBean.sportMapAddress}</td> --%>
-<!-- 		</tr> -->
-<!-- 		<tr> -->
-<%-- 			<td>${sportMapBean.sportMapInfo}</td> --%>
-<!-- 		</tr> -->
-<!-- 		<tr> -->
-
-<!-- 			<td><a class='getLikeLink' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getLike/${sportMapBean.sportMapId}"><button>收藏</button></a></td> --%>
-			
-			
-<!-- 			<td>來個評分吧 -->
-<!-- 			<a class='getScore1Link' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"><button>1</button></a></td> --%>
-<!-- 				<td><a class='getScore2Link' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/2"><button>2</button></a></td> --%>
-<!-- 			<td><a class='getScore3Link' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/3"><button>3</button></a></td> --%>
-<!-- 				<td><a class='getScore4Link' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/4"><button>4</button></a></td> --%>
-<!-- 				<td><a class='getScore5Link' -->
-<%-- 				href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/5"><button>5</button></a></td> --%>
-<!-- 		</tr> -->
-
-<!-- 	</table> -->
 
 
 <!-- ------------------------------用來接POST-------------------------------- -->

@@ -187,3 +187,12 @@ body {
   .container .info span .fa {
     color: #e74c3c;
   }
+  
+  
+  .style1{
+  display:flex;
+  margin:0px auto;
+  padding:10px 10px;
+  width:410px;
+  
+  }

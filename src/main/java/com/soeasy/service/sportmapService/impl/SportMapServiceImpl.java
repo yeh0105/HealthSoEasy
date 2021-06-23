@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
 import com.soeasy.repository.sportmapRepository.SportMapRepository;
 import com.soeasy.service.sportmapService.SportMapService;
@@ -25,7 +26,6 @@ public class SportMapServiceImpl implements SportMapService {
 	private static final Logger logger = LoggerFactory.getLogger(SportMapServiceImpl.class);
 
 	private int recordsPerPage = GlobalService.SPORTMAPS_PER_PAGE; // 預設值：每頁9筆
-//	private int recordsPerPage = 9; // 預設值：每頁9筆
 	private int totalPages = -1;
 
 	@Autowired
@@ -36,11 +36,9 @@ public class SportMapServiceImpl implements SportMapService {
 	@Override
 	public SportMapBean save(SportMapBean sportMapBean) {
 		return sportMapRepository.save(sportMapBean);
-	}	
+	}		
 	
-	
-	
-	//查詢單一地圖By ID
+	//查詢單一地圖ByID
 	@Override
 	public SportMapBean get(Integer sportMapId) {
 		Optional<SportMapBean> optional =sportMapRepository.findById(sportMapId);
@@ -55,13 +53,12 @@ public class SportMapServiceImpl implements SportMapService {
 		return sportMapBean ;
 	}
 
-	
+	//查詢所有地圖，帶分頁
 	@Transactional
 	@Override
 	public Map<Integer, SportMapBean> getPageSportMaps(int pageNo) {
 
 		Map<Integer, SportMapBean> map = new LinkedHashMap<>();
-		// PageRequest.of(pageNo, recordsPerPage): 第一個參數為 0-based
 		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
 		Page<SportMapBean> beans = sportMapRepository.findAll(pageable);
 
@@ -71,12 +68,9 @@ public class SportMapServiceImpl implements SportMapService {
 		}
 		return map;
 	}
-
-
-	//
+	
 	@Override
-	public Long getRecordCounts() {
-		
+	public Long getRecordCounts() {		
 		return sportMapRepository.count();
 	}
 
@@ -85,16 +79,10 @@ public class SportMapServiceImpl implements SportMapService {
 	public Integer getTotalPages() {
 		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
 		logger.info("totalPages=" + totalPages);
-		return totalPages;
-		
+		return totalPages;		
 
-	}
-	
-//	@Override
-//	public Integer getRecordsPerPage() {
-//		return recordsPerPage; //記得開啟
+	}	
 
-//	}
 	
 	//更新地圖資料
 	@Transactional
@@ -116,16 +104,22 @@ public class SportMapServiceImpl implements SportMapService {
 	return sportMapRepository.findAll();
 	}
 
+	// 抓分頁一頁有哪些地圖by SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
+	@Override
+	public Map<Integer, SportMapBean> getPageSportMapsBySportCategoryId(SportCategoryBean SportCategoryBean, Integer pageNo) {
+		Map<Integer, SportMapBean> map = new LinkedHashMap<>();
+		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
+		Page<SportMapBean> beans = sportMapRepository.findBySportCategoryBean(SportCategoryBean,pageable);
 
-	//查詢地圖By SportCategoryId
-//	@Override
-//	public SportMapBean getSportMapsBySportCategoryId(Integer sportCategoryId) {
-//				
-//		List<SportMapBean> list =sportMapRepository.findBySportCategoryId(sportCategoryId);
-//	
-//		return list;
-//	}
+		List<SportMapBean> list = beans.getContent();
+		for (SportMapBean bean : list) {
+			map.put(bean.getSportMapId(), bean);
+		}
+		return map;
+	}
 
+
+	
 
 	
 	
