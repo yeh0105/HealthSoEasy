@@ -37,6 +37,7 @@ import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
 import com.soeasy.util.GlobalService;
 import com.soeasy.validator.postValidator.PostBeanValidator;
+import com.soeasy.validator.postValidator.PostUpdateBeanValidator;
 
 @Controller
 @RequestMapping("/PostNeedLoginController")
@@ -52,20 +53,118 @@ public class PostNeedLoginController {
 	@Autowired
 	ServletContext context;
 
+	// 修改文章
+	@GetMapping(value = "/updatePost/{postId}")
+	public String showOnePost(@PathVariable("postId") Integer postId, Model model) {
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+
+		PostBean postBean = postService.findByPostId(postId);
+
+		PostUpdateBean postUpdateBean = new PostUpdateBean();
+
+		postUpdateBean.setPostTitle(postBean.getPostTitle());
+		postUpdateBean.setPostCategory(postBean.getPostCategory());
+		postUpdateBean.setPostContent(postBean.getPostContent());
+		postUpdateBean.setPostImg(postBean.getPostImg());
+		postUpdateBean.setPostStatus(postBean.getPostStatus());
+		postUpdateBean.setPostCategoryBean(postBean.getPostCategoryBean());
+
+		model.addAttribute("postBean", postUpdateBean);
+
+		return "post/updatePost";
+	}
+
+	// 修改文章，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫
+	@PostMapping("/updatePost/{postId}")
+	public String updatePost(@ModelAttribute("postBean") PostUpdateBean postUpdateBean, BindingResult result,
+			Model model, @PathVariable Integer postId, HttpServletRequest request) {
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+
+		// 取得原始的PostBean物件
+		PostBean postOrginalBean = postService.findByPostId(postId);
+
+		// 取得PostUpdateBean的PostCategoryBean物件
+		PostCategoryBean updatePostCategoryBean = postCategoryService
+				.getPostCategory(postUpdateBean.getPostCategoryBean().getPostCategoryId());
+
+		// 取得adminPostUpdate.jsp所送來的圖片資訊
+		MultipartFile postImg = postUpdateBean.getPostMultiImg();
+
+		// 檢驗欄位內容
+		PostUpdateBeanValidator validator = new PostUpdateBeanValidator();
+		validator.validate(postUpdateBean, result);
+
+		if (result.hasErrors()) {
+			return "post/updatePost";
+		}
+
+		// 將postUpdateBean的資料修改進postOrginalBean
+
+		// 圖片傳入資料庫
+		// 建立Blob物件，交由 Hibernate 寫入資料庫
+		if (postImg != null && !postImg.isEmpty()) {
+			try {
+				byte[] b = postImg.getBytes();
+				Blob blob = new SerialBlob(b);
+				postOrginalBean.setPostImg(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		} else {
+			postOrginalBean.setPostImg(postOrginalBean.getPostImg());
+		}
+
+		postOrginalBean.setPostTitle(postUpdateBean.getPostTitle());
+
+		postOrginalBean.setPostCategory(updatePostCategoryBean.getPostCategoryName());
+
+		postOrginalBean.setPostContent(postUpdateBean.getPostContent());
+
+		postOrginalBean.setPostStatus(postUpdateBean.getPostStatus());
+
+		postOrginalBean.setPostCategoryBean(updatePostCategoryBean);
+
+		try {
+			postService.updatePost(postOrginalBean);
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
+			return "post/updatePost";
+		}
+
+		// 跳轉至查詢所有文章頁面(送getAllPosts請求)
+		return "redirect:/PostController/getAllPost.json";
+	}
+
 	// 將單筆文章的狀態更改為2(禁止)
 	@PostMapping("/deletePost/{postId}")
-	public String changeStatus(@ModelAttribute("postBean") BindingResult result,
-			Model model, @PathVariable Integer postId, HttpServletRequest request) {
+	public String changeStatus(@ModelAttribute("postBean") PostBean postChangeBean, BindingResult result, Model model,
+			@PathVariable Integer postId, HttpServletRequest request) {
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
 
 		System.err.println("進入刪除");
 
 		// 取得原始的PostBean物件
-		PostBean postOrginalBean = postService.findByPostId(postId);
-		
-		postOrginalBean.setPostStatus(2);
+		postChangeBean = postService.findByPostId(postId);
+
+		postChangeBean.setPostStatus(2);
 
 		// 修改Post
-		postService.updatePost(postOrginalBean);
+		postService.updatePost(postChangeBean);
 
 		System.err.println("刪除了!!!");
 
@@ -195,7 +294,7 @@ public class PostNeedLoginController {
 
 		}
 		// 跳轉至查詢所有文章頁面(送getAllPost請求)
-		return "redirect:/PostController/getAllPost";
+		return "redirect:/PostController/getAllPost.json";
 
 	}
 
