@@ -47,57 +47,51 @@ public class SportMapController {
 		if (pageNo == null) {
 			pageNo = 1;     //網址加?pageNo=測試
 			}
-		System.out.println("getAll");
 
-		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMaps(pageNo);
-		model.addAttribute("pageNo", String.valueOf(pageNo));
-		model.addAttribute("totalPages", sportMapService.getTotalPages());
-		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		model.addAttribute("sportMaps_DPP", sportsMap);
-
+	Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMaps(pageNo);
+	model.addAttribute("pageNo", String.valueOf(pageNo));
+	model.addAttribute("totalPages", sportMapService.getTotalPages());
+	// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+	model.addAttribute("sportMaps_DPP", sportsMap);
 		
-		return "sportMap/getAllSportMaps";
+	return "sportMap/getAllSportMaps";
 	}		
 	
-	//帶出修改前單一表單
-		@GetMapping(value="/sportMap/{sportMapId}")
-		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
-			SportMapBean sportMapBean = sportMapService.get(sportMapId);			
-			model.addAttribute("sportMapBean",sportMapBean);
-//			return "sportMap/updateSportMap"; //帶出修改資料
-			return "sportMap/getOneSportMap"; //查詢單一頁面
+	//查詢單一地點(前台)
+	@GetMapping(value="/sportMap/{sportMapId}")
+	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
+	model.addAttribute("sportMapBean",sportMapBean);
+		return "sportMap/getOneSportMap"; //查詢單一頁面
 		}
 		
 		
-		//修改運動地點，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫
-		@PostMapping("/sportMap/{sportMapId}")
-		public String modify(
-				@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
-				BindingResult result,Model model,@PathVariable Integer sportMapId,
-				HttpServletRequest request) {
-//					
-			//檢驗欄位內容
-			SportMapBeanValidator validator = new SportMapBeanValidator();
-			validator.validate(sportMapBean,result);
-			if(result.hasErrors()) {
+	//修改運動地點，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫(未用到，寫在後台)
+	@PostMapping("/sportMap/{sportMapId}")
+	public String modify(
+		@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
+		BindingResult result,Model model,@PathVariable Integer sportMapId,
+		HttpServletRequest request) {
+					
+		//檢驗欄位內容
+		SportMapBeanValidator validator = new SportMapBeanValidator();
+		validator.validate(sportMapBean,result);
+		if(result.hasErrors()) {
 				
-				return "sportMap/updateSportMap";	
+		return "sportMap/updateSportMap";	
 
-			}	
+		}	
 			
-			//找到對應的Category物件
-			SportCategoryBean sportCategoryBean = sportCategoryService.getSportCategory(sportMapBean.getSportCategoryBean().getSportCategoryId());
-			sportMapBean.setSportCategoryBean(sportCategoryBean);
-			
-			
-			sportMapService.update(sportMapBean);
-			return "redirect:/sportMapController/displaySportMaps"; 
+		//找到對應的Category物件
+		SportCategoryBean sportCategoryBean = sportCategoryService.getSportCategory(sportMapBean.getSportCategoryBean().getSportCategoryId());
+		sportMapBean.setSportCategoryBean(sportCategoryBean);
+						
+		sportMapService.update(sportMapBean);
+		return "redirect:/sportMapController/displaySportMaps"; 
 		}
-		
-		
-		
+				
 	
-	//新增運動地點，先送一個空白表單
+	//新增運動地點，先送一個空白表單(未用到，寫在後台)
 	@GetMapping(value = "/add")
 	public String showEmptyForm(Model model) {
 		SportMapBean sportMapBean = new SportMapBean();
@@ -111,7 +105,7 @@ public class SportMapController {
 		return "sportMap/addSportMap";	
 		
 	}
-	//新增運動地點
+	//新增運動地點(未用到，寫在後台)
 	@PostMapping(value = "/add")
 	public String add(@ModelAttribute("sportMapBean") 
 	SportMapBean sportMapBean,BindingResult result,
@@ -143,17 +137,16 @@ public class SportMapController {
 		
 	}
 	
-	//產生下拉式選單(新增&修改用)
+	//產生下拉式選單(新增&修改用，寫在後台)
 	@ModelAttribute
 	public void commonCategory(Model model) {
 		List<SportCategoryBean> sportCategoryBeanList = sportCategoryService.getAllSportCategorys();
 		model.addAttribute("sportCategoryBeanList", sportCategoryBeanList);
-	}
-		
+	}		
 		
 	
 	
-	//刪除單筆運動地點
+	//刪除單筆運動地點(未用到，寫在後台)
 	@PostMapping("/del/{sportMapId}")
 	public String delete(@PathVariable("sportMapId") Integer sportMapId) {
 		System.out.println("抓到了抓到了");
@@ -163,8 +156,7 @@ public class SportMapController {
 		return "redirect:/sportMapController/displaySportMaps";
 	}
 	
-		
-	
+
 	//查詢所有運動類別Ajax，搭配查詢所有運動地點Ajax(依分類拉出地點，未寫完)
 	@GetMapping(value="/allSportCategory.json",produces= {"application/json; charset=UTF-8" })
 	public @ResponseBody List<SportCategoryBean>getAllCategorys(){
@@ -180,6 +172,25 @@ public class SportMapController {
 //		
 //		return sportMapsList;
 //	}
+	
+	//查詢所有運動地點by分類(前台)
+		@GetMapping("/displaySportMapsByCategoryId")
+		public String DisplaySportMapsBySportCategoryId(Model model, HttpServletRequest request, HttpServletResponse response,
+				@RequestParam(value = "pageNo", required = false) Integer pageNo,SportCategoryBean sportCategoryBean) {
+
+			if (pageNo == null) {
+				pageNo = 1;     //網址加?pageNo=測試
+				}
+
+		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMapsBySportCategoryId(sportCategoryBean,pageNo);
+		model.addAttribute("pageNo", String.valueOf(pageNo));
+		model.addAttribute("sportCategoryBean",String.valueOf(sportCategoryBean));
+		model.addAttribute("totalPages", sportMapService.getTotalPages());
+		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+		model.addAttribute("sportMaps_category", sportsMap);
+			
+		return "sportMap/getAllSportMapsByCategoryId";
+		}		
 	
 	
 	

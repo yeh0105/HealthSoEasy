@@ -33,12 +33,7 @@ public class AdminSportMap {
 	@Autowired
 	SportCategoryService sportCategoryService;
 	
-	//後台地圖首頁(換成顯示所有地圖)
-//	@GetMapping("/adminSportMap")
-//	public String adminSportMapIndex() {
-//		return "/admin/adminSportMap/adminSportMap";
-//	}
-	
+		
 	//顯示所有地圖(後台首頁)
 	@GetMapping("/adminSportMap")
 		public String list(Model model) {
@@ -47,7 +42,7 @@ public class AdminSportMap {
 		
 		}
 	
-	//Ajax顯示所有地圖(未用到)
+	//Ajax顯示所有地圖(未用到，未測試)
 	@GetMapping(value="/getAllSportMaps.json",produces={ "application/json; charset=UTF-8" })
 	public@ResponseBody Map<String,Object> getAllSportMaps(){		
 			Map<String,Object> map = new HashMap<>();
@@ -58,7 +53,7 @@ public class AdminSportMap {
 		
 	}
 	
-	//帶出地圖修改前單一表單
+	//帶出地圖修改前單一表單(後台用)
 	@GetMapping(value="/adminSportMap/up/{sportMapId}")
 	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
 	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
@@ -68,14 +63,14 @@ public class AdminSportMap {
 	}
 	
 	
-	//修改運動地點，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫
+	//修改運動地點，將送來修改過的資料用本方法檢核，若無誤則寫入資料庫(後台用)
 	@PostMapping("/adminSportMap/up/{sportMapId}")
 	public String modify(
 	@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
 	BindingResult result,Model model,@PathVariable Integer sportMapId,
 	HttpServletRequest request) {
 						
-	//檢驗欄位內容
+	//檢驗欄位內容(檢驗幾項欄位不能為空)
 	SportMapBeanValidator validator = new SportMapBeanValidator();
 	validator.validate(sportMapBean,result);
 	if(result.hasErrors()) {
@@ -84,7 +79,7 @@ public class AdminSportMap {
 
 	}	
 				
-	//找到對應的Category物件
+	//找到對應的Category物件(帶出分類欄位)
 	SportCategoryBean sportCategoryBean = sportCategoryService.getSportCategory(sportMapBean.getSportCategoryBean().getSportCategoryId());
 	sportMapBean.setSportCategoryBean(sportCategoryBean);
 				
@@ -113,12 +108,11 @@ public class AdminSportMap {
 	}
 		
 		
-	//新增運動地點
+	//新增運動地點(後台用)
 	@PostMapping(value = "/adminSportMap/add")
 	public String add(@ModelAttribute("sportMapBean") 
 	SportMapBean sportMapBean,BindingResult result,
 	Model model,HttpServletRequest request){
-	System.out.println("test123123");
 	//檢驗欄位內容
 	SportMapBeanValidator validator = new SportMapBeanValidator();
 	validator.validate(sportMapBean,result);
@@ -127,7 +121,7 @@ public class AdminSportMap {
 		return "admin/adminSportMap/adminAddSportMap";	
 
 		}		
-	// 找出對應的SportCategory物件
+	// 找出對應的SportCategory物件(帶出分類欄位)
 	SportCategoryBean sportCategoryBean =sportCategoryService.getSportCategory(sportMapBean.getSportCategoryBean().getSportCategoryId());
 	sportMapBean.setSportCategoryBean(sportCategoryBean);
 			
@@ -135,7 +129,7 @@ public class AdminSportMap {
 			sportMapService.save(sportMapBean);
 				
 			}catch (org.hibernate.exception.ConstraintViolationException e) {
-			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
+			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");//這裡未檢驗到
 			return "admin/adminSportMap/adminAddSportMap";	
 				
 			}
@@ -144,7 +138,7 @@ public class AdminSportMap {
 			
 		}
 		
-	//產生下拉式選單(新增&修改用)
+	//產生下拉式選單(後台用，新增&修改用到)
 	@ModelAttribute
 	public void commonCategory(Model model) {
 	List<SportCategoryBean> sportCategoryBeanList = sportCategoryService.getAllSportCategorys();
@@ -152,7 +146,7 @@ public class AdminSportMap {
 		}
 	
 		
-	//刪除單筆運動地點
+	//刪除單筆運動地點(後台用)
 	@PostMapping("/adminSportMap/del/{sportMapId}")
 	public String delete(@PathVariable("sportMapId") Integer sportMapId) {
 	sportMapService.delete(sportMapId);

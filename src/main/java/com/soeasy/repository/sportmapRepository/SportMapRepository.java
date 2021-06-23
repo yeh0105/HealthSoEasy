@@ -1,11 +1,10 @@
 package com.soeasy.repository.sportmapRepository;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
+import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
 
 
@@ -14,9 +13,9 @@ public interface SportMapRepository extends JpaRepository<SportMapBean, Integer>
 //	@Query("SELECT DISTINCT sportMapCategory FROM SportMapBean")
 //	List<String> findDistinctCategory();
 	
+	// 抓分頁一頁有哪些地圖by SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
+	Page<SportMapBean> findBySportCategoryBean(SportCategoryBean SportCategoryBean,Pageable pageable);
 	
-//	 @Query("SELECT s FROM SportMapBean s where s.fk_sportCategoryId = sportCategoryId") 
-//	 List<SportMapBean> findBySportCategoryId(@Param("sportCategoryId") Integer sportCategoryId);	
 }
 	
 

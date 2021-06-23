@@ -1,75 +1,31 @@
-.blog-card {
-/*     display: flex; */
-/*     flex-direction: column; */
-/*     margin: 1rem auto; */
-/*     box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1); */
-/*     margin-bottom: 1.6%; */
-/*     background: #fff; */
-/*     line-height: 1.4; */
-/*     font-family: sans-serif; */
-/*     border-radius: 5px; */
-/*     overflow: hidden; */
-  }
-  
-  .blog-card .photo {
-    position: absolute;
-    
-  }
-  
-  .blog-card .description {
-    padding: 1rem;
-    background: #fff;
-    position: relative;
-    z-index: 1;
-  }
-  .blog-card .description h1,
-  .blog-card .description h2 {
-    font-family: Poppins, sans-serif;
-  }
-  .blog-card .description h1 {
-    line-height: 1;
-    margin: 0;
-    font-size: 1.7rem;
-  }
-  .blog-card .description h2 {
-    font-size: 1rem;
-    font-weight: 300;
-    text-transform: uppercase;
-    color: #a2a2a2;
-    margin-top: 5px;
-  }
-  .blog-card .description .read-more {
-    /* 按鈕放右邊 */
-    text-align: right;
-  }
-  
-  .blog-card .description .read-more a {
-    color: #5ad67d;
-    display: inline-block;
-    position: relative;
-  }
-  
-  @media (min-width: 640px) {
-    .blog-card {
-      flex-direction: row;
-      max-width: 900px;
-    }
-    .blog-card .meta {
-      height: 500px;
-      width: 800px;
-    
-    }
-    .blog-card .description {
-      flex-basis: 100%;
-    }
-    .blog-card .description:before {
-      
-      background: #fff;
-      width: 30px;
-      position: absolute;
-      left: -10px;
-      top: 0;
-      bottom: 0;
-    }
-    
-  }
+.blog-card{
+	display: flex;
+	border-top:	white 1px solid;
+	border-left: white 1px solid;
+	border-radius:30px;
+	width:80%;
+	margin:30px auto;
+	padding:20px 30px 50px 20px;
+	box-shadow: 5px 5px 10px #D0D0D0;
+}
+
+.rightC{
+/* 	width:200px; */
+	padding:20px;	
+	
+}
+
+
+.floatR{
+	float:right;
+	padding:10px;
+}
+h1{
+	color:#218380;
+}
+h3{
+	color:#adb5bd;
+}
+p{
+	color:#252422;
+}
