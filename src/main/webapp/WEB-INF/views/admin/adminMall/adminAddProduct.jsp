@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Lecture</title>
+<title>Add SportMap</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall-common.css" type="text/css">
 
 <script type="text/javascript">
 	window.onload = function(){
@@ -40,9 +42,18 @@
 	
 
 </script>
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+
+</style>
+
 </head>
 <body>
-	<div class="app-container"">
+	<div class="app-container">
   <div class="sidebar">
     <div class="sidebar-header">
       <div class="app-icon">
@@ -111,7 +122,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item  active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
@@ -159,7 +170,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>分享</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
@@ -183,7 +194,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">產品管理</h1>
+      <h1 class="app-content-headerText" style="padding-top:50px;">Add Product</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -192,13 +203,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-      <button class="app-content-headerButton">新增產品</button>
+      <a href="<c:url value='#' />">
+      <button class="app-content-headerButton"></button></a>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
-      <input class="search-bar" placeholder="Search..." type="text">&nbsp;
-      <a href="<c:url value="#"></c:url>"><button class="app-content-headerButton">確定搜尋</button></a>&nbsp;
-  
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -238,150 +247,94 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
-<!--  --------------------------- ----表頭欄位--------------------------- -->
-      <div class="products-header">
-        <div class="product-cell image">
-          產品編號
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell category">Name<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell category">Category<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell price">Carloies<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell sales">Price<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell stock">Cost<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell price">UploadedDate<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell status-cell">Description<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell status-cell">Amount<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell status-cell">Image<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-     
-        
-<!--         <div class="product-cell price"> -->
-<!--           Update -->
-<!-- <!--           <button class="sort-button"> --> -->
-<!-- <!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> --> -->
-<!-- <!--           </button> --> -->
-<!--         </div> -->
-        
-<!--         <div class="product-cell price"> -->
-<!--           Delete -->
-<!--         </div> -->
-      </div>
-	<!--       ----------------------一筆資料內容--開始--------------------- -->
-     <c:forEach var='product' items="${product}">
-					<div class="products-row">
-						<button class="cell-more-button">
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-more-vertical">
-								<circle cx="12" cy="12" r="1" />
-								
-								<circle cx="12" cy="5" r="1" />
-								
-								<circle cx="12" cy="19" r="1" /></svg>
-						</button>
-					
-						<div class="product-cell category">
-							<span class="cell-label">Id:</span>${product.productId}
-						</div>
-						<div class="product-cell category">
-							<span class="cell-label">Name:</span>${product.productName}
-						</div>
-						<div class="product-cell category">
-							<span class="cell-label">Category:</span> ${product.category}
-						</div>
-						<div class="product-cell category">
-							<span class="cell-label">Calories</span> ${product.productCalories}
-						</div>
-						<div class="product-cell stock">
-							<span class="cell-label">Price:</span>${product.productPrice}
-						</div>
-						<div class="product-cell stock">
-							<span class="cell-label">Cost:</span>${product.productCost}
-						</div>
-						<div class="product-cell stock">
-							<span class="cell-label">Date:</span>${product.productDate}
-						</div>
+<!--  --------------------------- ----內容開始--------------------------- -->
 
-						<div class="product-cell stock">
-							<span class="cell-label">Description:</span>${product.productDescription}
-						</div>
-						<div class="product-cell stock">
-							<span class="cell-label">Amount:</span>${product.productAmount}
-						</div>
-					
-							<div class="product-cell image">
-							<span></span> <img
-								class="media-object"
-								src="' />"
-								alt='' />
-						</div>
-					
-						
-<%-- 						 <div class="product-cell price"><a	href="<c:url value='#' />"><button class="app-content-headerButton">Update</button></a></div> --%>
-                  
-<%--       					<div class="product-cell price"><a	class='deleteSportMap' href="<c:url value='#' />"><button class="app-content-headerButton">Delete</button></a></div> --%>
-        
-					</div>
-				</c:forEach>
-				<!--       一筆資料內容--結尾 -->
-
-			</div>
-		</div>
-	</div>
-	<!-- partial -->
-	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
-	<!-- 	---------------------用來接delete的post--------------------------	 -->
-	<form method='POST'>
-		<input type='hidden' name='_method' value='DELETE'>
-	</form>
-
-
-	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
-	<script>
-		//將 get 請求轉換為 post 請求提交
-		$(document).ready(function() {
-			$('#deletePost').click(function() {
-				if (confirm('確定刪除此筆紀錄? ')) {
-					var href = $(this).attr('href');
-					$('form').attr('action', href).submit();
-
-					console.log(href);
-				}
-				return false;
-
-			});
-		})
-	</script>
-	
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/mall-bootstrap.min.js" ></script>
+ <div class="container" style="max-width:600px;margin-left:40px;">
+  <br>
  
- <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
- <script src="js/mall-bootstrap3.js"></script>
+ <div class="well" >
+<%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
+ 
+ <form:form  modelAttribute='product' enctype="multipart/form-data" >
+ 
+<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
+<!-- 而且method屬性必須是 "post" -->
 
+
+ <div class="form-group">
+ <label>產品名稱 : </label>
+ <form:input  path="productName" type="text"/>
+ <form:errors path="productName" Class="form-control"/>
+ </div>
+ 
+ 
+ <div class="form-group">
+ <label>產品價格 : </label>
+ <form:input  path="productPrice" type="text"/>
+ <form:errors path="productPrice" Class="form-control"/>
+ </div>
+ 
+ <div class="form-group">
+ <label >產品熱量 : </label><form:input path='productCalories' type="text"/>
+  <form:errors path="productCalories" Class="form-control" />
+ </div>
+ 
+ <div class="form-group">
+ <label>產品庫存 : </label>
+ <form:input  path="productAmount" type="text"/>
+ <form:errors path="productAmount" Class="form-control"/>
+ </div>
+ 
+ <div class="form-group">
+ <label >產品分類 : </label>
+ <form:input path="category" type="text" />
+ <form:errors path="category" Class="form-control" />
+ </div>
+ 
+ <div class="form-group">
+ <label>產品成本 : </label>
+ <form:input  path="productCost" type="text"/>
+ <form:errors path="productCost" Class="form-control"/>
+ </div>
+ 
+ 
+ <div class="form-group">
+ <label >產品描述 : </label><form:textarea path='productDescription' cols="50" rows="5"/>
+  <form:errors path="productDescription" Class="form-control" />
+ </div>
+<!--  <div class="form-group"> -->
+<!--  <label>產品日期: </label> -->
+<%--  <form:input  path="productDate" type="date"/> --%>
+<%--  <form:errors path="productDate" Class="form-control"/> --%>
+ 
+<!--  </div> -->
+  
+
+ <div class="form-group">
+ <label >圖片上傳</label>
+ <form:input path='productMultiImg' type="file" />
+  <form:errors path="productMultiImg" Class="error" />
+ </div>
+ 
+ <p class="text-center">
+ <button type=submit class="btn btn-primary">submit</button>
+ <button type=reset class="btn btn-primary">reset</button>
+ </p>
+ 
+
+ </form:form>
+  </div>
+  </div>
+     
+<!-- --------------------------------一內容結尾---------------------------- -->
+	
+      
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script  src="${pageContext.request.contextPath}/js/admin.js"></script>
+  
+	
 </body>
 </html>

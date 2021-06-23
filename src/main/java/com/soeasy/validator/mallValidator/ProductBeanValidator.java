@@ -22,14 +22,15 @@ public class ProductBeanValidator implements Validator {
 		ProductBean product = (ProductBean) target;
 
 		// 欄位不得空白
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productName", "", "產品名字不得空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productDescription", "", "描述不得空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productPrice", "", "價格不得空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productAmount", "", "不得空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCost", "", "不得空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productName", "", "產品名字要記得填寫喔");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productDescription", "", "描述要記得填寫喔");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productPrice", "", "價格要記得填寫喔");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCalories", "", "熱量要記得填寫喔");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productAmount", "", "庫存要記得填寫喔");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCost", "", "成本要記得填寫喔");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productImg", "", "不得空白");
 		if (product.getProductMultiImg().isEmpty()) {
-			errors.rejectValue("productMultiImg", "", "必須挑選圖片");
+			errors.rejectValue("productMultiImg", "", "要記得上傳圖片喔");
 		}
 	}
 

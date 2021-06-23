@@ -24,7 +24,7 @@ public class GlobalService {
 	public static final Integer SHOP_STATUS_BANNED = 2;
 	
 	//商品
-	public static int RECORDS_PER_PAGE=2;
+	public static final Integer PRODUCT_PER_PAGE=10;
 
 
 	// 地圖
