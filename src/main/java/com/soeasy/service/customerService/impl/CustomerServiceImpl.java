@@ -72,4 +72,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
+	@Override
+	public List<CustomerBean> getAllCustomer() {
+		return customerRepository.findAll();
+	}
+
+	
 }

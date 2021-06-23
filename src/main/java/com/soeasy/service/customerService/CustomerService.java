@@ -1,5 +1,7 @@
 package com.soeasy.service.customerService;
 
+import java.util.List;
+
 import com.soeasy.model.CustomerBean;
 
 public interface CustomerService {
@@ -19,7 +21,8 @@ public interface CustomerService {
 	void updateCustomerStatus(CustomerBean customer, Integer customerStatus);
 	//會員積分花費&增加
 	void updateCustomerScore(CustomerBean customer, Integer score);
-	
+	//查詢所有會員
+	List<CustomerBean> getAllCustomer();
 	
 	
 }
