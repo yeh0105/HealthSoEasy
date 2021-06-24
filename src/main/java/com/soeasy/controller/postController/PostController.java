@@ -43,59 +43,59 @@ public class PostController {
 	@Autowired
 	ServletContext context;
 //
-//	@GetMapping(value = "/pagingPostData.json", produces = { "application/json; charset=UTF-8" })
-//	public @ResponseBody Map<String, Object> getPageBook(
-//			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-//			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
-//
-//		System.err.println("接收到/pagingPostData.json請求");
-//
-//		if (pageNo == null) {
-//			pageNo = 1; // 網址加?pageNo=測試
-//		}
-//
-//		if (totalPage == null) {
-//			totalPage = postService.getTotalPages();
-//		}
-//
-//		Map<String, Object> postmap = postService.getPagePosts(pageNo);
-//
-////		System.err.println("postmap=" + postmap);
-//
-//		postmap.put("currPage", String.valueOf(pageNo));
-//		postmap.put("totalPages", totalPage);
-//		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-//		postmap.put("post_DPP", postmap);
-//		System.err.println("newpostmap=" + postmap);
-//
-//		return postmap;
-//
-//	}
-
-	// 查詢全部文章
 	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
-	public String getAllPosts(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+	public @ResponseBody Map<String, Object> getPageBook(
+			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
 
-		System.err.println("接收到getAllPosts請求");
-		System.err.println("pageNo=" +pageNo);
+		System.err.println("接收到/pagingPostData.json請求");
 
 		if (pageNo == null) {
 			pageNo = 1; // 網址加?pageNo=測試
 		}
-		
-		System.err.println("getAll");
 
-		Map<Integer, PostBean> postMap = postService.getPagePosts(pageNo);
-		model.addAttribute("currPage", String.valueOf(pageNo));
-		model.addAttribute("totalPages", postService.getTotalPages());
+		if (totalPage == null) {
+			totalPage = postService.getTotalPages();
+		}
+
+		Map<String, Object> postmap = postService.getPagePosts(pageNo);
+
+//		System.err.println("postmap=" + postmap);
+
+		postmap.put("currPage", String.valueOf(pageNo));
+		postmap.put("totalPages", totalPage);
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		model.addAttribute("post_DPP", postMap);
+		postmap.put("post_DPP", postmap);
+		System.err.println("newpostmap=" + postmap);
 
-//		List<PostBean> postBean = postService.findAllByPostId();
-//		model.addAttribute("postList", postBean);
-		return "post/postByCategory";
+		return postmap;
+
 	}
+
+//	// 查詢全部文章
+//	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
+//	public String getAllPosts(Model model, HttpServletRequest request, HttpServletResponse response,
+//			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+//
+//		System.err.println("接收到getAllPosts請求");
+//		System.err.println("pageNo=" +pageNo);
+//
+//		if (pageNo == null) {
+//			pageNo = 1; // 網址加?pageNo=測試
+//		}
+//		
+//		System.err.println("getAll");
+//
+//		Map<Integer, PostBean> postMap = postService.getPagePosts(pageNo);
+//		model.addAttribute("currPage", String.valueOf(pageNo));
+//		model.addAttribute("totalPages", postService.getTotalPages());
+//		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+//		model.addAttribute("post_DPP", postMap);
+//
+////		List<PostBean> postBean = postService.findAllByPostId();
+////		model.addAttribute("postList", postBean);
+//		return "post/postByCategory";
+//	}
 
 	// 讀圖轉成位元組陣列
 	@RequestMapping(value = "/getPicture/{postId}", method = RequestMethod.GET)

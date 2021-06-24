@@ -31,9 +31,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.NutritionistBean;
 import com.soeasy.model.NutritionistCategoryBean;
+import com.soeasy.model.SportMapBean;
 import com.soeasy.service.nutritionistService.NutritionistCategoryService;
 import com.soeasy.service.nutritionistService.NutritionistService;
 import com.soeasy.validator.nutritionistValidator.NutritionistValidator;
+import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
 @RequestMapping("/admin/adminManage")
@@ -185,4 +187,29 @@ public class AdminNutritionists {
 		return "redirect:/admin/adminManage/adminNutritionist"; 
 	}
 	
+//	//帶出地圖修改前單一表單(後台用)
+//		@GetMapping(value="/adminSportMap/up/{sportMapId}")
+//		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+//		SportMapBean sportMapBean = sportMapService.get(sportMapId);			
+//		model.addAttribute("sportMapBean",sportMapBean);
+//		return "admin/adminSportMap/adminUpdateSportMap"; //帶出修改資料
+//			    
+//		}
+//		
+//		
+//		//修改運動地點，將送來修改過的資料用本方法檢核，若無誤則寫入資料庫(後台用)
+//		@PostMapping("/adminSportMap/up/{sportMapId}")
+//		public String modify(
+//		@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
+//		BindingResult result,Model model,@PathVariable Integer sportMapId,
+//		HttpServletRequest request) {
+//							
+//		//檢驗欄位內容(檢驗幾項欄位不能為空)
+//		SportMapBeanValidator validator = new SportMapBeanValidator();
+//		validator.validate(sportMapBean,result);
+//		if(result.hasErrors()) {
+//						
+//		return "admin/adminSportMap/adminUpdateSportMap";	
+//
+//		}
 }

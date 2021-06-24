@@ -22,6 +22,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Post")
@@ -38,7 +39,8 @@ public class PostBean implements Serializable {
 
 	@Column(length = 8000)
 	private String postContent;
-
+	
+	@JsonIgnore
 	private Blob postImg;
 
 	@Transient

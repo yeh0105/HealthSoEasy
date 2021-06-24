@@ -40,9 +40,16 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				
-				let customer = JSON.parse(xhr.responseText);
-				console.log(customer);
+				let customers = JSON.parse(xhr.responseText);
+				display();
 			}
+		}
+		
+		//印出資料
+		function display(){
+			(customers).forEach(customer => {
+				
+			})
 		}
 	}
 
