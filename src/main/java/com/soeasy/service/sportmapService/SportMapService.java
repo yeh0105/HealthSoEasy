@@ -36,10 +36,12 @@ public interface SportMapService {
 	// 抓分頁一頁有哪些地圖by SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
 	Map<Integer, SportMapBean> getPageSportMapsBySportCategoryId(SportCategoryBean SportCategoryBean,Integer pageNo);
 	
+	// 抓資料庫裡一個分類有幾個地圖
+	Long getRecordCountsBySportCategoryId(SportCategoryBean sportCategoryBean);
 	
 	
-	
-	
+	// 總共有幾頁
+	Integer getTotalPagesBySportCategoryId(SportCategoryBean sportCategoryBean);	
 	
 	
 	
