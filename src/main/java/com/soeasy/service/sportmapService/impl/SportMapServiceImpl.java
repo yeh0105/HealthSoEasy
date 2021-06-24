@@ -69,11 +69,13 @@ public class SportMapServiceImpl implements SportMapService {
 		return map;
 	}
 	
+	// 抓資料庫裡全部有幾個地圖
 	@Override
 	public Long getRecordCounts() {		
 		return sportMapRepository.count();
 	}
 
+	// 總共有幾頁
 	@Transactional
 	@Override
 	public Integer getTotalPages() {
@@ -117,9 +119,30 @@ public class SportMapServiceImpl implements SportMapService {
 		}
 		return map;
 	}
-
-
 	
+	// 抓資料庫一個分類裡有幾個地圖
+	@Override
+	public Long getRecordCountsBySportCategoryId(SportCategoryBean sportCategoryBean) {
+		System.out.println("第二關收到進來的sportCategoryBean="+sportCategoryBean);
+		return sportMapRepository.countBySportCategoryBean(sportCategoryBean);
+	}
+
+
+	// 一個分類總共有幾頁
+		@Transactional
+		@Override
+		public Integer getTotalPagesBySportCategoryId(SportCategoryBean sportCategoryBean) {
+			System.out.println("第一關進來的sportCategoryBean="+sportCategoryBean);
+			totalPages = (int) (Math.ceil(getRecordCountsBySportCategoryId(sportCategoryBean) / (double) recordsPerPage));
+			logger.info("totalPages=" + totalPages);
+			System.out.println("印出來的totalPages="+totalPages);
+			return totalPages;		
+
+		}
+
+		
+
+		
 
 	
 	

@@ -266,9 +266,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 				</tr>	
 				
 				<tr>
-				<td>
-					<input type='submit'>
-				</td>
+				<td><input type='submit' value='Submit'></td>
+				<td><input type="reset" value="Reset"></td>
 				<tr>
 
 			</table>

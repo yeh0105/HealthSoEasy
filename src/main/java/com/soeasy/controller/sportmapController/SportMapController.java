@@ -173,23 +173,34 @@ public class SportMapController {
 //		return sportMapsList;
 //	}
 	
-	//查詢所有運動地點by分類(前台)
+	//查詢所有運動地點by分類(前台)，給兩個參數(分類ID跟頁數，帶多個參數要用?參數=值&參數=值去串接)
 		@GetMapping("/displaySportMapsByCategoryId")
 		public String DisplaySportMapsBySportCategoryId(Model model, HttpServletRequest request, HttpServletResponse response,
-				@RequestParam(value = "pageNo", required = false) Integer pageNo,SportCategoryBean sportCategoryBean) {
-
+				@RequestParam(value = "sportCategoryBean", required = false)SportCategoryBean sportCategoryBean,
+				@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+//			System.out.println(sportCategoryBean);
 			if (pageNo == null) {
-				pageNo = 1;     //網址加?pageNo=測試
-				}
-
+				pageNo = 1;     //網址可加?pageNo=測試
+				}			
+		//把前一頁送來的分類存起來
+		SportCategoryBean getSportCategoryBean=(SportCategoryBean)model.getAttribute("sportCategoryBean");	
+		
+		if(sportCategoryBean==null) {
+			sportCategoryBean = getSportCategoryBean;
+		}
+		
 		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMapsBySportCategoryId(sportCategoryBean,pageNo);
+		//一個參數為
 		model.addAttribute("pageNo", String.valueOf(pageNo));
-		model.addAttribute("sportCategoryBean",String.valueOf(sportCategoryBean));
-		model.addAttribute("totalPages", sportMapService.getTotalPages());
-		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+		model.addAttribute("sportCategoryBean",sportCategoryBean);
+		//撈這個分類的總頁數
+		model.addAttribute("totalPages", sportMapService.getTotalPagesBySportCategoryId(sportCategoryBean));
+		
+		model.addAttribute("saveSportCategoryBean", sportCategoryBean);
+		// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
 		model.addAttribute("sportMaps_category", sportsMap);
-			
-		return "sportMap/getAllSportMapsByCategoryId";
+		
+		return "sportMap/getAllSportMapsByCategoryId"; 
 		}		
 	
 	

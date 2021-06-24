@@ -15,11 +15,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/sportMap_index.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/sportMap_index.css"
+	rel="stylesheet">
 
 <meta charset="UTF-8">
 <style>
-
 </style>
 
 <title>Sport Map</title>
@@ -48,37 +48,79 @@
 	<!-- ------------------------------內容開始區塊--------------------------------- -->
 
 	<div class="centerDiv">
-		<div>
+		<div class="btnBy1">
+			依分類：
 			<div>
-			<a href="#"><button>運動中心123</button></a> 
-			<a href="#"><button>市區場館</button></a> 
+				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font1">所有運動地點</button></a>
 			</div>
 			<div>
-			<a href="#"><button>游泳池</button></a>
-			<a href="#"><button>其他戶外</button></a>
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font1">運動中心</button></a>
 			</div>
 			<div>
-			<a href="#"><button>其他戶外場地</button></a>
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font1">市區場館</button></a>
+
 			</div>
+			<div>
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font1">游泳池</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">其他室內場地</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">其他戶外場地</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">其他1</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">其他2</button></a>
+			</div>
+			
+
 		</div>
 		<div>
 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
 				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
 				width="100%" height="100%"></a>
 		</div>
-		<div>
+		<div class="btnBy1">
+			依區域：
 			<div>
-			<a href="<c:url value='/sportMapController/displaySportMaps' />"><button
-					>所有運動地點</button></a> 
-			<a href="#"><button>運動中心</button></a>
+				<a href="#"><button class="font1">地區A</button></a>
+<!-- 				<a href="#"><button class="font1">地區B</button></a> -->
 			</div>
 			<div>
-			<a href="#"><button>市區場館</button></a> 
-			<a href="#"><button>游泳池</button></a> 
+				<a href="#"><button class="font1">地區C</button></a>
+				<a href="#"><button class="font1">地區D</button></a>
 			</div>
 			<div>
-			<a href="#"><button>其他戶外場地</button></a>
+				<a href="#"><button class="font1">地區E</button></a>
+				<a href="#"><button class="font1">地區F</button></a>
 			</div>
+			<div>
+				<a href="#"><button class="font1">地區G</button></a>
+				<a href="#"><button class="font1">地區H</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">地區 I</button></a>
+				<a href="#"><button class="font1">地區J</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">地區K</button></a>
+				<a href="#"><button class="font1">地區L</button></a>
+			</div>
+			<div>
+				<a href="#"><button class="font1">地區M</button></a>
+				<a href="#"><button class="font1">地區N</button></a>
+			</div>
+			<div>
+<!-- 				<a href="#"><button class="font1">地區O</button></a> -->
+				<a href="#"><button class="font1">地區P</button></a>
+			</div>
+			
 		</div>
 	</div>
 
@@ -91,7 +133,13 @@
 				width="90%" height="90%">
 		</div>
 		<div>
-			<span class="font1">運動地點說明文字運動地點說明文字運動地點說明文字運動地點說明文字</span>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
+					
 
 		</div>
 	</div>
@@ -100,14 +148,14 @@
 	<div class="centerDiv">
 		<div>
 
-			<div>熱門運動地點Top 3</div> 
+			<div>熱門運動地點Top 3</div>
 			<div id="showTop3">
-			<span style="border: 1px solid green; height: 400px; width: 300px"><a
-				href="#">Top 1</a></span> <span
-				style="border: 1px solid green; height: 400px; width: 300px"><a
-				href="#">Top 2</a></span> <span
-				style="border: 1px solid green; height: 400px; width: 300px"><a
-				href="#">Top 3</a></span>
+				<span style="border: 1px solid green; height: 400px; width: 300px"><a
+					href="#">Top 1</a></span> <span
+					style="border: 1px solid green; height: 400px; width: 300px"><a
+					href="#">Top 2</a></span> <span
+					style="border: 1px solid green; height: 400px; width: 300px"><a
+					href="#">Top 3</a></span>
 			</div>
 		</div>
 

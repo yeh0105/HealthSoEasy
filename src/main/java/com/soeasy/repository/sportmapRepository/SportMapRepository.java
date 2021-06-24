@@ -16,6 +16,8 @@ public interface SportMapRepository extends JpaRepository<SportMapBean, Integer>
 	// 抓分頁一頁有哪些地圖by SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
 	Page<SportMapBean> findBySportCategoryBean(SportCategoryBean SportCategoryBean,Pageable pageable);
 	
+	//抓一個分類裡有多少個地圖總數	
+	Long countBySportCategoryBean(SportCategoryBean sportCategoryBean);
 }
 	
 
