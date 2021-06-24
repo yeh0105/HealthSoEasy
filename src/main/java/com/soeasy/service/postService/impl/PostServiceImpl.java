@@ -1,5 +1,6 @@
 package com.soeasy.service.postService.impl;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,15 +92,43 @@ public class PostServiceImpl implements PostService {
 //		return postRepository.findTop10ByPostCategory(sort);
 //	}
 
+	@Override
+	public Map<String, Object> getPagePosts(int pageNo) {
+		System.err.println("進入service");
+		
+		Map<String, Object> map = new HashMap<>();
+		// PageRequest.of(pageNo, recordsPerPage): 第一個參數為 0-based
+		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
+		System.err.println("pageNo="+pageNo);
+		System.err.println("pageable="+pageable);
+		
+		Page<PostBean> beans = postRepository.findAll(pageable);
+		System.err.println("beans="+beans);
+
+		//PostBean的List
+		List<PostBean> list = beans.getContent();
+		System.err.println("list="+list);
+		
+		for (PostBean bean : list) {
+			map.put(bean.getPostId().toString(), bean);
+		}
+		
+//		System.err.println("map=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.err.println("map="+map);
+		
+		System.err.println("出去service");
+		return map;
+	}
+	
 //	@Override
-//	public Map<String, Object> getPagePosts(int pageNo) {
-//		System.err.println("進入service");
+//	public Map<Integer, PostBean> getPagePosts(int pageNo) {
+////		System.err.println("進入service");
 //		
-//		Map<String, Object> map = new LinkedHashMap<>();
+//		Map<Integer, PostBean> map = new LinkedHashMap<>();
 //		// PageRequest.of(pageNo, recordsPerPage): 第一個參數為 0-based
 //		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
-//		System.err.println("pageNo="+pageNo);
-//		System.err.println("pageable="+pageable);
+////		System.err.println("pageNo="+pageNo);
+////		System.err.println("pageable="+pageable);
 //		
 //		Page<PostBean> beans = postRepository.findAll(pageable);
 ////		System.err.println("beans="+beans);
@@ -109,43 +138,15 @@ public class PostServiceImpl implements PostService {
 ////		System.err.println("list="+list);
 //		
 //		for (PostBean bean : list) {
-//			map.put(bean.getPostId().toString(), bean);
+//			map.put(bean.getPostId(), bean);
 //		}
 //		
 ////		System.err.println("map=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//		System.err.println("map="+map);
+////		System.err.println("map="+map);
 //		
-//		System.err.println("出去service");
+////		System.err.println("出去service");
 //		return map;
 //	}
-	
-	@Override
-	public Map<Integer, PostBean> getPagePosts(int pageNo) {
-//		System.err.println("進入service");
-		
-		Map<Integer, PostBean> map = new LinkedHashMap<>();
-		// PageRequest.of(pageNo, recordsPerPage): 第一個參數為 0-based
-		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
-//		System.err.println("pageNo="+pageNo);
-//		System.err.println("pageable="+pageable);
-		
-		Page<PostBean> beans = postRepository.findAll(pageable);
-//		System.err.println("beans="+beans);
-
-		//PostBean的List
-		List<PostBean> list = beans.getContent();
-//		System.err.println("list="+list);
-		
-		for (PostBean bean : list) {
-			map.put(bean.getPostId(), bean);
-		}
-		
-//		System.err.println("map=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//		System.err.println("map="+map);
-		
-//		System.err.println("出去service");
-		return map;
-	}
 
 	@Override
 	public Long getRecordCounts() {

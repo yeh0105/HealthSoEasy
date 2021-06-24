@@ -130,6 +130,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer postId;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<PostBean> postBeans = new LinkedHashSet<PostBean>();
 	
