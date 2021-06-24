@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Reply")
@@ -50,6 +51,7 @@ public class ReplyBean implements Serializable {
 	@Column(name = "fk_postId")
 	private Integer postId;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_postId")
 	private PostBean postBean;

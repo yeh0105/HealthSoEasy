@@ -35,7 +35,7 @@ public interface PostService {
 	void deleteByPostId(Integer postId);
 
 	// 抓分頁一頁有哪些地圖
-	Map<Integer, PostBean> getPagePosts(int pageNo);
+	Map<String, Object> getPagePosts(int pageNo);
 
 	// 抓資料庫裡全部有幾個地圖
 	Long getRecordCounts();

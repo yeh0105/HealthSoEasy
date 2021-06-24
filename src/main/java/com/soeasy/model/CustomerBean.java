@@ -26,6 +26,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Customer")
@@ -128,6 +129,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer postId;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<PostBean> postBeans = new LinkedHashSet<PostBean>();
 	
