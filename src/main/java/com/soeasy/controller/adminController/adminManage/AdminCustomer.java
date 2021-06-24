@@ -34,6 +34,8 @@ public class AdminCustomer {
 			System.out.println(customerBean.getCustomerId());
 		}
 		
-		return null;
+		
+		
+		return customerBeans;
 	}
 }

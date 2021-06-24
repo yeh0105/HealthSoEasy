@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "CustomerHealth")
 public class CustomerHealthBean implements Serializable {
@@ -31,6 +33,7 @@ public class CustomerHealthBean implements Serializable {
 	//-------------------------------------------
 	//會員
 	@OneToOne(mappedBy = "customerHealthBean")
+	@JsonIgnore
 	private CustomerBean customerBean;
 	
 	
