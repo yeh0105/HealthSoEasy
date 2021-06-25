@@ -23,6 +23,14 @@ public interface CustomerService {
 	void updateCustomerScore(CustomerBean customer, Integer score);
 	//查詢所有會員
 	List<CustomerBean> getAllCustomer();
-	
-	
+	//以狀態查詢會員
+	List<CustomerBean> getCustomerByStastus(Integer customerStatus);
+	//以性別查詢會員
+	List<CustomerBean> getCustomerByGender(Integer customerGender);
+	//以葷素查詢會員
+	List<CustomerBean> getCustomerByDiet(Integer customerDiet);
+	//以運動強度查詢會員
+	List<CustomerBean> getCustomerByExercise(Integer customerExerciseHabits);
+	//以狀態與性別查詢會員
+	List<CustomerBean> getCustomerByStatusAndGender(Integer customerStatus, Integer customerGender);
 }
