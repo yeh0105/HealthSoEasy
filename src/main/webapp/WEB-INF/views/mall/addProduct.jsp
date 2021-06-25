@@ -40,7 +40,7 @@
  </div>
  
  <div class="form-group">
- <label >產品描述 : </label><form:input path='productDescription' type="text"/>
+ <label >產品描述 : </label><form:textarea path='productDescription' type="text"  cols="60" rows="10"/>
   <form:errors path="productDescription" Class="form-control" />
  </div>
  
@@ -63,7 +63,15 @@
  
  <div class="form-group">
  <label >產品分類 : </label>
- <form:input path="category" type="text" />
+ <form:select path="category" type="text">
+ <option value=1>海鮮餐盒</option>
+ <option value=2>雞肉餐盒</option>
+ <option value=3>豬肉餐盒</option>
+ <option value=4>牛肉餐盒</option>
+ <option value=5>素食餐盒</option>
+ 
+ </form:select>
+ 
  <form:errors path="category" Class="form-control" />
  </div>
  

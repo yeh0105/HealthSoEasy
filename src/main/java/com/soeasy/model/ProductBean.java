@@ -41,7 +41,10 @@ public class ProductBean  implements Serializable{
 	
 	private Integer productCalories;
 	
-	private String category;
+	private Integer category;
+	
+	private String productCategory;
+
 
 	private Blob productImg;
 	
@@ -154,13 +157,26 @@ public class ProductBean  implements Serializable{
 		this.shopBean = shopBean;
 	}
 
-	public String getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+
+	
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
+
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	
+	
 	
 	
 }

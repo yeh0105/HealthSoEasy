@@ -31,7 +31,18 @@
 
 <p><strong>產品ID:</strong><c:out value=" ${product.productId}"/></p>
 <p><strong>產品名稱:</strong><c:out value="${product.productName}"/></p>
-<p><strong>產品分類:</strong><c:out value="${product.category}"/></p>
+<p><strong>產品分類:</strong>
+<c:choose>
+<c:when test="${product.category==1}"><span>海鮮餐盒</span></c:when>
+<c:when test="${product.category==2}"><span>雞肉餐盒</span></c:when>
+<c:when test="${product.category==3}"><span>豬肉餐盒</span></c:when>
+<c:when test="${product.category==4}"><span>牛肉餐盒</span></c:when>
+<c:when test="${product.category==5}" ><span>素食餐盒</span></c:when>
+<c:otherwise> <span>未挑選</span></c:otherwise>
+</c:choose>
+
+<%-- <c:out value="${product.category}"/></p> --%>
+
 <p><strong>產品描述:</strong><c:out value="${product.productDescription}"/></p>
 <p><strong>產品標示:</strong><c:out value="${product.productCalories}"/></p>
 <p><strong>產品庫存:</strong><c:out value="${product.productAmount}"/></p>
