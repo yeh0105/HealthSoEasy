@@ -19,7 +19,8 @@ span.error {
 </head>
 <body>
 	<div>
-		<a href="<c:url value="/PostNeedLoginController/getPost/${postId}"></c:url>">回上一頁</a>
+		<a
+			href="<c:url value="/PostNeedLoginController/getPost/${postId}"></c:url>">回上一頁</a>
 	</div>
 	<br>
 	<div style="padding: 3% 5%; margin-top: -3%;">
@@ -43,12 +44,11 @@ span.error {
 							</form:select> <form:errors path="postCategoryBean" cssClass="error" /></td>
 
 					</tr>
-					<tr>
+					<tr style="display:none;">
 						<td>文章狀態：</td>
 						<td width='600'>
-<%-- 						 <form:radiobutton path="postStatus" value="1" /> 正常 --%>
-						 <form:radiobutton path="postStatus" value="2" />刪除文章
-						</td>
+						<form:radiobutton path="postStatus" value="1" />正常 
+						<form:radiobutton path="postStatus" value="2" />刪除文章</td>
 					</tr>
 					<tr>
 						<td>文章圖片：</td>
@@ -71,5 +71,4 @@ span.error {
 	<!-- partial -->
 	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </body>
-</ht
-							ml>
+</html>

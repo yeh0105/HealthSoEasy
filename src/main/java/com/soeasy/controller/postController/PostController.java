@@ -6,23 +6,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.PostBean;
@@ -44,11 +42,11 @@ public class PostController {
 	ServletContext context;
 //
 	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody Map<String, Object> getPageBook(
+	public ResponseEntity<Map<String, Object>> getPageBook(
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
 
-		System.err.println("接收到/pagingPostData.json請求");
+//		System.err.println("接收到/pagingPostData.json請求");
 
 		if (pageNo == null) {
 			pageNo = 1; // 網址加?pageNo=測試
@@ -58,22 +56,25 @@ public class PostController {
 			totalPage = postService.getTotalPages();
 		}
 
-		Map<String, Object> postmap = postService.getPagePosts(pageNo);
+		Map<String, Object> postmap =  new HashMap<>();
+				
 
 //		System.err.println("postmap=" + postmap);
 
 		postmap.put("currPage", String.valueOf(pageNo));
 		postmap.put("totalPages", totalPage);
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		postmap.put("post_DPP", postmap);
-		System.err.println("newpostmap=" + postmap);
+		postmap.put("post_DPP", postService.getPagePosts(pageNo));
+//		System.err.println("newpostmap=" + postmap);
+		
+		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);
 
-		return postmap;
+		return re;
 
 	}
 
 //	// 查詢全部文章
-//	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
+//	@GetMapping(value = "/getAllPost.json")
 //	public String getAllPosts(Model model, HttpServletRequest request, HttpServletResponse response,
 //			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
 //

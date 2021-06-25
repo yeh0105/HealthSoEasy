@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -143,6 +144,7 @@ public class PostNeedLoginController {
 
 		// 跳轉至查詢所有文章頁面(送getAllPosts請求)
 		return "redirect:/PostController/getAllPost.json";
+//		return "redirect:/PostController/getAllPost";
 	}
 
 	// 將單筆文章的狀態更改為2(禁止)
@@ -272,6 +274,10 @@ public class PostNeedLoginController {
 		// 文章創建時間
 		Timestamp registerTime = new Timestamp(System.currentTimeMillis());
 		postBean.setPostUploadTime(registerTime);
+		
+		// 文章創建時間
+		Date registerDate = new Date(System.currentTimeMillis());
+		postBean.setPostUploadDate(registerDate);
 
 		// 文章狀態:正常
 		postBean.setPostStatus(GlobalService.POST_STATUS_NORMAL);

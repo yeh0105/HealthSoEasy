@@ -36,6 +36,7 @@ public interface PostService {
 
 	// 抓分頁一頁有哪些地圖
 	Map<String, Object> getPagePosts(int pageNo);
+//	Map<Integer, PostBean> getPagePosts(int pageNo);
 
 	// 抓資料庫裡全部有幾個地圖
 	Long getRecordCounts();

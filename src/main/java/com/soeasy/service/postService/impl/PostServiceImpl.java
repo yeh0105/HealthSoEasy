@@ -1,6 +1,5 @@
 package com.soeasy.service.postService.impl;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,29 +94,34 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Map<String, Object> getPagePosts(int pageNo) {
-		System.err.println("進入service");
+//		System.err.println("進入service");
 		
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new LinkedHashMap<>();
+		// 排序
+		Sort sort = Sort.by(Sort.Order.desc("postUploadDate"),Sort.Order.desc("postLike"));
+		
 		// PageRequest.of(pageNo, recordsPerPage): 第一個參數為 0-based
-		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
-		System.err.println("pageNo="+pageNo);
-		System.err.println("pageable="+pageable);
+		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage,sort);
+		
+//		System.err.println("pageNo="+pageNo);
+//		System.err.println("pageable="+pageable);
 		
 		Page<PostBean> beans = postRepository.findAll(pageable);
-		System.err.println("beans="+beans);
+//		System.err.println("beans="+beans);
 
 		//PostBean的List
 		List<PostBean> list = beans.getContent();
-		System.err.println("list="+list);
+//		System.err.println("list="+list);
 		
 		for (PostBean bean : list) {
+			System.out.println("bean.getPostId().toString()=="+bean.getPostId().toString());
 			map.put(bean.getPostId().toString(), bean);
 		}
 		
 //		System.err.println("map=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.err.println("map="+map);
-		
-		System.err.println("出去service");
+//		System.err.println("map="+map);
+//		
+//		System.err.println("出去service");
 		return map;
 	}
 	

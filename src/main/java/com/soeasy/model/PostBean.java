@@ -2,6 +2,7 @@ package com.soeasy.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -48,6 +49,9 @@ public class PostBean implements Serializable {
 
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
 	private Timestamp postUploadTime;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private Date postUploadDate;
 
 	private Integer postLike;
 
@@ -135,6 +139,14 @@ public class PostBean implements Serializable {
 	public void setPostUploadTime(Timestamp postUploadTime) {
 		this.postUploadTime = postUploadTime;
 	}
+	
+	public Date getPostUploadDate() {
+		return postUploadDate;
+	}
+
+	public void setPostUploadDate(Date postUploadDate) {
+		this.postUploadDate = postUploadDate;
+	}
 
 	public Integer getPostLike() {
 		return postLike;
@@ -196,11 +208,12 @@ public class PostBean implements Serializable {
 	public String toString() {
 		return "PostBean [postId=" + postId + ", postTitle=" + postTitle + ", postCategory=" + postCategory
 				+ ", postContent=" + postContent + ", postImg=" + postImg + ", postMultiImg=" + postMultiImg
-				+ ", postUploadTime=" + postUploadTime + ", postLike=" + postLike + ", postStatus=" + postStatus
-				+ ", customerId=" + customerId + ", customerBean=" + customerBean + ", replyBeans=" + replyBeans
-				+ ", postCategoryId=" + postCategoryId + ", PostCategoryBean=" + PostCategoryBean + "]";
+				+ ", postUploadTime=" + postUploadTime + ", postUploadDate=" + postUploadDate + ", postLike=" + postLike
+				+ ", postStatus=" + postStatus + ", customerId=" + customerId + ", customerBean=" + customerBean
+				+ ", replyBeans=" + replyBeans + ", postCategoryId=" + postCategoryId + ", PostCategoryBean="
+				+ PostCategoryBean + "]";
 	}
-	
-	
 
+
+	
 }
