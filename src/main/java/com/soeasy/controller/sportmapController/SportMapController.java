@@ -1,19 +1,16 @@
 package com.soeasy.controller.sportmapController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -129,7 +126,6 @@ public class SportMapController {
 		}catch (org.hibernate.exception.ConstraintViolationException e) {
 			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "sportMap/addSportMap";	 
-
 			
 		}
 		//跳轉至查詢所有運動地點頁面(送displaySportMaps請求)
@@ -142,9 +138,7 @@ public class SportMapController {
 	public void commonCategory(Model model) {
 		List<SportCategoryBean> sportCategoryBeanList = sportCategoryService.getAllSportCategorys();
 		model.addAttribute("sportCategoryBeanList", sportCategoryBeanList);
-	}		
-		
-	
+	}			
 	
 	//刪除單筆運動地點(未用到，寫在後台)
 	@PostMapping("/del/{sportMapId}")
@@ -154,8 +148,7 @@ public class SportMapController {
 		
 		//跳轉至查詢所有運動地點頁面(送displaySportMaps請求)
 		return "redirect:/sportMapController/displaySportMaps";
-	}
-	
+	}	
 
 	//查詢所有運動類別Ajax，搭配查詢所有運動地點Ajax(依分類拉出地點，未寫完)
 	@GetMapping(value="/allSportCategory.json",produces= {"application/json; charset=UTF-8" })
@@ -203,7 +196,21 @@ public class SportMapController {
 		return "sportMap/getAllSportMapsByCategoryId"; 
 		}		
 	
-	
+
+		//查詢所有地圖裡的前3筆，依照地圖分數降冪排序(Ajax)
+		@GetMapping(value="/allSportMapsByTopNo.json",produces= {"application/json; charset=UTF-8" })
+		public @ResponseBody List<SportMapBean>findFirst3BySportMapScore(){
+			System.out.println("get it!");
+			Sort sort=null;
+			
+			//給特定分數撈出特定分數的前三筆
+//			List<SportMapBean> sportMapsTopNo = sportMapService.findTop3BySportMapScore(5,sort);
+			//給特定分數撈出特定分數的前三筆
+//			List<SportMapBean> sportMapsTopNo = sportMapService.findFirst3BySportMapScore(5,sort);
+
+			List<SportMapBean> sportMapsTopNo = sportMapService.findTop3ByOrderBySportMapScoreDesc();
+			return sportMapsTopNo;
+		}
 	
 	
 	
