@@ -1,5 +1,6 @@
 package com.soeasy.service.customerService.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.CustomerHealthBean;
+import com.soeasy.repository.customerRepository.CustomerHealthRepository;
 import com.soeasy.repository.customerRepository.CustomerRepository;
 import com.soeasy.service.customerService.CustomerService;
 
@@ -16,6 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
+	
+	@Autowired
+	CustomerHealthRepository customerHealthRepository;
 
 	public CustomerServiceImpl() {
 	}
@@ -74,6 +80,39 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerBean> getAllCustomer() {
 		return customerRepository.findAll();
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByStastus(Integer customerStatus) {
+		return customerRepository.findByCustomerStatus(customerStatus);
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByGender(Integer customerGender) {
+		List<CustomerHealthBean> customerHealthBeans =  customerHealthRepository.findByCustomerGender(customerGender);
+		List<CustomerBean> customers = new ArrayList<CustomerBean>();
+		for (CustomerHealthBean customerHealthBean : customerHealthBeans) {
+			customers.add(customerHealthBean.getCustomerBean());
+		}
+		return customers;
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByDiet(Integer customerDiet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByExercise(Integer customerExerciseHabits) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByStatusAndGender(Integer customerStatus, Integer customerGender) {
+//		return customerRepository.findByCustomerStatusAndCustomerGender(customerStatus, customerGender);
+		return null;
 	}
 
 	

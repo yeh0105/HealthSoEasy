@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ProcessBuilder.Redirect;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,10 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soeasy.model.ProductBean;
-import com.soeasy.model.SportMapBean;
 import com.soeasy.service.mallService.ProductService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
@@ -59,46 +54,35 @@ public class MallProductController {
 	    }
 	
 
-	@GetMapping("/lists")
-	 public String getAll(Model model) {
-	    		model.addAttribute("product", productService.findAll());
-	        	System.out.println("印出來all products");
-	            return "mall/productlists";
-	       
-	    }
-	
 //	@GetMapping("/lists")
-//	 public String getAll(Model model, HttpServletRequest request, HttpServletResponse response,
-//			 @RequestParam(value = "pageNo", required = false)Integer pageNo ){
-//		
-//		Map<Integer,ProductBean> productBean = productService.getPageProduct(pageNo);
-//		model.addAttribute("pageNo", String.valueOf(pageNo));
-//		model.addAttribute("totalPages", productService.getTotalPages());
-//		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-//		model.addAttribute("product", productService.findAll());
-////    	System.out.println("印出來all products");
-//
+//	 public String getAll(Model model) {
+//	    		model.addAttribute("product", productService.findAll());
+//	        	System.out.println("印出來all products");
 //	            return "mall/productlists";
 //	       
 //	    }
+
 	
-	
-//	@GetMapping("/page/{pageNo}")
-//	public String viewPage(Model model,
-//	        @PathVariable(name = "pageNo") Integer pageNo) {
-//	     
-//	    Page<ProductBean> page = productService.findAllByPage(pageNo);
-//	    List<ProductBean> listProducts = page.getContent();
-//	     
-//	    model.addAttribute("currentPage", pageNo);
-//	    model.addAttribute("totalPages", page.getTotalPages());
-//	    model.addAttribute("totalItems", page.getTotalElements());
-//	    model.addAttribute("listProducts", listProducts);
-//	     
-//	    return "redirect:/mall/lists";
-//	}
-//	
-	
+	@GetMapping("/lists")
+	public String viewPage(Model model,HttpServletRequest request, HttpServletResponse response,
+	        @RequestParam(value = "pageNo", required = false) Integer pageNo){
+		//如果沒有參數則自動視為1
+		if (pageNo == null) {
+			pageNo = 1;     
+			}		
+	    Page<ProductBean> page = productService.findAllByPage(pageNo);
+	    List<ProductBean> list = page.getContent();
+	    
+	    System.out.println("印出來all products");
+	    //分頁參數
+	    model.addAttribute("currentPage", pageNo);
+	    model.addAttribute("totalPages", page.getTotalPages());
+	    model.addAttribute("totalItems", page.getTotalElements());
+	   //羅列產品
+	    model.addAttribute("product", list);
+	     
+	    return "mall/productlists";
+	}
 	
 	
 	
@@ -120,7 +104,7 @@ public class MallProductController {
 		ProductBean product = new ProductBean();
 		product.setProductName("麥當勞歡樂全家餐");
 		product.setProductDescription("快樂肥宅餐");
-		product.setCategory("速食");
+		product.setCategory(5);
 		product.setProductAmount(100);
 		product.setProductCalories(500);
 		product.setProductPrice(210);

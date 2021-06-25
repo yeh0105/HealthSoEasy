@@ -7,11 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.util.GlobalService;
 
 @Controller
 @RequestMapping("/admin/adminManage")
@@ -33,9 +35,57 @@ public class AdminCustomer {
 		for (CustomerBean customerBean : customerBeans) {
 			System.out.println(customerBean.getCustomerId());
 		}
+		return customerBeans;
+	}
+	
+	
+	
+	//以過濾取得會員(ajax)
+	@GetMapping(value = "/adminCustomer/getCustomerByStatus.json/{customerCategory}/conf/{customerStatus}", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<CustomerBean> getCustomerByFilterStatus(@PathVariable("customerCategory") String customerCategory, @PathVariable("customerStatus") String customerStatus){
+		List<CustomerBean> customerBeans = null;
+//		if(customerCategory.equals("all") && customerStatus.equals("all")) {
+//			customerBeans = customerService.getAllCustomer();
+//		}else if(customerCategory.equals("all") && customerStatus.equals("active")) {
+//			customerBeans = customerService.getCustomerByStastus(GlobalService.CUSTOMER_STATUS_NORMAL);				
+//		}else if (customerCategory.equals("all") && customerStatus.equals("disabled")) {
+//			customerBeans = customerService.getCustomerByStastus(GlobalService.CUSTOMER_STATUS_BANNED);
+//		}
 		
-		
-		
+		if(customerCategory.equals("all")) {
+			if(customerStatus.equals("all")) {
+				customerBeans = customerService.getAllCustomer();
+			}else if(customerStatus.equals("active")) {
+				customerBeans = customerService.getCustomerByStastus(GlobalService.CUSTOMER_STATUS_NORMAL);
+			}else if(customerStatus.equals("disabled")) {
+				customerBeans = customerService.getCustomerByStastus(GlobalService.CUSTOMER_STATUS_BANNED);
+			}
+		}else if(customerCategory.equals("male")) {
+			if(customerStatus.equals("all")) {
+				customerBeans = customerService.getCustomerByGender(GlobalService.CUSTOMER_GENDER_MALE);
+			}else if(customerStatus.equals("active")) {
+				customerBeans = customerService.getCustomerByStatusAndGender(GlobalService.CUSTOMER_STATUS_NORMAL, GlobalService.CUSTOMER_GENDER_MALE);
+			}else if(customerStatus.equals("disabled")) {
+				customerBeans = customerService.getCustomerByStatusAndGender(GlobalService.CUSTOMER_STATUS_BANNED, GlobalService.CUSTOMER_GENDER_MALE);
+			}
+			
+		}else if(customerCategory.equals("female")) {
+			customerBeans = customerService.getCustomerByGender(GlobalService.CUSTOMER_GENDER_FEMALE);	
+		}else if(customerCategory.equals("meat")) {
+			customerBeans = customerService.getCustomerByDiet(GlobalService.CUSTOMER_DIET_MEAT);
+		}else if(customerCategory.equals("vegetable")) {
+			customerBeans = customerService.getCustomerByDiet(GlobalService.CUSTOMER_DIET_VAGETABLE);
+		}else if(customerCategory.equals("strong")) {
+			customerBeans = customerService.getCustomerByExercise(GlobalService.CUSTOMER_EXERCISE_STRONG);
+		}else if(customerCategory.equals("normal")) {
+			customerBeans = customerService.getCustomerByExercise(GlobalService.CUSTOMER_EXERCISE_NORMAL);
+		}else if(customerCategory.equals("weak")) {
+			customerBeans = customerService.getCustomerByExercise(GlobalService.CUSTOMER_EXERCISE_WEAK);
+		}
+				
+		for (CustomerBean customerBean : customerBeans) {
+			System.out.println(customerBean.getCustomerId());
+		}
 		return customerBeans;
 	}
 }

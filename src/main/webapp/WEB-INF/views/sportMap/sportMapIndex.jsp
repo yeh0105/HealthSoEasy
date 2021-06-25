@@ -2,10 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Sport Map</title>
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">
@@ -17,12 +20,68 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/sportMap_index.css"
 	rel="stylesheet">
+	
+<link href="${pageContext.request.contextPath}/css/sportMap_getAll.css"
+	rel="stylesheet">	
 
-<meta charset="UTF-8">
-<style>
-</style>
 
-<title>Sport Map</title>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+	let showTop = document.getElementById("showTopMaps")
+	let topMaps;
+	//新建XMLHttpRequest物件
+	let xhr = new XMLHttpRequest();
+	//設定連線內容
+	xhr.open('GET',"<c:url value='/sportMapController/allSportMapsByTopNo.json' />",true);//true==>用非同步送出
+	//對伺服器發送請求
+	xhr.send();
+	
+	//進頁面顯示第一頁
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status ==200){
+		topMaps = JSON.parse(xhr.responseText);
+		console.log(topMaps);
+		console.log("123");
+		displayTopMaps();				
+			
+		}
+		
+	}
+		
+		
+	function displayTopMaps(){
+		
+		let content = "<div class='container'>";
+		
+		(topMaps).forEach(topMap =>{
+		
+		content += "<div class='column'>"+
+	    "<div class='demo-title'>"+"</div>"
+        +"<div class='post-module'>"+"<div class='thumbnail'>"+"<div class='date'>"
+        +"<div class='day'>"+"Hot"+"</div>"+"<div class='month'>"+""+"</div>"                                                    
+        +"</div>"+topMap.sportMapMap+"</div>"+"<div class='post-content'>"
+        +"<div class='category'>"+"累積"+topMap.sportMapScore+"分！</div>"
+        +"<h3 class='sub_title'>"+"運動地點："+topMap.sportMapName+"</h3>"
+        +"<h3 class='description'>"+"地址："+topMap.sportMapAddress+"</h3>"
+        +"<div class='post-meta'>"+"<span class='timestamp'>"+"<i class='fa fa-clock-o'>"+"</i>"
+        +topMap.sportCategoryBean.sportCategoryName+"</span>"
+        +"<span class='comments'>"+"<i class='fa fa-comments'>"+"</i>"
+		+"<a href=' " + "<c:url value='/sportMapController/sportMap/' />" + topMap.sportMapId  +  " '>詳細資訊</a>"        
+        
+        +"</span>"+"</div>"+"</div>"+"</div>"+"</div>"
+		
+		});   
+		content+= "</div>"
+		showTop.innerHTML=content;		
+		
+	}	
+	
+}
+)
+
+</script>
+
 
 </head>
 <body>
@@ -45,7 +104,7 @@
 
 		</section>
 	</div>
-	<!-- ------------------------------內容開始區塊--------------------------------- -->
+	<!-- ------------------------------內容1開始區塊--------------------------------- -->
 
 	<div class="centerDiv">
 		<div class="btnBy1">
@@ -77,8 +136,7 @@
 			</div>
 			<div>
 				<a href="#"><button class="font1">其他2</button></a>
-			</div>
-			
+			</div>			
 
 		</div>
 		<div>
@@ -119,11 +177,23 @@
 			<div>
 <!-- 				<a href="#"><button class="font1">地區O</button></a> -->
 				<a href="#"><button class="font1">地區P</button></a>
-			</div>
-			
+			</div>			
 		</div>
 	</div>
+	<!-- ------------------------------內容1結束區塊--------------------------------- -->
+	<!-- ------------------------------內容2開始區塊--------------------------------- -->	
+	<div class="centerDiv">
+		<div>
 
+			<h4>熱門運動地點Top 3</h4><br>
+			<div id="showTopMaps" >
+				
+			</div>
+		</div>
+
+	</div>
+	<!-- ------------------------------內容2結束區塊--------------------------------- -->	
+	<!-- ------------------------------內容3開始區塊--------------------------------- -->	
 	<div class="centerDiv">
 
 		<div>
@@ -138,32 +208,13 @@
 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-					
+			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>				
 
 		</div>
-	</div>
+	</div>	
+	
 
-
-	<div class="centerDiv">
-		<div>
-
-			<div>熱門運動地點Top 3</div>
-			<div id="showTop3">
-				<span style="border: 1px solid green; height: 400px; width: 300px"><a
-					href="#">Top 1</a></span> <span
-					style="border: 1px solid green; height: 400px; width: 300px"><a
-					href="#">Top 2</a></span> <span
-					style="border: 1px solid green; height: 400px; width: 300px"><a
-					href="#">Top 3</a></span>
-			</div>
-		</div>
-
-	</div>
-
-
-
-	<!-- ------------------------------內容結束區塊--------------------------------- -->
+	<!-- ------------------------------內容3結束區塊--------------------------------- -->	
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
 

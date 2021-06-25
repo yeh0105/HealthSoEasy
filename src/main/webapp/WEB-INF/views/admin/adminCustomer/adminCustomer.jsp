@@ -33,23 +33,203 @@
 		}
 		
 // 		----------------------------------------------------------------------------------------------
-		//取得所有顧客會員
+		//初始化
 		let xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/admin/adminManage/adminCustomer/getAllCustomer.json'/>", true);
+		let customers = null;
+		let tableView = document.getElementById("tableView");
+		let customerCategory = document.getElementById("customerCategory");
+		let customerStatus = document.getElementById("customerStatus");
+		let basicInfobtn = document.getElementById("basicInfobtn");
+		let healthInfobtn = document.getElementById("healthInfobtn");
+		let applybtn = document.getElementById("applybtn");
+		let resetbtn = document.getElementById("resetbtn");
+		
+		//載入時 取得所有顧客會員
+		xhr.open("GET", "<c:url value='/admin/adminManage/adminCustomer/getAllCustomer.json' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				
-				let customers = JSON.parse(xhr.responseText);
-				display();
+				customers = JSON.parse(xhr.responseText);
+				displayCustomers();
 			}
 		}
 		
-		//印出資料
-		function display(){
+		//顯示基本資料鈕
+		basicInfobtn.addEventListener("click", displayCustomers);
+		//顯示健康資料鈕
+		healthInfobtn.addEventListener("click", displayCustomerHealth);
+		//套用過濾器
+		applybtn.addEventListener("click", getCustomerByFilter);
+		//重製過濾器
+		resetbtn.addEventListener("click", resetFilter);
+		
+		//以過濾器取得會員
+		function getCustomerByFilter(){
+			xhr.open("GET", "<c:url value='/admin/adminManage/adminCustomer/getCustomerByStatus.json/' />" + customerCategory.value + "/conf/" + customerStatus.value, true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					
+					customers = JSON.parse(xhr.responseText);
+					displayCustomers();
+					document.querySelector(".filter-menu").classList.toggle("active");
+				}
+			}
+		}
+		
+		//重製過濾器並取得會員
+		function resetFilter(){
+			customerCategory.value = "all";
+			customerStatus.value = "all";
+			
+			getCustomerByFilter();
+		}
+		
+		//印出顧客會員基本資料
+		function displayCustomers(){
+			//表頭欄位
+			let title = 
+				'<div class="products-header">'
+		    +   	'<div class="product-cell image">'
+	        +   	'Name'
+	        +   	'<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +   	'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell category">ID<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell status-cell">Status<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell sales">Email<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell price">Phone<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell stock">Nickname<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell price">Score<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell price">RigisterTime<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell price">Update</div>'
+	        +	'</div>';
+	        
+	        //內容
+	        let content = "";
+	        let status = "";
 			(customers).forEach(customer => {
 				
+				if(customer.customerStatus == 1){
+					status = '<span class="status active">Active</span>';
+				} else if(customer.customerStatus == 2){
+					status = '<span class="status disabled">Disabled</span>';
+				}
+				
+				content = content
+				+'<div class="products-row">'
+		        +	'<button class="cell-more-button">'
+		        +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
+		        +	'</button>'
+		        +	'<div class="product-cell image">'
+		        +   	'<img src="${pageContext.request.contextPath}/customerController/getCustomerImgById/' + customer.customerId + '" alt="product">'
+		        +   	'<span>' + customer.customerName + '</span>'
+		        +	'</div>'
+		        +	'<div class="product-cell category"><span class="cell-label">ID:</span>' + customer.customerId + '</div>'
+		        +	'<div class="product-cell status-cell">'
+		        +		'<span class="cell-label">Status:</span>'
+		        +		status
+		        +	'</div>'
+		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + customer.customerEmail + '</div>'
+		        +	'<div class="product-cell stock"><span class="cell-label">Phone:</span>' + customer.customerPhone + '</div>'
+		        +	'<div class="product-cell stock"><span class="cell-label">Nickname:</span>' + customer.customerNickname + '</div>'
+		        +	'<div class="product-cell price"><span class="cell-label">Score:</span>' + customer.customerScore + '</div>'
+		        +	'<div class="product-cell price"><span class="cell-label">RigisterTime:</span>' + customer.customerRigisterTime + '</div>'
+		        +	'<div class="product-cell price"><button class="app-content-headerButton">Update</button></div>'
+		      	+'</div>';
 			})
+			
+			tableView.innerHTML = title + content;
+		}
+		
+		//印出顧客會員健康資料
+		function displayCustomerHealth(){
+			//表頭欄位
+			let title = 
+				'<div class="products-header">'
+		    +   	'<div class="product-cell image">'
+	        +   	'Name'
+	        +   	'<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +   	'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell category">ID<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell status-cell">Gender<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell sales">Diets Type<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell price">Excercise<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell stock">Height<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell price">Weight<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell price">Update</div>'
+	        +	'</div>';
+	        
+			//內容
+	        let content = "";
+	        let gender = "";
+	        
+	        (customers).forEach(customer => {
+					
+				if(customer.customerHealthBean.customerGender == 1){
+					gender = '<span class="status active">Male</span>';
+				} else if(customer.customerHealthBean.customerGender == 2){
+					gender = '<span class="status disabled">Female</span>';
+				}
+					
+				content = content
+				+'<div class="products-row">'
+			    +	'<button class="cell-more-button">'
+			    +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
+			    +	'</button>'
+			    +	'<div class="product-cell image">'
+			    +   	'<img src="${pageContext.request.contextPath}/customerController/getCustomerImgById/' + customer.customerId + '" alt="product">'
+			    +   	'<span>' + customer.customerName + '</span>'
+			    +	'</div>'
+			    +	'<div class="product-cell category"><span class="cell-label">ID:</span>' + customer.customerId + '</div>'
+			    +	'<div class="product-cell status-cell">'
+			    +		'<span class="cell-label">Status:</span>'
+			    +		gender
+			    +	'</div>'
+			    +	'<div class="product-cell email"><span class="cell-label">Diets Type:</span>' + customer.customerHealthBean.customerDiet + '</div>'
+			    +	'<div class="product-cell stock"><span class="cell-label">Excercise:</span>' + customer.customerHealthBean.customerExerciseHabits + '</div>'
+			    +	'<div class="product-cell stock"><span class="cell-label">Height:</span>' + customer.customerHealthBean.customerHeight + '</div>'
+			    +	'<div class="product-cell price"><span class="cell-label">Weight:</span>' + customer.customerHealthBean.customerWeight + '</div>'
+			    +	'<div class="product-cell price"><button class="app-content-headerButton">Update</button></div>'
+			    +'</div>';
+			})
+				
+			tableView.innerHTML = title + content;
 		}
 	}
 
@@ -197,7 +377,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Home</h1>
+      <h1 class="app-content-headerText">Customer</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -205,36 +385,39 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
       </button>
-<!--       新增 -->
-      <button class="app-content-headerButton">Add Product</button>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">
+      <button id="basicInfobtn" class="app-content-headerButton" style="margin: 0px 0px 0px 5px">基本資料</button>
+      <button id="healthInfobtn" class="app-content-headerButton" style="margin: 0px 0px 0px 5px">健康資料</button>
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
           <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
           <div class="filter-menu">
             <label>Category</label>
-            <select>
-              <option>All Categories</option>
-              <option>Furniture</option>                     
-              <option>Decoration</option>
-              <option>Kitchen</option>
-              <option>Bathroom</option>
+            <select id="customerCategory">
+              <option value="all">All Categories</option>
+              <option value="male">男</option>                     
+              <option value="female">女</option>
+              <option value="meat">葷</option>
+              <option value="vegetable">素</option>
+              <option value="strong">運動(強)</option>
+              <option value="normal">運動(中)</option>
+              <option value="weak">運動(弱)</option>
             </select>
             <label>Status</label>
-            <select>
-              <option>All Status</option>
-              <option>Active</option>
-              <option>Disabled</option>
+            <select id="customerStatus">
+              <option value="all">All Status</option>
+              <option value="active">Active</option>
+              <option value="disabled">Disabled</option>
             </select>
             <div class="filter-menu-buttons">
-              <button class="filter-button reset">
+              <button id="resetbtn" class="filter-button reset">
                 Reset
               </button>
-              <button class="filter-button apply">
+              <button id="applybtn" class="filter-button apply jsFilter">
                 Apply
               </button>
             </div>
@@ -249,7 +432,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </div>
     </div>
     
-    <div class="products-area-wrapper tableView">
+    <div id="tableView" class="products-area-wrapper tableView">
 <!--    	表頭欄位 -->
       <div class="products-header">
         <div class="product-cell image">
@@ -282,12 +465,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
-        <div class="product-cell price">
-          Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
-        </div>
+        <div class="product-cell price">Update</div>
       </div>
 	<!--       一筆資料內容--開始 -->
       <div class="products-row">
