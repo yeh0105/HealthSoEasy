@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -139,9 +140,26 @@ public class SportMapServiceImpl implements SportMapService {
 			return totalPages;		
 
 		}
+		//給特定分數撈出特定分數的前三筆
+		@Override
+		public List<SportMapBean> findFirst3BySportMapScore(Integer sportMapScore, Sort sort) {
+			return sportMapRepository.findFirst3BySportMapScore(sportMapScore, sort);
+		}
+
+		//給特定分數撈出特定分數的前三筆
+		@Override
+		public List<SportMapBean> findTop3BySportMapScore(Integer sportMapScore, Sort sort) {
+			return sportMapRepository.findTop3BySportMapScore(sportMapScore, sort);
+		}
+
+		//查詢所有地圖裡的前3筆，依照地圖分數降冪排序
+		@Override
+		public List<SportMapBean> findTop3ByOrderBySportMapScoreDesc() {
+			return sportMapRepository.findTop3ByOrderBySportMapScoreDesc();
+		}
 
 		
-
+ 
 		
 
 	

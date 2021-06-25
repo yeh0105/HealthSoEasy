@@ -3,6 +3,8 @@ package com.soeasy.service.sportmapService;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Sort;
+
 import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
 
@@ -43,11 +45,14 @@ public interface SportMapService {
 	// 總共有幾頁
 	Integer getTotalPagesBySportCategoryId(SportCategoryBean sportCategoryBean);	
 	
-	
-	
+	//給特定分數撈出特定分數的前三筆
+	List<SportMapBean>findFirst3BySportMapScore(Integer sportMapScore,  Sort sort);
 		
+	//給特定分數撈出特定分數的前三筆	
+	List<SportMapBean>findTop3BySportMapScore(Integer sportMapScore,  Sort sort);
 		
-		
+	//查詢所有地圖裡的前3筆，依照地圖分數降冪排序
+	List<SportMapBean>findTop3ByOrderBySportMapScoreDesc();
 		
 		
 		

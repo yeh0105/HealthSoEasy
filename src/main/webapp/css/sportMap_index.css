@@ -1,19 +1,19 @@
 
 .centerDiv {
 	display: flex;
-	width:80%;
+	width:90%;
 	margin:10px auto;
-	padding:40px 20px 80px 10px;
+	padding:40px 20px 50px 10px;
 /* 	border:1px red solid; */
 	border-bottom: 1px solid;
 }
 
 .font1{
-	color:#9e7b9b;
+	color:#6d597a;
 	font-weight:bold;
 	font-size:15px;
-	background-color: #f6fff8;
-	border:1px solid #eae4e9;
+	background-color: #f7fff7;
+	border:1px solid ;
 	border-radius:10px;	
 	margin:10px 10px 10px 30px;
 	
@@ -34,7 +34,7 @@
 width:300px;
 padding:20px 20px 50px 20px;
 /* border:1px red solid; */
-	background-color: #eaf4f4;
+/* 	background-color: #96C0B7; */
 
 	
 }
