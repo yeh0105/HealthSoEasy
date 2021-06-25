@@ -69,7 +69,7 @@ public class AdminProduct {
 			ProductBean product = new ProductBean();
 			product.setProductName("麥當勞歡樂全家餐");
 			product.setProductDescription("快樂肥宅餐");
-			product.setCategory("速食");
+			product.setCategory(5);
 			product.setProductAmount(100);
 			product.setProductCalories(500);
 			product.setProductPrice(210);

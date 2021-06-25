@@ -22,22 +22,8 @@
 
 
  <div class="container">
- <h2 class="page-header">商品列表</h2>
+ <h2 class="page-header">分類列表</h2>
  
-<!--  夜面更新 -->
- 
-<%--  <c:set var="message" value="${message}" ></c:set> --%>
-<!--  <div  class="alert alert-success alert-dismissable fade in"> -->
-<!--  <a href="#" class="close" data-dismiss="alert">&times;</a> -->
-<%--  <strong>恭喜 </strong> --%>
-<%--  <span><c:out value="${message.productName}"/>更新成功</span> --%>
- 
-
-<!--  </div> -->
- 
-
- 
- <p class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a><p>
 
  <table class="table table-border">
 
@@ -48,7 +34,6 @@
  	<th>#ID</th>
  	<th>產品名稱</th>
  	<th>產品分類</th>
- 	<th>分類(測試用)</th>
  	<th>產品描述</th>
  	<th>熱量標示</th>
  	<th>產品庫存</th>
@@ -81,12 +66,14 @@
 </c:choose>
  </td>
  
- <td>${product.productCategory}</td>
  <td>${product.productDescription}</td>
  <td>${product.productCalories}</td>
  <td>${product.productAmount}</td>
  <td>${product.productPrice}</td>
  <td>${product.productDate}</td>
+ 
+ 
+ 
  <td><a href="<c:url value='/mall/lists/${product.productId}'/>"><button>詳情</button></a>
  <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
  <a onclick="return del(this)" href="${pageContext.request.contextPath }/mall/delete/${product.productId}"><button >刪除</button></a></td>
