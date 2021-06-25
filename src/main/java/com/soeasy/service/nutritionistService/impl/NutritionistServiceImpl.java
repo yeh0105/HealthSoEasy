@@ -46,7 +46,7 @@ public class NutritionistServiceImpl implements NutritionistService{
 
 	@Override
 	public void updateNutritionist(NutritionistBean nutritionistBean) {
-		
+		nutritionistRepository.save(nutritionistBean);
 	}
 
 	@Override

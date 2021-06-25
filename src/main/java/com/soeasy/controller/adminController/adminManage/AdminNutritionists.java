@@ -31,11 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.NutritionistBean;
 import com.soeasy.model.NutritionistCategoryBean;
-import com.soeasy.model.SportMapBean;
+
 import com.soeasy.service.nutritionistService.NutritionistCategoryService;
 import com.soeasy.service.nutritionistService.NutritionistService;
 import com.soeasy.validator.nutritionistValidator.NutritionistValidator;
-import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
 @RequestMapping("/admin/adminManage")
@@ -159,7 +158,6 @@ public class AdminNutritionists {
 		try {
 			nutritionistService.addNutritionist(nutritionistBean);
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
-//				result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "/admin/adminNutritionist/adminAddNutritionist";
 
 		}
@@ -171,8 +169,8 @@ public class AdminNutritionists {
 	@ModelAttribute
 	public void commonData(Model model) {
 		Map<String, String> genderMap = new HashMap<>();
-		genderMap.put("M", "男性");
-		genderMap.put("F", "女性");
+		genderMap.put("M", "Male");
+		genderMap.put("F", "Female");
 		model.addAttribute("genderMap", genderMap);
 
 		List<NutritionistCategoryBean> nutritionistCategoryList = nutritionistCategoryService
@@ -182,34 +180,60 @@ public class AdminNutritionists {
 
 	// 刪除單筆運動地點
 	@PostMapping("/adminNutritionist/del/{nutritionistId}")
-		public String delete(@PathVariable("nutritionistId") Integer nutritionistId) {
+	public String delete(@PathVariable("nutritionistId") Integer nutritionistId) {
 		nutritionistService.deleteByNutritionistId(nutritionistId);
-		return "redirect:/admin/adminManage/adminNutritionist"; 
+		return "redirect:/admin/adminManage/adminNutritionist";
+	}
+
+	// 查詢修改單營養師表單
+	@GetMapping(value = "/adminNutritionist/up/{nutritionistId}")
+	public String getOneNutritionistById(@PathVariable("nutritionistId") Integer nutritionistId, Model model) {
+		NutritionistBean nutritionistBean = nutritionistService.findByNutritionistId(nutritionistId);
+		model.addAttribute("nutritionistBean", nutritionistBean);
+		
+		return "/admin/adminNutritionist/adminUpdateNutritionist"; // 帶出修改資料
+
+	}
+
+	// 查詢修改單營養師表單
+	@PostMapping("/adminNutritionist/up/{nutritionistId}")
+	public String emptyNutritionist (@ModelAttribute("nutritionistBean")NutritionistBean nutritionistBean,
+			BindingResult result,Model model,@PathVariable("nutritionistId") Integer nutritionistId,
+			HttpServletRequest request) {
+		NutritionistValidator validator = new NutritionistValidator();
+		validator.validate(nutritionistBean, result);
+		if (result.hasErrors()) {
+			return "/admin/adminNutritionist/adminUpdateNutritionist";
+		}
+
+		// 取得addnutritionist.jsp所送來的圖片資訊
+		MultipartFile nutritionistImg = nutritionistBean.getNutritionistMultiImg();
+
+		// 建立Blob物件，交由 Hibernate 寫入資料庫
+		if (nutritionistImg != null && !nutritionistImg.isEmpty()) {
+			try {
+				byte[] b = nutritionistImg.getBytes();
+				Blob blob = new SerialBlob(b);
+				nutritionistBean.setNutritionistImage(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
+
+		NutritionistCategoryBean nutritionistCategoryBean = nutritionistCategoryService.
+				getNutritionistCategory(nutritionistBean.getNutritionistCategoryBean().getNutritionistCategoryId());
+		nutritionistBean.setNutritionistCategoryBean(nutritionistCategoryBean);	
+		nutritionistBean.setNutritionistCategory(nutritionistCategoryBean.getNutritionistCategoryName());
+		
+		try {
+			nutritionistService.updateNutritionist(nutritionistBean);
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
+//			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
+			return "/admin/adminNutritionist/adminUpdateNutritionist";
+		}
+		return "redirect:/admin/adminManage/adminNutritionist";
+
 	}
 	
-//	//帶出地圖修改前單一表單(後台用)
-//		@GetMapping(value="/adminSportMap/up/{sportMapId}")
-//		public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
-//		SportMapBean sportMapBean = sportMapService.get(sportMapId);			
-//		model.addAttribute("sportMapBean",sportMapBean);
-//		return "admin/adminSportMap/adminUpdateSportMap"; //帶出修改資料
-//			    
-//		}
-//		
-//		
-//		//修改運動地點，將送來修改過的資料用本方法檢核，若無誤則寫入資料庫(後台用)
-//		@PostMapping("/adminSportMap/up/{sportMapId}")
-//		public String modify(
-//		@ModelAttribute("sportMapBean")SportMapBean sportMapBean,
-//		BindingResult result,Model model,@PathVariable Integer sportMapId,
-//		HttpServletRequest request) {
-//							
-//		//檢驗欄位內容(檢驗幾項欄位不能為空)
-//		SportMapBeanValidator validator = new SportMapBeanValidator();
-//		validator.validate(sportMapBean,result);
-//		if(result.hasErrors()) {
-//						
-//		return "admin/adminSportMap/adminUpdateSportMap";	
-//
-//		}
 }
