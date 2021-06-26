@@ -99,21 +99,37 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<CustomerBean> getCustomerByDiet(Integer customerDiet) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerHealthBean> customerHealthBeans =  customerHealthRepository.findByCustomerDiet(customerDiet);
+		List<CustomerBean> customers = new ArrayList<CustomerBean>();
+		for (CustomerHealthBean customerHealthBean : customerHealthBeans) {
+			customers.add(customerHealthBean.getCustomerBean());
+		}
+		return customers;
 	}
 
 	@Override
 	public List<CustomerBean> getCustomerByExercise(Integer customerExerciseHabits) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerHealthBean> customerHealthBeans =  customerHealthRepository.findByCustomerExerciseHabits(customerExerciseHabits);
+		List<CustomerBean> customers = new ArrayList<CustomerBean>();
+		for (CustomerHealthBean customerHealthBean : customerHealthBeans) {
+			customers.add(customerHealthBean.getCustomerBean());
+		}
+		return customers;
 	}
 
 	@Override
 	public List<CustomerBean> getCustomerByStatusAndGender(Integer customerStatus, Integer customerGender) {
-//		return customerRepository.findByCustomerStatusAndCustomerGender(customerStatus, customerGender);
-		return null;
+		return customerRepository.findCustomerByStatusAndGender(customerStatus, customerGender);
 	}
 
+	@Override
+	public List<CustomerBean> getCustomerByStatusAndDiet(Integer customerStatus, Integer customerDiet) {
+		return customerRepository.findCustomerByStatusAndDiet(customerStatus, customerDiet);
+	}
+
+	@Override
+	public List<CustomerBean> getCustomerByStatusAndExercise(Integer customerStatus, Integer customerExerciseHabits) {
+		return customerRepository.findCustomerByStatusAndExercise(customerStatus, customerExerciseHabits);
+	}
 	
 }

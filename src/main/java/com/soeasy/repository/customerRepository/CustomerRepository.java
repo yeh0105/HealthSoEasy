@@ -15,6 +15,12 @@ public interface CustomerRepository extends JpaRepository<CustomerBean, Integer>
 	
 	List<CustomerBean> findByCustomerStatus(Integer customerStatus);
 	
-//	@Query("select c from Customer c where c.customerStatus = ?1 and where c.fk_customerHealthId = (select ch.customerHealthId from CustomerHealth ch where ch.customerGender = ?2)")
-//	List<CustomerBean> findByCustomerStatusAndCustomerGender(Integer customerStatus, Integer customerGender);
+	@Query(value = "select c from CustomerBean c where c.customerStatus = ?1 AND c.customerHealthBean.customerGender = ?2")
+	List<CustomerBean> findCustomerByStatusAndGender(Integer customerStatus, Integer customerGender);
+	
+	@Query(value = "select c from CustomerBean c where c.customerStatus = ?1 AND c.customerHealthBean.customerDiet = ?2")
+	List<CustomerBean> findCustomerByStatusAndDiet(Integer customerStatus, Integer customerDiet);
+
+	@Query(value = "select c from CustomerBean c where c.customerStatus = ?1 AND c.customerHealthBean.customerExerciseHabits = ?2")
+	List<CustomerBean> findCustomerByStatusAndExercise(Integer customerStatus, Integer customerExerciseHabits);
 }
