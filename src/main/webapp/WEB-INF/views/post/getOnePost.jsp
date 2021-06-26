@@ -30,7 +30,7 @@
 		<!-- 			作者頭像+暱稱 -->
 		<div class="row-fluid">
 			<div class="span10" style="display: flex; align-items: center;">
-				<img alt="作者頭像" src="#" class="img-circle"
+				<img alt="作者頭像" src="<c:url value='/customerController/getCustomerImgById/${getOnePostBean.customerBean.customerId}' />" class="img-circle"
 					style="width: 50px; height: 50px;" />
 				<p class="text-left">&nbsp;&nbsp;&nbsp;${getOnePostBean.customerBean.customerNickname}</p>
 			</div>
@@ -128,7 +128,7 @@
 			<form action="" method="post">
 				<label for="">回應</label>
 				<textarea placeholder="寫下你的回應..."
-					style="width: 90%; height: 100%; overflow-y: scroll;">
+					style="width: 94%; overflow-y: scroll;">
 				</textarea>
 				<button type="submit"
 					style="border: none; background-color: transparent; text-align: right;">
