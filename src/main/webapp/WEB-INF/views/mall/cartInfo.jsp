@@ -1,9 +1,8 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page session="false"%>
-<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"  %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,51 +22,70 @@
 
 
  <div class="container">
- <h2 class="page-header">分類列表</h2>
-  <p class="text-right"><a href="<c:url value='/mall/addcategory'/>" class="btn btn-primary">Add</a><p>
+ <h2 class="page-header">Shoppingcart  [目前有${countItems}項商品]</h2>
  
+ <p class="text-right"><a href="<c:url value='/mall/lists'/>" class="btn btn-primary">繼續購物</a><p>
 
+<form method="post" action="#">
  <table class="table table-border">
-
  	<thead>
 
  <tr>
 
- 	<th>#ID</th>
- 	<th>產品分類</th>
- 	<th>修改</th>
-
+	<th>product</th>
+ 	<th>Name</th>
+ 	<th>Quantity(update)</th>
+ 	<th>price</th>
+ 	<th>SubTotal</th>
+ 	
  </tr>
 
  </thead>
 
  <tbody>
-
- <c:forEach items="${page}" var="page">
- 
-<%--   <c:forEach>標記如何可用於遍歷MallController books model屬性。 --%>
-
+ <c:forEach var="item" items="${sessionScope.cart}">
  <tr>
-
- <td>${page.productCategoryName}</td>
-<%--  <td>${product.category}</td> --%>
-
-
  
+ <td>#圖片</td>
+ <td>${item.product.productName}</td>
+ 
+ <!--  ===== -->
  <td>
- <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
- <a onclick="return del(this)" href="${pageContext.request.contextPath}/mall/deletecategory/{productCategoryId}"><button >刪除</button></a></td>
- </tr>
+ <div class="input-append">
+ <input class="span1" style="max-width:34px;text-align:center" placeholder="1" 
+ id="appendedInputButtons" size="15" type="number" name="quantities" value="${item.cartQuantity}">
+<!--  <button class="btn" type="button" value="submit">confirm</button> -->
+<!--  <button class="btn" type="button">+</button> -->
+<!--  <button class="btn btn-danger" type="button"><i class="icon-remove"></i>-</button> -->
+
+ </div>
+ </td>
+ <!--  ===== -->
  
+ <td>$${item.product.productPrice}</td>
+ <td>$${item.product.productPrice*item.cartQuantity}</td>
+ </tr>
 
  </c:forEach>
-
+ <tr>
+ 
+ 
+<td style="text-align:right"><strong>ToTal</strong></td>
+<td style="display:block">$${total}</td>
+ </tr>
+ 
  </tbody>
-
+ 
+  
  </table>
+
+
+<!-- ========================================================= -->
+ 
+ </form>
  
  
- <!-- ---------------------------控制分頁用----------------------------------- -->
+<!--  <!-- ---------------------------控制分頁用----------------------------------- --> 
  
 <!--  <nav style="width:300px;margin:0px auto"> -->
 <!--  <ul class=pager> -->
@@ -110,23 +128,25 @@
   <!-------------- end of container------------- -->
    </div>
   <!-- -------------end of container ------------------>
-   
  
     <!-- 用於將 POST 請求轉換為 DELETE請求 -->
 <!--     暫時放棄 先直接用Post請求 -->
 <form action="#" method="POST">
     <input type="hidden" value="DELETE" name="_method" />
  </form>
+ 
   <script type="text/javascript">
-    //將 get 請求轉換為 post 請求提交
-    function del(tag) {
-      //獲取當前請求路徑
-      var href = tag.href;
-      //提交
-      $("form").attr("action", href).submit();
-      return false;
-    }
+  //將 get 請求轉換為 post 請求提交
+  function del(tag) {
+    //獲取當前請求路徑
+    var href = tag.href;
+    //提交
+    $("form").attr("action", href).submit();
+    return false;
+  }
+  
   </script>
+ 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

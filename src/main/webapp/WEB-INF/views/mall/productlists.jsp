@@ -38,6 +38,8 @@
 
  
  <p class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a><p>
+ <p class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">New Cat</a><p>
+ <p class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a><p>
 
  <table class="table table-border">
 
@@ -55,6 +57,8 @@
  	<th>產品價格</th>
  	<th>產品上架日期</th>
  	<th>修改</th>
+ 	<th>購買</th>
+ 	
 
  </tr>
 
@@ -90,6 +94,7 @@
  <td><a href="<c:url value='/mall/lists/${product.productId}'/>"><button>詳情</button></a>
  <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
  <a onclick="return del(this)" href="${pageContext.request.contextPath }/mall/delete/${product.productId}"><button >刪除</button></a></td>
+ <td><a href="<c:url value='/mall/cart/buy/${product.productId}'/>"><button>加入購物車</button></a></td>
  </tr>
  
 

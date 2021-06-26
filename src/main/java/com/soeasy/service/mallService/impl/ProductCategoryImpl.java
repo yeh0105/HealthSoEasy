@@ -21,14 +21,12 @@ public class ProductCategoryImpl implements ProductCategoryService {
 	private ProductCategoryRepository productCategoryRepository;
 	
 	
-	@Transactional
 	@Override
 	public ProductCategoryBean saveCategory(ProductCategoryBean productCategory) {
 		// TODO Auto-generated method stub
 		return productCategoryRepository.save(productCategory) ;
 	}
 
-	@Transactional
 	@Override
 	public ProductCategoryBean getCategory(Integer productCategoryId) {
 		// TODO Auto-generated method stub
@@ -37,19 +35,19 @@ public class ProductCategoryImpl implements ProductCategoryService {
 	
 	
 	@Override
-	@Transactional
-	public Page<ProductCategoryBean>ListCategory(Pageable pageable){
+	public Page<ProductCategoryBean>listCategory(Pageable pageable){
 		return productCategoryRepository.findAll(pageable);
 
 	}
 
+	
+	// 刪除產品
+
 	@Override
 	public void deleteCategory(Integer productCategoryId) {
-	//return productCategoryRepository.deleteById(productCategoryId);
-		return;
+	 productCategoryRepository.deleteById(productCategoryId);
 	}
 	
-	@Transactional
 	@Override
 	public ProductCategoryBean updateCategory(Integer productCategoryId,ProductCategoryBean productCategory) throws NotFoundException {
 		
@@ -60,6 +58,9 @@ public class ProductCategoryImpl implements ProductCategoryService {
 		BeanUtils.copyProperties(productCategory, category);
 		return productCategoryRepository.save(category);
 			}
+	
+	
+	
 	
 	
 
