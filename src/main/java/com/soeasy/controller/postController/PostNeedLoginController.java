@@ -142,9 +142,9 @@ public class PostNeedLoginController {
 			return "post/updatePost";
 		}
 
-		// 跳轉至查詢所有文章頁面(送getAllPosts請求)
-		return "redirect:/PostController/getAllPost.json";
-//		return "redirect:/PostController/getAllPost";
+		// 跳轉至查詢單一文章頁面
+//		return "/post/getOnePost";
+		return "redirect:/PostNeedLoginController/getPost/{postId}";
 	}
 
 	// 將單筆文章的狀態更改為2(禁止)
@@ -300,7 +300,7 @@ public class PostNeedLoginController {
 
 		}
 		// 跳轉至查詢所有文章頁面(送getAllPost請求)
-		return "redirect:/PostController/getAllPost.json";
+		return "/post/postByCategory";
 
 	}
 

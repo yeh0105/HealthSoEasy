@@ -11,12 +11,10 @@ public interface ProductCategoryService {
 	
 	ProductCategoryBean saveCategory(ProductCategoryBean productCategory);
 	ProductCategoryBean getCategory(Integer productCategoryId);
+		
+	void deleteCategory(Integer productCategory);
 	
-	
-	//ProductCategoryBean updateCategory(Long productCategoryId);
-	
-	void deleteCategory(Integer pproductCategory);
-	Page<ProductCategoryBean> ListCategory(Pageable pageable);
+	Page<ProductCategoryBean> listCategory(Pageable pageable);
 	
 	ProductCategoryBean updateCategory(Integer productCategoryId, ProductCategoryBean productCategory) throws NotFoundException;
 	

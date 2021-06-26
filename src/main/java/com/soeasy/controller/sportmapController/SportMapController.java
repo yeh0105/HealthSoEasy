@@ -36,7 +36,7 @@ public class SportMapController {
 	SportCategoryService sportCategoryService;
 	
 
-	//查詢所有運動地點(前台)
+	//(前台用)查詢所有運動地點
 	@GetMapping("/displaySportMaps")
 	public String DisplaySportMaps(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
@@ -54,7 +54,7 @@ public class SportMapController {
 	return "sportMap/getAllSportMaps";
 	}		
 	
-	//查詢單一地點(前台)
+	//(前台用)查詢單一地點詳細資料
 	@GetMapping(value="/sportMap/{sportMapId}")
 	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
 	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
@@ -143,7 +143,7 @@ public class SportMapController {
 	//刪除單筆運動地點(未用到，寫在後台)
 	@PostMapping("/del/{sportMapId}")
 	public String delete(@PathVariable("sportMapId") Integer sportMapId) {
-		System.out.println("抓到了抓到了");
+//		System.out.println("抓到了抓到了");
 		sportMapService.delete(sportMapId);
 		
 		//跳轉至查詢所有運動地點頁面(送displaySportMaps請求)
@@ -166,7 +166,7 @@ public class SportMapController {
 //		return sportMapsList;
 //	}
 	
-	//查詢所有運動地點by分類(前台)，給兩個參數(分類ID跟頁數，帶多個參數要用?參數=值&參數=值去串接)
+	//(前台用)查詢所有運動地點by分類，給兩個參數(分類ID跟頁數，帶多個參數要用?參數=值&參數=值去串接)
 		@GetMapping("/displaySportMapsByCategoryId")
 		public String DisplaySportMapsBySportCategoryId(Model model, HttpServletRequest request, HttpServletResponse response,
 				@RequestParam(value = "sportCategoryBean", required = false)SportCategoryBean sportCategoryBean,
@@ -197,17 +197,16 @@ public class SportMapController {
 		}		
 	
 
-		//查詢所有地圖裡的前3筆，依照地圖分數降冪排序(Ajax)
+		//(前台用)查詢所有地圖裡的前3筆，依照地圖分數降冪排序(Ajax)
 		@GetMapping(value="/allSportMapsByTopNo.json",produces= {"application/json; charset=UTF-8" })
 		public @ResponseBody List<SportMapBean>findFirst3BySportMapScore(){
-			System.out.println("get it!");
-			Sort sort=null;
-			
-			//給特定分數撈出特定分數的前三筆
+//			Sort sort=null;			
+			//給特定分數(5分)撈出特定分數的前三筆
 //			List<SportMapBean> sportMapsTopNo = sportMapService.findTop3BySportMapScore(5,sort);
-			//給特定分數撈出特定分數的前三筆
+			//給特定分數(5分)撈出特定分數的前三筆
 //			List<SportMapBean> sportMapsTopNo = sportMapService.findFirst3BySportMapScore(5,sort);
 
+			//查詢所有地圖裡的前3筆，依照地圖分數降冪排序
 			List<SportMapBean> sportMapsTopNo = sportMapService.findTop3ByOrderBySportMapScoreDesc();
 			return sportMapsTopNo;
 		}

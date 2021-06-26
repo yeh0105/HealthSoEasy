@@ -31,6 +31,10 @@ public interface CustomerService {
 	List<CustomerBean> getCustomerByDiet(Integer customerDiet);
 	//以運動強度查詢會員
 	List<CustomerBean> getCustomerByExercise(Integer customerExerciseHabits);
-	//以狀態與性別查詢會員
+	//以狀態與性別查詢
 	List<CustomerBean> getCustomerByStatusAndGender(Integer customerStatus, Integer customerGender);
+	//以狀態與飲食習慣查詢
+	List<CustomerBean> getCustomerByStatusAndDiet(Integer customerStatus, Integer customerDiet);
+	//以狀態與運動強度查詢
+	List<CustomerBean> getCustomerByStatusAndExercise(Integer customerStatus, Integer customerExerciseHabits);
 }

@@ -59,7 +59,7 @@
 
 <div style="margin-left:150px;">
 <div class="hero-btn">
-<a href="<c:url value='/mall/lists' />" class="theme-btn">測試用後台</a>
+<a href="<c:url value='/mall/lists' />" class="theme-btn">商城測試用頁面 </a>
  </div>
  </div>
  
