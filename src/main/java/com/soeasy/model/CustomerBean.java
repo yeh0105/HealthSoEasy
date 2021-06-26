@@ -64,6 +64,7 @@ public class CustomerBean implements Serializable {
 
 	private Integer customerStatus;
 
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(updatable=false)
 	private Timestamp customerRegisterTime;
 
