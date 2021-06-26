@@ -12,6 +12,8 @@
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">
+<link rel='stylesheet'
+	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>	
 <link
 	href="https://fonts.googleapis.com/css2?family=Caudex&display=swap"
 	rel="stylesheet">
@@ -47,8 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			
 		}
 		
-	}
-		
+	}		
 		
 	function displayTopMaps(){
 		
@@ -75,9 +76,9 @@ document.addEventListener("DOMContentLoaded", function(){
 		content+= "</div>"
 		showTop.innerHTML=content;		
 		
-	}	
+		}	
 	
-}
+	}
 )
 
 </script>
@@ -139,12 +140,12 @@ document.addEventListener("DOMContentLoaded", function(){
 			</div>			
 
 		</div>
-		<div>
+		<div class="btnBy2">
 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
 				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
 				width="100%" height="100%"></a>
 		</div>
-		<div class="btnBy1">
+		<div class="btnBy3">
 			依區域：
 			<div>
 				<a href="#"><button class="font1">地區A</button></a>
@@ -185,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	<div class="centerDiv">
 		<div>
 
-			<h4>熱門運動地點Top 3</h4><br>
+			<span>熱門運動地點Top 3</span><br>
 			<div id="showTopMaps" >
 				
 			</div>

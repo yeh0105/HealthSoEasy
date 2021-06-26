@@ -3,6 +3,8 @@ package com.soeasy.service.sportmapService;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.soeasy.model.SportCategoryBean;
@@ -35,7 +37,7 @@ public interface SportMapService {
 	List<SportMapBean> getAllSportMaps();
 	
 	
-	// 抓分頁一頁有哪些地圖by SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
+	// 抓分頁一頁有哪些地圖，依照SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
 	Map<Integer, SportMapBean> getPageSportMapsBySportCategoryId(SportCategoryBean SportCategoryBean,Integer pageNo);
 	
 	// 抓資料庫裡一個分類有幾個地圖
@@ -45,15 +47,22 @@ public interface SportMapService {
 	// 總共有幾頁
 	Integer getTotalPagesBySportCategoryId(SportCategoryBean sportCategoryBean);	
 	
-	//給特定分數撈出特定分數的前三筆
+	//給特定分數撈出特定分數的前3筆
 	List<SportMapBean>findFirst3BySportMapScore(Integer sportMapScore,  Sort sort);
 		
-	//給特定分數撈出特定分數的前三筆	
+	//給特定分數撈出特定分數的前3筆	
 	List<SportMapBean>findTop3BySportMapScore(Integer sportMapScore,  Sort sort);
 		
 	//查詢所有地圖裡的前3筆，依照地圖分數降冪排序
 	List<SportMapBean>findTop3ByOrderBySportMapScoreDesc();
-		
-		
+	
+	//抓分頁一頁有哪些地圖，依照區域(地址關鍵字)		
+	Map<Integer, SportMapBean> getPageSportMapsBySportInfoLike(String SportMapInfo,Integer pageNo);
+	
+	// 抓資料庫依照區域(地址關鍵字)裡有幾個地圖(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	
+	
+	// 抓依照區域(地址關鍵字)總共有幾頁(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+
 		
 }
