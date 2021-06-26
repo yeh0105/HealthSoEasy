@@ -169,8 +169,8 @@ public class AdminNutritionists {
 	@ModelAttribute
 	public void commonData(Model model) {
 		Map<String, String> genderMap = new HashMap<>();
-		genderMap.put("M", "Male");
-		genderMap.put("F", "Female");
+		genderMap.put("M", "男性");
+		genderMap.put("F", "女性");
 		model.addAttribute("genderMap", genderMap);
 
 		List<NutritionistCategoryBean> nutritionistCategoryList = nutritionistCategoryService
@@ -220,7 +220,12 @@ public class AdminNutritionists {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-
+		
+		// 營養師創建時間
+		long miliseconds = System.currentTimeMillis();
+		Date Date = new Date(miliseconds);
+		nutritionistBean.setNutritionistDate(Date);
+		
 		NutritionistCategoryBean nutritionistCategoryBean = nutritionistCategoryService.
 				getNutritionistCategory(nutritionistBean.getNutritionistCategoryBean().getNutritionistCategoryId());
 		nutritionistBean.setNutritionistCategoryBean(nutritionistCategoryBean);	
