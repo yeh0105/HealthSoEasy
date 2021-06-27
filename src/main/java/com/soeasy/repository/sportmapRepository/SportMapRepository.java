@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
@@ -31,10 +32,12 @@ public interface SportMapRepository extends JpaRepository<SportMapBean, Integer>
 	//查詢所有地圖裡的前3筆，依照地圖分數降冪排序
 	List<SportMapBean>findTop3ByOrderBySportMapScoreDesc();
 	
-	//抓分頁一頁有哪些地圖，依照區域(地址關鍵字)
-	Page<SportMapBean> findBySportMapInfoLike(String SportMapInfo,Pageable pageable);
+	//抓分頁一頁有哪些地圖，依照區域(地址關鍵字)，Query可不用寫也會動
+	@Query(value = "select s from SportMapBean s where s.sportMapAddress like %:sportMapAddress%")
+	Page<SportMapBean> findBySportMapAddressContaining(String sportMapAddress,Pageable pageable);
 		 
 	//抓依照區域(地址關鍵字)裡有多少個地圖總數(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))	
+	Long countBySportMapAddressContaining(String sportMapAddress);
 
 }
 	

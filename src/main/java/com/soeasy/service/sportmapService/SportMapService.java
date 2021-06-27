@@ -18,12 +18,13 @@ public interface SportMapService {
 	//查詢單一地圖By sportMapId
 	SportMapBean get(Integer SportMapId);	
 		
-	// 抓分頁一頁有哪些地圖
+	// 查詢所有地圖，帶分頁
 	Map<Integer, SportMapBean> getPageSportMaps(int pageNo);
 	
-	// 抓資料庫裡全部有幾個地圖
+	// 抓資料庫裡全部有幾個地圖(搭配查詢所有地圖，帶分頁用)
 	Long getRecordCounts();
-	// 總共有幾頁
+	
+	// 總共有幾頁(搭配查詢所有地圖，帶分頁用)
 	Integer getTotalPages();		
 		
 	//更新地圖資料
@@ -37,14 +38,14 @@ public interface SportMapService {
 	List<SportMapBean> getAllSportMaps();
 	
 	
-	// 抓分頁一頁有哪些地圖，依照SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
+	//抓分頁一頁有哪些地圖，依照SportCategoryId(SportMapBean裡SportCategoryId欄位名稱為SportCategoryBean)
 	Map<Integer, SportMapBean> getPageSportMapsBySportCategoryId(SportCategoryBean SportCategoryBean,Integer pageNo);
 	
-	// 抓資料庫裡一個分類有幾個地圖
+	//抓資料庫裡一個分類有幾個地圖(搭配抓分頁一頁有哪些地圖，依照SportCategoryId用)
 	Long getRecordCountsBySportCategoryId(SportCategoryBean sportCategoryBean);
 	
 	
-	// 總共有幾頁
+	//一個分類總共有幾頁(搭配抓分頁一頁有哪些地圖，依照SportCategoryId用)
 	Integer getTotalPagesBySportCategoryId(SportCategoryBean sportCategoryBean);	
 	
 	//給特定分數撈出特定分數的前3筆
@@ -57,12 +58,13 @@ public interface SportMapService {
 	List<SportMapBean>findTop3ByOrderBySportMapScoreDesc();
 	
 	//抓分頁一頁有哪些地圖，依照區域(地址關鍵字)		
-	Map<Integer, SportMapBean> getPageSportMapsBySportInfoLike(String SportMapInfo,Integer pageNo);
+	Map<Integer, SportMapBean> getPageSportMapsBySportMapAddress(String sportMapAddress,Integer pageNo);
 	
-	// 抓資料庫依照區域(地址關鍵字)裡有幾個地圖(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	//抓資料庫依照區域(地址關鍵字)裡有幾個地圖(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	Long getRecordCountsBySportMapAddress(String sportMapAddress);
 	
-	
-	// 抓依照區域(地址關鍵字)總共有幾頁(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	//抓依照區域(地址關鍵字)總共有幾頁(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	Integer getTotalPagesByBySportMapAddress(String sportMapAddress);	
 
 		
 }
