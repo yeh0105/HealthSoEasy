@@ -15,19 +15,14 @@
 <script type="text/javascript">
 	window.onload = function(){
 		let switch_moon = document.getElementById("switch_moon");
-		//	點擊日夜間模式設定session
+		let xhr = new XMLHttpRequest();
+//		點擊日夜間模式設定session
 		switch_moon.addEventListener("click", function(){
 			document.documentElement.classList.toggle('dark');
 			switch_moon.classList.toggle('active');
-			
-			if("${switchMode}" == "" || "${switchMode}" == "sun"){
-				location.href='/soeasy/admin/switchMode?switchMode=moon';
-			} else if("${switchMode}" == "moon"){
-				location.href='/soeasy/admin/switchMode?switchMode=sun';
-			}
+			xhr.open("GET", "<c:url value='/admin/switchMode.json' />", true);
+			xhr.send();
 		})
-		
-		
 		
 		if("${switchMode}" == "" || "${switchMode}" == "sun"){
 		} else if("${switchMode}" == "moon"){

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
@@ -89,24 +90,18 @@ public class AdminLogin {
 		System.out.println(nextPath);
 		return "redirect:" + nextPath;
 	}
-	@GetMapping(value = "/switchMode")
-	public String switchMode(
-			@RequestParam(value = "switchMode", required = false) String switchMode,
-			Model model,
-			HttpServletRequest request) {
+	@GetMapping(value = "/switchMode.json", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody String switchMode(Model model) {
+		String switchMode = (String)model.getAttribute("switchMode");
 		if(switchMode.equals("moon")) {
-			//設定夜間模式
-			model.addAttribute("switchMode", "moon");
-		} else if(switchMode.equals("sun")){	
 			//設定日間模式
+			switchMode = "sun";
 			model.addAttribute("switchMode", "sun");
+		} else if(switchMode.equals("sun") || switchMode == null){	
+			//設定夜間模式
+			switchMode = "moon";
+			model.addAttribute("switchMode", "moon");
 		}
-		System.out.println(request.getRequestURI());
-		HttpSession session = request.getSession();
-		String nextPath = (String)session.getAttribute("servletPath");
-		if (nextPath == null) {
-			nextPath = "/admin/";
-		}
-		return "redirect:" + nextPath;
+		return switchMode;
 	}
 }
