@@ -7,33 +7,18 @@
 <meta charset="UTF-8">
 <title>Admin Customer</title>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
-
 <script type="text/javascript">
 	window.onload = function(){
-		let switch_moon = document.getElementById("switch_moon");
-		//	點擊日夜間模式設定session
-		switch_moon.addEventListener("click", function(){
-			document.documentElement.classList.toggle('dark');
-			switch_moon.classList.toggle('active');
-			
-			if("${switchMode}" == "" || "${switchMode}" == "sun"){
-				location.href='/soeasy/admin/switchMode?switchMode=moon';
-			} else if("${switchMode}" == "moon"){
-				location.href='/soeasy/admin/switchMode?switchMode=sun';
-			}
-		})
 		
-		
-		
-		if("${switchMode}" == "" || "${switchMode}" == "sun"){
-		} else if("${switchMode}" == "moon"){
-			document.documentElement.classList.toggle('dark');			
-		}
 		
 // 		----------------------------------------------------------------------------------------------
 		//初始化
+		let switch_moon = document.getElementById("switch_moon");
 		let xhr = new XMLHttpRequest();
 		let customers = null;
 		let tableView = document.getElementById("tableView");
@@ -171,7 +156,7 @@
 		        +	'<div class="product-cell price"><span class="cell-label">Score:</span>' + customer.customerScore + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">BirthDay:</span>' + customer.customerBirthDay + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">RigisterTime:</span>' + customer.customerRigisterTime + '</div>'
-		        +	'<div class="product-cell price"><button class="app-content-headerButton">Update</button></div>'
+		        +	'<div class="product-cell price"><button class="app-content-headerButton data-toggle="modal" data-target="#exampleModal" data-whatever="' + customer.customerName + '">Update</button></div>'
 		      	+'</div>';
 			})
 			
@@ -242,12 +227,54 @@
 			    +	'<div class="product-cell stock"><span class="cell-label">Excercise:</span>' + customer.customerHealthBean.customerExerciseHabits + '</div>'
 			    +	'<div class="product-cell stock"><span class="cell-label">Height:</span>' + customer.customerHealthBean.customerHeight + '</div>'
 			    +	'<div class="product-cell price"><span class="cell-label">Weight:</span>' + customer.customerHealthBean.customerWeight + '</div>'
-			    +	'<div class="product-cell price"><button class="app-content-headerButton">Update</button></div>'
+			    +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#exampleModal" data-customer="' + customer + '">Update</button></div>'
 			    +'</div>';
 			})
 				
 			tableView.innerHTML = title + content;
 		}
+		
+//		點擊日夜間模式設定session
+		switch_moon.addEventListener("click", function(){
+			document.documentElement.classList.toggle('dark');
+			switch_moon.classList.toggle('active');
+			xhr.open("GET", "<c:url value='/admin/switchMode.json' />", true);
+			xhr.send();
+		})
+		
+		if("${switchMode}" == "" || "${switchMode}" == "sun"){
+		} else if("${switchMode}" == "moon"){
+			document.documentElement.classList.toggle('dark');			
+		}
+		
+// 		互動視窗
+// 		var exampleModal = document.getElementById('exampleModal')
+// 		exampleModal.addEventListener('show.bs.modal', function (event) {
+// 			console.log(1);
+// 		  // Button that triggered the modal
+// 		  var button = event.relatedTarget
+// 		  // Extract info from data-bs-* attributes
+// 		  var recipient = button.getAttribute('data-bs-whatever')
+// 		  // If necessary, you could initiate an AJAX request here
+// 		  // and then do the updating in a callback.
+// 		  //
+// 		  // Update the modal's content.
+// 		  var modalTitle = exampleModal.querySelector('.modal-title')
+// 		  var modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+// 		  modalTitle.textContent = 'New message to ' + recipient
+// 		  modalBodyInput.value = recipient
+// 		})
+		
+		$('#exampleModal').on('show.bs.modal', function (event) {
+  			var button = $(event.relatedTarget); // Button that triggered the modal
+  			var recipient_customer = button.data('customer'); // Extract info from data-* attributes
+  			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  			var modal = $(this);
+ 			modal.find('.modal-title').text('ID: ' + recipient_customer[2]);
+  			modal.find('.modal-body input').val(recipient_customer);
+		})
 	}
 
 </script>
@@ -508,7 +535,42 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       <!--       一筆資料內容--結尾 -->
       
     </div>
+<!-- 			互動視窗 -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ID:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-phone" class="col-form-label">Phone:</label>
+            <input type="text" class="form-control" id="recipient-phone">
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
   </div>
+</div>
+
+		</div>
 </div>
 <!-- partial -->
   <script  src="${pageContext.request.contextPath}/js/admin.js"></script>

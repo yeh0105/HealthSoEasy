@@ -210,6 +210,36 @@ public class SportMapController {
 			List<SportMapBean> sportMapsTopNo = sportMapService.findTop3ByOrderBySportMapScoreDesc();
 			return sportMapsTopNo;
 		}
+		
+		//(前台用)查詢所有運動地點依照區域(地址關鍵字)，給兩個參數(分類ID跟頁數，帶多個參數要用?參數=值&參數=值去串接)
+		@GetMapping("/displaySportMapsBySportMapAddress")
+		public String DisplaySportMapsBySportMapAddress(Model model, HttpServletRequest request, 
+				@RequestParam(value = "sportMapAddress", required = false)String sportMapAddress,
+				@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+			System.out.println(sportMapAddress);
+			if (pageNo == null) {
+				pageNo = 1;     //網址可加?pageNo=測試
+				}			
+		//把前一頁送來的分類存起來
+		SportMapBean getSportMapBean=(SportMapBean)model.getAttribute("sportMapAddress");	
+		
+		if(sportMapAddress==null) {
+			sportMapAddress = getSportMapBean.getSportMapAddress();
+		}
+		
+		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMapsBySportMapAddress(sportMapAddress,pageNo);
+		//一個參數為
+		model.addAttribute("pageNo", String.valueOf(pageNo));
+		model.addAttribute("sportMapAddress",sportMapAddress);
+		//撈這個分類的總頁數
+		model.addAttribute("totalPages", sportMapService.getTotalPagesByBySportMapAddress(sportMapAddress));
+		
+		model.addAttribute("saveSportMapAddress", sportMapAddress);
+		// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
+		model.addAttribute("sportMaps_Address", sportsMap);
+		
+		return "sportMap/getAllSportMapsBySportMapAddress"; 
+		}				
 	
 	
 	

@@ -9,124 +9,250 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Share</title>
-<script type="text/javascript"
-	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
+<!-- <script type="text/javascript" -->
+<!-- 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script> -->
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">
-<link
-	href="https://fonts.googleapis.com/css2?family=Caudex&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-	rel="stylesheet">
+<!-- <link -->
+<!-- 	href="https://fonts.googleapis.com/css2?family=Caudex&display=swap" -->
+<!-- 	rel="stylesheet"> -->
+<!-- <link -->
+<!-- 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" -->
+<!-- 	rel="stylesheet"> -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/categoryNav.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<script>
-	// 	document.addEventListener("DOMContentLoaded", function() {
-	// 		let xhr = new XMLHttpRequest();
-	// 		xhr.open("GET", "<c:url value='/PostController/getAllPost.json' />",
-	// 				true);
-	// 		xhr.send();
-
-	// 		xhr.onreadystatechange = function() {
-	// 			if (xhr.readyState == 4 && xhr.status == 200) {
-
-	// 				let posts = JSON.parse(xhr.responseText);
-	// 				console.log(xhr.responseText);
-	// 			}
-	// 		}
-	// 	})
-</script>
 
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
+	document.addEventListener("DOMContentLoaded",function() {
 
-		// 	變數宣告-----------------------------------------------------------
+		//變數宣告------------------------------------------------------------
+
 		var pageNo = 0;
 		var totalPage = 0;
-		// 	變數宣告-----------------------------------------------------------
 
-		// 本網頁一開始時先向後端發出非同步請求，要求第一頁
-		var xhr = new XMLHttpRequest();
+		//變數宣告------------------------------------------------------------
 
-		xhr.open("GET", "<c:url value='/PostController/getAllPost.json' />",
-				true);
+		//新建XMLHttpRequest物件
+		let xhr = new XMLHttpRequest();
+		//設定連線內容
+		xhr.open("GET","<c:url value='/PostController/getAllPost.json' />",true);
+		//對伺服器發送請求
 		xhr.send();
+		//當readyState屬性值改變時呼叫此方法
 		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var responseData = xhr.responseText;
-				console.log(xhr.responseText);
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		// 				console.log(xhr.responseText);
 
-				displayPagePosts(responseData); // 顯示讀取到的非文字性資料
+			var responseData = JSON.parse(xhr.responseText);
+// 			console.log("xhr.responseText="+ xhr.responseText);
+// 			console.log("responseData=" + responseData);
+
+			displayPagePosts(); // 顯示讀取到的非文字性資料
 			}
 		}
-		
-		//顯示送回來的所有文章
-		function displayPagePosts(responseData) {
-			var mapObj = JSON.parse(responseData);
-			var Posts = mapObj.Posts;
+
+		// 當使用者按下『第一頁』、『前一頁』、『下一頁』、『最末頁』的連結時，由本方法發出非同步請求。
+		// id為前端的唯一值的id
+		function asynRequest(id) {
+			var xhr = new XMLHttpRequest();
+			var no = 0; // 頁數
+			var queryString = ""; // queryString紀錄查詢字串
+// 			console.log("no.typeof=" + typeof(no));
+			
+			
+
+			// 判斷頁數
+			if (id == "first") { // 算出查詢字串中，要送出的pageNo為何?
+				no = 1;
+				console.log("no=" + no);
+			} else if (id == "prev") {
+				no = pageNo - 1;
+				console.log("no=" + no);
+			} else if (id == "next") {
+				no = pageNo + 1;
+				console.log("no=" + no);
+			} else if (id == "last") {
+				no = totalPage;
+				console.log("no=" + no);
+			}
+
+			// 查詢字串包含1.即將要讀取的頁數(pageNo), 2.總共有幾頁(totalPage)
+			// 注意，查詢字串的前面有問號
+			queryString = "?pageNo=" + no + "&totalPage="+ totalPage;
+			console.log("queryString=" + queryString);
+// 			console.log("totalPage=" + totalPage);
+// 			console.log("totalPage.typeof=" + typeof(totalPage));
+
+			xhr.open("GET","<c:url value='/PostController/getAllPost.json' />"+ queryString, true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var mapObj = JSON.parse(xhr.responseText);
+					console.log("xhr.responseText=" + xhr.responseText);
+					displayPagePosts();
+				}
+			}
+		}
+
+		// 顯示送回來的所有文章
+		function displayPagePosts() {
+
+			var mapObj = JSON.parse(xhr.responseText);
+			var posts = mapObj.post_DPP;
 			pageNo = mapObj.currPage;
 			totalPage = mapObj.totalPage;
+							let content = "";
+
+// 			console.log("mapObj=" + mapObj);
+// 			console.log("Posts=" + posts);
+// 			console.log("pageNo=" + pageNo);
+// 			console.log("totalPage=" + totalPage);
+// 			console.log("content=" + content);
+			
+			//內容
+			$.each(posts,function(i) {
+
+// 				console.log(i); //获取键值
+			// 			    console.log(posts[i]); //获取对应的value
+			// 			    console.log(posts[i].postContent); //获取对应的value的value
+
+				content += '<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding: 1% 1% 0% 1%;">'
+						+ '<div class="row-fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
+						+ '<div class="span9">'
+						+ '<div class="media">'
+						//	 				文章圖片
+						+ '<a class="pull-left" href=""> <img class="media-object" style="width: 100px; height: 100px; border: 1px lightgrey dashed;" src="<c:url value="/PostController/getPicture/'+posts[i].postId+' " />" /></a>'
+						+ '<div class="media-body" style="line-height: 30px;">'
+						//	 				文章標題+類別
+						+ '<h3 class="media-heading">'
+						+ posts[i].postTitle
+						+ '&nbsp;<button class="btn-success">'
+						+ posts[i].postCategory
+						+ '</button></h3>'
+						//	 				文章內容(取前100字)
+						+ posts[i].postContent.substring(0,100)+ '...'
+						//	 				觀看單篇文章
+						+ ' <a href="<c:url value="/PostNeedLoginController/getPost/'+posts[i].postId+'" />">>>>觀看更多 </a>'
+						+ '</div>'
+						+ '</div>'
+						+ '</div>'
+						//	 				Like按鈕SVG
+						+ '<a href="#"> <svg viewBox="0 0 520 500" style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg">'
+						+ '<path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0" />'
+						+ '</svg>'
+						//	 				Like數量
+						+ '</a>'
+						+ posts[i].postLike
+						+ '<p style="font-size: 15px; color: grey;">'
+						+ '	<br> <br> By'
+						//	 				暱稱
+						+ posts[i].customerBean.customerNickname
+						+ '<br>'
+						//	 				文章上傳時間
+						+ posts[i].postUploadTime.substring(0,19)
+						+ '</p>'
+						+ '</div>'
+						+ '</div>'
+
+			});
+// 			console.log("content=" + content);
+			document.getElementById("insertPosts").innerHTML = content;
+		
+
+			// 	頁數區塊----------------------------------------------------------------------------------------------
+			var navContent = "<table border='1' ><tr height='36' bgcolor='#fbdb98'>";
+			if (pageNo != 1) {
+				navContent += "<td width='80' align='center'><button id='first'>第一頁</button></td>";
+				navContent += "<td width='80' align='center'><button id='prev'>前一頁</button></td>";
+			} else {
+				navContent += "<td width='80' align='center'>&nbsp;</td>";
+				navContent += "<td width='80' align='center'>&nbsp;</td>";
+			}
 			
 			
-				let content ="";
-				
-				(posts).forEach(post =>{
+			navContent += "<td width='200' align='center'>第" + pageNo + "頁 / 共"+ totalPage + "頁</td>";
+			if (pageNo != totalPage) {
+				navContent += "<td width='80' align='center'><button id='next'>下一頁</button></td>";
+				navContent += "<td width='80' align='center'><button id='last'>最末頁</button></td>";
+			} else {
+				navContent += "<td width='80' align='center'>&nbsp;</td>";
+				navContent += "<td width='80' align='center'>&nbsp;</td>";
+			}
+			// 	頁數區塊----------------------------------------------------------------------------------------------
+// 			console.log("navContent=" + navContent);
+							
+							
+	
+			// 	頁數事件----------------------------------------------------------------------------------------------
 
-					content +='<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding-bottom: 1%;">'
-					+'<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding-bottom: 1%;">'
-					+'<div class="span9">'
-					+'<div class="media">'
-//	 				文章圖片
-					+'<a class="pull-left" href=""> <img class="media-object" style="width: 100px; height: 100px; border: 1px lightgrey dashed;" src="<c:url value="/PostController/getPicture/'+post.postId+' " />" /></a>'
-					+'<div class="media-body" style="line-height: 30px;">'
-//	 				文章標題+類別
-					+'<h3 class="media-heading">'+post.postTitle+'&nbsp;<button class="btn-success">'post.value.postCategory'</button></h3>'
-//	 				文章內容(取前100字)
-					+${fn:substring(post.postContent,0,100)}+'...'
-//	 				觀看單篇文章
-					+' <a href="<c:url value="/PostNeedLoginController/getPost/'+post.postId+'" />">>>>觀看更多 </a>'
-					+'</div>'
-					+'</div>'
-					+'</div>'
-//	 				Like按鈕SVG
-					+'<a href="#"> <svg viewBox="0 0 520 500" style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg">'
-					+'<path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0" />'
-					+'</svg>'
-//	 				Like數量
-					+'</a>'+post.postLike
-					+'<p style="font-size: 15px; color: grey;">'
-					+'	<br> <br> By'
-//	 				暱稱
-					+post.customerBean.customerNickname+'<br>'
-//	 				文章上傳時間
-					+${fn:substring(post.postUploadTime,0,19)}
-					+'</p>'
-					+'</div>'
-					+'</div>'
-					
-					console.log("content="+content);
-					
-				})
-				document.getElementById("insertPosts").innerHTML = content;
+			document.getElementById("navigation").innerHTML = navContent;
+			var firstBtn = document.getElementById("first");
+			var prevBtn = document.getElementById("prev");
+			var nextBtn = document.getElementById("next");
+			var lastBtn = document.getElementById("last");
+							
+			if (firstBtn != null) {
+				firstBtn.onclick = function() {
+				asynRequest(this.id);
+				}
+			}
 
-	})
+			if (prevBtn != null) {
+				prevBtn.onclick = function() {
+				asynRequest(this.id);
+				}
+			}
+
+			if (nextBtn != null) {
+				nextBtn.onclick = function() {
+				asynRequest(this.id);
+				}
+			}
+
+			if (lastBtn != null) {
+				lastBtn.onclick = function() {
+				asynRequest(this.id);
+				}
+			}
+
+			// 	頁數事件----------------------------------------------------------------------------------------------
+
+		}
+
+})
 </script>
 
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
+
+	<div class="mainWrapper">
+		<section id="offer">
+			<div style="background-color: #C9D8BF; text-align: center;">
+				<div style="margin: 5% auto;">
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Share</h1>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						Taking Our Health in Our Hands!</p>
+
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						Let's Share Your Story.</p>
+				</div>
+
+			</div>
+
+		</section>
+	</div>
+
 	<div class="container-fluid">
 		<div class="row-fluid" style="width: 80%; padding-left: 10%;">
 			<div class="span12">
 				<div class="row-fluid">
-					<div class="row-fluid"
-						style="border-top: 7px solid #325b43; border-radius: 5px; padding-top: 5%;">
+					<div class="row-fluid" style="border-radius: 5px; padding-top: 5%;">
 						<!-- 	<div class="span12"> -->
 						<!-- 		<h3 style="padding-left: 3%; border-top: 7px solid #325b43; border-radius: 5px;">全部</h3> -->
 						<!-- 	</div> -->
@@ -162,6 +288,8 @@
 								</div>
 							</div>
 						</div>
+						<hr style="color: transparent;">
+						<br> <br> <br> <br>
 						<div id="insertPosts">
 							<%-- 							<c:forEach var='post' items="${post_DPP}"> --%>
 							<!-- 								<div class="row-fluid" -->

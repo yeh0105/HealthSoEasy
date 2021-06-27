@@ -40,7 +40,8 @@ public class PostController {
 
 	@Autowired
 	ServletContext context;
-//
+	
+	// 取得所有文章
 	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
 	public ResponseEntity<Map<String, Object>> getPageBook(
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
@@ -62,7 +63,7 @@ public class PostController {
 //		System.err.println("postmap=" + postmap);
 
 		postmap.put("currPage", String.valueOf(pageNo));
-		postmap.put("totalPages", totalPage);
+		postmap.put("totalPage", totalPage);
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
 		postmap.put("post_DPP", postService.getPagePosts(pageNo));
 //		System.err.println("newpostmap=" + postmap);

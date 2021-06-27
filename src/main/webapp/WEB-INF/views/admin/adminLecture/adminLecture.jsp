@@ -13,19 +13,14 @@
 <script type="text/javascript">
 	window.onload = function(){
 		let switch_moon = document.getElementById("switch_moon");
-		//	點擊日夜間模式設定session
+		let xhr = new XMLHttpRequest();
+//		點擊日夜間模式設定session
 		switch_moon.addEventListener("click", function(){
 			document.documentElement.classList.toggle('dark');
 			switch_moon.classList.toggle('active');
-			
-			if("${switchMode}" == "" || "${switchMode}" == "sun"){
-				location.href='/soeasy/admin/switchMode?switchMode=moon';
-			} else if("${switchMode}" == "moon"){
-				location.href='/soeasy/admin/switchMode?switchMode=sun';
-			}
+			xhr.open("GET", "<c:url value='/admin/switchMode.json' />", true);
+			xhr.send();
 		})
-		
-		
 		
 		if("${switchMode}" == "" || "${switchMode}" == "sun"){
 		} else if("${switchMode}" == "moon"){
@@ -110,7 +105,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item  active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
@@ -134,7 +129,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>訂單</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>講座</span>
