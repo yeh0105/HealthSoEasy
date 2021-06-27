@@ -21,20 +21,23 @@
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-	
-	<hr style="color:transparent;">
 
-	<!-- --------------------------------------------文章顯示區------------------------------------------------------- -->
+	<hr style="color: transparent;">
+
+	<!-- --------------------------------------------文章顯示區開始------------------------------------------------------- -->
 	<div class="container-fluid"
 		style="width: 80%; padding: 1% 5%; border: 2px solid lightslategray; border-radius: 10px; box-shadow: 3px 3px 12px lightgrey; margin-left: 5%; margin-top: 8.5%;">
-		<!-- 			作者頭像+暱稱 -->
+		<!-- 			作者頭像+暱稱開始 -->
 		<div class="row-fluid">
 			<div class="span10" style="display: flex; align-items: center;">
-				<img alt="作者頭像" src="<c:url value='/customerController/getCustomerImgById/${getOnePostBean.customerBean.customerId}' />" class="img-circle"
-					style="width: 50px; height: 50px;" />
+				<img alt="作者頭像"
+					src="<c:url value='/customerController/getCustomerImgById/${getOnePostBean.customerBean.customerId}' />"
+					class="img-circle" style="width: 50px; height: 50px;" />
 				<p class="text-left">&nbsp;&nbsp;&nbsp;${getOnePostBean.customerBean.customerNickname}</p>
 			</div>
+
 			<div class="span2" style="display: flex; align-items: center;">
+				<!-- --------------------------------------------文章修改區開始------------------------------------------------------- -->
 				<a
 					href="<c:url value='/PostNeedLoginController/updatePost/${getOnePostBean.postId}' /> "
 					style="text-decoration: none; margin: 5%; width: 15%; height: 10%;">
@@ -59,7 +62,11 @@
 							d="m329.628906 230.820312-97.257812 80.65625c-15.90625-7.941406-29.894532-18.917968-41.488282-32.597656l105.828126-87.765625c10.964843-9.085937 27.222656-7.570312 36.3125 3.394531 9.089843 10.964844 7.570312 27.222657-3.394532 36.3125zm0 0"
 							fill="#35e298" />
 					</svg>
-				</a> <a class="deletePost"
+				</a>
+				<!-- --------------------------------------------文章修改區結束------------------------------------------------------- -->
+
+				<!-- --------------------------------------------文章刪除區開始------------------------------------------------------- -->
+				<a class="deletePost"
 					href="<c:url value='/PostNeedLoginController/deletePost/${getOnePostBean.postId}' /> "
 					style="text-decoration: none; margin: 3%; width: 15%; height: 10%;">
 					<svg height="427pt" viewBox="0 0 427 427.00131"
@@ -75,9 +82,19 @@
 							d="m173.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0" />
 					</svg>
 				</a>
+				<!-- --------------------------------------------文章刪除區結束------------------------------------------------------- -->
+
+				<!-- --------------------------------------------前一頁------------------------------------------------------- -->
+<!-- 				<a class="" -->
+<%-- 					href="<c:url value="/post/postByCategory.jsp"></c:url>">回上一頁 --%>
+<!-- 				</a> -->
+				<!-- --------------------------------------------前一頁------------------------------------------------------- -->
 			</div>
 		</div>
-		<!-- 			作者頭像+暱稱 -->
+
+
+
+		<!-- 			作者頭像+暱稱結束 -->
 
 		<!-- 			文章標題+類別+時間 -->
 		<div class="row-fluid">
