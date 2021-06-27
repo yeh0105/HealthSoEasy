@@ -121,6 +121,7 @@ public class SportMapServiceImpl implements SportMapService {
 	}
 	
 	// 抓資料庫一個分類裡有幾個地圖(搭配抓分頁一頁有哪些地圖，依照SportCategoryId用)
+	@Transactional
 	@Override
 	public Long getRecordCountsBySportCategoryId(SportCategoryBean sportCategoryBean) {
 		System.out.println("第二關收到進來的sportCategoryBean="+sportCategoryBean);
@@ -160,10 +161,10 @@ public class SportMapServiceImpl implements SportMapService {
 
 	//抓分頁一頁有哪些地圖，依照區域(地址關鍵字)
 	@Override
-	public Map<Integer, SportMapBean> getPageSportMapsBySportInfoLike(String SportMapInfo, Integer pageNo) {
+	public Map<Integer, SportMapBean> getPageSportMapsBySportMapAddress(String sportMapAddress, Integer pageNo) {
 		Map<Integer,SportMapBean> map = new LinkedHashMap<>();
 		Pageable pageable = PageRequest.of(pageNo - 1, recordsPerPage);
-		Page<SportMapBean> beans = sportMapRepository.findBySportMapInfoLike(SportMapInfo, pageable);
+		Page<SportMapBean> beans = sportMapRepository.findBySportMapAddressContaining(sportMapAddress, pageable);
 		
 		List<SportMapBean> list = beans.getContent();
 		for(SportMapBean bean : list) {
@@ -171,11 +172,26 @@ public class SportMapServiceImpl implements SportMapService {
 		}
 		return map;
 	}
-	
+
 	// 抓資料庫依照區域(地址關鍵字)裡有幾個地圖(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
-	
+	@Override
+	public Long getRecordCountsBySportMapAddress(String sportMapAddress) {
+		System.out.println("第二關收到進來的SportMapAddress="+sportMapAddress);
+		return sportMapRepository.countBySportMapAddressContaining(sportMapAddress);
+	}
 	
 	// 抓依照區域(地址關鍵字)總共有幾頁(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
+	@Override
+	public Integer getTotalPagesByBySportMapAddress(String sportMapAddress) {
+		System.out.println("第一關進來的SportMapAddress="+sportMapAddress);
+		totalPages = (int) (Math.ceil(getRecordCountsBySportMapAddress(sportMapAddress) / (double) recordsPerPage));
+		logger.info("totalPages=" + totalPages);
+		System.out.println("印出來的totalPages="+totalPages);
+		return totalPages;	
+	}
+	
+	
+	
 
 		
 
