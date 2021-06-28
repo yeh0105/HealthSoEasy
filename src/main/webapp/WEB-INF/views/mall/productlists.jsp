@@ -24,22 +24,31 @@
  <div class="container">
  <h2 class="page-header">商品列表</h2>
  
-<!--  夜面更新 -->
- 
-<%--  <c:set var="message" value="${message}" ></c:set> --%>
-<!--  <div  class="alert alert-success alert-dismissable fade in"> -->
-<!--  <a href="#" class="close" data-dismiss="alert">&times;</a> -->
-<%--  <strong>恭喜 </strong> --%>
-<%--  <span><c:out value="${message.productName}"/>更新成功</span> --%>
- 
 
-<!--  </div> -->
+<div>
  
+<span class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a></span>
+<span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">New Cat</a></span>
+<span class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a></span>
+</div>
+&nbsp;
 
- 
- <p class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a><p>
- <p class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">New Cat</a><p>
- <p class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a><p>
+<div >
+<form action="<c:url value='/mall/lists/1'/>">
+<input type="hidden" name="sortField"  value="${sortField}"/>
+<input type="hidden" name="sortDir"  value="${sortDir}"/>
+查詢:
+<input type="text" name="keyword"  value="${keyword}" required/>
+&nbsp;
+<input type="submit" value="Search"/>
+&nbsp;
+<input type="button" value="clear" onclick="clearFilter()">
+</form>
+
+
+
+</div>
+
 
  <table class="table table-border">
 
@@ -47,15 +56,15 @@
 
  <tr>
 
- 	<th>#ID</th>
- 	<th>產品名稱</th>
- 	<th>產品分類</th>
- 	<th>分類(測試用)</th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>"><button>#ID</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productName&sortDir=${reverSortDir}'/>"><button>產品名稱</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}'/>"><button>產品分類</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productCategory&sortDir=${reverSortDir}'/>"><button>分類(測試用)</button></a></th>
  	<th>產品描述</th>
- 	<th>熱量標示</th>
- 	<th>產品庫存</th>
- 	<th>產品價格</th>
- 	<th>產品上架日期</th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productCalories&sortDir=${reverSortDir}'/>"><button>熱量</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productAmount&sortDir=${reverSortDir}'/>"><button>產品庫存</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productPrice&sortDir=${reverSortDir}'/>"><button>產品價格</button></a></th>
+ 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productDate&sortDir=${reverSortDir}'/>"><button>產品上架日期</button></a></th>
  	<th>修改</th>
  	<th>購買</th>
  	
@@ -91,7 +100,7 @@
  <td>${product.productAmount}</td>
  <td>${product.productPrice}</td>
  <td>${product.productDate}</td>
- <td><a href="<c:url value='/mall/lists/${product.productId}'/>"><button>詳情</button></a>
+ <td><a href="<c:url value='/mall/lists/product/${product.productId}'/>"><button>詳情</button></a>
  <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
  <a onclick="return del(this)" href="${pageContext.request.contextPath }/mall/delete/${product.productId}"><button >刪除</button></a></td>
  <td><a href="<c:url value='/mall/cart/buy/${product.productId}'/>"><button>加入購物車</button></a></td>
@@ -106,15 +115,18 @@
  
  
  <!-- ---------------------------控制分頁用----------------------------------- -->
- 
+ <span>產品總數:<c:out value="${totalItems}"/></span>
  <nav style="width:300px;margin:0px auto">
- <ul class=pager>
  
+ 
+ 
+<ul class=pager>
+
 <!--  上頁 -->
 <li class=previous> 
 	<c:choose>
 		<c:when test="${currentPage > 1}">
-			<a href="<c:url value='/mall/lists?pageNo=${currentPage-1}'/>">Previous</a>
+			<a href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
 		</c:when>
 		<c:otherwise>
 			<a>Previous</a>
@@ -123,13 +135,14 @@
 </li>
 <!-- 上頁結束 -->
 
-<li style="font-style:italic;color:	#00477D"><c:out value="${currentPage}"/></li>
+<li style="font-style:italic;color:	#00477D">Page &nbsp;<c:out value="${currentPage}"/>&nbsp; of &nbsp;&nbsp;<c:out value="${totalPages}"/></li>
+
 
  <!--  下頁 -->
 <li class=next> 
 	<c:choose>
 		<c:when test="${currentPage < totalPages}">
-			<a href="<c:url value='/mall/lists?pageNo=${currentPage + 1}'/>">Next</a>
+			<a href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
 		</c:when>
 		<c:otherwise>
 			<a>Previous</a>
@@ -165,6 +178,18 @@
       return false;
     }
   </script>
+  
+  <!-- ======================    綁定清除查詢 ================================-->
+  
+  
+  <script type="text/javascript">
+    function clearFilter(){
+		window.location='/soeasy/mall/lists';     
+    }
+  </script>
+  
+  <!-- ==========================   (End) 綁定清除查詢========================-->
+  
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

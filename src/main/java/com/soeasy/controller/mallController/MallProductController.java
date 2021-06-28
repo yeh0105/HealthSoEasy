@@ -16,6 +16,7 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -45,49 +46,57 @@ public class MallProductController {
 	
 	
 	
-	
-	//前端測試用跳轉
+	//前端跳轉
 	
 	@GetMapping("/mallindex")
 	 public String getIndex(Model model) {
 	            return "mall/mallDetai";
 	    }
 	
-
-//	@GetMapping("/lists")
-//	 public String getAll(Model model) {
-//	    		model.addAttribute("product", productService.findAll());
-//	        	System.out.println("印出來all products");
-//	            return "mall/productlists";
-//	       
-//	    }
-
 	
-	@GetMapping("/lists")
-	public String viewPage(Model model,HttpServletRequest request, HttpServletResponse response,
-	        @RequestParam(value = "pageNo", required = false) Integer pageNo){
-		//如果沒有參數則自動視為1
-		if (pageNo == null) {
-			pageNo = 1;     
-			}		
-	    Page<ProductBean> page = productService.findAllByPage(pageNo);
-	    List<ProductBean> list = page.getContent();
-	    
-	    System.out.println("印出來all products");
-	    //分頁參數
-	    model.addAttribute("currentPage", pageNo);
-	    model.addAttribute("totalPages", page.getTotalPages());
-	    model.addAttribute("totalItems", page.getTotalElements());
-	   //羅列產品
-	    model.addAttribute("product", list);
-	     
-	    return "mall/productlists";
-	}
+	
+	//測試用頁面跳轉
+		@RequestMapping("/lists")
+		public String viewPage(Model model){
+			String keyword = null;
+			return ListByPage(model,1,"productName","asc",keyword);
+		}
+
+
+	//showProduct
+	@GetMapping("/lists/{pageNo}")
+	public String ListByPage(Model model,
+	        @PathVariable("pageNo") int currentPage,
+	        @Param("sortField")String sortField,
+	        @Param("sortDir")String sortDir,
+	        @Param("keyword")String keyword)
+			{
+			Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword);
+			    
+			    System.out.println("印出來all products");
+			    //分頁參數
+			    model.addAttribute("currentPage", currentPage);
+			    model.addAttribute("totalPages", page.getTotalPages());
+			    model.addAttribute("totalItems", page.getTotalElements());
+			   //羅列產品
+			    List<ProductBean> list = page.getContent();
+			    model.addAttribute("poduct", list);
+			    //用各類別進去排序&
+			    model.addAttribute("sortField", sortField);
+			    model.addAttribute("sortDir", sortDir);
+			    model.addAttribute("keyword",keyword);
+			    
+			    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";
+			    model.addAttribute("reverSortDir", reverseSortDir);
+			     
+			    return "mall/productlists";
+			}
+	
 	
 	
 	
 	//使用ID查詢單一產品
-	@GetMapping("/lists/{productId}")
+	@GetMapping("/lists/product/{productId}")
 	 public String getOne(@PathVariable Integer productId,Model model) {
 	      ProductBean product = productService.findProductById(productId);
       		model.addAttribute("product", product);
@@ -218,7 +227,6 @@ public class MallProductController {
 			return b;
 		}	
 		
-	
 		
 		
 	// 刪除一筆紀錄
@@ -229,7 +237,6 @@ public class MallProductController {
         	System.out.println("刪除products");
 			return "redirect:/mall/lists"; 
 		}
-		
 		
 		
 		

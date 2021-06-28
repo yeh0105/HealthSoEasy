@@ -46,7 +46,7 @@ public class AdminProduct {
 
 		@GetMapping("/adminProduct")
 		 public String getAll(Model model) {
-		    		model.addAttribute("product", productService.findAll());
+		    		model.addAttribute("product", productService.findAllProduct());
 		        	System.out.println("印出來all products");
 		            return "admin/adminMall/adminProduct";
 		    }

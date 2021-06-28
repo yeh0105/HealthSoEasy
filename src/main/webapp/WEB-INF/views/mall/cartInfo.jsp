@@ -16,25 +16,35 @@
 
  <body>
 
-<!-- 引入共同的頁首 -->  
-<jsp:include page="/fragment/header.jsp" />
+	<!-- 引入共同的頁首 -->  
+	<jsp:include page="/fragment/header.jsp" />
  
-
-
- <div class="container">
+ <!-------------- start of container------------- -->
+   
+    <div class="container">
+   
+ <!-- -------------(End) start of container ------------------>
+ 
+ 
+ 
  <h2 class="page-header">Shoppingcart  [目前有${countItems}項商品]</h2>
  
  <p class="text-right"><a href="<c:url value='/mall/lists'/>" class="btn btn-primary">繼續購物</a><p>
 
-<form method="post" action="#">
+<form method="post" action="${pageContext.request.contextPath}/mall/cart/update">
+<!-- =================   表格開始    ======================================== -->
+
  <table class="table table-border">
  	<thead>
 
  <tr>
-
+	
+	<th>Action</th>
 	<th>product</th>
  	<th>Name</th>
- 	<th>Quantity(update)</th>
+ 	<th>Quantity</th>
+<!--  <button class="btn" type="button" value="submit">confirm</button> -->
+<!--  <button class="btn" type="button">+</button> -->
  	<th>price</th>
  	<th>SubTotal</th>
  	
@@ -43,24 +53,25 @@
  </thead>
 
  <tbody>
- <c:forEach var="item" items="${sessionScope.cart}">
+ <c:forEach var="item" items="${sessionScope.cart}" varStatus="i">
  <tr>
  
+<!--  移除按鈕 -->
+ <td><a class="btn btn-danger" href="${pageContext.request.contextPath}/mall/cart/remove/${i.index}">x<i class="icon-remove icon-white"></i></a></td>
  <td>#圖片</td>
  <td>${item.product.productName}</td>
  
- <!--  ===== -->
+ <!--  數量 -->
  <td>
- <div class="input-append">
- <input class="span1" style="max-width:34px;text-align:center" placeholder="1" 
+ <div class="number-input">
+ <input class="quantity" style="max-width:50px;text-align:center" placeholder="1" min="1" max="50"
  id="appendedInputButtons" size="15" type="number" name="quantities" value="${item.cartQuantity}">
-<!--  <button class="btn" type="button" value="submit">confirm</button> -->
-<!--  <button class="btn" type="button">+</button> -->
-<!--  <button class="btn btn-danger" type="button"><i class="icon-remove"></i>-</button> -->
-
+ <c:if test="${sessionScope.cart!=null}">
+ <button  class="btn btn-primary" type="submit">Update</button>
+ </c:if>
  </div>
  </td>
- <!--  ===== -->
+ <!--  (end)數量 -->
  
  <td>$${item.product.productPrice}</td>
  <td>$${item.product.productPrice*item.cartQuantity}</td>
@@ -71,7 +82,7 @@
  
  
 <td style="text-align:right"><strong>ToTal</strong></td>
-<td style="display:block">$${total}</td>
+<td align="center" style="display:block">$${total}</td>
  </tr>
  
  </tbody>
@@ -84,45 +95,6 @@
  
  </form>
  
- 
-<!--  <!-- ---------------------------控制分頁用----------------------------------- --> 
- 
-<!--  <nav style="width:300px;margin:0px auto"> -->
-<!--  <ul class=pager> -->
- 
-<!-- <!--  上頁 --> 
-<!-- <li class=previous>  -->
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${currentPage > 1}"> --%>
-<%-- 			<a href="<c:url value='/mall/lists?pageNo=${currentPage-1}'/>">Previous</a> --%>
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-<!-- 			<a>Previous</a> -->
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
-<!-- </li> -->
-<!-- <!-- 上頁結束 --> 
-
-<%-- <li style="font-style:italic;color:	#00477D"><c:out value="${currentPage}"/></li> --%>
-
-<!--  <!--  下頁 --> 
-<!-- <li class=next>  -->
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${currentPage < totalPages}"> --%>
-<%-- 			<a href="<c:url value='/mall/lists?pageNo=${currentPage + 1}'/>">Next</a> --%>
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-<!-- 			<a>Previous</a> -->
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
-<!-- </li> -->
-<!-- <!-- 下頁結束 --> 
- 
-<!-- </ul> -->
-<!--  </nav> -->
-
-<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
-
 
  
   <!-------------- end of container------------- -->
