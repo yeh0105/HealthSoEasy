@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.CustomerHealthBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.util.GlobalService;
 
@@ -37,8 +40,6 @@ public class AdminCustomer {
 		}
 		return customerBeans;
 	}
-	
-	
 	
 	//以過濾取得會員(ajax)
 	@GetMapping(value = "/adminCustomer/getCustomerByStatus.json/{customerCategory}/conf/{customerStatus}", produces = { "application/json; charset=UTF-8" })
@@ -94,10 +95,39 @@ public class AdminCustomer {
 			customerBeans = customerService.getCustomerByStatusAndExercise(GlobalService.CUSTOMER_STATUS_BANNED, GlobalService.CUSTOMER_EXERCISE_WEAK);
 		}
 		
-		System.out.println("customerBeans");
-		
-			
-		
 		return customerBeans;
+	}
+	
+//	透過ID修改會員資料
+	@PostMapping(value = "/adminUpdateCustomerInfo", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody Map<String, String> adminUpdateCustomerInfo(@RequestBody CustomerBean updateCustomerBean) {
+		//以傳入的ID搜尋原始的會員物件
+		CustomerBean originalCustomer = customerService.findByCustomerId(updateCustomerBean.getCustomerId());
+		
+		//更新檢查訊息
+		Map<String, String> updateMessage = new HashMap<String, String>();
+		
+		if(updateCustomerBean.getCustomerName() == null) {
+			updateMessage.put("updateErrorNameMessage", "名字不得為空");
+		}
+		if(updateCustomerBean.getCustomerEmail() == null) {
+			updateMessage.put("updateErrorEmailMessage", "信箱不得為空");
+		}
+		//為原始物件設定傳入的欄位值
+		originalCustomer.setCustomerName(updateCustomerBean.getCustomerName());
+		originalCustomer.setCustomerStatus(updateCustomerBean.getCustomerStatus());
+		originalCustomer.setCustomerEmail(updateCustomerBean.getCustomerEmail());
+		originalCustomer.setCustomerPhone(updateCustomerBean.getCustomerPhone());
+		originalCustomer.setCustomerNickname(updateCustomerBean.getCustomerNickname());
+		originalCustomer.setCustomerScore(updateCustomerBean.getCustomerScore());
+		originalCustomer.setCustomerBirthDay(updateCustomerBean.getCustomerBirthDay());
+		
+		
+		//save原始物件
+		customerService.updateCustomer(originalCustomer);
+		
+		//更新成功訊息
+		updateMessage.put("updateSuccessMessage", "更新成功");
+		return updateMessage;
 	}
 }
