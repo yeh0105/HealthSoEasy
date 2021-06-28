@@ -100,7 +100,7 @@ public class AdminSportMap {
 	sportMapBean.setSportMapAddress("105台北市松山區敦化北路1號");
 	sportMapBean.setSportMapInfo("為臺北市第9座啟用的運動中心，自98年11月1日開幕。前身為聽障奧運的比賽場地。中心規劃有體適能健身中心、舞蹈教室，還有兩座游泳池，一座可供民眾休閒使用，另一座是台北市唯一可以作跳水、水中芭蕾訓練使用的游泳池，也可以從事室內水 上課程，如：獨木舟等。");
 	sportMapBean.setSportMapScore(5);
-	sportMapBean.setSportMapCategory(1);
+//	sportMapBean.setSportMapCategory(1);
 	sportMapBean.setSportMapMap("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.571645929474!2d121.54804231500653!3d25.04860698396554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abc2e4069759%3A0x1ddb2333e456f746!2zMTA15Y-w5YyX5biC5p2-5bGx5Y2A5pWm5YyW5YyX6LevMeiZnw!5e0!3m2!1szh-TW!2stw!4v1624341149696!5m2!1szh-TW!2stw\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>");
 	model.addAttribute("sportMapBean", sportMapBean);
 			

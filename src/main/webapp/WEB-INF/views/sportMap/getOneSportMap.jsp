@@ -15,6 +15,65 @@
 <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet"> -->
 <link href="${pageContext.request.contextPath}/css/sportMap_getOne.css" rel="stylesheet">
 <title>所有運動地點</title>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded",function(){
+		let showFavorite = document.getElementById("showFavorite");
+		
+		//初始化XMLHttpRequest物件
+		let xhr = new XMLHttpRequest();
+		
+		//收藏按鈕
+		showFavorite.addEventListener("click",updateFavorite);
+		
+		//按下收藏按鈕，送出JSON字串資料
+		function updateFavorite(){
+			//建一支Object，裝收藏controller要的內容
+			let favoriteInfo = {
+				'favoriteCategory' : 'sportMap'	
+				'favoriteItemId' : ${sportMapBean.sportMapId}
+				
+			}
+			//將物件轉為json			
+			let json = JSON.stringify(favoriteInfo);
+			
+			console.log(json);
+			
+			xhr.open('POST',"<c:url value='/favoriteController/addFavorite'/>");
+			xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			xhr.send(json);
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status ==200){
+					
+					let favoriteJson ==JSON.parse(xhr.responseText);
+					console.log(favoriteJson);
+					//更改圖片
+					if (favoriteJson.favoriteExist){
+						showFavorite.src="${pageContext.request.contextPath}/images/sportMap/Like1.png";
+					}else {
+						showFavorite.src="${pageContext.request.contextPath}/images/sportMap/Like2.png";
+
+					}
+										
+				}
+				
+				
+			}
+			
+			
+		}		
+		
+		
+		
+	} )
+
+
+</script>
+
+
+
+
 </head>
 <body>
 	<jsp:include page="/fragment/header.jsp" />
@@ -28,8 +87,10 @@
 
         <div class="rightC">
             
-               <div class="floatR"> <a class='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/${sportMapBean.sportMapId}">
-                    點我收藏</a></div>
+<%--                <div class="floatR"> <a id='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/sportMap/${sportMapBean.sportMapId}"> --%>
+<%--                     <img src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></a></div> --%>
+                <div  class="floatR"><button id="showFavorite"><img src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
+                    
           <div class="">  
             <h1>${sportMapBean.sportMapName}</h1>
             <h3>${sportMapBean.sportMapAddress}</h3>
@@ -73,19 +134,19 @@
 	</form>
 
 	<!-- -----------------------------收藏地點------------------------------- -->
-	<script>
-		$(document).ready(function() {
-			$('.getLikeLink').click(function() {
-				if (confirm('要收藏這個地點嗎? ')) {
-					var href = $(this).attr('href');
-					$('form').attr('action', href).submit();
+<!-- 	<script> -->
+// 		$(document).ready(function() {
+// 			$('#getLikeLink').click(function() {
+// 				if (confirm('要收藏這個地點嗎? ')) {
+// 					var href = $(this).attr('href');
+// 					$('form').attr('action', href).submit();
+// 					console.log(${customerSignInSuccess.customerId});
+// 				}
+// 				return false;
 
-				}
-				return false;
-
-			});
-		})
-	</script>
+// 			});
+// 		})
+<!-- 	</script> -->
 	<!-- -----------------------------收藏地點------------------------------- -->
 	<!-- -----------------------------評分一下------------------------------- -->
 	<script>

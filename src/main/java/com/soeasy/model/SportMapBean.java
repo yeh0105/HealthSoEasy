@@ -32,6 +32,11 @@ public class SportMapBean implements Serializable {
 	private String sportMapMap;
 	private Integer sportMapCategory;
 	private Integer sportMapScore;
+	
+	//判斷收藏
+	@Transient
+	private Boolean favoriteStatus;
+	
 
 	// 種類
 	@Transient

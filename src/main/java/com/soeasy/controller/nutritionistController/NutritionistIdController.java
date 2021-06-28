@@ -118,7 +118,6 @@ public class NutritionistIdController {
 		try {
 			nutritionistService.addNutritionist(nutritionistBean);
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
-//			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "nutritionist/addNutritionists";
 
 		}

@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		<div class="btnBy2">
 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
 				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
-				width="100%" height="100%"></a>
+				width="120%" height="120%"></a>
 		</div>
 		<div class="btnBy3">
 			依區域：

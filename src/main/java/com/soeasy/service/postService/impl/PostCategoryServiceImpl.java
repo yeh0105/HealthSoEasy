@@ -34,6 +34,11 @@ public class PostCategoryServiceImpl implements PostCategoryService {
 	// 取出所有類別
 	@Override
 	public List<PostCategoryBean> getAllPostCategorys() {
+		
+		List<PostCategoryBean> postCategory = postCategoryRepository.findAll();
+		
+		
+		
 		return (List<PostCategoryBean>) postCategoryRepository.findAll();
 	}
 
