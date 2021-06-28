@@ -178,7 +178,7 @@ public class AdminNutritionists {
 		model.addAttribute("nutritionistCategoryList", nutritionistCategoryList);
 	}
 
-	// 刪除單筆運動地點
+	// 刪除單筆營養師
 	@PostMapping("/adminNutritionist/del/{nutritionistId}")
 	public String delete(@PathVariable("nutritionistId") Integer nutritionistId) {
 		nutritionistService.deleteByNutritionistId(nutritionistId);
@@ -234,7 +234,6 @@ public class AdminNutritionists {
 		try {
 			nutritionistService.updateNutritionist(nutritionistBean);
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
-//			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "/admin/adminNutritionist/adminUpdateNutritionist";
 		}
 		return "redirect:/admin/adminManage/adminNutritionist";
