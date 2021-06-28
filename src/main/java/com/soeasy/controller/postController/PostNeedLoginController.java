@@ -158,7 +158,7 @@ public class PostNeedLoginController {
 			return "redirect:/customerController/customerSignIn";
 		}
 
-		System.err.println("進入刪除");
+//		System.err.println("進入刪除");
 
 		// 取得原始的PostBean物件
 		postChangeBean = postService.findByPostId(postId);
@@ -168,7 +168,7 @@ public class PostNeedLoginController {
 		// 修改Post
 		postService.updatePost(postChangeBean);
 
-		System.err.println("刪除了!!!");
+//		System.err.println("刪除了!!!");
 
 		// 跳轉至post首頁(送postIndex請求)
 		return "redirect:/postIndex";
@@ -300,7 +300,7 @@ public class PostNeedLoginController {
 
 		}
 		// 跳轉至查詢所有文章頁面(送getAllPost請求)
-		return "/post/postByCategory";
+		return "redirect:/postByCategory";
 
 	}
 
@@ -373,5 +373,6 @@ public class PostNeedLoginController {
 	public void commonCategory(Model model) {
 		List<PostCategoryBean> postCategoryBeanList = postCategoryService.getAllPostCategorys();
 		model.addAttribute("postCategoryBeanList", postCategoryBeanList);
+//		System.err.println("postCategoryBeanList="+postCategoryBeanList);
 	}
 }

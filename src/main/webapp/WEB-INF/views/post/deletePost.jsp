@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 			<h1>
 				Oh！文章不見了。<br />
 			</h1>
-			<a class="home-link" href="#">這篇文章已被作者或管理者刪除。返回看更多文章吧</a>
+			<a class="home-link" href="<c:url value='/postIndex'/>">這篇文章已被作者或管理者刪除。返回看更多文章吧</a>
 		</div>
 		<div class="ground">
 			<div class="mound">
