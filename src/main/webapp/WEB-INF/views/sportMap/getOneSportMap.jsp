@@ -19,18 +19,18 @@
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded",function(){
 		let showFavorite = document.getElementById("showFavorite");
+		let favoriteHeart = document.getElementById("favoriteHeart");
 		
 		//初始化XMLHttpRequest物件
 		let xhr = new XMLHttpRequest();
 		
 		//收藏按鈕
 		showFavorite.addEventListener("click",updateFavorite);
-		
 		//按下收藏按鈕，送出JSON字串資料
 		function updateFavorite(){
 			//建一支Object，裝收藏controller要的內容
 			let favoriteInfo = {
-				'favoriteCategory' : 'sportMap'	
+				'favoriteCategory' : 'sportMap'	,
 				'favoriteItemId' : ${sportMapBean.sportMapId}
 				
 			}
@@ -46,13 +46,13 @@
 			xhr.onreadystatechange = function(){
 				if (xhr.readyState == 4 && xhr.status ==200){
 					
-					let favoriteJson ==JSON.parse(xhr.responseText);
+					let favoriteJson = JSON.parse(xhr.responseText);
 					console.log(favoriteJson);
 					//更改圖片
 					if (favoriteJson.favoriteExist){
-						showFavorite.src="${pageContext.request.contextPath}/images/sportMap/Like1.png";
+						favoriteHeart.src="${pageContext.request.contextPath}/images/sportMap/Like2.png";
 					}else {
-						showFavorite.src="${pageContext.request.contextPath}/images/sportMap/Like2.png";
+						favoriteHeart.src="${pageContext.request.contextPath}/images/sportMap/Like1.png";
 
 					}
 										
@@ -89,7 +89,7 @@
             
 <%--                <div class="floatR"> <a id='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/sportMap/${sportMapBean.sportMapId}"> --%>
 <%--                     <img src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></a></div> --%>
-                <div  class="floatR"><button id="showFavorite"><img src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
+                <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
                     
           <div class="">  
             <h1>${sportMapBean.sportMapName}</h1>
