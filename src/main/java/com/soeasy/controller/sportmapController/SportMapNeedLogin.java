@@ -24,8 +24,9 @@ public class SportMapNeedLogin {
 	
 	
 	//地圖加入收藏
-	@PostMapping("/getLike/{sportMapId}")
+	@PostMapping("/getLike/{sportMap}/{sportMapId}")
 	public String getLike(Model model,
+	@PathVariable("sportMap") String sportMap,		
 	@PathVariable("sportMapId") Integer sportMapId) {
 			
 		// 判斷是否為會員
@@ -39,7 +40,12 @@ public class SportMapNeedLogin {
 			
 //			return "redirect:/sportMapController/sportMap/{sportMapId}";
 			return "redirect:/sportMapController/displaySportMaps";
+			
 		}
+	
+	
+	
+	
 				
 	//地圖評分(接兩個參數1.ID 2.分數)
 	@PostMapping("/getScore/{sportMapId}/{scoreNo}")

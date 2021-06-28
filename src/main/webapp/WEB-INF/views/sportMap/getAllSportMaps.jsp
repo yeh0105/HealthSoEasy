@@ -59,49 +59,49 @@
 	</div>
 	
 	<!-- ---------------------------控制分頁用----------------------------------- -->
-<div class="style1">
-		<table border="1" id="tb2">
-			<tr align="center">
-				<td width='80' height='20'><c:if test="${pageNo > 1}">
-						<div id="">
-							<a href="<c:url value='displaySportMaps?pageNo=1#tb2' />"> <img
-							src="${pageContext.request.contextPath}/images/sportMap/iconStart.png"
-								border='0' alt='第一頁' height='30' width='30' />
-							</a>
-						</div>
-					</c:if></td>
-				<td width='80'><c:if test="${pageNo > 1}">
-						<div id="">
-							<a
-								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb2' />">
-								<img src="${pageContext.request.contextPath}/images/sportMap/iconPre.png"
-								border='0' alt='前一頁' height='30' width='30' />
-							</a>
-						</div>
-					</c:if></td>
-				<td width='76'>${pageNo}/ ${totalPages}</td>
-				<td width='80'><c:if test="${pageNo != totalPages}">
-						<div id="">
-							<a
-								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb2' />">
-								<img src="${pageContext.request.contextPath}/images/sportMap/iconNext.png"
-								border='0' alt='下一頁' height='30' width='30' />
-							</a>
-						</div>
-					</c:if></td>
-				<td width='80'><c:if test="${pageNo != totalPages}">
-						<div id="">
-							<a
-								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb2' />">
-								<img 
-								src="${pageContext.request.contextPath}/images/sportMap/iconEnd.png"
-								border='0' alt='最末頁' height='30' width='30' />
-							</a>
-						</div>
-					</c:if></td>
-			</tr>
-		</table>
-	</div>
+<!-- <div class="style1"> -->
+<!-- 		<table border="0" id="tb2"> -->
+<!-- 			<tr align="center"> -->
+<%-- 				<td width='80' height='20'><c:if test="${pageNo > 1}"> --%>
+<!-- 						<div id=""> -->
+<%-- 							<a href="<c:url value='displaySportMaps?pageNo=1#tb2' />"> <img --%>
+<%-- 							src="${pageContext.request.contextPath}/images/sportMap/iconStart.png" --%>
+<!-- 								border='0' alt='第一頁' height='30' width='30' /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<%-- 					</c:if></td> --%>
+<%-- 				<td width='80'><c:if test="${pageNo > 1}"> --%>
+<!-- 						<div id=""> -->
+<!-- 							<a -->
+<%-- 								href="<c:url value='displaySportMaps?pageNo=${pageNo-1}#tb2' />"> --%>
+<%-- 								<img src="${pageContext.request.contextPath}/images/sportMap/iconPre.png" --%>
+<!-- 								border='0' alt='前一頁' height='30' width='30' /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<%-- 					</c:if></td> --%>
+<%-- 				<td width='76'>${pageNo}/ ${totalPages}</td> --%>
+<%-- 				<td width='80'><c:if test="${pageNo != totalPages}"> --%>
+<!-- 						<div id=""> -->
+<!-- 							<a -->
+<%-- 								href="<c:url value='displaySportMaps?pageNo=${pageNo+1}#tb2' />"> --%>
+<%-- 								<img src="${pageContext.request.contextPath}/images/sportMap/iconNext.png" --%>
+<!-- 								border='0' alt='下一頁' height='30' width='30' /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<%-- 					</c:if></td> --%>
+<%-- 				<td width='80'><c:if test="${pageNo != totalPages}"> --%>
+<!-- 						<div id=""> -->
+<!-- 							<a -->
+<%-- 								href="<c:url value='displaySportMaps?pageNo=${totalPages}#tb2' />"> --%>
+<!-- 								<img  -->
+<%-- 								src="${pageContext.request.contextPath}/images/sportMap/iconEnd.png" --%>
+<!-- 								border='0' alt='最末頁' height='30' width='30' /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<%-- 					</c:if></td> --%>
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 
 <!-- ------------------------------控制分頁結束區塊--------------------------------- -->
 	
@@ -171,7 +171,7 @@
 	</script>
 <!-- ---------------------------控制分頁用----------------------------------- -->
 	<div class="style1">
-		<table border="1" id="tb1">
+		<table border="0" id="tb1">
 			<tr align="center">
 				<td width='80' height='20'><c:if test="${pageNo > 1}">
 						<div id="">
