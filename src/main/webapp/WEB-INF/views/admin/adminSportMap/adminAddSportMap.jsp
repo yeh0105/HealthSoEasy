@@ -290,12 +290,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 					<form:errors path="sportMapScore" cssClass="error" />
 					</td>
 				</tr>
-				<tr>	
-					<td>分類：</td>
-					<td width='600'><form:input path='sportMapCategory' /> 
-					<form:errors path="sportMapCategory" cssClass="error" />
-					</td>
-				</tr>
+<!-- 				<tr>	 -->
+<!-- 					<td>分類：</td> -->
+<%-- 					<td width='600'><form:input path='sportMapCategory' />  --%>
+<%-- 					<form:errors path="sportMapCategory" cssClass="error" /> --%>
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				
 				<tr>	
 					<td>地圖：</td>
