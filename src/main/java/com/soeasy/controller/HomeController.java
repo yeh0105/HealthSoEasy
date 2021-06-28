@@ -20,6 +20,12 @@ public class HomeController {
 	public String postIndex() {
 		return "/post/postIndex";
 	}
+	
+	// 從SoEasy首頁跳至post首頁
+	@GetMapping({ "/postByCategory" })
+	public String postByCategory() {
+		return "/post/postByCategory";
+	}
 
 //	// 從SoEasy首頁跳至nutritionist首頁
 //	@GetMapping({ "/nutritionist" })

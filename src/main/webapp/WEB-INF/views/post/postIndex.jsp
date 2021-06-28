@@ -19,6 +19,63 @@
 	rel="stylesheet">
 <link rel="stylesheet" href="css/categoryNav.css">
 <link rel="stylesheet" href="css/header&footer.css">
+<script>
+document.addEventListener("DOMContentLoaded",function() {
+	
+	//變數宣告------------------------------------------------------------
+
+	var top3Posts;
+
+	//變數宣告------------------------------------------------------------
+	
+	//載入時 取得所有文章的Top3-----------------------------------------------------
+	//新建XMLHttpRequest物件
+	let xhr = new XMLHttpRequest();
+	//設定連線內容
+	xhr.open("GET","<c:url value='/PostController/getTop3Post'/>",true);
+	//對伺服器發送請求
+	xhr.send();
+	//當readyState屬性值改變時呼叫此方法
+	xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+
+		var top3Posts = JSON.parse(xhr.responseText);
+		console.log(xhr.responseText);
+
+		displaytop3Post(); // 顯示讀取到的非文字性資料
+		}
+	}
+	
+	// 顯示送回來的所有文章
+	function displaytop3Post() {
+		
+		let content = "";
+		
+		(top3Posts).forEach(post =>{
+			
+			<li class="span4">
+			<div class="thumbnail">
+				<img alt="300x200" src="images/post/product_01.jpg" />
+				<div class="caption">
+					<h3>缩略图标题</h3>
+					<p>123456</p>
+					<a
+						href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
+						>>>觀看更多 </a>
+					<div style="display: flex;">
+						<p>
+							<a href="#"> <img alt=""
+								src="images/post/heart-empty.png" width="7%" height="7%">
+							</a>123
+						<p style="font-size: 15px; color: grey;">By NickName</p>
+						</p>
+					</div>
+				</div>
+			</div>
+		</li>
+	}
+})
+</script>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
@@ -46,74 +103,74 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<h3>熱門文章</h3>
-						<ul class="thumbnails">
-							<li class="span4">
-								<div class="thumbnail">
-									<img alt="300x200" src="images/post/product_01.jpg" />
-									<div class="caption">
-										<h3>缩略图标题</h3>
-										<p>123456</p>
-										<a
-											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
-											>>>觀看更多 </a>
-										<div style="display: flex;">
-											<p>
-												<a href="#"> <img alt=""
-													src="images/post/heart-empty.png" width="7%" height="7%">
-												</a>123
-											<p style="font-size: 15px; color: grey;">By NickName</p>
-											</p>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="span4">
-								<div class="thumbnail">
-									<img alt="300x200" src="images/post/product_01.jpg" />
-									<div class="caption">
-										<h3>缩略图标题</h3>
-										<p>123456</p>
-										<a
-											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
-											>>>觀看更多 </a>
-										<div style="display: flex;">
-											<p>
-												<a href="#"> <img alt=""
-													src="images/post/heart-empty.png" width="7%" height="7%">
-												</a>123
-											<p style="font-size: 15px; color: grey;">By NickName</p>
-											</p>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="span4">
-								<div class="thumbnail">
-									<img alt="300x200" src="images/post/product_01.jpg" />
-									<div class="caption">
-										<h3>缩略图标题</h3>
-										<p>123456</p>
-										<a
-											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">
-											>>>觀看更多 </a>
-										<div style="display: flex;">
-											<p>
-												<a href="#"> <img alt=""
-													src="images/post/heart-empty.png" width="7%" height="7%">
-												</a>123
-											<p style="font-size: 15px; color: grey;">By NickName</p>
-											</p>
-										</div>
-									</div>
-								</div>
-							</li>
+						<ul class="thumbnails" id=insertTop3>
+<!-- 							<li class="span4"> -->
+<!-- 								<div class="thumbnail"> -->
+<!-- 									<img alt="300x200" src="images/post/product_01.jpg" /> -->
+<!-- 									<div class="caption"> -->
+<!-- 										<h3>缩略图标题</h3> -->
+<!-- 										<p>123456</p> -->
+<!-- 										<a -->
+<%-- 											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />"> --%>
+<!-- 											>>>觀看更多 </a> -->
+<!-- 										<div style="display: flex;"> -->
+<!-- 											<p> -->
+<!-- 												<a href="#"> <img alt="" -->
+<!-- 													src="images/post/heart-empty.png" width="7%" height="7%"> -->
+<!-- 												</a>123 -->
+<!-- 											<p style="font-size: 15px; color: grey;">By NickName</p> -->
+<!-- 											</p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</li> -->
+<!-- 							<li class="span4"> -->
+<!-- 								<div class="thumbnail"> -->
+<!-- 									<img alt="300x200" src="images/post/product_01.jpg" /> -->
+<!-- 									<div class="caption"> -->
+<!-- 										<h3>缩略图标题</h3> -->
+<!-- 										<p>123456</p> -->
+<!-- 										<a -->
+<%-- 											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />"> --%>
+<!-- 											>>>觀看更多 </a> -->
+<!-- 										<div style="display: flex;"> -->
+<!-- 											<p> -->
+<!-- 												<a href="#"> <img alt="" -->
+<!-- 													src="images/post/heart-empty.png" width="7%" height="7%"> -->
+<!-- 												</a>123 -->
+<!-- 											<p style="font-size: 15px; color: grey;">By NickName</p> -->
+<!-- 											</p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</li> -->
+<!-- 							<li class="span4"> -->
+<!-- 								<div class="thumbnail"> -->
+<!-- 									<img alt="300x200" src="images/post/product_01.jpg" /> -->
+<!-- 									<div class="caption"> -->
+<!-- 										<h3>缩略图标题</h3> -->
+<!-- 										<p>123456</p> -->
+<!-- 										<a -->
+<%-- 											href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />"> --%>
+<!-- 											>>>觀看更多 </a> -->
+<!-- 										<div style="display: flex;"> -->
+<!-- 											<p> -->
+<!-- 												<a href="#"> <img alt="" -->
+<!-- 													src="images/post/heart-empty.png" width="7%" height="7%"> -->
+<!-- 												</a>123 -->
+<!-- 											<p style="font-size: 15px; color: grey;">By NickName</p> -->
+<!-- 											</p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</li> -->
 						</ul>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span12">
-						<h3 style="padding-left: 3%;">全部</h3>
-					</div>
+<!-- 					<div class="span12"> -->
+<!-- 						<h3 style="padding-left: 3%;">全部</h3> -->
+<!-- 					</div> -->
 					<div class="span8" style="margin: 0px; margin-bottom: 1%;">
 						<nav class="menu">
 							<ol>

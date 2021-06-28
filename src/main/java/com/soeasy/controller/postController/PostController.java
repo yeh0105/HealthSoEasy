@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -21,15 +22,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.PostBean;
+import com.soeasy.model.PostCategoryBean;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
 
 @Controller
 @RequestMapping("/PostController")
-@SessionAttributes({ "customerSignInSuccess" })
 public class PostController {
 
 	@Autowired
@@ -40,7 +41,32 @@ public class PostController {
 
 	@Autowired
 	ServletContext context;
-	
+
+	// 查詢所有文章的 TOP3
+	@GetMapping(value = "/getTop3Post", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<PostBean> getTop3() {
+		System.err.println("進入getTop3Post");
+
+		List<PostBean> list = postService.findTop3();
+
+		System.err.println("list=" + list);
+		System.err.println("出去PostController");
+		return list;
+	}
+
+	// 查詢文章類別的 TOP10
+	@GetMapping(value = "/getTop10PostByPostCategoryId.json", produces = { "application/json; charset=UTF-8" })
+	public List<PostBean> getTop10ByPostCategoryBean(
+			@RequestParam(value = "postCategoryBean", required = false) PostCategoryBean postCategoryBean) {
+		System.err.println("進入getTop10PostByPostCategoryId");
+
+		List<PostBean> list = postService.findTop10ByPostCategoryBean(postCategoryBean);
+
+		System.err.println("list=" + list);
+		System.err.println("出去PostController");
+		return list;
+	}
+
 	// 取得所有文章
 	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
 	public ResponseEntity<Map<String, Object>> getPageBook(
@@ -57,8 +83,8 @@ public class PostController {
 			totalPage = postService.getTotalPages();
 		}
 
-		Map<String, Object> postmap =  new HashMap<>();
-				
+		Map<String, Object> postmap = new HashMap<>();
+		List<PostBean> listTarget = postService.getPagePosts(pageNo);
 
 //		System.err.println("postmap=" + postmap);
 
@@ -67,37 +93,45 @@ public class PostController {
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
 		postmap.put("post_DPP", postService.getPagePosts(pageNo));
 //		System.err.println("newpostmap=" + postmap);
-		
+
 		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);
 
 		return re;
 
 	}
 
-//	// 查詢全部文章
-//	@GetMapping(value = "/getAllPost.json")
-//	public String getAllPosts(Model model, HttpServletRequest request, HttpServletResponse response,
-//			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
-//
-//		System.err.println("接收到getAllPosts請求");
-//		System.err.println("pageNo=" +pageNo);
-//
-//		if (pageNo == null) {
-//			pageNo = 1; // 網址加?pageNo=測試
-//		}
-//		
-//		System.err.println("getAll");
-//
-//		Map<Integer, PostBean> postMap = postService.getPagePosts(pageNo);
-//		model.addAttribute("currPage", String.valueOf(pageNo));
-//		model.addAttribute("totalPages", postService.getTotalPages());
-//		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-//		model.addAttribute("post_DPP", postMap);
-//
-////		List<PostBean> postBean = postService.findAllByPostId();
-////		model.addAttribute("postList", postBean);
-//		return "post/postByCategory";
-//	}
+	// 取得所有文章By PostCategoryId
+	@GetMapping(value = "/getAllPostByPostCategoryId.json", produces = { "application/json; charset=UTF-8" })
+	public ResponseEntity<Map<String, Object>> getByPostCategoryBean(
+			@RequestParam(value = "postCategoryBean", required = false) PostCategoryBean postCategoryBean,
+			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
+			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
+
+//			System.err.println("接收到/pagingPostData.json請求");
+
+		if (pageNo == null) {
+			pageNo = 1; // 網址加?pageNo=測試
+		}
+
+		if (totalPage == null) {
+			totalPage = postService.getTotalPagesByPostCategoryId(postCategoryBean);
+		}
+
+		Map<String, Object> postmap = new HashMap<>();
+
+//			System.err.println("postmap=" + postmap);
+
+		postmap.put("currPage", String.valueOf(pageNo));
+		postmap.put("totalPage", totalPage);
+		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
+		postmap.put("post_DPP", postService.getPageByPostCategoryBean(postCategoryBean, pageNo));
+//		System.err.println("newpostmap=" + postmap);
+
+		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);
+
+		return re;
+
+	}
 
 	// 讀圖轉成位元組陣列
 	@RequestMapping(value = "/getPicture/{postId}", method = RequestMethod.GET)

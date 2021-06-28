@@ -77,7 +77,7 @@ public class PostBean implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_postCategoryId")
-	private PostCategoryBean PostCategoryBean;
+	private PostCategoryBean postCategoryBean;
 
 	// ----------------------------
 	public PostBean() {
@@ -197,11 +197,11 @@ public class PostBean implements Serializable {
 	}
 
 	public PostCategoryBean getPostCategoryBean() {
-		return PostCategoryBean;
+		return postCategoryBean;
 	}
 
 	public void setPostCategoryBean(PostCategoryBean postCategoryBean) {
-		PostCategoryBean = postCategoryBean;
+		this.postCategoryBean = postCategoryBean;
 	}
 
 	@Override
@@ -211,7 +211,7 @@ public class PostBean implements Serializable {
 				+ ", postUploadTime=" + postUploadTime + ", postUploadDate=" + postUploadDate + ", postLike=" + postLike
 				+ ", postStatus=" + postStatus + ", customerId=" + customerId + ", customerBean=" + customerBean
 				+ ", replyBeans=" + replyBeans + ", postCategoryId=" + postCategoryId + ", PostCategoryBean="
-				+ PostCategoryBean + "]";
+				+ postCategoryBean + "]";
 	}
 
 
