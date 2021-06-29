@@ -18,14 +18,14 @@ public class RecordController {
 	@Autowired
 	RecordService recordService;
 
-	// 查詢全部營養師
+	// 查詢全部日誌
 	@GetMapping("/getAllRecords")
 	public String DisplayRecord(Model model) {
 		model.addAttribute("records", recordService.findAllByRecordId());
 		return "/record/getAllRecords";
 	}
 
-	// 查詢單營養師
+	// 查詢單日誌
 	@GetMapping(value = "/record/{recordId}")
 	public String getOneRecordById(@PathVariable("recordId") Integer recordId, Model model) {
 		RecordBean recordBean = recordService.findByRecordId(recordId);
@@ -33,7 +33,7 @@ public class RecordController {
 		return "/record/recordIndex";
 	}
 
-	// 新增營養師，先送一個空白表單，並給予初值
+	// 新增日誌，先送一個空白表單，並給予初值
 	@GetMapping(value = "/addRecord")
 	public String emptyRecord(Model model) {
 		RecordBean recordBean = new RecordBean();
