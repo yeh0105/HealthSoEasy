@@ -92,16 +92,21 @@ public class AdminLogin {
 	}
 	@GetMapping(value = "/switchMode.json", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody String switchMode(Model model) {
-		String switchMode = (String)model.getAttribute("switchMode");
-		if(switchMode.equals("moon")) {
-			//設定日間模式
+		String switchMode = (String) model.getAttribute("switchMode");
+		if (switchMode == null) {
+			// 設定夜間模式
+			switchMode = "moon";
+			model.addAttribute("switchMode", "moon");
+		} else if (switchMode.equals("moon")) {
+			// 設定日間模式
 			switchMode = "sun";
 			model.addAttribute("switchMode", "sun");
-		} else if(switchMode.equals("sun") || switchMode == null){	
-			//設定夜間模式
+		} else if (switchMode.equals("sun")) {
+			// 設定夜間模式
 			switchMode = "moon";
 			model.addAttribute("switchMode", "moon");
 		}
+		
 		return switchMode;
 	}
 }

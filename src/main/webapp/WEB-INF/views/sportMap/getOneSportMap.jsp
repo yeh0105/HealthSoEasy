@@ -135,17 +135,17 @@
 
 	<!-- -----------------------------收藏地點------------------------------- -->
 <!-- 	<script> -->
-// 		$(document).ready(function() {
-// 			$('#getLikeLink').click(function() {
-// 				if (confirm('要收藏這個地點嗎? ')) {
-// 					var href = $(this).attr('href');
-// 					$('form').attr('action', href).submit();
-// 					console.log(${customerSignInSuccess.customerId});
-// 				}
-// 				return false;
+<!-- // 		$(document).ready(function() { -->
+<!-- // 			$('#getLikeLink').click(function() { -->
+<!-- // 				if (confirm('要收藏這個地點嗎? ')) { -->
+<!-- // 					var href = $(this).attr('href'); -->
+<!-- // 					$('form').attr('action', href).submit(); -->
+<%-- // 					console.log(${customerSignInSuccess.customerId}); --%>
+<!-- // 				} -->
+<!-- // 				return false; -->
 
-// 			});
-// 		})
+<!-- // 			}); -->
+<!-- // 		}) -->
 <!-- 	</script> -->
 	<!-- -----------------------------收藏地點------------------------------- -->
 	<!-- -----------------------------評分一下------------------------------- -->

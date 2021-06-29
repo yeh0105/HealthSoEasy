@@ -57,6 +57,9 @@ public class SportMapController {
 	//(前台用)查詢單一地點詳細資料
 	@GetMapping(value="/sportMap/{sportMapId}")
 	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+		
+		
+		
 	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
 	model.addAttribute("sportMapBean",sportMapBean);
 		return "sportMap/getOneSportMap"; //查詢單一頁面

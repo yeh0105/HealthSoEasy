@@ -28,6 +28,7 @@ public class FavoriteController {
 	@Autowired
 	FavoriteService favoriteService;
 	
+	//新增or取消收藏
 	@PostMapping(value = "/addFavorite", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody Map<String, Boolean> addFavorite(@RequestBody FavoriteBean favoriteBean, Model model){
 		CustomerBean customerSignInSuccess = (CustomerBean)model.getAttribute("customerSignInSuccess");
@@ -50,5 +51,4 @@ public class FavoriteController {
 		return favoriteMessage;
 		
 	}
-	
 }
