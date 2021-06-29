@@ -124,5 +124,15 @@ public class SportMapBean implements Serializable {
 		this.sportCategoryBean = sportCategoryBean;
 	}
 
+	public Boolean getFavoriteStatus() {
+		return favoriteStatus;
+	}
+
+	public void setFavoriteStatus(Boolean favoriteStatus) {
+		this.favoriteStatus = favoriteStatus;
+	}
+	
+	
+
 	
 }

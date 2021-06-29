@@ -89,7 +89,17 @@
             
 <%--                <div class="floatR"> <a id='getLikeLink' href="<c:url value='/' />sportMapNeedLogin/getLike/sportMap/${sportMapBean.sportMapId}"> --%>
 <%--                     <img src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></a></div> --%>
-                <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
+
+<%--                 <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>   --%>
+		<c:choose>
+			<c:when test="${sportMapBean.favoriteStatus == true}">
+                <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like2.png"></button></div>  
+			</c:when>
+			<c:otherwise>
+			   <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
+			
+			</c:otherwise>
+		</c:choose>
                     
           <div class="">  
             <h1>${sportMapBean.sportMapName}</h1>
@@ -135,17 +145,17 @@
 
 	<!-- -----------------------------收藏地點------------------------------- -->
 <!-- 	<script> -->
-// 		$(document).ready(function() {
-// 			$('#getLikeLink').click(function() {
-// 				if (confirm('要收藏這個地點嗎? ')) {
-// 					var href = $(this).attr('href');
-// 					$('form').attr('action', href).submit();
-// 					console.log(${customerSignInSuccess.customerId});
-// 				}
-// 				return false;
+<!-- // 		$(document).ready(function() { -->
+<!-- // 			$('#getLikeLink').click(function() { -->
+<!-- // 				if (confirm('要收藏這個地點嗎? ')) { -->
+<!-- // 					var href = $(this).attr('href'); -->
+<!-- // 					$('form').attr('action', href).submit(); -->
+<%-- // 					console.log(${customerSignInSuccess.customerId}); --%>
+<!-- // 				} -->
+<!-- // 				return false; -->
 
-// 			});
-// 		})
+<!-- // 			}); -->
+<!-- // 		}) -->
 <!-- 	</script> -->
 	<!-- -----------------------------收藏地點------------------------------- -->
 	<!-- -----------------------------評分一下------------------------------- -->
