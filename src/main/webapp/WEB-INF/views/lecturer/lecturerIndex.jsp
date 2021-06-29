@@ -30,7 +30,7 @@
 		<section id="offer">
 			<div style="background-color: #C9D8BF; text-align: center;">
 				<div style="margin: 5% auto;">
-					<h1 style="color: #1d3b2a; font-family: Caudex;">So Lecturer(講座首頁暫時先放這頁測試用)</h1>
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Lecturer</h1>
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">現在開始你/妳的健康革命！</p>
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">聽聽講師怎麼說，讓你越吃越瘦、越動越健康！</p>
 				</div>
