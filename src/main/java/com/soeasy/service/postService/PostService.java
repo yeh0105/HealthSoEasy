@@ -9,6 +9,9 @@ public interface PostService {
 
 	// 查詢所有文章的 TOP3
 	List<PostBean> findTop3();
+	
+	// 查詢所有文章的 TOP10
+	List<PostBean> findTop10();
 
 	// 查詢文章類別的 TOP10
 	List<PostBean> findTop10ByPostCategoryBean(PostCategoryBean postCategoryBean);
@@ -40,15 +43,6 @@ public interface PostService {
 	Integer getTotalPagesByPostCategoryId(PostCategoryBean postCategoryBean);
 
 	// 查詢全部ByPostCategoryId(有分頁)-------------------------------------------------------------------------
-
-//	// 查詢所有類別的 TOP3
-//	List<PostBean> findTop3(Sort sort);
-//
-//	// 查詢文章類別的 TOP3
-//	List<PostBean> findTop3ByPostCategory(Sort sort);
-//
-//	// 查詢文章類別的 TOP10
-//	List<PostBean> findTop10ByPostCategory(Sort sort);
 
 	// 新增文章
 	void addPost(PostBean postBean);

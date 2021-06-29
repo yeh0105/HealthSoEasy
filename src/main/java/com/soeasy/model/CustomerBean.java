@@ -139,6 +139,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer recordId;
 	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<RecordBean> recordBeans = new LinkedHashSet<RecordBean>();
 	
@@ -146,6 +147,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer replyId;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<ReplyBean> replyBeans = new LinkedHashSet<ReplyBean>();
 	// ------------------------------------------
