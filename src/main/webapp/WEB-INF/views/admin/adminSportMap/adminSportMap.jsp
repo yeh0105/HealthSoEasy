@@ -188,7 +188,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </button>
 <!--       新增 -->
       <a href="<c:url value='/admin/adminManage/adminSportMap/add' />">
-      <button class="app-content-headerButton">Add</button></a>
+      <button class="app-content-headerButton">新增地點</button></a>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->

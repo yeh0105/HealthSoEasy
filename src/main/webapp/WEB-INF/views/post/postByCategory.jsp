@@ -32,7 +32,7 @@
 		var pageNo = 0;
 		var totalPage = 0;
 		var responseData;
-		var categoryStatus=0;
+		var categoryStatus="all";
 
 		//變數宣告------------------------------------------------------------
 
@@ -185,7 +185,7 @@
 // 			Object.entries(posts).forEach(([i,post]) =>{
 			
 				content += '<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding: 1% 1% 0% 1%;">'
-						+ '<div class="row-fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
+						+ '<div class="row-<fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
 						+ '<div class="span9">'
 						+ '<div class="media">'
 // 						文章圖片
@@ -385,9 +385,6 @@
 			<div class="span12">
 				<div class="row-fluid">
 					<div class="row-fluid" style="border-radius: 5px; padding-top: 5%;">
-						<!-- 	<div class="span12"> -->
-						<!-- 		<h3 style="padding-left: 3%; border-top: 7px solid #325b43; border-radius: 5px;">全部</h3> -->
-						<!-- 	</div> -->
 						<div class="span8" style="margin: 0px; margin-bottom: 1%;">
 							<nav class="menu">
 								<ol>

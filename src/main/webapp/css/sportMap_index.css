@@ -1,7 +1,7 @@
 
 .centerDiv {
 	display: flex;
-	width:90%;
+	width:100%;
 	margin:10px auto;
 	padding:30px 20px 50px 10px;
 /* 	border:1px red solid; */
@@ -9,20 +9,36 @@
 }
 
 .font1{
-	color:#6d597a;
+	color:#8a5a44;
 	font-weight:bold;
-	font-size:15px;
-	background-color: #f7fff7;
-	border:1px solid ;
+	font-size:18px;
+	background-color: #f4f1de;
+	border:1px solid #f1faee ;
 	border-radius:10px;	
 	margin:10px 10px 10px 30px;
 	padding:5px;	
 }
 
 .font1:hover{
-	background-color: #bca3ac;
+	background-color: #b08968;
 	color:#f6fff8;
-	
+		
+}
+.font2{
+	color:#b08968;
+	font-weight:bold;
+	font-size:18px;
+	background-color: #f8f9fa;
+	border:1px solid  ;
+	border-radius:10px;	
+	margin:10px 10px 10px 30px;
+	padding:5px;	
+}
+
+.font2:hover{
+	background-color: #8a5a44;
+	color:#f6fff8;
+		
 }
 .btn1 {
 	border-radius: 20px 20px;

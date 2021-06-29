@@ -1,5 +1,7 @@
 package com.soeasy.service.favoriteService.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,11 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Override
 	public void removeFavorite(Integer favoriteId) {
 		favoriteRepository.deleteById(favoriteId);
+	}
+
+	@Override
+	public List<FavoriteBean> findByCategory(String favoriteCategory) {
+		return favoriteRepository.findByFavoriteCategory(favoriteCategory);
 	}
 
 }

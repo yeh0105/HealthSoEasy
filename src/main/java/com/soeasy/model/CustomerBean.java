@@ -105,13 +105,13 @@ public class CustomerBean implements Serializable {
 	Set<OrderBean> orderBeans = new LinkedHashSet<OrderBean>();
 	
 	//購物車	
-	@Column(name = "fk_shoppingcartId")
-	@Transient
-	private Integer shoppingcartId;
+//	@Column(name = "fk_shoppingcartId")
+//	@Transient
+//	private Integer shoppingcartId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_shoppingcartId")
-	private ShoppingcartBean shoppingcartBean;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
+	Set<ShoppingcartBean> shoppingcartBean = new LinkedHashSet<ShoppingcartBean>();
+
 	
 	//留言
 //	@Transient
@@ -139,6 +139,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer recordId;
 	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<RecordBean> recordBeans = new LinkedHashSet<RecordBean>();
 	
@@ -146,6 +147,7 @@ public class CustomerBean implements Serializable {
 //	@Transient
 //	private Integer replyId;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
 	Set<ReplyBean> replyBeans = new LinkedHashSet<ReplyBean>();
 	// ------------------------------------------
@@ -297,19 +299,12 @@ public class CustomerBean implements Serializable {
 		this.orderBeans = orderBeans;
 	}
 
-	public Integer getShoppingcartId() {
-		return shoppingcartId;
-	}
-
-	public void setShoppingcartId(Integer shoppingcartId) {
-		this.shoppingcartId = shoppingcartId;
-	}
-
-	public ShoppingcartBean getShoppingcartBean() {
+	
+	public Set<ShoppingcartBean> getShoppingcartBean() {
 		return shoppingcartBean;
 	}
 
-	public void setShoppingcartBean(ShoppingcartBean shoppingcartBean) {
+	public void setShoppingcartBean(Set<ShoppingcartBean> shoppingcartBean) {
 		this.shoppingcartBean = shoppingcartBean;
 	}
 

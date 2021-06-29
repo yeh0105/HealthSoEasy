@@ -23,7 +23,7 @@ public class SportMapNeedLogin {
 	SportMapService sportMapService;	
 	
 	
-	//地圖加入收藏
+	//地圖加入收藏(未用到，用收藏的controller)
 	@PostMapping("/getLike/{sportMap}/{sportMapId}")
 	public String getLike(Model model,
 	@PathVariable("sportMap") String sportMap,		
@@ -33,18 +33,12 @@ public class SportMapNeedLogin {
 	       CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 	       if (customerBean == null) {
 	            return "redirect:/customerController/customerSignIn";
-	       }
-	        
-	         //1.會員將此地點(存sportMapId)到會員收藏表 2.收藏按鈕要判斷顯示是否收藏過
-	 
-			
+	       }	        
+	         //1.會員將此地點(存sportMapId)到會員收藏表 2.收藏按鈕要判斷顯示是否收藏過	 			
 //			return "redirect:/sportMapController/sportMap/{sportMapId}";
 			return "redirect:/sportMapController/displaySportMaps";
 			
-		}
-	
-	
-	
+		}	
 	
 				
 	//地圖評分(接兩個參數1.ID 2.分數)

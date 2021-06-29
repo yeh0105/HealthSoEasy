@@ -67,7 +67,6 @@ public class LecturerController {
 	// 刪除講師
 		@PostMapping("/deleteLecturer/{lecturerId}")
 		public String delete(@PathVariable("lecturerId") Integer lecturerId) {
-			System.out.println("抓到了抓到了");
 			lecturerService.deleteLecturer(lecturerId);
 			
 			// 跳轉至查詢所有講師

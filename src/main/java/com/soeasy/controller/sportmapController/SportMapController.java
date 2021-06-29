@@ -18,15 +18,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.SportCategoryBean;
 import com.soeasy.model.SportMapBean;
+import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.sportmapService.SportCategoryService;
 import com.soeasy.service.sportmapService.SportMapService;
 import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
 @RequestMapping("/sportMapController")
+@SessionAttributes("customerSignInSuccess")
 public class SportMapController {
 
 	@Autowired
@@ -34,6 +40,13 @@ public class SportMapController {
 	
 	@Autowired
 	SportCategoryService sportCategoryService;
+	
+	@Autowired
+	CustomerService customerService;
+	
+	@Autowired
+	FavoriteService favoriteService;	
+	
 	
 
 	//(前台用)查詢所有運動地點
@@ -57,13 +70,47 @@ public class SportMapController {
 	//(前台用)查詢單一地點詳細資料
 	@GetMapping(value="/sportMap/{sportMapId}")
 	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+
+	String sportMap = "sportMap";
+	//存取登入訊息，	
+	CustomerBean customerSignInSuccess = (CustomerBean) model.getAttribute("customerSignInSuccess");
+
 	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
+	
+	//1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false 
+    if (customerSignInSuccess != null) {
+    	CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
+     	FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(sportMapId, sportMap, originalCustomer);
+     	
+     	System.out.println("originalCustomer="+originalCustomer);
+     	System.out.println("sportMapId="+sportMapId);
+     	System.out.println("sportMap="+sportMap);     	
+     	
+    		//2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+    		if(checkFavoriteBean != null) {
+    			//3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+    			//4.將FavoriteStatus狀態存進model.addAttribute
+    			sportMapBean.setFavoriteStatus(true);
+    			}
+//    			sportMapBean.setFavoriteStatus(false);
+    				
+    }
+	System.out.println(sportMapBean.getFavoriteStatus());
 	model.addAttribute("sportMapBean",sportMapBean);
 		return "sportMap/getOneSportMap"; //查詢單一頁面
 		}
+	
+//(以下為查詢單一地點詳細資料，未撈出favoriteStatus的舊版)
+//	@GetMapping(value="/sportMap/{sportMapId}")
+//	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+//	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
+//	model.addAttribute("sportMapBean",sportMapBean);
+//		return "sportMap/getOneSportMap"; //查詢單一頁面
+//		}
 		
 		
-	//修改運動地點，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫(未用到，寫在後台)
+		
+	//(未用到，寫在後台)修改運動地點，將瀏覽器送來修改過的資料時，由本方法負責檢核，若無誤則寫入資料庫
 	@PostMapping("/sportMap/{sportMapId}")
 	public String modify(
 		@ModelAttribute("sportMapBean")SportMapBean sportMapBean,

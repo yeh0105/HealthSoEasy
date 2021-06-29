@@ -98,7 +98,7 @@ public class AdminCustomer {
 		return customerBeans;
 	}
 	
-//	透過ID修改會員資料
+//	透過ID修改會員基本資料
 	@PostMapping(value = "/adminUpdateCustomerInfo", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody Map<String, String> adminUpdateCustomerInfo(@RequestBody CustomerBean updateCustomerBean) {
 		//以傳入的ID搜尋原始的會員物件
@@ -121,6 +121,32 @@ public class AdminCustomer {
 		originalCustomer.setCustomerNickname(updateCustomerBean.getCustomerNickname());
 		originalCustomer.setCustomerScore(updateCustomerBean.getCustomerScore());
 		originalCustomer.setCustomerBirthDay(updateCustomerBean.getCustomerBirthDay());
+		
+		
+		//save原始物件
+		customerService.updateCustomer(originalCustomer);
+		
+		//更新成功訊息
+		updateMessage.put("updateSuccessMessage", "更新成功");
+		return updateMessage;
+	}
+	
+//	透過ID修改會員健康資料
+	@PostMapping(value = "/adminUpdateCustomerHealthInfo", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody Map<String, String> UpdateCustomerHealthInfo(@RequestBody CustomerBean updateCustomerBean) {
+		//以傳入的ID搜尋原始的會員物件
+		CustomerBean originalCustomer = customerService.findByCustomerId(updateCustomerBean.getCustomerId());
+		
+		//更新檢查訊息
+		Map<String, String> updateMessage = new HashMap<String, String>();
+		
+		if(updateCustomerBean.getCustomerName() == null) {
+			updateMessage.put("updateErrorNameMessage", "名字不得為空");
+		}
+		
+		//為原始物件設定傳入的欄位值
+		originalCustomer.setCustomerName(updateCustomerBean.getCustomerName());
+		originalCustomer.setCustomerHealthBean(updateCustomerBean.getCustomerHealthBean());
 		
 		
 		//save原始物件

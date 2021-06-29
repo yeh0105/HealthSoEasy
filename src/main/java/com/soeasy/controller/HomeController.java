@@ -47,9 +47,9 @@ public class HomeController {
 		return "mall/mallIndex";
 	}
 
-	// 從SoEasy首頁跳至講座首頁(先測講師)
-	@GetMapping("/lecturerIndex")
-	public String lecturerIndex() {
-		return "/lecturer/lecturerIndex";
+	// 從SoEasy首頁跳至講座首頁
+	@GetMapping("/lectureIndex")
+	public String lectureIndex() {
+		return "/lecture/lectureIndex";
 	}
 }

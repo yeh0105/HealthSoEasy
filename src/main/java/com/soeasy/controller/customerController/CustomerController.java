@@ -93,7 +93,7 @@ public class CustomerController {
 		//關聯新的健康資訊
 		customerBean.setCustomerHealthBean(new CustomerHealthBean());
 		//關聯新的購物車
-		customerBean.setShoppingcartBean(new ShoppingcartBean());
+		//customerBean.setShoppingcartBean(new ShoppingcartBean());
 		//初始積分為0
 		customerBean.setCustomerScore(0);
 		//帳號狀態:正常
@@ -318,4 +318,6 @@ public class CustomerController {
 			}
 			return responseEntity;
 		}
+		
+		
 }

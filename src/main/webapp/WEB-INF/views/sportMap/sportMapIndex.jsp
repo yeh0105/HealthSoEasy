@@ -106,129 +106,172 @@ document.addEventListener("DOMContentLoaded", function(){
 		</section>
 	</div>
 	<!-- ------------------------------內容1開始區塊--------------------------------- -->
+	
+    <!-- --------------------------------依區域區塊--------------------------------- -->
 
 	<div class="centerDiv">
 		<div class="btnBy1">
-			依分類：
-			<div>
-				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font1">所有運動地點</button></a>
-			</div>
-			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font1">運動中心</button></a>
-			</div>
-			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font1">市區場館</button></a>
-
-			</div>
-			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font1">游泳池</button></a>
-			</div>
-			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font1">其他室內場地</button></a>
-			</div>
-			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font1">其他戶外場地</button></a>
-			</div>
-<!-- 			<div> -->
-<!-- 				<a href="#"><button class="font1">其他1</button></a> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<a href="#"><button class="font1">其他2</button></a> -->
-<!-- 			</div>			 -->
-
-		</div>
-		<div class="btnBy2">
-			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
-				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
-				width="120%" height="120%"></a>
-		</div>
-		<div class="btnBy3">
-			依區域：
+						
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北市' />"><button class="font1">所有台北市</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
+				
 			</div>
+			依區域：
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中正區' />"><button class="font1">中正區</button></a>
 				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=板橋區' />"><button class="font1">板橋區</button></a>
-			</div>
-			<div>
-				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=萬華區' />"><button class="font1">萬華區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中和區' />"><button class="font1">中和區</button></a>
+				
 			</div>
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大安區' />"><button class="font1">大安區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新莊區' />"><button class="font1">新莊區</button></a>
-			</div>
-			<div>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=文山區' />"><button class="font1">文山區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=淡水區' />"><button class="font1">淡水區</button></a>
+				
 			</div>
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=信義區' />"><button class="font1">信義區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=三重區' />"><button class="font1">三重區</button></a>
-			</div>
-			<div>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=南港區' />"><button class="font1">南港區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新店區' />"><button class="font1">新店區</button></a>
+				
 			</div>
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=士林區' />"><button class="font1">士林區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=五股區' />"><button class="font1">五股區</button></a>
-			</div>	
-			<div>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=北投區' />"><button class="font1">北投區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=林口區' />"><button class="font1">林口區</button></a>
+				
 			</div>	
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中山區' />"><button class="font1">中山區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=蘆洲區' />"><button class="font1">蘆洲區</button></a>
-			</div>	
-			<div>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大同區' />"><button class="font1">大同區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=八里區' />"><button class="font1">八里區</button></a>
+				
 			</div>	
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=松山區' />"><button class="font1">松山區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=土城區' />"><button class="font1">土城區</button></a>
-			</div>	
-			<div>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=內湖區' />"><button class="font1">內湖區</button></a>
+				
+			</div>	
+		 
+
+		</div>
+<!-- ------------------------------中間地圖區塊開始------------------------------ -->
+				
+		<div class="btnBy2">
+			
+			<div>
+			<form>
+			<input name="" id="" type="text" placeholder="今天 想找什麼地點呢？">
+			<input type='submit' value="Go">
+			</form>
+			</div>
+		
+		
+			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
+				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
+				width="120%" height="120%"></a>
+			
+			
+<!-- -------------------------------中間地圖區塊結束------------------------------ -->
+			依分類：
+			<div>
+				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font2">所有運動地點</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font2">運動中心</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font2">市區場館</button></a>
+
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font2">游泳池</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">其他室內場地</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">其他戶外場地</button></a>
+			</div>		
+				
+				
+				
+		</div>
+<!-- 	----------------------------------依分類區塊----------------------------------- -->
+		<div class="btnBy3">
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
+			</div>
+			依區域：
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=板橋區' />"><button class="font1">板橋區</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中和區' />"><button class="font1">中和區</button></a>
+			</div>
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新莊區' />"><button class="font1">新莊區</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=淡水區' />"><button class="font1">淡水區</button></a>
+			</div>
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=三重區' />"><button class="font1">三重區</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新店區' />"><button class="font1">新店區</button></a>
+			</div>
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=五股區' />"><button class="font1">五股區</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=林口區' />"><button class="font1">林口區</button></a>
+			</div>	
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=蘆洲區' />"><button class="font1">蘆洲區</button></a>
+			
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=八里區' />"><button class="font1">八里區</button></a>
+			</div>	
+			<div>
+				
+				<a
+					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=土城區' />"><button class="font1">土城區</button></a>
+			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=永和區' />"><button class="font1">永和區</button></a>
-			</div>			
+			</div>	
+			
+				
 		</div>
+		
 	</div>
+	
 	<!-- ------------------------------內容1結束區塊--------------------------------- -->
 	<!-- ------------------------------內容2開始區塊--------------------------------- -->	
 	<div class="centerDiv">

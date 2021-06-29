@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Favorite")
 public class FavoriteBean implements Serializable {
@@ -35,6 +37,7 @@ public class FavoriteBean implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_customerId")
+	@JsonIgnore
 	private CustomerBean customerBean;
 	
 	

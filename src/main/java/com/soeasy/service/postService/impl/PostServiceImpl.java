@@ -51,6 +51,22 @@ public class PostServiceImpl implements PostService {
 		
 		return newList;
 	}
+	
+	// 查詢所有文章的 TOP10
+	@Override
+	public List<PostBean> findTop10() {
+		
+		Sort sort = Sort.by(Sort.Order.desc("postUploadDate"), Sort.Order.desc("postLike"));
+		
+		List<PostBean> list = postRepository.findAll(sort);
+//		System.err.println("list="+list);
+		
+		List<PostBean> newList = list.subList(0,10);
+//		System.out.println("-----------------------------------------------------------");
+//		System.err.println("newList="+newList);
+		
+		return newList;
+	}
 
 	// 查詢文章類別的 TOP10
 	@Override

@@ -110,5 +110,12 @@ public class RecordBean implements Serializable {
 		this.customerBean = customerBean;
 	}
 
+	@Override
+	public String toString() {
+		return "RecordBean [recordId=" + recordId + ", recordHeight=" + recordHeight + ", recordWeight=" + recordWeight
+				+ ", recordBmi=" + recordBmi + ", recordDate=" + recordDate + ", customerId=" + customerId
+				+ ", customerBean=" + customerBean + "]";
+	}
+
 	
 }
