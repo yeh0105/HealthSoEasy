@@ -28,7 +28,7 @@
 <div>
  
 <span class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a></span>
-<span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">New Cat</a></span>
+<span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">分類</a></span>
 <span class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a></span>
 </div>
 &nbsp;
@@ -94,7 +94,7 @@
 </c:choose>
  </td>
  
- <td>${product.productCategory}</td>
+ <td></td>
  <td>${product.productDescription}</td>
  <td>${product.productCalories}</td>
  <td>${product.productAmount}</td>
@@ -169,14 +169,23 @@
     <input type="hidden" value="DELETE" name="_method" />
  </form>
   <script type="text/javascript">
-    //將 get 請求轉換為 post 請求提交
-    function del(tag) {
-      //獲取當前請求路徑
-      var href = tag.href;
-      //提交
-      $("form").attr("action", href).submit();
-      return false;
-    }
+	//將 get 請求轉換為 post 請求提交
+	function del(tag) {
+		//獲取當前請求路徑
+       var href = tag.href;
+       //提交
+       $("form").attr("action", href).submit();
+       return delmag();
+       
+       function delmag() {
+    	   var msg = "您確定要刪除這樣產品嗎？";
+    	   if (confirm(msg)==true){
+    	   return true;
+    	   }else{
+    	   return false;
+    	   }
+    	   }
+     }
   </script>
   
   <!-- ======================    綁定清除查詢 ================================-->

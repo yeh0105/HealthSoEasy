@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,13 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CartItem;
+import com.soeasy.model.CustomerBean;
+import com.soeasy.model.OrderBean;
+import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.mallService.ProductService;
 
 
 @Controller
 @RequestMapping("/mall/cart")
+@SessionAttributes("customerSignInSuccess")
 public class CartController {
 	
 	
@@ -30,6 +36,13 @@ public class CartController {
 	//建立跳轉
 	@GetMapping("/index")
 	public String index(HttpSession session,Model model) {
+		
+////		// 登入攔截(怪怪的)
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+		
 		
 		//顯示購物車內有幾項商品
 		int countItems=0;
@@ -48,6 +61,7 @@ public class CartController {
 		model.addAttribute("countItems",countItems);
 		model.addAttribute("total",total);
 		return "mall/cartInfo";
+//		}
 	}
 	
 	
@@ -56,7 +70,15 @@ public class CartController {
 	@GetMapping("/buy/{productId}")
 	public String buy(@PathVariable("productId") Integer productId, 
 			HttpSession session) {
+//		
+//		// 登入攔截
+//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//		if (customerBean == null) {
+//			return "redirect:/customerController/customerSignIn";
+//		}
 		
+		
+	
 		//  如果購物車是空的
 		if (session.getAttribute("cart")==null) {
 			List<CartItem> cart = new ArrayList<CartItem>();
@@ -75,6 +97,7 @@ public class CartController {
 				}
 		}
 		return"redirect:/mall/cart/index";
+		
 	}
 	
 	
@@ -94,7 +117,6 @@ public class CartController {
 	
 //	===========================(End)移除購物車內的項目==========================================
 
-	
 	
 //	=====================    更新購物車商品的數量    ==========================================
 	
@@ -124,6 +146,35 @@ public class CartController {
 		}
 		return -1;
 	}
+	
+	
+//	=============================  結帳    ==========================================
+
+//	public String checkout(Model model,HttpSession session){
+//	
+//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//		if (customerBean == null) {
+//			return "redirect:/customerController/customerSignIn";
+//		}
+//		
+//
+//			// 保存新訂單
+//			OrderBean order = new OrderBean();
+//
+//			return "mall/cartthanks";
+//		
+//	}
+	
+	
+	
+	
+	
+	
 
 
+	
+//	============================= (END 結帳    ==========================================
+
+	
+	
 }
