@@ -45,10 +45,19 @@ public class PostController {
 	// 查詢所有文章的 TOP3
 	@GetMapping(value = "/getTop3Post", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<PostBean> getTop3() {
-		System.err.println("進入getTop3Post");
 
 		List<PostBean> list = postService.findTop3();
 
+		return list;
+	}
+	
+	// 查詢所有文章的 TOP10
+	@GetMapping(value = "/getTop10Post", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<PostBean> getTop10() {
+		System.err.println("進入getTop10Post");
+		
+		List<PostBean> list = postService.findTop10();
+		
 		System.err.println("list=" + list);
 		System.err.println("出去PostController");
 		return list;
@@ -56,14 +65,14 @@ public class PostController {
 
 	// 查詢文章類別的 TOP10
 	@GetMapping(value = "/getTop10PostByPostCategoryId.json", produces = { "application/json; charset=UTF-8" })
-	public List<PostBean> getTop10ByPostCategoryBean(
+	public @ResponseBody List<PostBean> getTop10ByPostCategoryBean(
 			@RequestParam(value = "postCategoryBean", required = false) PostCategoryBean postCategoryBean) {
-		System.err.println("進入getTop10PostByPostCategoryId");
+//		System.err.println("進入getTop10PostByPostCategoryId");
 
 		List<PostBean> list = postService.findTop10ByPostCategoryBean(postCategoryBean);
 
-		System.err.println("list=" + list);
-		System.err.println("出去PostController");
+//		System.err.println("list=" + list);
+//		System.err.println("出去PostController");
 		return list;
 	}
 

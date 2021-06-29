@@ -36,6 +36,9 @@ public class ReplyBean implements Serializable {
 	private Integer replyLike;
 
 	private Integer replyStatus;
+	
+	private Integer replyFloor;
+	
 	// ---------------------------
 	// 會員
 	@Transient
@@ -101,6 +104,14 @@ public class ReplyBean implements Serializable {
 	public void setReplyStatus(Integer replyStatus) {
 		this.replyStatus = replyStatus;
 	}
+	
+	public Integer getReplyFloor() {
+		return replyFloor;
+	}
+
+	public void setReplyFloor(Integer replyFloor) {
+		this.replyFloor = replyFloor;
+	}
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -134,5 +145,4 @@ public class ReplyBean implements Serializable {
 		this.postBean = postBean;
 	}
 
-	
 }
