@@ -118,7 +118,7 @@
 	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
 	        +  		'</button>'
 	        +	'</div>'
-	        +	'<div class="product-cell price">RigisterTime<button class="sort-button">'
+	        +	'<div class="product-cell price">RegisterTime<button class="sort-button">'
 	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
 	        +  		'</button>'
 	        +	'</div>'
@@ -155,7 +155,7 @@
 		        +	'<div class="product-cell stock"><span class="cell-label">Nickname:</span>' + customer.customerNickname + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">Score:</span>' + customer.customerScore + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">BirthDay:</span>' + customer.customerBirthDay + '</div>'
-		        +	'<div class="product-cell price"><span class="cell-label">RigisterTime:</span>' + customer.customerRigisterTime + '</div>'
+		        +	'<div class="product-cell price"><span class="cell-label">RegisterTime:</span>' + customer.customerRegisterTime + '</div>'
 		        +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#customerInfoModal"'
 		        +	'data-id="' + customer.customerId
 		        +	'"data-name="' + customer.customerName
@@ -237,8 +237,14 @@
 			    +	'<div class="product-cell stock"><span class="cell-label">Height:</span>' + customer.customerHealthBean.customerHeight + '</div>'
 			    +	'<div class="product-cell price"><span class="cell-label">Weight:</span>' + customer.customerHealthBean.customerWeight + '</div>'
 			    +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#customerHealthInfoModal" data-dismiss="modal"'
-			    + 	'data-customerId="' + customer.customerId
-			    +	'data-customerPhone="' + customer.customerPhone
+			    + 	'data-id="' + customer.customerId
+			    +	'"data-name="' + customer.customerName
+			    +	'"data-healthid="' + customer.customerHealthBean.customerHealthId
+			    +	'"data-gender="' + customer.customerHealthBean.customerGender
+			    +	'"data-diet="' + customer.customerHealthBean.customerDiet
+			    +	'"data-exercise="' + customer.customerHealthBean.customerExerciseHabits
+			    +	'"data-height="' + customer.customerHealthBean.customerHeight
+			    +	'"data-weight="' + customer.customerHealthBean.customerWeight
 			    +	'">Update</button></div>'
 			    +'</div>';
 			})
@@ -336,23 +342,135 @@
 					let customerJSON = JSON.parse(xhr.responseText);
 // 					infoMessage.innerHTML = customerJSON.updateMessage;
 					console.log(customerJSON);
-					
+// 					重新搜尋目前類型資料
+					applybtn.click();
+					document.querySelector(".filter-menu").classList.toggle("active");
+				}
+			}
+			
+			
+		});
+// 		-------------------------------------------------------------------------------------------------
+		
+// 		互動視窗--健康資料
+// 		開啟互動視窗表單
+		let inputCustomerHealthId = null;
+		$('#customerHealthInfoModal').on('show.bs.modal', function (event) {
+// 			取得代入update按鈕的值
+  			let button = $(event.relatedTarget); 
+  			let updateCustomerId = button.data('id');
+  			let updateCustomerName = button.data('name');
+  			inputCustomerId = updateCustomerId;		//作為表單送出用ID
+  			inputCustomerHealthId = button.data('healthid');
+  			let updateCustomerGender = button.data('gender'); 
+  			let updateCustomerDiet = button.data('diet'); 
+  			let updateCustomerExerciseHabits = button.data('exercise'); 
+  			let updateCustomerHeight = button.data('height'); 
+  			let updateCustomerWeight = button.data('weight'); 
+//   		依照取得值寫入表單
+  			let modal = $(this);
+  			modal.find('.modal-title').text('健康資料修改	ID: ' + updateCustomerId);
+  			modal.find('.modal-body #recipient-health-name').val(updateCustomerName);
+  			
+  			if(updateCustomerGender == 1){
+	  			modal.find('.modal-body #recipient-health-gender1').prop('checked',true);
+  			}else if(updateCustomerGender == 2){
+	  			modal.find('.modal-body #recipient-health-gender2').prop('checked',true);
+  			}
+  			
+  			if(updateCustomerDiet == 1){
+	  			modal.find('.modal-body #recipient-health-diet1').prop('checked',true);
+  			}else if(updateCustomerDiet == 2){
+	  			modal.find('.modal-body #recipient-health-diet2').prop('checked',true);
+  			}
+  			
+  			if(updateCustomerExerciseHabits == 3){
+	  			modal.find('.modal-body #recipient-health-exercise3').prop('checked',true);
+  			}else if(updateCustomerExerciseHabits == 2){
+	  			modal.find('.modal-body #recipient-health-exercise2').prop('checked',true);
+  			}else if(updateCustomerExerciseHabits == 1){
+	  			modal.find('.modal-body #recipient-health-exercise1').prop('checked',true);
+  			}
+
+  			modal.find('.modal-body #recipient-health-height').val(updateCustomerHeight);
+  			modal.find('.modal-body #recipient-health-weight').val(updateCustomerWeight);
+		})
+		
+// 		互動視窗--健康資料--送出按鈕
+		let sendCustomerHealthInfo = document.getElementById("sendCustomerHealthInfo");
+		let customerHealthInfo_form = document.getElementById("customerHealthInfo_form");
+		
+		sendCustomerHealthInfo.addEventListener("click", function(){
+// 			表單資料初始化
+			//ID使用原先取得的值
+			let inputCustomerName = document.getElementById("recipient-health-name");
+			let inputCustomerGender1 = document.getElementById("recipient-health-gender1");
+			let inputCustomerGender2 = document.getElementById("recipient-health-gender2");
+			let inputCustomerDiet1 = document.getElementById("recipient-health-diet1");
+			let inputCustomerDiet2 = document.getElementById("recipient-health-diet2");
+			let inputCustomerExerciseHabits3 = document.getElementById("recipient-health-exercise3");
+			let inputCustomerExerciseHabits2 = document.getElementById("recipient-health-exercise2");
+			let inputCustomerExerciseHabits1 = document.getElementById("recipient-health-exercise1");
+			let inputCustomerHeight = document.getElementById("recipient-health-height");
+			let inputCustomerWeight = document.getElementById("recipient-health-weight");
+			
+			
+			let inputCustomerGender = null;
+			if(inputCustomerGender1.checked){
+				inputCustomerGender = inputCustomerGender1.value;
+			}else if(inputCustomerGender2.checked){
+				inputCustomerGender = inputCustomerGender2.value;			
+			}
+			
+			let inputCustomerDiet = null;
+			if(inputCustomerDiet1.checked){
+				inputCustomerDiet = inputCustomerDiet1.value;
+			}else if(inputCustomerDiet2.checked){
+				inputCustomerDiet = inputCustomerDiet2.value;			
+			}
+			
+			let inputCustomerExerciseHabits = null;
+			if(inputCustomerExerciseHabits3.checked){
+				inputCustomerExerciseHabits = inputCustomerExerciseHabits3.value;
+			}else if(inputCustomerExerciseHabits2.checked){
+				inputCustomerExerciseHabits = inputCustomerExerciseHabits2.value;			
+			}else if(inputCustomerExerciseHabits1.checked){
+				inputCustomerExerciseHabits = inputCustomerExerciseHabits1.value;			
+			}
+//         	建立一支obj，將input內容裝入
+			
+			let updateCustomerHealthObj = {
+					"customerId" : inputCustomerId,	//Id為Update代入的值(全域)
+					"customerName" : inputCustomerName.value,
+					"customerHealthBean" : {
+						'customerHealthId' : inputCustomerHealthId,
+						'customerGender' : inputCustomerGender,
+						'customerDiet' : inputCustomerDiet,
+						'customerExerciseHabits' : inputCustomerExerciseHabits,
+						'customerHeight' : inputCustomerHeight.value,
+						'customerWeight' : inputCustomerWeight.value
+					}
+			}
+			
+//			將物件轉為JSON字串
+			let json = JSON.stringify(updateCustomerHealthObj);
+			
+			xhr.open('POST', "<c:url value='/admin/adminManage/adminUpdateCustomerHealthInfo'/>" , true);
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(json);	
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200){
+// 					接收回傳訊息，更新訊息框
+					let customerHealthJSON = JSON.parse(xhr.responseText);
+// 					infoMessage.innerHTML = customerJSON.updateMessage;
+					console.log(customerHealthJSON);
+// 					重新搜尋目前類型資料
+					applybtn.click();
+					document.querySelector(".filter-menu").classList.toggle("active");
 				}
 			}
 		});
-		
-		
-// 		互動視窗--健康資料
-// 		$('#customerHealthInfoModal').on('show.bs.modal', function (event) {
-//   			var button = $(event.relatedTarget); // Button that triggered the modal
-//   			var recipient_customerId = button.data('customerId'); // Extract info from data-* attributes
-//   			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-//   			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-//   			var modal = $(this);
-//  			modal.find('.modal-title').text('ID: ' + recipient_customerId);
-//   			modal.find('.modal-body input').val(recipient_customerId);
-// 		})
-		
 	}
 
 </script>
@@ -583,7 +701,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
-        <div class="product-cell price">RigisterTime<button class="sort-button">
+        <div class="product-cell price">RegisterTime<button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
@@ -607,7 +725,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell stock"><span class="cell-label">Phone:</span>0939956219</div>
         <div class="product-cell stock"><span class="cell-label">Nickname:</span>DDD</div>
         <div class="product-cell price"><span class="cell-label">Score:</span>0</div>
-        <div class="product-cell price"><span class="cell-label">RigisterTime:</span>2021-06-22</div>
+        <div class="product-cell price"><span class="cell-label">RegisterTime:</span>2021-06-22</div>
         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
       </div>
       <!--       一筆資料內容--結尾 -->
@@ -664,8 +782,62 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
   </div>
 </div>
-
-
+<!-- 			---------------------------------------------------------------------------------------------------------------- -->
+<!-- 			互動視窗--健康資料 -->
+<div class="modal fade" id="customerHealthInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ID:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="customerHealthInfo_form" action="#" method="post">
+          <div class="form-group">
+            <label for="recipient-health-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="recipient-health-name">
+          </div>
+          <div class="form-group" style="display: flex; justify-content: flex-start;">
+            <label for="recipient-health-gender1" class="col-form-label">男:</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-gender1" name="radio-gender" style=" margin: 10px 5px 0px 5px" value="1">
+            <label for="recipient-health-gender2" class="col-form-label">女:</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-gender2" name="radio-gender" style=" margin: 10px 5px 0px 5px" value="2">
+          </div>
+          <div class="form-group" style="display: flex; justify-content: flex-start;">
+            <label for="recipient-health-diet1" class="col-form-label">葷:</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-diet1" name="radio-diet" style=" margin: 10px 5px 0px 5px" value="1">
+            <label for="recipient-health-diet2" class="col-form-label">素:</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-diet2" name="radio-diet" style=" margin: 10px 5px 0px 5px" value="2">
+          </div>
+          <div class="form-group" style="display: flex; justify-content: flex-start;">
+            <label for="recipient-health-exercise3" class="col-form-label">運動(強):</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise3" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="3">
+            <label for="recipient-health-exercise2" class="col-form-label">運動(中):</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise2" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="2">
+            <label for="recipient-health-exercise1" class="col-form-label">運動(弱):</label>
+            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise1" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="1">
+          </div>
+          <div class="form-group">
+            <label for="recipient-health-height" class="col-form-label">Height:</label>
+            <input type="text" class="form-control" id="recipient-health-height">
+          </div>
+          <div class="form-group">
+            <label for="recipient-health-weight" class="col-form-label">Weight:</label>
+            <input type="text" class="form-control" id="recipient-health-weight">
+          </div>
+          
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendCustomerHealthInfo" style="background-color: #007500; border-color: #007500">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 		</div>
 </div>

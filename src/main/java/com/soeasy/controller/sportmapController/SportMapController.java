@@ -70,9 +70,11 @@ public class SportMapController {
 	//(前台用)查詢單一地點詳細資料
 	@GetMapping(value="/sportMap/{sportMapId}")
 	public String showOneMap(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+
 	String sportMap = "sportMap";
 	//存取登入訊息，	
 	CustomerBean customerSignInSuccess = (CustomerBean) model.getAttribute("customerSignInSuccess");
+
 	SportMapBean sportMapBean = sportMapService.get(sportMapId);			
 	
 	//1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false 
