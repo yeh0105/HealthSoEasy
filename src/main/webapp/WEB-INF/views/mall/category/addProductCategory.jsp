@@ -24,33 +24,26 @@
  
 
 <div class="container" style="max-width:500px;">
-  <h2 class="page-header">新增產品</h2>
+  <h2 class="page-header">新增分類</h2>
  
  <div class="well" >
 <%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
  
- <form:form  modelAttribute='category' >
- 
-<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
-<!-- 而且method屬性必須是 "post" -->
-
-
-
+ <form  method="post" action="<c:url value='/mall/category/add'/>">
 
  <div class="form-group">
- <label>分類名稱 : </label>
- <form:input  path="productCategoryName" type="text"/>
- <form:errors path="productCategoryName" Class="form-control"/>
+ <label for="productCategoryName">分類名稱 : </label>
+ <input  class="form-control" type="text" name="productCategoryName" value="${category.productCategoryName}" required="required"/>
+ </div>
+ <div class="checkbox">
+ <input type="checkbox" name="status"/>是否顯示:
  </div>
  
-
- <p class="text-center">
  <button type=submit class="btn btn-primary">submit</button>
  <button type=reset class="btn btn-primary">reset</button>
- </p>
  
 
- </form:form>
+ </form>
   </div>
   </div>
  

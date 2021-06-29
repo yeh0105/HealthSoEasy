@@ -74,8 +74,21 @@
  
  <form:errors path="category" Class="form-control" />
  </div>
- 
- <div class="form-group">
+
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>產品分類 : </label> -->
+<%-- 					<form:select path="category.productCategoryId" type="text" class="form-control"> --%>
+<%-- 						<c:forEach var="category" items="${categories}"> --%>
+<%-- 							<optgroup label="${category.productCategoryName} "></optgroup> --%>
+
+<%-- 						</c:forEach> --%>
+<%-- 					</form:select> --%>
+
+<!--  				</div> -->
+
+
+
+				<div class="form-group">
  <label>產品成本 : </label>
  <form:input  path="productCost" type="text"/>
  <form:errors path="productCost" Class="form-control"/>

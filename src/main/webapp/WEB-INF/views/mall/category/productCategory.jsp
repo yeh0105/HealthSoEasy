@@ -24,47 +24,61 @@
 
  <div class="container">
  <h2 class="page-header">分類列表</h2>
-  <p class="text-right"><a href="<c:url value='/mall/addcategory'/>" class="btn btn-primary">Add</a><p>
  
+ <section class="container-header"></section>
+  <p class="text-right"><a href="<c:url value='/mall/category/add'/>" class="btn btn-primary">Add</a><p>
+ 
+ <c:if test="${error!=null}">
+ <div class="alert alert-danger alert-dismissable">
+		${error} 
+ </div>
+ </c:if>
 
- <table class="table table-border">
-
+<div class="box-body">
+ <table id="CategoryList" class="table table-borded table-hover">
  	<thead>
+ 		<tr>
+		 	<th>#ID</th>
+		 	<th>Name</th>
+		 	<th>Status</th>
+		 	<th>Action</th>
+		</tr>
 
- <tr>
-
- 	<th>#ID</th>
- 	<th>產品分類</th>
- 	<th>修改</th>
-
- </tr>
-
- </thead>
+ 	</thead>
 
  <tbody>
 
- <c:forEach items="${page}" var="page">
+ 	<c:forEach var="c" items="${categories}">
  
-<%--   <c:forEach>標記如何可用於遍歷MallController books model屬性。 --%>
-
- <tr>
-
- <td>${page.productCategoryName}</td>
-<%--  <td>${product.category}</td> --%>
-
-
- 
- <td>
- <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
- <a onclick="return del(this)" href="${pageContext.request.contextPath}/mall/deletecategory/{productCategoryId}"><button >刪除</button></a></td>
- </tr>
+ 		<tr>
+			 <td>${c.productCategoryId}</td>
+			 <td>${c.productCategoryName}</td>
+			 <td>${c.status? "Show":"Hide"}</td>
+			 <td>	 
+			 <a href="${pageContext.request.contextPath}/mall/category/update/${c.productCategoryId}"> EDIT</a>
+			 <a onclick="return confirm('確定要刪除嗎?')" href="${pageContext.request.contextPath}/mall/category/delete/${c.productCategoryId}">DELETE</a>
+ 		</td>
+ 		</tr>
  
 
- </c:forEach>
+ 	</c:forEach>
 
  </tbody>
+ 
+ <tfoot>
+ 		<tr>
+
+		 	<th>#ID</th>
+		 	<th>Name</th>
+		 	<th>Status</th>
+		 	<th>Action</th>
+		
+		</tr>
+
+ 	</tfoot>
 
  </table>
+ </div>
  
  
  <!-- ---------------------------控制分頁用----------------------------------- -->
@@ -126,6 +140,20 @@
       $("form").attr("action", href).submit();
       return false;
     }
+  </script>
+  
+  <script type="text/javascript">
+    $(function () {
+      $('#categoryList')}.DataTable({
+    	  'paging':true,
+    	  'lengthChange':false,
+    	  'searching':false,
+    	  'ordering':true,
+    	  'info':true,
+    	  'autoWidth':false,  
+      })
+      
+    })
   </script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

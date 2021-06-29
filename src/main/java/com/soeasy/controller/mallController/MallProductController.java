@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +27,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.soeasy.model.PostCategoryBean;
 import com.soeasy.model.ProductBean;
+import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
+import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
@@ -43,6 +44,11 @@ public class MallProductController {
 	private ProductService productService;
 	@Autowired
 	ServletContext context;
+	
+	@Autowired
+	private ProductCategoryService productCategoryService;
+
+
 	
 	
 	
@@ -80,7 +86,7 @@ public class MallProductController {
 			    model.addAttribute("totalItems", page.getTotalElements());
 			   //羅列產品
 			    List<ProductBean> list = page.getContent();
-			    model.addAttribute("poduct", list);
+			    model.addAttribute("product", list);
 			    //用各類別進去排序&
 			    model.addAttribute("sortField", sortField);
 			    model.addAttribute("sortDir", sortDir);
@@ -131,13 +137,11 @@ public class MallProductController {
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 	@PostMapping("/add")
 		public String addProduct(
-				@ModelAttribute("product") /* @Valid */ ProductBean product, 
+				@ModelAttribute("product") /* @Valid */ ProductBean product,
 				BindingResult result, Model model,HttpServletRequest request) {
 		
-//		public String addProduct(
-//		@ModelAttribute("product") /* @Valid */ ProductBean product, 
-//		BindingResult result, final RedirectAttributes attributes,HttpServletRequest request) {
-//	
+
+		model.addAttribute("categories", productCategoryService.findParentCategories());
 			
 		ProductBeanValidator validator = new ProductBeanValidator();
 		// 呼叫Validate進行資料檢查
@@ -145,6 +149,8 @@ public class MallProductController {
 		if (result.hasErrors()) {			
 			return "mall/addProduct";
 		}
+	
+		
 			// 取得addProduct.jsp所送來的圖片資訊
 		MultipartFile picture = product.getProductMultiImg();
 	
@@ -231,7 +237,7 @@ public class MallProductController {
 		
 	// 刪除一筆紀錄
 	//送不出DELETE 先用POST
-		@PostMapping("/delete/{productId}")
+		@GetMapping("/delete/{productId}")
 		public String delete(@PathVariable("productId") Integer productId) {
 	        productService.deleteById(productId);
         	System.out.println("刪除products");
@@ -252,7 +258,7 @@ public class MallProductController {
 		}
 		
 		
-		@PostMapping("/update/{productId}")
+		@PostMapping("/update")
 		// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 		public String modify(
 				@ModelAttribute("product") ProductBean product, 

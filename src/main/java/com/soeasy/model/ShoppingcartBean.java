@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Shoppingcart")
 public class ShoppingcartBean implements Serializable {
@@ -22,15 +24,20 @@ public class ShoppingcartBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer shoppingcartId;
-
-	private Integer cartPtoductNumber;
+	
+//Amount
+	private Integer cartProductAmount;
 
 	private Integer cartTotalprice;
 
 	private Boolean cartIsDelete;
 
-	// 會員 透過Id查詢會員 目前不需要
-//	private Integer customerId;
+	// 會員
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_customerId")
+	@JsonIgnore
+	private CustomerBean customerBean;
 
 	// 商品
 	@Transient
@@ -40,6 +47,8 @@ public class ShoppingcartBean implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_productId")
 	private ProductBean productBean;
+	
+
 
 	// ------------------------------------------
 	public ShoppingcartBean() {
@@ -54,12 +63,12 @@ public class ShoppingcartBean implements Serializable {
 		this.shoppingcartId = shoppingcartId;
 	}
 
-	public Integer getCartPtoductNumber() {
-		return cartPtoductNumber;
+	public Integer getCartProductAmount() {
+		return cartProductAmount;
 	}
 
-	public void setCartPtoductNumber(Integer cartPtoductNumber) {
-		this.cartPtoductNumber = cartPtoductNumber;
+	public void setCartProductAmount(Integer cartProductAmount) {
+		this.cartProductAmount = cartProductAmount;
 	}
 
 	public Integer getCartTotalprice() {

@@ -9,10 +9,13 @@
 <meta charset="UTF-8">
 <title>Add SportMap</title>
 
+<link href="${pageContext.request.contextPath}/css/admin.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall-common.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" type="text/css">
 
+
+
+<!-- ==================日夜間模式==============================-->
 <script type="text/javascript">
 	window.onload = function(){
 		let switch_moon = document.getElementById("switch_moon");
@@ -32,11 +35,10 @@
 	}
 	
 	
-	
-	
-	
-
 </script>
+
+<!-- ===============(End)日夜間模式=================================-->
+
 <style>
 span.error {
 	color: red;
@@ -129,7 +131,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>廠商</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminProduct"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg> -->
           <span>商品</span>
@@ -165,7 +167,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>分享</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item ">
         <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
@@ -189,7 +191,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText" style="padding-top:50px;">Add Product</h1>
+      <h1 class="app-content-headerText" style="padding-top:50px;padding-left:500px">Add Product</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -197,64 +199,23 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
       </button>
-<!--       新增 -->
-      <a href="<c:url value='#' />">
-      <button class="app-content-headerButton"></button></a>
+
     </div>
-    <div class="app-content-actions">
-<!--     搜尋 -->
-      <div class="app-content-actions-wrapper">
-        <div class="filter-button-wrapper">
-<!--         過濾器 -->
-          <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
-          <div class="filter-menu">
-            <label>Category</label>
-            <select>
-              <option>All Categories</option>
-              <option>Furniture</option>                     
-              <option>Decoration</option>
-              <option>Kitchen</option>
-              <option>Bathroom</option>
-            </select>
-            <label>Status</label>
-            <select>
-              <option>All Status</option>
-              <option>Active</option>
-              <option>Disabled</option>
-            </select>
-            <div class="filter-menu-buttons">
-              <button class="filter-button reset">
-                Reset
-              </button>
-              <button class="filter-button apply">
-                Apply
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="action-button list active" title="List View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        </button>
-        <button class="action-button grid" title="Grid View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </button>
-      </div>
-    </div>
+    
     
     <div class="products-area-wrapper tableView">
 <!--  --------------------------- ----內容開始--------------------------- -->
 
- <div class="container" style="max-width:600px;margin-left:40px;">
-  <br>
+ <div class="container" style="max-width:500px;margin-top:50px">
+
  
  <div class="well" >
 <%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
  
- <form:form  modelAttribute='product' enctype="multipart/form-data" >
+ <form:form  modelAttribute='product' enctype="multipart/form-data" method="post">
  
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-
 
  <div class="form-group">
  <label>產品名稱 : </label>
@@ -262,6 +223,10 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  <form:errors path="productName" Class="form-control"/>
  </div>
  
+ <div class="form-group">
+ <label >產品描述 : </label><form:textarea path='productDescription' type="text"  cols="60" rows="10"/>
+  <form:errors path="productDescription" Class="form-control" />
+ </div>
  
  <div class="form-group">
  <label>產品價格 : </label>
@@ -282,7 +247,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  
  <div class="form-group">
  <label >產品分類 : </label>
- <form:input path="category" type="text" />
+ <form:select path="category" type="text">
+ <option value=1>海鮮餐盒</option>
+ <option value=2>雞肉餐盒</option>
+ <option value=3>豬肉餐盒</option>
+ <option value=4>牛肉餐盒</option>
+ <option value=5>素食餐盒</option>
+ 
+ </form:select>
+ 
  <form:errors path="category" Class="form-control" />
  </div>
  
@@ -293,10 +266,6 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  </div>
  
  
- <div class="form-group">
- <label >產品描述 : </label><form:textarea path='productDescription' cols="50" rows="5"/>
-  <form:errors path="productDescription" Class="form-control" />
- </div>
 <!--  <div class="form-group"> -->
 <!--  <label>產品日期: </label> -->
 <%--  <form:input  path="productDate" type="date"/> --%>
@@ -312,14 +281,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  </div>
  
  <p class="text-center">
- <button type=submit class="btn btn-primary">submit</button>
- <button type=reset class="btn btn-primary">reset</button>
- </p>
+ <input type="submit" value="Submit" class="btn btn-primary"/>
+ <input type="reset" value="reset" class="btn btn-primary"/>
+  </p>
  
 
  </form:form>
   </div>
   </div>
+ 
      
 <!-- --------------------------------一內容結尾---------------------------- -->
 	
@@ -329,6 +299,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 </div>
 <!-- partial -->
   <script  src="${pageContext.request.contextPath}/js/admin.js"></script>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/malladmin/mall-bootstrap.min.js" ></script>
+ 
+ <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
+ <script src="${pageContext.request.contextPath}/js/mall/malladmin/mall-bootstrap3.js"></script>
+
+  
   
 	
 </body>
