@@ -79,7 +79,9 @@ public class RecordBean implements Serializable {
 	}
 
 	public Double getRecordBmi() {
-		return (recordWeight / (recordHeight * recordHeight));
+		Double BMI =recordWeight/((recordHeight/100)*(recordHeight/100));
+		Double roundBMI = Math.round(BMI*10.0)/10.0;
+		return roundBMI;
 	}
 
 	public void setRecordBmi(Double recordBmi) {

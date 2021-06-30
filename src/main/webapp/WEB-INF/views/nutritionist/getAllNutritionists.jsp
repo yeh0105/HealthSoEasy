@@ -140,8 +140,8 @@ body * {
 					<li>&emsp;&frasl;&emsp;營養師列表</li>
 				</ul>
 			</div>
-
 			<hr>
+			
 			<h3 id="h3css">營養師列表</h3>
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -182,9 +182,10 @@ body * {
 			</div>
 			<br>
 
-<!-- 			<div> -->
-<%-- 				<a href="<c:url value='/nutritionistController/addNutritionist'/>"><button>新增營養師</button></a> --%>
-<!-- 			</div> -->
+			<div>
+				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
+				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
+			</div>
 
 
 		</section>
