@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,43 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 )
 
+// -----------------------------------------------------------------//
+	document.addEventListener("DOMContentLoaded", function () {
+
+            // let areas = document.getElementsByTagName("area");
+            let areas = document.querySelectorAll("area.imgbut");
+            let areasLen = areas.length;
+            console.log(areas);
+            console.log(areas.length);
+            for (let i = 0; i < areas.length; i++) {
+                areas[i].addEventListener("mouseover", mouseOver);
+                areas[i].addEventListener("mouseout", mouseOut);
+                areas[i].addEventListener("click", Click);
+            }
+        });
+
+        function mouseOver() {
+            console.log(this);
+            console.log(this.id);
+            document.images[1].src ="${pageContext.request.contextPath}/images/sportMap/Map" + this.id.substr(2) + ".png";
+        }
+
+
+        function mouseOut() {
+            document.images[1].src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png";
+        }
+
+
+        function Click() {
+            // document.getElementById("mapdiv").innerHTML = "<img src='images/" + this.id.substr(2) + ".gif'/>";
+            // document.getElementById("mapdiv").innerHTML = "<img src='images/" + this.id.substr(2) + ".gif'/>";
+
+        }
+
+
+
+// ---------------------------------------------------------------//
+
 </script>
 
 
@@ -107,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	<!-- ------------------------------內容1開始區塊--------------------------------- -->
 	
+	
     <!-- --------------------------------依區域區塊--------------------------------- -->
 
 	<div class="centerDiv">
@@ -117,7 +156,9 @@ document.addEventListener("DOMContentLoaded", function(){
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北市' />"><button class="font1">所有台北市</button></a>
 				
 			</div>
-			依區域：
+			<div>
+				<span>依區域：</span>
+			</div>
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中正區' />"><button class="font1">中正區</button></a>
@@ -180,14 +221,37 @@ document.addEventListener("DOMContentLoaded", function(){
 			</div>
 		
 		
-			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img
-				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png"
-				width="120%" height="120%"></a>
-			
-			
+<%-- 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img --%>
+<%-- 				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png" --%>
+<!-- 				width="120%" height="120%"></a> -->
+<!-------------------------------------測試區塊--------------------------------- -->
+	
+        <img id="imgMap" alt="" src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png" usemap="#FPMap0" 
+          />
+               
+        <map id="imgMap" name="FPMap0">
+            <area target="" alt="" title="" id="idTaipei" class="imgbut"
+                href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北' ></c:url>"
+                coords="311,109,302,120,281,135,266,146,225,188,225,202,247,210,262,225,264,250,243,258,254,284,266,274,276,274,285,284,285,296,297,306,315,321,349,325,345,280,359,277,375,272,364,232,364,207"
+                shape="poly">
+            <area target="" alt="" title="" id="idTamsui" class="imgbut"
+                href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=淡水' ></c:url>"
+                coords="248,413,252,425,247,441,238,450,225,466,209,481,196,497,199,520,213,546,239,564,247,580,269,572,292,564,300,550,315,547,328,540,334,530,343,514,341,491,347,476,362,475,369,461,398,457,421,454,435,438,412,424,374,416,328,405,304,389"
+                shape="poly">
+        </map>
+
+    
+<!--     <div id="mapdiv" style="float:left;width:auto;height:auto;"></div> -->
+
+
+
+
+	<!-------------------------------------測試區塊--------------------------------- -->				
+	
 <!-- -------------------------------中間地圖區塊結束------------------------------ -->
-			依分類：
+			
 			<div>
+			依分類：
 				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font2">所有運動地點</button></a>
 			
 				<a
@@ -217,7 +281,9 @@ document.addEventListener("DOMContentLoaded", function(){
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
 			</div>
-			依區域：
+			<div>
+				<span>依區域：</span>
+			</div>
 			<div>
 				
 				<a
@@ -306,7 +372,16 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>	
 	
 
-	<!-- ------------------------------內容3結束區塊--------------------------------- -->	
+	<!-- ------------------------------內容3結束區塊--------------------------------- -->
+
+	
+	
+	
+	
+	
+	
+	
+		
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
 
