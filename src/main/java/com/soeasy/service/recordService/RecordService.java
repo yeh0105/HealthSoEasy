@@ -21,5 +21,6 @@ public interface RecordService {
 			// 刪除
 			void deleteByRecordId(Integer recordId);
 
-			
+			//查詢全部customerId
+			List<RecordBean> findAllByCustomerId(Integer customerId);
 }
