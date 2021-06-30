@@ -39,7 +39,7 @@ body * {
 
 #nutritImage01 {
 	width: auto;
-	width:80%;
+	width: 80%;
 	height: 70%;
 	border: black 1px solid;
 }
@@ -57,7 +57,7 @@ body * {
 }
 
 #content1 {
-	text-decoration:none;
+	text-decoration: none;
 	color: #008000;
 }
 
@@ -108,18 +108,20 @@ body * {
 					<li>&emsp;&frasl;&emsp;營養師介紹</li>
 				</ul>
 			</div>
-
+			<hr>
 			<div id="nutrit01">
 				<img id="nutritImage01"
 					src="<c:url value='/nutritionistController/getImage/${nutritionistBean.nutritionistId}' />">
 			</div>
 			<div id="nutrit02">
 				<h2 id="dr_title">營養師基本資料</h2>
-				<font size="5">1. 姓名 : <a id='content1'>${nutritionistBean.nutritionistName} </a></font><br><br> 
-				<font size="5">2. 性別 : <a id='content1'>${nutritionistBean.nutritionistGender == 'F' ? "女性" : "男性"}</a></font><br><br> 
-				<font size="5">3. 學位 : <a id='content1'>${nutritionistBean.nutritionistDegree}</a></font><br> <br> 
-				<font size="5">4. E-mail : <a id='content1'>${nutritionistBean.nutritionistEmail}</a></font><br> <br> 
-				<font size="5">5. 專長 : <a id='content1'>${nutritionistBean.nutritionistCategory}</a></font><br> <br>
+				<font size="5">1. 姓名 : <a id='content1'>${nutritionistBean.nutritionistName}
+				</a></font><br>
+				<br> <font size="5">2. 性別 : <a id='content1'>${nutritionistBean.nutritionistGender == 'F' ? "女性" : "男性"}</a></font><br>
+				<br> <font size="5">3. 學位 : <a id='content1'>${nutritionistBean.nutritionistDegree}</a></font><br>
+				<br> <font size="5">4. E-mail : <a id='content1'>${nutritionistBean.nutritionistEmail}</a></font><br>
+				<br> <font size="5">5. 專長 : <a id='content1'>${nutritionistBean.nutritionistCategory}</a></font><br>
+				<br>
 			</div>
 
 			<div id="nutrit03">

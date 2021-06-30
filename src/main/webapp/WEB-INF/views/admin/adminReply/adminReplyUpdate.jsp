@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Post</title>
+<title>Admin Reply</title>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -263,42 +263,22 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 			<br>
 			<div style="padding:3% 5%; margin-top: -3%;">
 				<fieldset style="width: 90%; height: 100%;">
-					<legend>修改文章</legend>
-					<form:form method="POST" modelAttribute="postBean"
+					<legend>修改留言</legend>
+					<form:form method="POST" modelAttribute="replyBean"
 						enctype='multipart/form-data'>
 						<table>
 							<tr>
-								<td>文章標題：</td>
-								<td width='600'><form:input path='postTitle' type="text" />
-									<form:errors path="postTitle" cssClass="error" /></td>
-							</tr>
-							<tr>
-							<tr>
-								<td>文章分類</td>
-								<td><form:select path='postCategoryBean.postCategoryId'>
-										<form:option label="請挑選" value="-1" />
-										<form:options items="${postCategoryBeanList}"
-											itemLabel='postCategoryName' itemValue='postCategoryId' />
-									</form:select> <form:errors path="postCategoryBean" cssClass="error" /></td>
-
-							</tr>
-							<tr>
-								<td>文章狀態：</td>
+								<td>留言狀態：</td>
 								<td width='600'>
-								 	<form:radiobutton path="postStatus" value="1"/> 正常 
-        							<form:radiobutton path="postStatus" value="2"/> 禁止  
+								 	<form:radiobutton path="replyStatus" value="1"/> 正常 
+        							<form:radiobutton path="replyStatus" value="2"/> 禁止  
 								</td>
 							</tr>
 							<tr>
-								<td>文章圖片：</td>
-								<td width='600'><form:input path='postMultiImg' type="file" />
-									<form:errors path="postMultiImg" cssClass="error" /></td>
-							</tr>
-							<tr>
-								<td>文章內容：</td>
-								<td width='600'><form:textarea path='postContent'
+								<td>留言內容：</td>
+								<td width='600'><form:textarea path='replyContent'
 										style="width: 140%; height: 310px; overflow-y: scroll;" /> <form:errors
-										path="postContent" cssClass="error" /></td>
+										path="replyContent" cssClass="error" /></td>
 							<tr>
 								<td><input type='submit'></td>
 								<td><input type="reset" value="Reset"></td>

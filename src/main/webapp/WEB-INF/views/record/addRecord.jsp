@@ -35,6 +35,12 @@
 								cssClass="error" /></td>
 					</tr>
 					<tr>
+						<td>今天的日期？ （格式 : 西元年/月/日）:</td>
+						<td width='600'><form:input path='recordDate'
+								type="date" /> <form:errors path="recordDate"
+								cssClass="error" /></td>
+					</tr>
+					<tr>
 						<td><input type='submit'></td>
 					<tr>
 				</table>

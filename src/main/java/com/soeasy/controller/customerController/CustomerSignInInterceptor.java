@@ -14,17 +14,31 @@ import com.soeasy.model.CustomerBean;
 
 @Component
 public class CustomerSignInInterceptor implements HandlerInterceptor {
+	//需要登入且登入後需跳轉 名單
 	List<String> urls = Arrays.asList(
 			"/customerController/customerPage",
 			"/customerController/updateCustomerInfo",
 			"/customerController/updateCustomerHealthInfo",
 			"/customerController/uploadCustomerImg",
-			"/customerController/getCustomerImg"
+			"/sportMapNeedLogin/*",
+			"/favoriteController/*",
+			"/PostNeedLoginController/*",
+			"/ReplyNeedLoginController/*"
 	);
-	
+	//需要登入但登入後不能跳轉 名單
+	List<String> postUrls = Arrays.asList(
+			"/favoriteController/addFavorite",
+			"/sportMapNeedLogin/getScore/*"
+	);
+	//不需要登入但登入後需跳轉 名單
+	List<String> recordUrls = Arrays.asList(
+			"/sportMapController/sportMap/*"
+	);
 	String servletPath;
 	String contextPath;
 	String requestURI;
+	
+	
 	
 	public CustomerSignInInterceptor() {
 	}
@@ -44,7 +58,7 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 		if(mustSignInCustomer()) {
 			if(checkCustomerSignIn(request)) {	//已登入
 				HttpSession session = request.getSession();
-				session.setAttribute("servletPath", servletPath);
+				session.setAttribute("customerServletPath", servletPath);
 				byPass = true;
 			} else {	//需登入但未登入，導向登入顧客會員登入頁面
 				HttpSession session = request.getSession();
@@ -55,12 +69,19 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 					// 原本要執行的程式。
 //					System.out.println("CheckLoginInterceptor#preHandle, servletPath=" + servletPath );
 //					System.out.println("CheckLoginInterceptor#preHandle, session=" + session );
-					session.setAttribute("servletPath", servletPath);	
+					if(!needLoginNoRecordRequest()) {
+						System.out.println(servletPath);
+						session.setAttribute("customerServletPath", servletPath);						
+					}
 				}
 				response.sendRedirect(contextPath + "/customerController/customerSignIn");
 				byPass = false;
 			}
 		} else {	//不需登入
+			HttpSession session = request.getSession();
+			if(needRecordRequestNoLogin()) {
+				session.setAttribute("customerServletPath", servletPath);	
+			}
 			byPass = true;
 		}
 		
@@ -70,7 +91,7 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 	// 判斷Session物件內是否含有識別字串為LoginOK的屬性物件，如果有，表示已經登入，否則尚未登入
 	private boolean checkCustomerSignIn(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		CustomerBean loginToken = (CustomerBean) session.getAttribute("CustomerSignInSuccess");
+		CustomerBean loginToken = (CustomerBean) session.getAttribute("customerSignInSuccess");
 		if (loginToken == null) {
 			return false;
 		} else {
@@ -94,5 +115,41 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 			}
 		} 
 		return mustSignInCustomer;
+	}
+	
+	// 如果必須登入才能使用的請求為Post請求，則不須記入登入成功後轉入
+	private Boolean needLoginNoRecordRequest() {
+		Boolean needLoginNoRecordRequest = false;
+			for(String postUrl : postUrls) {
+				postUrl = postUrl.substring(0, postUrl.length() - 1); // 除去掉最後一個字元的剩餘字串
+				if (servletPath.startsWith(postUrl)) {
+					needLoginNoRecordRequest = true;
+					break;
+				} else {
+					if (servletPath.equals(postUrl)) {
+						needLoginNoRecordRequest = true;
+						break;
+					}
+				}
+			}
+		return needLoginNoRecordRequest;
+	}
+	
+	// 不需要登入，但該頁面包含了需要登入的請求路徑(例如訪客瀏覽的頁面含有需登入會員的功能)，加入登入後轉向
+	private Boolean needRecordRequestNoLogin() {
+		Boolean needRecordRequestNoLogin = false;
+		for(String recordUrl : recordUrls) {
+			recordUrl = recordUrl.substring(0, recordUrl.length() - 1); // 除去掉最後一個字元的剩餘字串
+			if (servletPath.startsWith(recordUrl)) {
+				needRecordRequestNoLogin = true;
+				break;
+			} else {
+				if (servletPath.equals(recordUrl)) {
+					needRecordRequestNoLogin = true;
+					break;
+				}
+			}
+		}
+	return needRecordRequestNoLogin;
 	}
 }

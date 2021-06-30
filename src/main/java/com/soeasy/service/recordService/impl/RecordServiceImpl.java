@@ -53,5 +53,11 @@ public class RecordServiceImpl implements RecordService{
 		recordRepository.deleteById(recordId);
 	}
 
+	@Override
+	public List<RecordBean> findAllByCustomerId(Integer customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

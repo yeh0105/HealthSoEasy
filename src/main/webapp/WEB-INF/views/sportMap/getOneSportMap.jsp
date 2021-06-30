@@ -46,8 +46,12 @@
 			xhr.onreadystatechange = function(){
 				if (xhr.readyState == 4 && xhr.status ==200){
 					
+					if(xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn"){
+						location.href="/soeasy/customerController/customerSignIn";
+					}
+					
 					let favoriteJson = JSON.parse(xhr.responseText);
-					console.log(favoriteJson);
+// 					console.log(favoriteJson);
 					//更改圖片
 					if (favoriteJson.favoriteExist){
 						favoriteHeart.src="${pageContext.request.contextPath}/images/sportMap/Like2.png";
@@ -55,7 +59,7 @@
 						favoriteHeart.src="${pageContext.request.contextPath}/images/sportMap/Like1.png";
 
 					}
-										
+					
 				}
 				
 				

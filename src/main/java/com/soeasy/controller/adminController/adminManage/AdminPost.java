@@ -49,12 +49,6 @@ public class AdminPost {
 	@Autowired
 	ServletContext context;
 
-//	// 文章
-//	@GetMapping({ "/adminPost" })
-//	public String admin() {
-//		return "/admin/adminPost";
-//	}
-
 	// 查詢全部文章
 	@GetMapping({ "/adminPost" })
 	public String getAllPostById(Model model) {

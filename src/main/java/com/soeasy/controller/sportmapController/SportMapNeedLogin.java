@@ -48,10 +48,10 @@ public class SportMapNeedLogin {
 			@PathVariable("scoreNo") Integer scoreNo, HttpServletRequest request){
 		
 		// 判斷是否為會員
-	    CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-	    if (customerBean == null) {
-	         return "redirect:/customerController/customerSignIn";
-	        }
+//	    CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//	    if (customerBean == null) {
+//	         return "redirect:/customerController/customerSignIn";
+//	        }
 	        
 	    //1.new一個sportMapBean物件，用sportMapId撈出舊資料裝進sportMapBean物件裡 
 	    //2.將修改的scoreNo裝進sportMapBean物件的score欄位裡

@@ -8,6 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Share</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript"
@@ -17,6 +29,23 @@
 	rel="stylesheet" media="screen">
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+
+
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 8pt;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded",function() {
+	
+
+	
+})
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded",function() {
@@ -142,7 +171,9 @@ document.addEventListener("DOMContentLoaded",function() {
 			
 			for(var i=0; i < replies.length; i++){
 				
-				content+='<div class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
+				content+='<div id="'
+						+(i+1)
+						+'" class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
 						+'<div class="span11" style="display: flex;">'
 // 						留言者頭像
 						+'<img alt="留言者頭像" src="<c:url value="/customerController/getCustomerImgById/'+replies[i].customerBean.customerId+'" />" class="img-circle"'
@@ -163,19 +194,112 @@ document.addEventListener("DOMContentLoaded",function() {
 						+'</div>'
 						+'</div>'
 					
+						+'<div style="display:flex;">'
+						
 						+'<div class="row-fluid">'
-						+'<div class="span12" style="padding: 2%;">'
+						+'<div class="span10" style="padding: 2%;">'
 						+'<p>'
 // 						留言內容
 						+replies[i].replyContent
 						+'</p>'
 						+'</div>'
+
+// 						Update按鈕
+						+'<div class="span2">'
+						+'<button style="margin: 0% 1%;" data-toggle="modal" data-target="#replyInfoModal"'
+				        +'data-id="' + replies[i].replyId
+				        +'"data-status="' + replies[i].replyStatus
+				        +'"data-content="' + replies[i].replyContent
+				        +'">Update</button>'
+				        
+// 						Delete按鈕
+// 						+'<button style="margin: 0% 1%;" data-toggle="modal" data-target="#replyInfoModal"'
+// 				        +'data-id="' + replies[i].replyId
+// 				        +'"data-status="' + replies[i].replyStatus
+// 				        +'"data-content="' + replies[i].replyContent
+// 				        +'">Delete</button>'
+				        +'</div>'
+				        
 						+'</div>'
+						
+						+'</div>'
+				        
+						
+				        
 			
 				
 			}
 			document.getElementById("insertReplies").innerHTML = content;
 		}
+		
+		
+//		互動視窗--所有留言
+//		開啟互動視窗表單
+		let inputReplyId = null;
+		$('#replyInfoModal').on('show.bs.modal', function (event) {
+//	 		取得代入update按鈕的值
+			let button = $(event.relatedTarget); 
+			let updateReplyId = button.data('id'); 
+			inputReplyId=updateReplyId;		//作為表單送出用ID
+			let updateReplyStatus = button.data('status'); 
+			let updateReplyContent = button.data('content');
+			let modal = $(this);
+//			依照取得值寫入表單
+			modal.find('.modal-title').text('留言修改	ID: ' + updateReplyId);
+			if(updateReplyStatus == 1){
+	  			modal.find('.modal-body #recipient-status1').prop('checked',true);
+			}else if(updateReplyStatus == 2){
+	  			modal.find('.modal-body #recipient-status2').prop('checked',true);
+			}
+			modal.find('.modal-body #recipient-content').val(updateReplyContent);
+		})
+		
+//	 	互動視窗--所有留言--送出按鈕
+		let sendReplyInfo = document.getElementById("sendReplyInfo");
+		let replyInfo_form = document.getElementById("replyInfo_form");
+		
+		sendReplyInfo.addEventListener("click", function(){
+//			表單資料初始化
+		// ID使用原先取得的值
+			let inputRreplyStatus1 = document.getElementById("recipient-status1");
+			let inputRreplyStatus2 = document.getElementById("recipient-status2");
+			let inputRreplyContent = document.getElementById("recipient-content");
+			
+			let inputReplyStatus = null;
+			if(inputReplyStatus1.checked){
+				inputReplyStatus = inputReplyStatus1.value;
+			}else if(inputReplyStatus2.checked){
+				inputReplyStatus = inputReplyStatus2.value;				
+			}
+			
+//	 		建立一支obj，將input內容裝入
+			
+			let updateReplyrObj = {
+					"replyId" : inputReplyId,	//Id為Update代入的值(全域)
+					"replyStatus" : inputReplyStatus,
+					"replyContent" : inputRreplyContent.value,
+			}
+			
+//	 		將物件轉為JSON字串
+			let json = JSON.stringify(updateReplyrObj);
+			
+			xhr.open('POST', "<c:url value='/ReplyNeedLoginController/updateReply'/>" , true);
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(json);	
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200){
+//					接收回傳訊息，更新訊息框
+					let replyJSON = JSON.parse(xhr.responseText);
+//	 				infoMessage.innerHTML = replyJSON.updateMessage;
+					console.log(replyJSON);
+//					重新搜尋目前類型資料
+//	 				applybtn.click();
+//	 				document.querySelector(".filter-menu").classList.toggle("active");
+				}
+			}
+		
+		})
 		
 	})
 </script>
@@ -201,7 +325,7 @@ document.addEventListener("DOMContentLoaded",function() {
 					class="img-circle" style="width: 50px; height: 50px;" />
 				<p class="text-left">&nbsp;&nbsp;&nbsp;${getOnePostBean.customerBean.customerNickname}</p>
 			</div>
-		<!-- 			作者頭像+暱稱結束 -->
+			<!-- 			作者頭像+暱稱結束 -->
 
 			<div class="span2" style="display: flex; align-items: center;">
 				<!-- --------------------------------------------文章修改區開始------------------------------------------------------- -->
@@ -291,8 +415,8 @@ document.addEventListener("DOMContentLoaded",function() {
 		<!-- 			文章內容 -->
 		<br>
 		<!-- 			文章likes -->
-		<div class="row-fluid" style="display: flex; align-items: center;">
-			<div class="span12">
+		<div class="row-fluid">
+			<div class="span11">
 				<a href="" style="text-decoration: none;"> <svg class="like"
 						viewBox="0 0 520 500" style="width: 20px; height: 20px;"
 						xmlns="http://www.w3.org/2000/svg">
@@ -301,91 +425,77 @@ document.addEventListener("DOMContentLoaded",function() {
 					</svg>
 				</a>${getOnePostBean.postLike}
 			</div>
+			<div class="span1">
+				<button id="addReplyBtn"
+					class="btn btn-success btn-large glyphicon glyphicon-plus"
+					aria-hidden="true" type="button"></button>
+			</div>
 		</div>
 		<!-- 			文章likes -->
 
 		<!-- --------------------------------------------文章顯示區------------------------------------------------------- -->
 
 		<!-- --------------------------------------------留言區------------------------------------------------------- -->
-		<div style="border-top: 4px #325b43 dotted; padding-top: 1%;">
-			<form:form action="" method="post">
-				<label for="">回應</label>
-				<textarea placeholder="寫下你的回應..." path=""
-					style="width: 94%; overflow-y: scroll;">
-				</textarea>
-				
-				<button type="submit"
-					style="border: none; background-color: transparent; text-align: right;">
-					<svg id="Capa_1" enable-background="new 0 0 512 512"
-						viewBox="0 0 512 512" height="30" width="30"
-						xmlns="http://www.w3.org/2000/svg">
-						<g>
-							<g>
-								<path
-							d="m78.651 475.5c-22.029 0-39.887-17.909-39.887-40v-387.999c0-22.092 17.858-40 39.887-40h170.714c7.945 0 15.564 3.17 21.176 8.81l113.483 114.048c5.596 5.624 8.739 13.245 8.739 21.191v276.95c0 25.957-21.043 47-47 47z"
-							fill="#f9f8f9" />
-								<path
-							d="m108.655 475.496h-30c-22.03 0-39.89-17.9-39.89-40v-388c0-22.09 17.86-40 39.89-40h30c-22.03 0-39.89 17.91-39.89 40v388c0 22.1 17.86 40 39.89 40z"
-							fill="#e3e0e4" />
-								<g fill="#a29aa5">
-									<path
-							d="m219.369 157.481h-123.611c-4.142 0-7.5-3.357-7.5-7.5s3.358-7.5 7.5-7.5h123.611c4.142 0 7.5 3.357 7.5 7.5s-3.358 7.5-7.5 7.5z" />
-									<path
-							d="m269.369 337.522h-173.611c-4.142 0-7.5-3.357-7.5-7.5s3.358-7.5 7.5-7.5h173.611c4.142 0 7.5 3.357 7.5 7.5s-3.358 7.5-7.5 7.5z" />
-									<path
-							d="m317.597 217.495h-223.837c-4.142 0-7.5-3.357-7.5-7.5s3.358-7.5 7.5-7.5h223.837c4.142 0 7.5 3.357 7.5 7.5s-3.358 7.5-7.5 7.5z" />
-									<path
-							d="m317.633 277.509h-223.873c-4.142 0-7.5-3.357-7.5-7.5s3.358-7.5 7.5-7.5h223.874c4.142 0 7.5 3.357 7.5 7.5s-3.358 7.5-7.501 7.5z" />
-								</g>
-								<path
-							d="m473.193 404.108c-.318-6.64-3.204-13.105-7.953-17.779l-72.297-71.877c-10.654-10.592-27.923-10.592-38.577 0s-10.654 27.761 0 38.353l25.727 25.577h-145.576c-15.073 0-27.282 12.138-27.282 27.124s12.209 27.124 27.282 27.124h145.577l-25.727 25.578c-10.654 10.592-10.654 27.761 0 38.353 10.639 10.598 27.938 10.598 38.577 0l72.297-71.878c5.427-5.328 8.382-13.002 7.952-20.575z"
-							fill="#80e29e" />
-								<path
-							d="m380.032 378.325h17.991c4.461 0 6.689-5.4 3.526-8.545l-25.054-24.914c-10.45-10.39-11.99-26.29-4.61-38.3-6.38.41-12.64 3.04-17.52 7.89-10.65 10.59-10.65 27.76 0 38.35zm-25.667 79.881c-10.65 10.59-10.65 27.76 0 38.35 4.87 4.85 11.14 7.48 17.52 7.89-7.38-12.02-5.84-27.91 4.61-38.3l23.934-25.064c3.038-3.182.783-8.453-3.616-8.453h-16.719zm-106.33-79.82h-13.52c-15.07 0-27.28 12.13-27.28 27.12s12.21 27.12 27.28 27.12h13.52c-9.46-5.38-15.83-15.51-15.83-27.12s6.37-21.74 15.83-27.12z"
-							fill="#77d192" />
-								<path
-							d="m392.765 151.546v17.57h-103.87c-31.44 0-57.02-25.62-57.02-57.11v-104.51h17.49c7.95 0 15.56 3.17 21.18 8.81l113.48 114.05c5.6 5.63 8.74 13.25 8.74 21.19z"
-							fill="#e3e0e4" />
-								<path
-							d="m390.065 139.116h-101.17c-14.92 0-27.02-12.13-27.02-27.11v-101.75c3.19 1.47 6.14 3.51 8.67 6.05l113.48 114.05c2.55 2.56 4.59 5.53 6.04 8.76z"
-							fill="#a29aa5" />
-							</g>
-							<g>
-								<path
-							d="m140.064 468h-61.413c-17.858 0-32.387-14.579-32.387-32.5v-184.874c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v184.874c0 26.191 21.258 47.5 47.387 47.5h61.413c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5z" />
-								<path
-							d="m95.758 157.481h123.611c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5h-123.611c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5z" />
-								<path
-							d="m95.758 322.522c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5h173.611c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5z" />
-								<path
-							d="m93.76 217.495h223.837c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5h-223.837c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5z" />
-								<path
-							d="m93.76 277.509h223.874c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5h-223.874c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5z" />
-								<path
-							d="m480.685 403.749c-.407-8.499-4.119-16.797-10.156-22.738l-70.265-69.857v-159.605c0-9.997-3.879-19.401-10.923-26.481l-113.483-114.048c-6.969-7.003-16.625-11.02-26.493-11.02h-170.714c-26.129 0-47.387 21.309-47.387 47.501v168.125c0 4.143 3.358 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-168.125c0-17.921 14.529-32.501 32.387-32.501h170.714c1.708 0 3.381.211 5.006.582v42.202c0 4.143 3.358 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-32.017l105.327 105.852h-85.804c-10.765 0-19.523-8.797-19.523-19.609v-19.226c0-4.143-3.358-7.5-7.5-7.5s-7.5 3.357-7.5 7.5v19.226c0 19.084 15.487 34.609 34.523 34.609h95.813c.355 1.602.557 3.249.557 4.93v149.453c-12.234-4.289-26.417-1.58-36.186 8.131-13.512 12.89-13.512 36.098 0 48.989 0 0 12.834 12.76 12.834 12.76h-44.279c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5h62.46c3.038 0 5.775-1.832 6.933-4.64 1.159-2.809.509-6.037-1.645-8.179l-25.727-25.578c-7.653-7.303-7.652-20.413 0-27.716 7.721-7.675 20.282-7.675 28.001 0l72.324 71.904c7.592 7.217 7.626 20.439-.027 27.689l-72.302 71.883c-7.718 7.687-20.275 7.688-27.996-.005-7.653-7.303-7.652-20.414 0-27.717l25.727-25.577c2.154-2.141 2.804-5.37 1.646-8.179-1.158-2.808-3.896-4.64-6.933-4.64h-145.577c-10.908 0-19.782-8.804-19.782-19.624s8.875-19.623 19.782-19.623h48.117c4.142 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5h-48.117c-19.179 0-34.782 15.532-34.782 34.623 0 19.092 15.603 34.624 34.782 34.624h127.395l-12.833 12.759c-4.291 4.266-7.315 9.454-8.906 15.112h-165.109c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5h164.274c1.16 7.118 4.512 13.68 9.736 18.873 13.551 13.501 35.607 13.504 49.158.005l72.263-71.844c6.928-6.798 10.736-16.648 10.19-26.283z" />
-							</g>
-						</g>
-					</svg>
-				</button>
-			</form:form>
-		</div>
+
+
 
 		<!-- --------------------------------------------留言區------------------------------------------------------- -->
 
 		<!-- ------------------------------------------熱門留言------------------------------------------------------- -->
-		<h4>熱門回應</h4>
+		<h4 style="border-top: 3px #325b43 solid; padding-top: 1%;">熱門回應</h4>
 		<div id="insertTop3Replies" style="background-color: #F0FFF0;">
-		
-		</div>
 
+		</div>
 		<!-- ------------------------------------------熱門留言----------------------------------------ㄦ------------- -->
 
 		<!-- ------------------------------------------留言顯示區----------------------------------------------------- -->
-		<div id="insertReplies">
-		
-		</div>
+		<div id="insertReplies"></div>
 		<!-- ------------------------------------------留言顯示區----------------------------------------------------- -->
 	</div>
+	
+			<!-- 			互動視窗--留言資料 -->
+		<div class="modal fade" id="ReplyInfoModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+				role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">ID:</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="replyInfo_form" action="#" method="post">
+							<div class="form-group">
+								<label for="recipient-content" class="col-form-label">Content:</label>
+								<input type="text" class="form-control" id="recipient-content">
+							</div>
+							<div class="form-group"
+								style="display: flex; justify-content: flex-start;">
+								<label for="recipient-status1" class="col-form-label">Active:</label>
+								<input type="radio" class="form-control form-check-input"
+									id="recipient-status1" name="radio-status"
+									style="margin: 10px 5px 0px 5px" value="1"> <label
+									for="recipient-status2" class="col-form-label">Disabled:</label>
+								<input type="radio" class="form-control form-check-input"
+									id="recipient-status2" name="radio-status"
+									style="margin: 10px 5px 0px 5px" value="2">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="sendReplyInfo"
+							style="background-color: #007500; border-color: #007500">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 			---------------------------------------------------------------------------------------------------------------- -->
+	
 
 	<!-- 	---------------------用來接delete的post--------------------------	 -->
 
@@ -409,16 +519,15 @@ document.addEventListener("DOMContentLoaded",function() {
 			});
 		})
 	</script>
-	
+
 	<div class="mainWrapper">
 		<section id="offer">
 			<div>
-				<div>
-				</div>
+				<div></div>
 			</div>
 		</section>
 	</div>
-	
+
 	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />

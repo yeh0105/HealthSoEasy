@@ -189,7 +189,7 @@ public class PostServiceImpl implements PostService {
 		postRepository.save(postBean);
 	}
 
-	// 查詢單邊文章By postId
+	// 查詢單篇文章By postId
 	@Override
 	public PostBean findByPostId(Integer postId) {
 		Optional<PostBean> optional = postRepository.findById(postId);
