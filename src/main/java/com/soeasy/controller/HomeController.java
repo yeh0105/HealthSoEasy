@@ -1,17 +1,19 @@
 package com.soeasy.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import com.soeasy.model.member.AdminBean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
 
 	// 首頁
 	@GetMapping({ "/", "/index" })
-	public String index() {
+	public String index(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("customerServletPath", null);
 		return "index";
 	}
 

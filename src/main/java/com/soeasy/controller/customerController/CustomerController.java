@@ -4,16 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.CustomerHealthBean;
-import com.soeasy.model.ShoppingcartBean;
 import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.util.GlobalService;
