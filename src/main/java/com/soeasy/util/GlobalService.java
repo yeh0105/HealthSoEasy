@@ -22,29 +22,28 @@ public class GlobalService {
 	// 廠商帳號狀態
 	public static final Integer SHOP_STATUS_NORMAL = 1;
 	public static final Integer SHOP_STATUS_BANNED = 2;
-	
-	//商品
-	public static final Integer PRODUCT_PER_PAGE=10;
 
+	// 商品
+	public static final Integer PRODUCT_PER_PAGE = 10;
 
 	// 地圖
 	public static final int SPORTMAPS_PER_PAGE = 6;
 
 	// 講座狀態
-	public static final Integer LECTURE_STATUS_TOBEHELD = 1;  //即將舉辦
-	public static final Integer LECTURE_STATUS_ONGOING = 2;   //進行中
-	public static final Integer LECTURE_STATUS_HISTORY = 3;   //精采回顧
-	
+	public static final Integer LECTURE_STATUS_TOBEHELD = 1; // 即將舉辦
+	public static final Integer LECTURE_STATUS_ONGOING = 2; // 進行中
+	public static final Integer LECTURE_STATUS_HISTORY = 3; // 精采回顧
+
 	// 講座分類
-	public static final Integer LECTURE_CATEGORY_EAT = 1;       //飲食
-	public static final Integer LECTURE_CATEGORY_EXERCISE = 2;  //運動
+	public static final Integer LECTURE_CATEGORY_EAT = 1; // 飲食
+	public static final Integer LECTURE_CATEGORY_EXERCISE = 2; // 運動
 
 	// 講座預約狀態
-	public static final Integer RESERVATION_STATUS_SUCCESS = 1;     //預約成功
-	public static final Integer RESERVATION_STATUS_WAITINGLIST = 2; //候補名單
-	public static final Integer RESERVATION_STATUS_CANCEL = 3;      //取消預約
-	public static final Integer RESERVATION_STATUS_ATTEND = 4;      //出席
-	public static final Integer RESERVATION_STATUS_ABSENCE = 5;     //缺席
+	public static final Integer RESERVATION_STATUS_SUCCESS = 1; // 預約成功
+	public static final Integer RESERVATION_STATUS_WAITINGLIST = 2; // 候補名單
+	public static final Integer RESERVATION_STATUS_CANCEL = 3; // 取消預約
+	public static final Integer RESERVATION_STATUS_ATTEND = 4; // 出席
+	public static final Integer RESERVATION_STATUS_ABSENCE = 5; // 缺席
 
 	// 分享
 	// 文章狀態
@@ -53,6 +52,9 @@ public class GlobalService {
 	// 一頁預設10篇文章
 	public static final int POSTS_PER_PAGE = 10;
 
+	// 留言狀態
+	public static final Integer REPLY_STATUS_NORMAL = 1;
+	public static final Integer REPLY_STATUS_BANNED = 2;
 
 	// 營養師
 	// 性別

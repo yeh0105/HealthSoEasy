@@ -7,12 +7,17 @@ import com.soeasy.model.ReplyBean;
 
 public interface ReplyService {
 
+	// 查詢全部replyIdByReplyId
+	List<ReplyBean> findAllByReplyId();
+	
+	// 查詢單篇留言ByReplyId
+	ReplyBean findByReplyId(Integer replyId);
+
 	// 查詢留言ByPostId
 	List<ReplyBean> findByPostBean(PostBean postBean);
 
 	// 查詢Top3的留言ByPostId
 	List<ReplyBean> findTop3ByPostBeanOrderByReplyLikeDesc(PostBean postBean);
-	
 
 	// 新增留言
 	void addReply(ReplyBean replyBean);

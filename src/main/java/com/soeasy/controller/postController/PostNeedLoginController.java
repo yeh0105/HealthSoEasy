@@ -34,6 +34,7 @@ import com.soeasy.model.CustomerBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
 import com.soeasy.model.PostUpdateBean;
+import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
 import com.soeasy.util.GlobalService;
@@ -50,6 +51,9 @@ public class PostNeedLoginController {
 
 	@Autowired
 	PostCategoryService postCategoryService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	@Autowired
 	ServletContext context;
@@ -163,7 +167,7 @@ public class PostNeedLoginController {
 		// 取得原始的PostBean物件
 		postChangeBean = postService.findByPostId(postId);
 
-		postChangeBean.setPostStatus(2);
+		postChangeBean.setPostStatus(GlobalService.POST_STATUS_BANNED);
 
 		// 修改Post
 		postService.updatePost(postChangeBean);
@@ -189,7 +193,7 @@ public class PostNeedLoginController {
 
 		// 假如文章狀態是2(禁止)就導到deletePost.jsp
 		// 取得文章狀態
-		if (postBean.getPostStatus() == 2) {
+		if (postBean.getPostStatus() == GlobalService.POST_STATUS_BANNED) {
 			return "post/deletePost";
 		}
 
@@ -198,11 +202,11 @@ public class PostNeedLoginController {
 //		System.err.println("postContent="+postContent+"----------------------------------------------------------------");
 
 		// 將換行(\n)換成<br>
-		String newtContent = postContent.replaceAll("\n", "<br>");
+		String newContent = postContent.replaceAll("\n", "<br>");
 //		System.err.println("newtContent="+newtContent+"----------------------------------------------------------------");
 
 		// 將更改過的內容塞入postBean
-		postBean.setPostContent(newtContent);
+		postBean.setPostContent(newContent);
 
 		model.addAttribute("getOnePostBean", postBean);
 
@@ -243,6 +247,8 @@ public class PostNeedLoginController {
 		if (customerBean == null) {
 			return "redirect:/customerController/customerSignIn";
 		}
+		
+		CustomerBean originalBean = customerService.findByCustomerId(customerBean.getCustomerId());
 
 		// 檢測不正當欄位並回傳提示訊息
 		PostBeanValidator validator = new PostBeanValidator();
@@ -284,6 +290,9 @@ public class PostNeedLoginController {
 
 		// 初始文章收藏數為0
 		postBean.setPostLike(0);
+		
+		// 會員積分為+10
+		originalBean.setCustomerScore(originalBean.getCustomerScore()+10);
 
 		// 找出對應的PostCategory物件
 		PostCategoryBean postCategoryBean = postCategoryService
@@ -294,6 +303,7 @@ public class PostNeedLoginController {
 
 		try {
 			postService.addPost(postBean);
+			customerService.addCustomer(originalBean);
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
 //			result.rejectValue("sportMapName", "", "地點已存在，請重新輸入");
 			return "post/addPost";

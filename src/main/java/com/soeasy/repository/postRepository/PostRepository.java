@@ -18,7 +18,7 @@ public interface PostRepository extends JpaRepository<PostBean, Integer> {
 	// 抓一個分類裡有多少個文章總數(搭配抓分頁一頁有哪些文章，依照PostCategoryId用)
 	Long countByPostCategoryBean(PostCategoryBean postCategoryBean);
 //	
-////	 查詢所有文章的 TOP3
+//	 查詢所有文章的 TOP3
 //	List<PostBean> findTop3(Sort sort);
 	
 	// 查詢類別文章的 TOP10
