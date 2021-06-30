@@ -216,6 +216,8 @@
 					gender = '<span class="status active">Male</span>';
 				} else if(customer.customerHealthBean.customerGender == 2){
 					gender = '<span class="status disabled">Female</span>';
+				} else {
+					gender = '<span class="status null">null</span>';
 				}
 					
 				content = content
@@ -229,7 +231,7 @@
 			    +	'</div>'
 			    +	'<div class="product-cell category"><span class="cell-label">ID:</span>' + customer.customerId + '</div>'
 			    +	'<div class="product-cell status-cell">'
-			    +		'<span class="cell-label">Status:</span>'
+			    +		'<span class="cell-label">Gender:</span>'
 			    +		gender
 			    +	'</div>'
 			    +	'<div class="product-cell email"><span class="cell-label">Diets Type:</span>' + customer.customerHealthBean.customerDiet + '</div>'

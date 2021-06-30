@@ -572,6 +572,14 @@ body {
   background-color: #59719d;
 }
 
+.status.null {
+  color: #fff;
+  background-color: rgba(89, 113, 157, 0.2);
+}
+.status.null:before {
+  background-color: #fff;
+}
+
 .gridView {
   display: flex;
   flex-wrap: wrap;

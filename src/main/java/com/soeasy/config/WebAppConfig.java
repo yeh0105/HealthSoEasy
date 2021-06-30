@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.soeasy.controller.adminController.AdminLoginInterceptor;
+import com.soeasy.controller.customerController.CustomerSignInInterceptor;
+import com.soeasy.controller.shopController.ShopSignInInterceptor;
 
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
@@ -19,10 +21,18 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Autowired
 	private AdminLoginInterceptor adminLoginInterceptor;
 	
+	@Autowired
+	private CustomerSignInInterceptor customerSignInInterceptor;
+	
+	@Autowired
+	private ShopSignInInterceptor shopSignInInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(adminLoginInterceptor);
+		registry.addInterceptor(customerSignInInterceptor);
+		registry.addInterceptor(shopSignInInterceptor);
 		
 	}
 

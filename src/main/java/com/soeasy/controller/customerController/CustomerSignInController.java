@@ -88,7 +88,8 @@ public class CustomerSignInController {
 		}
 		
 		HttpSession session = request.getSession();
-		String nextPath = (String)session.getAttribute("servletPath");
+		String nextPath = (String)session.getAttribute("customerServletPath");
+		System.out.println("登入完去哪:" + nextPath);
 		if (nextPath == null) {
 			nextPath = "/";
 		}
