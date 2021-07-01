@@ -2,6 +2,7 @@ package com.soeasy.controller.recordController;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
@@ -41,12 +42,21 @@ public class RecordController {
 		return "/record/getAllRecords";
 	}
 
-	// 查詢單日誌
-	@GetMapping(value = "/record/{recordId}")
-	public String getOneRecordById(@PathVariable("recordId") Integer recordId, Model model) {
-		RecordBean recordBean = recordService.findByRecordId(recordId);
+//	// 查詢單日誌
+//	@GetMapping(value = "/record/{recordId}")
+//	public String getOneRecordById(@PathVariable("recordId") Integer recordId, Model model) {
+//		RecordBean recordBean = recordService.findByRecordId(recordId);
+//		model.addAttribute("recordBean", recordBean);
+//		return "/record/recordIndex";
+//	}
+
+	// 由customerId查詢日誌
+	@GetMapping(value = "/record/getRecordByCustomerId")
+	public String getCustomerById( Model model) {
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		List<RecordBean> recordBean=recordService.getCustomerId(customerBean);
 		model.addAttribute("recordBean", recordBean);
-		return "/record/recordIndex";
+		return "/record/reordIndex";
 	}
 
 	// 新增日誌，先送一個空白表單，並給予初值
@@ -60,13 +70,12 @@ public class RecordController {
 
 		return "/record/addRecord";
 	}
-	
-	// 新增營養師
+
+	// 新增日誌
 	@PostMapping(value = "/addRecord")
 	public String addRecord(@ModelAttribute("nutritionistBean") RecordBean recordBean, BindingResult result,
 			Model model, HttpServletRequest request) {
 
-		
 		// 檢測不正當欄位並回傳提示訊息
 		RecordValidator validator = new RecordValidator();
 		validator.validate(recordBean, result);
@@ -74,13 +83,11 @@ public class RecordController {
 			return "/record/addRecord";
 		}
 
-		
 		// 會員ID
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 		System.out.println(customerBean);
 		recordBean.setCustomerBean(customerBean);
-		
-		
+
 		try {
 			recordService.addRecord(recordBean);
 		} catch (org.hibernate.exception.ConstraintViolationException e) {

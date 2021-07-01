@@ -20,4 +20,7 @@ public interface NutritionistService {
 		
 		// 刪除
 		void deleteByNutritionistId(Integer nutritionistId);
+		
+		// 查詢全部
+		List<NutritionistBean> getAllPageNutritionist(int pageNo);
 }
