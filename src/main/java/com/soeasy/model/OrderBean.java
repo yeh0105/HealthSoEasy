@@ -21,7 +21,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "OrderTable")
+@Table(name = "OrderBean")
 public class OrderBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,38 +32,40 @@ public class OrderBean implements Serializable {
 
 	private String orderCustomerName;
 
-	private String orderAddress;
-
-	private String orderPhone;
+//	private String orderAddress;
+//
+//	private String orderPhone;
 
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
 	private Timestamp orderRegisterTime;
 
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
-	private Timestamp orderArrviedTime;
+//	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+//	private Timestamp orderArrviedTime;
 
-	private String orderRemark;
+//	private String orderRemark;
+//
+//	private String orderPaytype;
 
-	private String orderPaytype;
-
-	private Integer orderTotalPrice;
+	//private Integer orderTotalPrice;
 
 	private Integer orderStatus;
 
-	private Integer payStatus;
+	//private Integer payStatus;
 
+	
 	// 會員
-	@Transient
-	@Column(name = "fk_customerId")
-	private Integer customerId;
+		@Transient
+		@Column(name = "fk_customerId")
+		private Integer customerId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_customerId")
-	private CustomerBean customerBean;
+		@ManyToOne(fetch = FetchType.EAGER)
+		@JoinColumn(name = "fk_customerId")
+		private CustomerBean customerBean;
+
 
 	// 訂單項目
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderBean", cascade = CascadeType.ALL)
-	Set<OrderItemBean> orderItemBeans = new LinkedHashSet<OrderItemBean>();
+	Set<OrderDetailBean> OrderDetail = new LinkedHashSet<OrderDetailBean>();
 
 	// ------------------------------------------
 	public OrderBean() {
@@ -86,21 +88,21 @@ public class OrderBean implements Serializable {
 		this.orderCustomerName = orderCustomerName;
 	}
 
-	public String getOrderAddress() {
-		return orderAddress;
-	}
-
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
-	}
-
-	public String getOrderPhone() {
-		return orderPhone;
-	}
-
-	public void setOrderPhone(String orderPhone) {
-		this.orderPhone = orderPhone;
-	}
+//	public String getOrderAddress() {
+//		return orderAddress;
+//	}
+//
+//	public void setOrderAddress(String orderAddress) {
+//		this.orderAddress = orderAddress;
+//	}
+//
+//	public String getOrderPhone() {
+//		return orderPhone;
+//	}
+//
+//	public void setOrderPhone(String orderPhone) {
+//		this.orderPhone = orderPhone;
+//	}
 
 	public Timestamp getOrderRegisterTime() {
 		return orderRegisterTime;
@@ -110,37 +112,37 @@ public class OrderBean implements Serializable {
 		this.orderRegisterTime = orderRegisterTime;
 	}
 
-	public Timestamp getOrderArrviedTime() {
-		return orderArrviedTime;
-	}
+//	public Timestamp getOrderArrviedTime() {
+//		return orderArrviedTime;
+//	}
+//
+//	public void setOrderArrviedTime(Timestamp orderArrviedTime) {
+//		this.orderArrviedTime = orderArrviedTime;
+//	}
+//
+//	public String getOrderRemark() {
+//		return orderRemark;
+//	}
+//
+//	public void setOrderRemark(String orderRemark) {
+//		this.orderRemark = orderRemark;
+//	}
+//
+//	public String getOrderPaytype() {
+//		return orderPaytype;
+//	}
+//
+//	public void setOrderPaytype(String orderPaytype) {
+//		this.orderPaytype = orderPaytype;
+//	}
 
-	public void setOrderArrviedTime(Timestamp orderArrviedTime) {
-		this.orderArrviedTime = orderArrviedTime;
-	}
-
-	public String getOrderRemark() {
-		return orderRemark;
-	}
-
-	public void setOrderRemark(String orderRemark) {
-		this.orderRemark = orderRemark;
-	}
-
-	public String getOrderPaytype() {
-		return orderPaytype;
-	}
-
-	public void setOrderPaytype(String orderPaytype) {
-		this.orderPaytype = orderPaytype;
-	}
-
-	public Integer getOrderTotalPrice() {
-		return orderTotalPrice;
-	}
-
-	public void setOrderTotalPrice(Integer orderTotalPrice) {
-		this.orderTotalPrice = orderTotalPrice;
-	}
+//	public Integer getOrderTotalPrice() {
+//		return orderTotalPrice;
+//	}
+//
+//	public void setOrderTotalPrice(Integer orderTotalPrice) {
+//		this.orderTotalPrice = orderTotalPrice;
+//	}
 
 	public Integer getOrderStatus() {
 		return orderStatus;
@@ -150,13 +152,13 @@ public class OrderBean implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	public Integer getPayStatus() {
-		return payStatus;
-	}
-
-	public void setPayStatus(Integer payStatus) {
-		this.payStatus = payStatus;
-	}
+//	public Integer getPayStatus() {
+//		return payStatus;
+//	}
+//
+//	public void setPayStatus(Integer payStatus) {
+//		this.payStatus = payStatus;
+//	}
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -174,12 +176,13 @@ public class OrderBean implements Serializable {
 		this.customerBean = customerBean;
 	}
 
-	public Set<OrderItemBean> getOrderItemBeans() {
-		return orderItemBeans;
+	public Set<OrderDetailBean> getOrderDetail() {
+		return OrderDetail;
 	}
 
-	public void setOrderItemBeans(Set<OrderItemBean> orderItemBeans) {
-		this.orderItemBeans = orderItemBeans;
+	public void setOrderDetail(Set<OrderDetailBean> orderDetail) {
+		OrderDetail = orderDetail;
 	}
 
+	
 }

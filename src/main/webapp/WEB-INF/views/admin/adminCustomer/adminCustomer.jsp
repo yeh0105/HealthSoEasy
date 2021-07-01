@@ -216,8 +216,6 @@
 					gender = '<span class="status active">Male</span>';
 				} else if(customer.customerHealthBean.customerGender == 2){
 					gender = '<span class="status disabled">Female</span>';
-				} else {
-					gender = '<span class="status null">null</span>';
 				}
 					
 				content = content
@@ -231,14 +229,14 @@
 			    +	'</div>'
 			    +	'<div class="product-cell category"><span class="cell-label">ID:</span>' + customer.customerId + '</div>'
 			    +	'<div class="product-cell status-cell">'
-			    +		'<span class="cell-label">Gender:</span>'
+			    +		'<span class="cell-label">Status:</span>'
 			    +		gender
 			    +	'</div>'
 			    +	'<div class="product-cell email"><span class="cell-label">Diets Type:</span>' + customer.customerHealthBean.customerDiet + '</div>'
 			    +	'<div class="product-cell stock"><span class="cell-label">Excercise:</span>' + customer.customerHealthBean.customerExerciseHabits + '</div>'
 			    +	'<div class="product-cell stock"><span class="cell-label">Height:</span>' + customer.customerHealthBean.customerHeight + '</div>'
 			    +	'<div class="product-cell price"><span class="cell-label">Weight:</span>' + customer.customerHealthBean.customerWeight + '</div>'
-			    +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#customerHealthInfoModal" data-dismiss="modal"'
+			    +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#customerHealthInfoModal"'
 			    + 	'data-id="' + customer.customerId
 			    +	'"data-name="' + customer.customerName
 			    +	'"data-healthid="' + customer.customerHealthBean.customerHealthId

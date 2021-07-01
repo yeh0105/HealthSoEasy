@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "OrderItem")
-public class OrderItemBean implements Serializable {
+@Table(name = "OrderDetail")
+public class OrderDetailBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,10 +41,9 @@ public class OrderItemBean implements Serializable {
 	private OrderBean orderBean;
 
 	// -------------------------------------
-	public OrderItemBean() {
+	public OrderDetailBean() {
 	}
 
-	// -------------------------------------
 	public Integer getOrderItemId() {
 		return orderItemId;
 	}
@@ -101,4 +100,6 @@ public class OrderItemBean implements Serializable {
 		this.orderBean = orderBean;
 	}
 
+	// -------------------------------------
+	
 }

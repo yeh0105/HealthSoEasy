@@ -2,6 +2,7 @@ package com.soeasy.service.recordService;
 
 import java.util.List;
 
+import com.soeasy.model.CustomerBean;
 import com.soeasy.model.RecordBean;
 
 public interface RecordService {
@@ -21,6 +22,6 @@ public interface RecordService {
 			// 刪除
 			void deleteByRecordId(Integer recordId);
 
-			//查詢全部customerId
-			List<RecordBean> findAllByCustomerId(Integer customerId);
+			//由customerId查詢
+			List<RecordBean> getCustomerId(CustomerBean customerBean);
 }

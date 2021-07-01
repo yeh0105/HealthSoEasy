@@ -24,9 +24,17 @@
  <h2 class="page-header" style="margin-top:50px;">商品資訊 (
  <c:out value="${product.productName}"/> )</h2>
  
+ 
+<!--  ======圖片======================================= -->
+ 
  <div class="" style="display:inline-block;margin-left: 60px">
  <img src="<c:url value='/mall/getImage/${product.productId}' /> " style="height:300px;width:200px;"/>
  </div>
+ 
+<!--   ======(End)圖片====================================== -->
+ 
+ 
+ 
  <div class="well" style="display:inline-block; height:300px;width:500px;margin-left: 20px;margin-top: 50px">
 
 <p><strong>產品ID:</strong><c:out value=" ${product.productId}"/></p>

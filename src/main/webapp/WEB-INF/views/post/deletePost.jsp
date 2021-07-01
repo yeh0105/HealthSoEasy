@@ -15,7 +15,7 @@
 </head>
 <body>
 	<!-- partial:index.partial.html -->
-	<div class="content">
+	<div class="content" style="">
 		<canvas class="snow" id="snow"></canvas>
 		<div class="main-text">
 			<h1>
@@ -31,6 +31,8 @@
 	</div>
 	<!-- partial -->
 	<script src="${pageContext.request.contextPath}/js/postDelete.js"></script>
+
+
 
 </body>
 </html>

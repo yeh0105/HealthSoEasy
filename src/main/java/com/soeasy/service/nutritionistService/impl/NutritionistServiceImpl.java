@@ -53,6 +53,13 @@ public class NutritionistServiceImpl implements NutritionistService{
 	public void deleteByNutritionistId(Integer nutritionistId) {
 		nutritionistRepository.deleteById(nutritionistId);
 	}
+
+	@Transactional
+	@Override
+	public List<NutritionistBean> getAllPageNutritionist(int pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

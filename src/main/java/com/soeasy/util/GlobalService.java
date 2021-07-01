@@ -62,8 +62,6 @@ public class GlobalService {
 	public static String NUTRITIONIST_GENDER_FEMALE = "女性";
 
 	// 營養師
-	// 專長
-//	public static final Integer NUTRITIONIST_CATEGORY_LOSEWEIGHT = 1;
-//	public static final Integer NUTRITIONIST_CATEGORY_FITNESS = 2;
-//	public static final Integer NUTRITIONIST_CATEGORY_ADDCALCIUM = 3;
+	public static final int NUTRITIONISTS_PER_PAGE = 6;
+
 }

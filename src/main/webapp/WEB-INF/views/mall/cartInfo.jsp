@@ -95,6 +95,10 @@
  
  </form>
  
+  <p class="text-right"><a href="<c:url value='/mall/lists'/>" class="btn btn-primary">繼續購物</a><p>
+  <p class="text-right"><a href="<c:url value='/mall/cart/checkout'/>" class="btn btn-primary">結帳</a><p>
+ 
+ 
 
  
   <!-------------- end of container------------- -->

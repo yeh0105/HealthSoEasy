@@ -88,26 +88,33 @@
 
 
 
-				<div class="form-group">
+<div class="form-group">
  <label>產品成本 : </label>
  <form:input  path="productCost" type="text"/>
  <form:errors path="productCost" Class="form-control"/>
  </div>
  
  
-<!--  <div class="form-group"> -->
-<!--  <label>產品日期: </label> -->
-<%--  <form:input  path="productDate" type="date"/> --%>
-<%--  <form:errors path="productDate" Class="form-control"/> --%>
+<!--  ====================PIC=========================== -->
  
-<!--  </div> -->
-  
 
  <div class="form-group">
  <label >圖片上傳</label>
  <form:input path='productMultiImg' type="file" />
   <form:errors path="productMultiImg" Class="error" />
  </div>
+
+
+<!--  <div class="form-group"> -->
+<!--  <label >圖片上傳</label> -->
+<!--  <input name='mainPicture' id='mainPicture' type="file" accept="image/png,image/jpeg"/> -->
+<!--   <img id="thumbnail" alt="Preview" > -->
+<!--  </div> -->
+ 
+ 
+ <!--  ===================(E)PIC=========================== -->
+ 
+ 
  
  <p class="text-center">
  <button type=submit class="btn btn-primary">submit</button>
@@ -118,6 +125,32 @@
  </form:form>
   </div>
   </div>
+  
+  
+  
+  
+  
+  <script type="text/javascript">
+  
+  $(document).ready(function(){
+	  $('#mainPicture').change(function(){
+		  showImageThumbnail(this);
+	  });
+  })
+  
+  function showImageThumbnail(fileInput){
+	  file=fileInput.files[0];
+	  reader = new FileReader();
+	  
+	  reader.onload=function(e){
+		  $('#thumbnail').attr('src',e.target.result);
+		  };
+		  reader.readAsDataURL(file);
+  }
+  
+  
+  
+  </script>
  
  
 <!--  ====================================== -->
