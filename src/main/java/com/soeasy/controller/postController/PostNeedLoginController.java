@@ -8,6 +8,7 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,9 +36,11 @@ import com.soeasy.model.CustomerBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
 import com.soeasy.model.PostUpdateBean;
+import com.soeasy.model.ReplyBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
+import com.soeasy.service.replyService.ReplyService;
 import com.soeasy.util.GlobalService;
 import com.soeasy.validator.postValidator.PostBeanValidator;
 import com.soeasy.validator.postValidator.PostUpdateBeanValidator;
@@ -51,9 +55,12 @@ public class PostNeedLoginController {
 
 	@Autowired
 	PostCategoryService postCategoryService;
-	
+
 	@Autowired
 	CustomerService customerService;
+
+	@Autowired
+	ReplyService replyService;
 
 	@Autowired
 	ServletContext context;
@@ -199,20 +206,92 @@ public class PostNeedLoginController {
 
 		// 取得文章內容
 		String postContent = postBean.getPostContent();
-//		System.err.println("postContent="+postContent+"----------------------------------------------------------------");
 
 		// 將換行(\n)換成<br>
 		String newContent = postContent.replaceAll("\n", "<br>");
-//		System.err.println("newtContent="+newtContent+"----------------------------------------------------------------");
 
 		// 將更改過的內容塞入postBean
 		postBean.setPostContent(newContent);
 
 		model.addAttribute("getOnePostBean", postBean);
 
-//		System.err.println("postBean="+postBean);
+		// -------------------------------------------------------------------------------------
+
+		// 新增留言
+		// 預設表單資料
+		ReplyBean replyBean = new ReplyBean();
+
+		replyBean.setReplyContent("　武藏：既然你誠心誠意的發問了\r\n" + "小次郎：我們就大發慈悲的告訴你\r\n" + "　武藏：為了防止世界被破壞\r\n"
+				+ "小次郎：為了守護世界的和平\r\n" + "　武藏：貫徹愛與真實的邪惡\r\n" + "小次郎：可愛又迷人的反派角色\r\n" + "　武藏：武藏！\r\n" + "小次郎：小次郎！\r\n"
+				+ "　武藏：我們是穿梭在銀河中的火箭隊\r\n" + "小次郎：白洞、白色的明天正等著我們\r\n" + "　喵喵：就是這樣喵！");
+
+		model.addAttribute("replyBean", replyBean);
 
 		return "post/getOnePost";
+	}
+
+	// 新增留言
+	@PostMapping(value = "/getPost/{postId}")
+	public String addReply(@ModelAttribute("replyBean") @PathVariable Integer postId, ReplyBean replyBean, Model model,
+			BindingResult result, HttpServletRequest request) {
+
+		System.err.println("進入addReply");
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+//			System.err.println("customerBean=" + customerBean);
+
+		// 會員ID
+		replyBean.setCustomerBean(customerBean);
+
+		// 留言創建時間
+		Timestamp registerTime = new Timestamp(System.currentTimeMillis());
+		replyBean.setReplyTime(registerTime);
+
+		// 留言狀態:正常
+		replyBean.setReplyStatus(GlobalService.REPLY_STATUS_NORMAL);
+
+		// 初始留言收藏數為0
+		replyBean.setReplyLike(0);
+
+		// 留言的文章 id
+
+		System.err.println("postId=" + postId);
+
+		// 取得文章物件
+		PostBean postBean = postService.findByPostId(postId);
+		replyBean.setPostBean(postBean);
+
+		// 留言創建樓層
+		List<ReplyBean> list = replyService.findByPostBean(postBean);
+		Integer floor = 1;
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			System.err.println(it.next());
+			floor++;
+		}
+		
+		System.err.println("floor="+floor);
+
+		replyBean.setReplyFloor(floor);
+
+		try {
+			replyService.addReply(replyBean);
+		} catch (Exception e) {
+			result.rejectValue("replyContent", "", "發生異常，請通知系統人員..." + e.getMessage());
+			return "post/getOnePost";
+
+		}
+		System.err.println("addReply");
+
+		// 跳轉至查詢單一文章頁面
+		return "redirect:/PostNeedLoginController/getPost/{postId}";
+
 	}
 
 	// 新增文章，先送一個空白表單，並給予初值
@@ -247,7 +326,7 @@ public class PostNeedLoginController {
 		if (customerBean == null) {
 			return "redirect:/customerController/customerSignIn";
 		}
-		
+
 		CustomerBean originalBean = customerService.findByCustomerId(customerBean.getCustomerId());
 
 		// 檢測不正當欄位並回傳提示訊息
@@ -280,7 +359,7 @@ public class PostNeedLoginController {
 		// 文章創建時間
 		Timestamp registerTime = new Timestamp(System.currentTimeMillis());
 		postBean.setPostUploadTime(registerTime);
-		
+
 		// 文章創建時間
 		Date registerDate = new Date(System.currentTimeMillis());
 		postBean.setPostUploadDate(registerDate);
@@ -290,9 +369,9 @@ public class PostNeedLoginController {
 
 		// 初始文章收藏數為0
 		postBean.setPostLike(0);
-		
+
 		// 會員積分為+10
-		originalBean.setCustomerScore(originalBean.getCustomerScore()+10);
+		originalBean.setCustomerScore(originalBean.getCustomerScore() + 10);
 
 		// 找出對應的PostCategory物件
 		PostCategoryBean postCategoryBean = postCategoryService

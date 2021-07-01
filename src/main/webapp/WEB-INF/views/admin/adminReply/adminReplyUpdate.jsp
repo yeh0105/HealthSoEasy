@@ -258,7 +258,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 				</div>
 			</div>
 			<div>
-				<a class="" href="<c:url value="/admin/adminManage/adminPost"></c:url>">回上一頁</a>
+				<a class="" href="<c:url value="/admin/adminManage/adminReply"></c:url>">回上一頁</a>
 			</div>
 			<br>
 			<div style="padding:3% 5%; margin-top: -3%;">

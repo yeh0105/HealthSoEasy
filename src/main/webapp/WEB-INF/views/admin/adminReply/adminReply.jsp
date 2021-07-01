@@ -189,7 +189,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 				<!--     搜尋 -->
 				<input class="search-bar" placeholder="Search..." type="text">&nbsp;
 				<a href="<c:url value="/admin/adminManage/adminPost"></c:url>"><button class="app-content-headerButton">Posts</button></a>&nbsp;
-				<a href="<c:url value="/admin/adminManage/adminReply/addReply"></c:url>"><button class="app-content-headerButton">AddReply</button></a>&nbsp;
+<%-- 				<a href="<c:url value="/admin/adminManage/adminReply/addReply"></c:url>"><button class="app-content-headerButton">AddReply</button></a>&nbsp; --%>
 				<div class="app-content-actions-wrapper">
 					<div class="filter-button-wrapper">
 						<!--         過濾器 -->
@@ -346,7 +346,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							<span>${reply.replyId}</span> 
 						</div>
 						<div class="product-cell category">
-							<span class="cell-label">Content:</span>${reply.replyContent}
+							<span class="cell-label">Content:</span>${fn:substring(reply.replyContent,0,20)}...
 						</div>
 						<div class="product-cell sales">
 							<span class="cell-label">Time:</span> ${fn:substring(reply.replyTime,0,10)}
@@ -373,7 +373,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							</c:otherwise>
 						</c:choose>
 						<div class="product-cell stock">
-							<span class="cell-label">Floor:</span>${reply.replyFloor}...
+							<span class="cell-label">Floor:</span>${reply.replyFloor}
 						</div>
 						<div class="product-cell price">
 							<span class="cell-label">Respondent:</span>${reply.customerBean.customerNickname}
