@@ -177,14 +177,17 @@ body * {
 
 			<div class="page-icon">
 				<span class="page-disabled"><i></i>上一頁</span> <span
-					class="page-current">1</span> <a href="#">2</a> <a href="#">3</a> <a
-					class="page-next" href="#">下一頁<i></i></a>
+					class="page-current">1</span> 
+					<a href="#">2</a> 
+					 
+					<a class="page-next" href="#">下一頁<i></i></a>
 			</div>
 			<br>
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
 				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
+				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
 			</div>
 
 
