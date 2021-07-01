@@ -238,17 +238,17 @@ public class AdminProduct {
 			
 					// 修改時，送回含有會員資料的表單，讓使用者進行修改
 					// 由這個方法送回修改記錄的表單...
-						@GetMapping("/adminupdate/{productId}")
+						@GetMapping("/adminUpdate/{productId}")
 						// 取得原始的PostBean物件
 						public String showDataForm(@PathVariable("productId") Integer productId, Model model) {
 							ProductBean product = productService.findProductById(productId);
 				      		model.addAttribute("product", product);
-							return "admin/adminMall/adminupdateProduct";
+							return "admin/adminMall/adminUpdateProduct";
 				
 						}
 						
 						
-						@PostMapping("/adminupdate")
+						@PostMapping("/adminUpdate/{productId}")
 						// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 						public String modify(
 								@ModelAttribute("product") ProductBean product, 
@@ -256,6 +256,36 @@ public class AdminProduct {
 								Model model,
 								@PathVariable Integer productId, 
 								HttpServletRequest request) {
+							
+
+							// 自動帶入創建時間
+							long miliseconds = System.currentTimeMillis();
+							Date Date = new Date(miliseconds);
+							product.setProductDate(Date);
+							
+							
+							
+							// 取得addProduct.jsp所送來的圖片資訊
+							MultipartFile picture = product.getProductMultiImg();
+							// 建立Blob物件，交由 Hibernate 寫入資料庫
+							if (picture != null && !picture.isEmpty()) {
+								try {
+									byte[] b = picture.getBytes();
+									Blob blob = new SerialBlob(b);
+									product.setProductImg(blob);
+								} catch (Exception e) {
+									e.printStackTrace();
+									throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+								}
+							}
+								try {
+									productService.save(product);
+								} catch (org.hibernate.exception.ConstraintViolationException e) {
+									return "mall/addProduct";
+							}
+
+						
+							
 							productService.save(product);
 							return "redirect:/admin/adminManage/adminProduct";
 						}
