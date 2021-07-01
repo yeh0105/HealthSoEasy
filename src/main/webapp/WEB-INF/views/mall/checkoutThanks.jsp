@@ -25,75 +25,13 @@
    
  <!-- -------------(End) start of container ------------------>
  
+ 謝謝!
  
  
- <h2 class="page-header">Shoppingcart  [目前有${countItems}項商品]</h2>
  
- <p class="text-right"><a href="<c:url value='/mall/lists'/>" class="btn btn-primary">繼續購物</a><p>
-
-<form method="post" action="${pageContext.request.contextPath}/mall/cart/update">
-<!-- =================   表格開始    ======================================== -->
-
- <table class="table table-border">
- 	<thead>
-
- <tr>
-	
-	<th>Action</th>
-	<th>product</th>
- 	<th>Name</th>
- 	<th>Quantity</th>
-<!--  <button class="btn" type="button" value="submit">confirm</button> -->
-<!--  <button class="btn" type="button">+</button> -->
- 	<th>price</th>
- 	<th>SubTotal</th>
- 	
- </tr>
-
- </thead>
-
- <tbody>
- <c:forEach var="item" items="${sessionScope.cart}" varStatus="i">
- <tr>
- 
-<!--  移除按鈕 -->
- <td><a class="btn btn-danger" href="${pageContext.request.contextPath}/mall/cart/remove/${i.index}">x<i class="icon-remove icon-white"></i></a></td>
- <td>#圖片</td>
- <td>${item.product.productName}</td>
- 
- <!--  數量 -->
- <td>
- <div class="number-input">
- <input class="quantity" style="max-width:50px;text-align:center" placeholder="1" min="1" max="50"
- id="appendedInputButtons" size="15" type="number" name="quantities" value="${item.cartQuantity}">
- <c:if test="${sessionScope.cart!=null}">
- <button  class="btn btn-primary" type="submit">Update</button>
- </c:if>
- </div>
- </td>
- <!--  (end)數量 -->
- 
- <td>$${item.product.productPrice}</td>
- <td>$${item.product.productPrice*item.cartQuantity}</td>
- </tr>
-
- </c:forEach>
- <tr>
- 
- 
-<td style="text-align:right"><strong>ToTal</strong></td>
-<td align="center" style="display:block">$${total}</td>
- </tr>
- 
- </tbody>
- 
-  
- </table>
-
 
 <!-- ========================================================= -->
  
- </form>
  
   <p class="text-right"><a href="<c:url value='/mall/lists'/>" class="btn btn-primary">繼續購物</a><p>
   <p class="text-right"><a href="<c:url value='/mall/cart/checkout'/>" class="btn btn-primary">結帳</a><p>

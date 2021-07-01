@@ -29,11 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.soeasy.model.PostCategoryBean;
 import com.soeasy.model.ProductBean;
 import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
-import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
@@ -47,10 +45,6 @@ public class MallProductController {
 	
 	@Autowired
 	private ProductCategoryService productCategoryService;
-
-
-	
-	
 	
 	//前端跳轉
 	
@@ -111,7 +105,7 @@ public class MallProductController {
 	       
 	    }
 	
-	//新增產品 使用Post請求
+	//新增產品 使用product請求
 	//跳轉add提交頁  於新增時，送出空白的表單讓使用者輸入資料
 
 	@GetMapping("/add")
@@ -129,6 +123,10 @@ public class MallProductController {
 
 		return "mall/addProduct";
 	}
+	
+	
+	
+	
 	
 //	=========================
 
@@ -236,7 +234,7 @@ public class MallProductController {
 		
 		
 	// 刪除一筆紀錄
-	//送不出DELETE 先用POST
+	//送不出DELETE 先用product
 		@GetMapping("/delete/{productId}")
 		public String delete(@PathVariable("productId") Integer productId) {
 	        productService.deleteById(productId);
@@ -250,15 +248,17 @@ public class MallProductController {
 	// 修改時，送回含有會員資料的表單，讓使用者進行修改
 	// 由這個方法送回修改記錄的表單...
 		@GetMapping("/update/{productId}")
-		// 取得原始的PostBean物件
+		// 取得原始的productBean物件
 		public String showDataForm(@PathVariable("productId") Integer productId, Model model) {
 			ProductBean product = productService.findProductById(productId);
+			
       		model.addAttribute("product", product);
+
 			return "mall/updateProduct";
 		}
 		
 		
-		@PostMapping("/update")
+		@PostMapping("/update/{productId}")
 		// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 		public String modify(
 				@ModelAttribute("product") ProductBean product, 
@@ -266,7 +266,28 @@ public class MallProductController {
 				Model model,
 				@PathVariable Integer productId, 
 				HttpServletRequest request) {
-			productService.save(product);
+			
+			// 取得addProduct.jsp所送來的圖片資訊
+			MultipartFile picture = product.getProductMultiImg();
+		
+			// 建立Blob物件，交由 Hibernate 寫入資料庫
+			if (picture != null && !picture.isEmpty()) {
+				try {
+					byte[] b = picture.getBytes();
+					Blob blob = new SerialBlob(b);
+					product.setProductImg(blob);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+				}
+			}
+				try {
+					productService.save(product);
+				} catch (org.hibernate.exception.ConstraintViolationException e) {
+					return "mall/addProduct";
+			}
+
+		
 			return "redirect:/mall/lists";
 		}
 		

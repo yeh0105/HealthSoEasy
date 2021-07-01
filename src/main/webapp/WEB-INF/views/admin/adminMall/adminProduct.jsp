@@ -370,7 +370,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 									<!--       更新(JSPu頁面建置)/刪除 按鈕 -->
 					
 	
-						 <div class="product-cell price"><a	href="<c:url value='/mall/update/${product.productId}'/>"><button class="app-content-headerButton">Update</button></a></div>
+						 <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminUpdate/${product.productId}'/>"><button class="app-content-headerButton">Update</button></a></div>
                   
       					<div class="product-cell price"><a onclick="return del(this)" href="<c:url value='/admin/adminManage/adminDelete/${product.productId}'/>"><button class="app-content-headerButton">Delete</button></a></div>
 					</div>

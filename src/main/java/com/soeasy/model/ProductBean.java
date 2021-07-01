@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -44,13 +45,13 @@ public class ProductBean  implements Serializable{
 	private Integer category;
 	
 	private String productCategory;
-
+	
 
 	private Blob productImg;
 	
 	@Transient
 	private MultipartFile productMultiImg;
-	
+//	
 	@JsonFormat(pattern ="yyyy-MM-dd",timezone = "GMT+8")
 	private Date productDate;
 	
@@ -117,6 +118,7 @@ public class ProductBean  implements Serializable{
 		this.productCalories = productCalories;
 	}
 
+//	==============ProductImg==================
 	public Blob getProductImg() {
 		return productImg;
 	}
@@ -132,6 +134,9 @@ public class ProductBean  implements Serializable{
 	public void setProductMultiImg(MultipartFile productMultiImg) {
 		this.productMultiImg = productMultiImg;
 	}
+	
+//	==============(E)ProductImg======================
+
 
 	public Date getProductDate() {
 		return productDate;
@@ -176,6 +181,11 @@ public class ProductBean  implements Serializable{
 	}
 
 	
+//	===========
+
+
+	
+
 	
 	
 	

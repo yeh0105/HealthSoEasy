@@ -37,7 +37,6 @@ public class CartController {
 	@GetMapping("/index")
 	public String index(HttpSession session,Model model) {
 		
-////		// 登入攔截(怪怪的)
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 		if (customerBean == null) {
 			return "redirect:/customerController/customerSignIn";
@@ -150,20 +149,21 @@ public class CartController {
 	
 //	=============================  結帳    ==========================================
 
-//	public String checkout(Model model,HttpSession session){
-//	
-//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-//		if (customerBean == null) {
-//			return "redirect:/customerController/customerSignIn";
-//		}
-//		
-//
+	@GetMapping("checkout")
+	public String checkout(Model model,HttpSession session){
+	
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) 
+			return "redirect:/customerController/customerSignIn";
+		
+		
+
 //			// 保存新訂單
 //			OrderBean order = new OrderBean();
 //
-//			return "mall/cartthanks";
-//		
-//	}
+			return "/mall/checkoutThanks";
+		
+	}
 	
 	
 	
