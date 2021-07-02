@@ -1,3 +1,22 @@
+/* 網頁框 */
+#pageWrapper {
+	width: 80%;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#uk_breadcrumb {
+	flex-wrap: wrap;
+	list-style: none;
+	display: flex;
+	font-size: 18px;
+}
+
+#headerBlank {
+	padding: 10px;
+}
+
+/* 輪播區 */
 body{
 /*     background-image: url(images/background.jpg); */
     background-repeat: no-repeat;
@@ -77,9 +96,21 @@ ul.slides li img{
     transition: .5s;
 }
 
+/* 講座列表字型樣式 */
+.header-title {
+	/*   margin-right: auto; */
+	position: relative;
+	text-align: left;
+	color: #353535;
+	font-family: 'Oswald', sans-serif;
+	font-size: 26px;
+	margin: 0;
+}
+
+/* 輪播內容 */
 .box{
 	column-count: 2;
-	column-rule: 2px dotted orangered;
+/* 	column-rule: 2px dotted orangered; */
 	float: left;
 	column-gap: 3em;
 }
@@ -100,22 +131,6 @@ ul.slides li img{
 	color: #1d3b2a;
 }
 
-#pageWrapper {
-	width: 80%;
-	padding-left: 10%;
-	padding-right: 10%;
-}
-
-#uk_breadcrumb {
-	flex-wrap: wrap;
-	list-style: none;
-	display: flex;
-	font-size: 18px;
-}
-
-#headerBlank {
-	padding: 10px;
-}
 
 /* 表頭按鈕 */
 .custom-btn {
@@ -176,18 +191,6 @@ ul.slides li img{
 .search-bar {
 	position: relative;
 }
-
-/* 講座列表 */
-.header-title {
-	/*   margin-right: auto; */
-	position: relative;
-	text-align: left;
-	color: #353535;
-	font-family: 'Oswald', sans-serif;
-	font-size: 26px;
-	margin: 0;
-}
-
 
 /* 看更多按鈕 */
 .custom2-btn {

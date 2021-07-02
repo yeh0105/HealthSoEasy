@@ -69,9 +69,11 @@
         <ul class="slides">
             <li>
             	<div class="box">
-            		<img class="lectureImg" src="${pageContext.request.contextPath}/images/lecture/講座1.PNG" alt="">
+            		<img class="lectureImg" src="<c:url value='/lectureController/getImage/${lectureBean.lectureId}' />" alt="">
             			<div>
-            				<h3 class="lectureTitle">吃對食物讓你更瘦更健康</h3>
+            				<h3 class="lectureTitle">${lectureBean.lectureTitle}</h3>
+            				<h2 class="lectureDate">${lectureBean.lectureDate}</h2>
+            				
             				<a href="#"><button class="custom2-btn btn-4">(查看更多...)</button></a>
             			</div>
             	</div>
