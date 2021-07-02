@@ -25,26 +25,19 @@
                                 End Header area
         =====================================================================-->
 
-        
-        
-        
-        
-        
-        
-        
-        
-
-        <!--==================================================================== 
+     
+       
+            <!--==================================================================== 
             Start Banner Section
         =====================================================================-->
-        <section class="banner-section" style="background-image:url(assets/img/banner.jpg);">
+        <section class="banner-section" style="background-image:url(${pageContext.request.contextPath}/images/mall/banner.jpg); margin-top:120px;">
             <div class="container">
                 <div class="banner-inner text-center">
-                    <h2 class="page-title">Product Details</h2>
+                    <h2 class="page-title">Shop</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Shop Details</li>
+                            <li class="breadcrumb-item"><a href="<c:url value='/mall'></c:url>" title="Mall">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
                         </ol>
                     </nav>
                 </div>
@@ -53,7 +46,6 @@
         <!--==================================================================== 
             End Banner Section
         =====================================================================-->
-
 
 
         <!--==================================================================== 

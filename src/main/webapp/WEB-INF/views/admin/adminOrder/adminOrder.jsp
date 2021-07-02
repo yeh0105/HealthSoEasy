@@ -1,19 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous"></script>
+<title>Admin Product</title>
 
-<title>Admin SportMap</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">
+
+
 
 <script type="text/javascript">
 	window.onload = function(){
@@ -32,12 +31,16 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
-
+	
+	
+	
+	
+	
 
 </script>
 </head>
 <body>
-	<div class="app-container">
+	<div class="app-container"">
   <div class="sidebar">
     <div class="sidebar-header">
       <div class="app-icon">
@@ -118,7 +121,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>廠商</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item  active">
         <a href="<c:url value="/admin/adminManage/adminProduct"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg> -->
           <span>商品</span>
@@ -154,7 +157,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>分享</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>地圖</span>
@@ -178,7 +181,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">SportMap</h1>
+      <h1 class="app-content-headerText">產品管理</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -186,27 +189,16 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
       </button>
-<!--       新增 -->
-      <a href="<c:url value='/admin/adminManage/adminSportMap/add' />">
-      <button class="app-content-headerButton">新增地點</button></a>
-    </div>
-    <div class="app-content-actions">
-<!--     搜尋 -->
-
-<div style="width:500px">
-<%-- 	<form action="<c:url value='/admin/adminManage/adminSportMap/search/'/>"> --%>
-     <input class="search-bar" placeholder="Search..." type="text" name="keyword" value="">&nbsp;
-	<input  class="app-content-headerButton" type="submit" value="確定查詢"/>
-	<input  class="app-content-headerButton" type="button" value="Reset" >		   	
+<!--   ===================  新增 =========================================================================-->
+   
     
-<!--     </form> -->
- </div>
- 
-      
-<!-- 跳至所有分類       -->
-      
-      <a href="<c:url value="/admin/adminManage/adminSportCategory"></c:url>"><button class="app-content-headerButton">所有分類</button></a>
-      
+  <!--   ===============(ENd) 新增 =========================================================================-->
+    
+
+
+  
+  
+  
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -215,10 +207,10 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
             <label>Category</label>
             <select>
               <option>All Categories</option>
-              <option>運動中心</option>                     
-              <option>市區場館</option>
-              <option>游泳池</option>
-              <option>其他室內場地</option>
+              <option>Furniture</option>                     
+              <option>Decoration</option>
+              <option>Kitchen</option>
+              <option>Bathroom</option>
             </select>
             <label>Status</label>
             <select>
@@ -247,161 +239,228 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     
     <div class="products-area-wrapper tableView">
 <!--  --------------------------- ----表頭欄位--------------------------- -->
-        
+
       <div class="products-header">
         <div class="product-cell image">
-          Id
+          產品編號
+          <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
+          </a>
+          
         </div>
-        <div class="product-cell category">Name<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell status-cell">Address<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-<!--         <div class="product-cell sales">Info<button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button></div> -->
-<!--         <div class="product-cell stock">地圖<button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button></div> -->
-        <div class="product-cell price">Score<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        <div class="product-cell category">Name
+         <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
+          </a>
+          
         </div>
-          <div class="product-cell price">Category<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+        <div class="product-cell category">Category< <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
+          </a>
+          
         </div>
+        
+        <div class="product-cell sales">Price <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+          </a>
+        </div>
+        
+        
+        <div class="product-cell stock">Cost<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+          </a>
+        </div>
+        
+        
+        <div class="product-cell status-cell">Amount<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+          </a>
+        </div>
+        <div class="product-cell status-cell">Date<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+          </a>
+        </div>
+        
         
         <div class="product-cell price">
           Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
         </div>
+        
+        
         
         <div class="product-cell price">
           Delete
         </div>
-      </div>
-	<!--       ----------------------一筆資料內容--開始--------------------- -->
-     <c:forEach  varStatus="stVar" var='sportMap' items='${sportMaps}'> 
-     
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-          <div class="product-cell image">
-            <img src="${pageContext.request.contextPath}/images/sportMap/MapSport6.png" alt="sport">
-            <span>${sportMap.value.sportMapId}</span>
-          </div>
-        <div class="product-cell category"><span class="cell-label">Name:</span>${sportMap.value.sportMapName}</div>
-        <div class="product-cell status-cell">
-          <span class="cell-label">Address</span>
-          <span >${sportMap.value.sportMapAddress}</span>
-        </div>
-<%--         <div class="product-cell sales"><span class="cell-label">Info</span>${sportMap.value.sportMapInfo}</div> --%>
-<%--         <div class="product-cell stock"><span class="cell-label">:</span>${sportMap.sportMapMap}</div> --%>
-        <div class="product-cell price"><span class="cell-label">Score</span>${sportMap.value.sportMapScore}</div>
-        <div class="product-cell price"><span class="cell-label">Category</span>${(sportMap.value.sportCategoryBean.sportCategoryName)}</div>
-         <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminSportMap/up/${sportMap.value.sportMapId}' />"><button class="app-content-headerButton">Update</button></a></div>
-                  
-         <div class="product-cell price"><a	class='deleteSportMap' href="<c:url value='/admin/adminManage/adminSportMap/del/${sportMap.value.sportMapId}' />"><button class="app-content-headerButton">Delete</button></a></div>
+        
         
       </div>
-      
-      </c:forEach>
-    
-<!-- -------------------------一筆資料內容--結尾--------------------- -->
-<!-- ---------------------------控制分頁用----------------------------------- -->
-<!-- 	<div class="style1"> -->
-		<table border="0" id="tb1">
-			<tr align="center">
-				<td width='80' height='20'><c:if test="${pageNo > 1}">
-						<div id="">
-							<a href="<c:url value='adminSportMap?pageNo=1' />"> 
-							<img src="${pageContext.request.contextPath}/images/sportMap/iconStart.png"
-								border='0' alt='第一頁' height='30' width='30' />
-							</a>
+	<!--       ----------------------一筆資料內容--開始--------------------- -->
+     <c:forEach var='product' items="${product}">
+					<div class="products-row">
+						<button class="cell-more-button">
+							<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-more-vertical">
+								<circle cx="12" cy="12" r="1" />
+								
+								<circle cx="12" cy="5" r="1" />
+								
+								<circle cx="12" cy="19" r="1" /></svg>
+						</button>
+					
+						<div class="product-cell category">
+							<span class="cell-label">Id:</span> ${product.productId}
 						</div>
-					</c:if></td>
-				<td width='80'><c:if test="${pageNo > 1}">
-						<div id="">
-							<a 	href="<c:url value='adminSportMap?pageNo=${pageNo-1}' />">
-								<img src="${pageContext.request.contextPath}/images/sportMap/iconPre.png"
-								border='0' alt='前一頁' height='30' width='30' />
-							</a>
+						<div class="product-cell category">
+							<span class="cell-label">Name:</span><a href="<c:url value='/mall/lists/product/${product.productId}'/>">
+							${product.productName}</a>
+							
 						</div>
-					</c:if></td>
-				<td width='76'>${pageNo}/ ${totalPages}</td>
-				<td width='80'><c:if test="${pageNo != totalPages}">
-						<div id="">
-							<a
-								href="<c:url value='adminSportMap?pageNo=${pageNo+1}' />">
-								<img src="${pageContext.request.contextPath}/images/sportMap/iconNext.png"
-								border='0' alt='下一頁' height='30' width='30' />
-							</a>
+						<div class="product-cell category">
+							<span class="cell-label">Category:</span> ${product.category}
 						</div>
-					</c:if></td>
-				<td width='80'><c:if test="${pageNo != totalPages}">
-						<div id="">
-							<a
-								href="<c:url value='adminSportMap?pageNo=${totalPages}' />">
-								<img 
-								src="${pageContext.request.contextPath}/images/sportMap/iconEnd.png"
-								border='0' alt='最末頁' height='30' width='30' />
-							</a>
+						
+						<div class="product-cell stock">
+							<span class="cell-label">Price:</span>${product.productPrice}
 						</div>
-					</c:if></td>
-			</tr>
-		</table>
-<!-- 	</div>     -->
-    
-    
-    
-    
-    
-    
-    
-    
-	<!-- 	---------------------用來接delete的post-------------------- -->
+						<div class="product-cell stock">
+							<span class="cell-label">Cost:</span>${product.productCost}
+						</div>
+						
+						<div class="product-cell stock">
+							<span class="cell-label">Amount:</span>${product.productAmount}
+						</div>
+						
+						<div class="product-cell stock">
+							<span class="cell-label">Date:</span>${product.productDate}
+						</div>
+
+									<!--       更新(JSPu頁面建置)/刪除 按鈕 -->
+					
+	
+						 <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminUpdate/${product.productId}'/>"><button class="app-content-headerButton">Update</button></a></div>
+                  
+      					<div class="product-cell price"><a onclick="return del(this)" href="<c:url value='/admin/adminManage/adminDelete/${product.productId}'/>"><button class="app-content-headerButton">Delete</button></a></div>
+					</div>
+				</c:forEach>
+				<!--       一筆資料內容--結尾 -->
+
+			</div>
+		
+		
+		
+ <!-- ---------------------------控制分頁用----------------------------------- -->
+ <span>產品總數:<c:out value="${totalItems}"/></span>
+ <nav style="width:300px;margin:0px auto">
+ 
+ 
+<ul class=pager>
+
+<!--  上頁 -->
+<li class=previous> 
+	<c:choose>
+		<c:when test="${currentPage > 1}">
+			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
+		</c:when>
+		<c:otherwise>
+			<a>Previous</a>
+		</c:otherwise>
+	</c:choose>
+</li>
+<!-- 上頁結束 -->
+
+<li style="font-style:italic;color:	#00477D">Page &nbsp;<c:out value="${currentPage}"/>&nbsp; of &nbsp;&nbsp;<c:out value="${totalPages}"/></li>
+
+&nbsp;
+
+ <!--  下頁 -->
+<li class=next> 
+	<c:choose>
+		<c:when test="${currentPage < totalPages}">
+			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
+		</c:when>
+		<c:otherwise>
+			<a>Previous</a>
+		</c:otherwise>
+	</c:choose>
+</li>
+<!-- 下頁結束 -->
+ 
+</ul>
+ </nav>
+
+<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
+
+
+ 
+		
+		</div>
+		
+		
+	</div>
+	<!-- partial -->
+	<script src="${pageContext.request.contextPath}/js/admin.js"></script>>
+	<!-- 	---------------------用來接delete的post--------------------------	 -->
 	<form method='POST'>
 		<input type='hidden' name='_method' value='DELETE'>
 	</form>
 
+	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 
-<!-- ----------------------------刪除單筆資料用-------------------------- -->
-	<script>
-		$(document).ready(function() {
-			$('.deleteSportMap').click(function() {
-				if (confirm('確定刪除此筆紀錄? ')) {
-					var href = $(this).attr('href');
-					$('form').attr('action', href).submit();
-
-					console.log(href);
-				}
-				return false;
-
-			});
-		})
-	</script>
-<!-- -------------------------------清除查詢------------------------ -->
-	<script type="text/javascript">
-    function clearFilter(){
-		window.location='/soeasy/admin/adminManage/adminSportMap/';     
-    }
+  <script type="text/javascript">
+	//將 get 請求轉換為 post 請求提交
+	function del(tag) {
+		//獲取當前請求路徑
+       var href = tag.href;
+       //提交
+       $("form").attr("action", href).submit();
+       return delmag();
+       
+       function delmag() {
+    	   var msg = "您確定要刪除這樣產品嗎？";
+    	   if (confirm(msg)==true){
+    	   return true;
+    	   }else{
+    	   return false;
+    	   }
+    	   }
+     }
   </script>
 	
 	
-<!-- -- --------------------------------------------------------  -->
-    </div>
-  </div>
-</div>
-<!-- partial -->
-  <script  src="${pageContext.request.contextPath}/js/admin.js"></script>
+	 <!-- ======================    綁定清除查詢 ================================-->
+  
+  
+  <script type="text/javascript">
+    function clearFilter(){
+		window.location='/soeasy/admin/adminManage/adminProduct/';     
+    }
+  </script>
+  
+  <!-- ==========================   (End) 綁定清除查詢========================-->
+  
 	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/mall-bootstrap.min.js" ></script>
+ 
+ <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
+ <script src="js/mall-bootstrap3.js"></script>
+
 </body>
 </html>

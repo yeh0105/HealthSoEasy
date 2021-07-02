@@ -42,7 +42,7 @@ public class LectureServiceImpl implements LectureService {
 	// 更新講座
 	@Override
 	public void updateLecture(LectureBean lectureBean) {
-		
+		lectureRepository.save(lectureBean);
 	}
 
 	// 刪除講座

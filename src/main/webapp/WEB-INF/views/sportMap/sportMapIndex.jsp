@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		
 		content += "<div class='column'>"+
 	    "<div class='demo-title'>"+"</div>"
-        +"<div class='post-module'>"+"<div class='thumbnail'>"+"<div class='date'>"
+        +"<div class='post-module'>"+"<div class='thumbnail'>"+"<div class='date2'>"
         +"<div class='day'>"+"Hot"+"</div>"+"<div class='month'>"+""+"</div>"                                                    
         +"</div>"+topMap.sportMapMap+"</div>"+"<div class='post-content'>"
-        +"<div class='category'>"+"累積"+topMap.sportMapScore+"分！</div>"
-        +"<h3 class='sub_title'>"+"運動地點："+topMap.sportMapName+"</h3>"
+        +"<div class='category2'>"+"累積"+topMap.sportMapScore+"分！</div>"
+        +"<h3 class='sub_title'>"+"地點："+topMap.sportMapName+"</h3>"
         +"<h3 class='description'>"+"地址："+topMap.sportMapAddress+"</h3>"
         +"<div class='post-meta'>"+"<span class='timestamp'>"+"<i class='fa fa-clock-o'>"+"</i>"
         +topMap.sportCategoryBean.sportCategoryName+"</span>"
@@ -133,16 +133,18 @@ document.addEventListener("DOMContentLoaded", function(){
 				<div style="margin: 5% auto;">
 					<h1 style="color: #1d3b2a; font-family: Caudex;">So Map</h1>
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
-						揮灑你的汗水，展現你的風采</p>
+						運動使我們充滿活力，快揮灑你的汗水，展現你的風采</p>
 
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
-						運動使我們充滿活力，活力讓生命變得美麗！</p>
+						現在就起身尋找一個適合自己的地點吧！</p>
 				</div>
 
 			</div>
 
 		</section>
 	</div>
+	
+	
 	<!-- ------------------------------內容1開始區塊--------------------------------- -->
 	
 	
@@ -152,13 +154,14 @@ document.addEventListener("DOMContentLoaded", function(){
 		<div class="btnBy1">
 						
 			<div>
+				<span>依區域：</span>
+			</div>
+			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北市' />"><button class="font1">所有台北市</button></a>
 				
 			</div>
-			<div>
-				<span>依區域：</span>
-			</div>
+			
 			<div>
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中正區' />"><button class="font1">中正區</button></a>
@@ -282,21 +285,21 @@ document.addEventListener("DOMContentLoaded", function(){
 <!-- -------------------------------中間地圖區塊結束------------------------------ -->
 			
 			<div>
-			依分類：
+<!-- 			依分類： -->
 				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font2">所有運動地點</button></a>
 			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font2">運動中心</button></a>
 			
 				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font2">市區場館</button></a>
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font2">室內場館</button></a>
 
 			
 				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font2">游泳池</button></a>
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font2">戶外球場</button></a>
 			
 				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">其他室內場地</button></a>
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">河濱及公園</button></a>
 			
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">其他戶外場地</button></a>
@@ -308,13 +311,14 @@ document.addEventListener("DOMContentLoaded", function(){
 <!-- 	----------------------------------依分類區塊----------------------------------- -->
 		<div class="btnBy3">
 			<div>
+				<span>依區域：</span>
+			</div>
+			<div>
 				
 				<a
 					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
 			</div>
-			<div>
-				<span>依區域：</span>
-			</div>
+			
 			<div>
 				
 				<a
@@ -370,36 +374,42 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	
 	<!-- ------------------------------內容1結束區塊--------------------------------- -->
+	
 	<!-- ------------------------------內容2開始區塊--------------------------------- -->	
 	<div class="centerDiv">
 		<div>
-
-			<span>熱門運動地點Top 3</span><br>
+		
+		<div class="HotTitle">
+		<img src="${pageContext.request.contextPath}/images/sportMap/Hot1.jpg" width="35px" height="35px">
+		熱門場館場地
+		</div><br>
+		
 			<div id="showTopMaps" >
 				
 			</div>
 		</div>
 
 	</div>
-	<!-- ------------------------------內容2結束區塊--------------------------------- -->	
+	<!-- ------------------------------內容2結束區塊--------------------------------- -->
+		
 	<!-- ------------------------------內容3開始區塊--------------------------------- -->	
 	<div class="centerDiv">
 
-		<div>
+<!-- 		<div> -->
 
-			<img
-				src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png"
-				width="90%" height="90%">
-		</div>
-		<div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>
-			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>				
+<!-- 			<img -->
+<%-- 				src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png" --%>
+<!-- 				width="90%" height="90%"> -->
+<!-- 		</div> -->
+<!-- 		<div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
+<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>				 -->
 
-		</div>
+<!-- 		</div> -->
 	</div>	
 	
 

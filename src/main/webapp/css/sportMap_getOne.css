@@ -17,9 +17,19 @@
 
 
 .floatR{
+	
 	float:right;
 	padding:10px;
 }
+
+.floatR2{
+	display: flex;
+	justify-content: flex-end;
+	
+/* 	float:right; */
+	padding:10px;
+}
+
 h1{
 	color:#218380;
 }

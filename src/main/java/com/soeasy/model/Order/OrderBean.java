@@ -1,8 +1,10 @@
-package com.soeasy.model;
+package com.soeasy.model.Order;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.soeasy.model.CustomerBean;
 
 @Entity
 @Table(name = "OrderBean")
@@ -46,9 +49,9 @@ public class OrderBean implements Serializable {
 //
 //	private String orderPaytype;
 
-	//private Integer orderTotalPrice;
+	private Integer orderTotalPrice;
 
-	private Integer orderStatus;
+	private String orderStatus;
 
 	//private Integer payStatus;
 
@@ -65,8 +68,8 @@ public class OrderBean implements Serializable {
 
 	// 訂單項目
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderBean", cascade = CascadeType.ALL)
-	Set<OrderDetailBean> OrderDetail = new LinkedHashSet<OrderDetailBean>();
-
+	List<OrderDetailBean> OrderDetail = new ArrayList<OrderDetailBean>();
+	
 	// ------------------------------------------
 	public OrderBean() {
 	}
@@ -136,19 +139,19 @@ public class OrderBean implements Serializable {
 //		this.orderPaytype = orderPaytype;
 //	}
 
-//	public Integer getOrderTotalPrice() {
-//		return orderTotalPrice;
-//	}
-//
-//	public void setOrderTotalPrice(Integer orderTotalPrice) {
-//		this.orderTotalPrice = orderTotalPrice;
-//	}
+	public Integer getOrderTotalPrice() {
+		return orderTotalPrice;
+	}
 
-	public Integer getOrderStatus() {
+	public void setOrderTotalPrice(Integer orderTotalPrice) {
+		this.orderTotalPrice = orderTotalPrice;
+	}
+
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(Integer orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
@@ -176,11 +179,11 @@ public class OrderBean implements Serializable {
 		this.customerBean = customerBean;
 	}
 
-	public Set<OrderDetailBean> getOrderDetail() {
+	public List<OrderDetailBean> getOrderDetail() {
 		return OrderDetail;
 	}
 
-	public void setOrderDetail(Set<OrderDetailBean> orderDetail) {
+	public void setOrderDetail(List<OrderDetailBean> orderDetail) {
 		OrderDetail = orderDetail;
 	}
 

@@ -29,11 +29,11 @@ public class HomeController {
 		return "/post/postByCategory";
 	}
 
-//	// 從SoEasy首頁跳至nutritionist首頁
-//	@GetMapping({ "/nutritionist" })
-//	public String nutritionist() {
-//		return "/nutritionist/nutritionistIndex";
-//	}
+	// 從SoEasy首頁跳至nutritionist首頁
+	@GetMapping({ "/nutritionist" })
+	public String nutritionist() {
+		return "/nutritionist/getAllPageNutritionist";
+	}
 
 	// 從SoEasy首頁跳至sportMap首頁
 	@GetMapping("/showSportMapIndex")

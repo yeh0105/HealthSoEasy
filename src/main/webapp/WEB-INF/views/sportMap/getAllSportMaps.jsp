@@ -47,10 +47,10 @@
 				<div style="margin: 5% auto;">
 					<h1 style="color: #1d3b2a; font-family: Caudex;">So Map</h1>
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
-						揮灑你的汗水，展現你的風采</p>
+						運動使我們充滿活力，快揮灑你的汗水，展現你的風采</p>
 
 					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
-						運動使我們充滿活力，活力讓生命變得美麗！</p>
+						現在就起身尋找一個適合自己的地點吧！</p>
 				</div>
 
 			</div>
@@ -110,6 +110,7 @@
 	
 	
 	<div class='container'>
+	<div class="style2"><a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap"> ／首頁</a>／所有運動地點</div>
 		<c:forEach varStatus="stVar" var="entry" items="${sportMaps_DPP}">
 
 			<div class='column'>

@@ -14,4 +14,8 @@ public interface FavoriteService {
 	public void removeFavorite(Integer favoriteId);
 	
 	public List<FavoriteBean> findByCategory(String favoriteCategory);
+	
+	public List<FavoriteBean> findByFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory);
+	
+	public Integer countFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory);
 }
