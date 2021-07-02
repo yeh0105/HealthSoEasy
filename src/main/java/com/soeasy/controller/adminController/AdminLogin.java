@@ -82,7 +82,7 @@ public class AdminLogin {
 		}
 		
 		HttpSession session = request.getSession();
-		String nextPath = (String)session.getAttribute("servletPath");
+		String nextPath = (String)session.getAttribute("adminServletPath");
 		System.out.println(nextPath);
 		if (nextPath == null) {
 			nextPath = "/admin/";

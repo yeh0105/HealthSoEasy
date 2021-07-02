@@ -17,7 +17,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Autowired
 	FavoriteRepository favoriteRepository;
-	
+
 	@Override
 	public void addFavorite(FavoriteBean favoriteBean) {
 		favoriteRepository.save(favoriteBean);
@@ -25,9 +25,10 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public FavoriteBean checkFavoriteBean(Integer favoriteItemId, String favoriteCategory, CustomerBean customerBean) {
-		return favoriteRepository.findByFavoriteItemIdAndFavoriteCategoryAndCustomerBean(favoriteItemId, favoriteCategory, customerBean);
+		return favoriteRepository.findByFavoriteItemIdAndFavoriteCategoryAndCustomerBean(favoriteItemId,
+				favoriteCategory, customerBean);
 	}
-	
+
 	@Override
 	public void removeFavorite(Integer favoriteId) {
 		favoriteRepository.deleteById(favoriteId);
@@ -36,6 +37,25 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Override
 	public List<FavoriteBean> findByCategory(String favoriteCategory) {
 		return favoriteRepository.findByFavoriteCategory(favoriteCategory);
+	}
+
+	@Override
+	public List<FavoriteBean> findByFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory) {
+		return favoriteRepository.findByFavoriteItemIdAndFavoriteCategory(favoriteItemId, favoriteCategory);
+	}
+
+	@Override
+	public Integer countFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory) {
+
+		List<FavoriteBean> favoriteBeans = favoriteRepository.findByFavoriteItemIdAndFavoriteCategory(favoriteItemId,
+				favoriteCategory);
+		Integer count = null;
+		if (favoriteBeans == null) {
+			count = 0;
+		} else {
+			count = favoriteBeans.size();
+		}
+		return count;
 	}
 
 }

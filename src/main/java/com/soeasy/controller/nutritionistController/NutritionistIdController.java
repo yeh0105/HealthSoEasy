@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.NutritionistBean;
@@ -184,5 +185,30 @@ public class NutritionistIdController {
 		List<NutritionistCategoryBean> nutritionistCategoryList = nutritionistCategoryService
 				.getAllNutritionistCategorys();
 		model.addAttribute("nutritionistCategoryList", nutritionistCategoryList);
+	}
+	
+	// 查詢全部營養師(分頁)
+	@GetMapping(value="/getAllNutritionist.json",produces = { "application/json; charset=UTF-8" })
+	public ResponseEntity<Map<String, Object>> getPageNutritionist(
+			@RequestParam(value = "pageNo", required = false, defaultValue = "1")Integer pageNo,
+			@RequestParam(value = "totalPage", required = false)Integer totalPage){
+		
+		if (pageNo == null) {
+			pageNo = 1; // 網址加?pageNo=測試
+		}
+		
+		if (totalPage == null) {
+			totalPage = nutritionistService.getTotalPages();
+		}
+		
+		Map<String, Object> genderMap=new HashMap<>();
+		List<NutritionistBean> listTarget= nutritionistService.getAllPageNutritionist(pageNo);
+		
+		genderMap.put("currPage", String.valueOf(pageNo));
+		genderMap.put("totalPage", totalPage);
+		genderMap.put("nutritionistPage", nutritionistService.getAllPageNutritionist(pageNo));
+		
+		ResponseEntity<Map<String, Object>> re =new ResponseEntity<>(genderMap, HttpStatus.OK);
+		return re;
 	}
 }

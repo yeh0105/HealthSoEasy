@@ -22,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.ReplyBean;
+import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.replyService.ReplyService;
 import com.soeasy.util.GlobalService;
 
@@ -36,35 +40,59 @@ public class ReplyNeedLoginController {
 	ReplyService replyService;
 
 	@Autowired
+	CustomerService customerService;
+
+	@Autowired
+	FavoriteService favoriteService;
+
+	@Autowired
 	ServletContext context;
 
 	// 查詢的留言ByPostId
 	@GetMapping(value = "/getAllReply.json", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<ReplyBean> findByPostBean(
+	public @ResponseBody List<ReplyBean> findByPostBean(Model model,
 			@RequestParam(value = "postBean", required = false) PostBean postBean) {
 
 		List<ReplyBean> list = replyService.findByPostBean(postBean);
 
-		List<ReplyBean> newlist = new ArrayList();;
-		
-		for(ReplyBean replyBean:list) {
-			
+		List<ReplyBean> newlist = new ArrayList();
+
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		String reply = "reply";
+
+		for (ReplyBean replyBean : list) {
+
 			// 取得留言內容
 			String replyContent = replyBean.getReplyContent();
-			System.err.println("replyContent="+replyContent);
-			
+
 			// 將換行(\n)換成<br>
 			String newReplyContent = replyContent.replaceAll("\n", "<br>");
-			System.err.println("newReplyContent="+newReplyContent);
-			
+
 			// 將更改過的內容塞入newlist
 			replyBean.setReplyContent(newReplyContent);
-			
-			System.err.println("replyBean="+replyBean);
-			
+
+			// 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(replyBean.getReplyId(), reply,
+						originalCustomer);
+
+				System.out.println("originalCustomer=" + originalCustomer);
+				System.out.println("replyId=" + replyBean.getReplyId());
+				System.out.println("reply=" + reply);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					replyBean.setFavoriteStatus(true);
+				}
+//		    			postBean.setFavoriteStatus(false);
+
+			}
+
 			newlist.add(replyBean);
-			System.err.println("newlist="+newlist);
-			
+
 		}
 
 		return newlist;
@@ -72,12 +100,52 @@ public class ReplyNeedLoginController {
 
 	// 查詢Top3的留言ByPostId
 	@GetMapping(value = "/getTop3Reply.json", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<ReplyBean> findTop3ByPostBeanOrderByReplyLike(
+	public @ResponseBody List<ReplyBean> findTop3ByPostBeanOrderByReplyLike(Model model,
 			@RequestParam(value = "postBean", required = false) PostBean postBean) {
 
 		List<ReplyBean> list = replyService.findTop3ByPostBeanOrderByReplyLikeDesc(postBean);
 
-		return list;
+		List<ReplyBean> newlist = new ArrayList();
+
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		String reply = "reply";
+
+		for (ReplyBean replyBean : list) {
+
+			// 取得留言內容
+			String replyContent = replyBean.getReplyContent();
+
+			// 將換行(\n)換成<br>
+			String newReplyContent = replyContent.replaceAll("\n", "<br>");
+
+			// 將更改過的內容塞入newlist
+			replyBean.setReplyContent(newReplyContent);
+
+			// 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(replyBean.getReplyId(), reply,
+						originalCustomer);
+
+				System.out.println("originalCustomer=" + originalCustomer);
+				System.out.println("replyId=" + replyBean.getReplyId());
+				System.out.println("reply=" + reply);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					replyBean.setFavoriteStatus(true);
+				}
+//		    			postBean.setFavoriteStatus(false);
+
+			}
+
+			newlist.add(replyBean);
+
+		}
+
+		return newlist;
 	}
 
 ////	 新增留言，先送一個空白表單，並給予初值
@@ -170,7 +238,7 @@ public class ReplyNeedLoginController {
 	public @ResponseBody Map<String, String> updateReply(@RequestBody ReplyBean replyBean, Model model) {
 		// 以傳入的ID搜尋原始的會員物件
 		ReplyBean originalBean = replyService.findByReplyId(replyBean.getReplyId());
-		System.err.println("originalBean="+originalBean);
+		System.err.println("originalBean=" + originalBean);
 
 		// 更新檢查訊息
 		Map<String, String> updateMessage = new HashMap<String, String>();
@@ -196,31 +264,31 @@ public class ReplyNeedLoginController {
 
 	// 將單筆留言的狀態更改為2(禁止)
 	// 修改留言
-		@PostMapping(value = "/deleteReply", produces = { "application/json; charset=UTF-8" })
+	@PostMapping(value = "/deleteReply", produces = { "application/json; charset=UTF-8" })
 
-		public @ResponseBody Map<String, String> changeStatus(@RequestBody ReplyBean replyBean, Model model) {
-			// 以傳入的ID搜尋原始的會員物件
-			ReplyBean originalBean = replyService.findByReplyId(replyBean.getReplyId());
-			System.err.println("originalBean="+originalBean);
+	public @ResponseBody Map<String, String> changeStatus(@RequestBody ReplyBean replyBean, Model model) {
+		// 以傳入的ID搜尋原始的會員物件
+		ReplyBean originalBean = replyService.findByReplyId(replyBean.getReplyId());
+		System.err.println("originalBean=" + originalBean);
 
-			// 更新檢查訊息
-			Map<String, String> updateMessage = new HashMap<String, String>();
+		// 更新檢查訊息
+		Map<String, String> updateMessage = new HashMap<String, String>();
 
-			// 為原始物件設定傳入的欄位值
-			originalBean.setReplyStatus(replyBean.getReplyStatus());
+		// 為原始物件設定傳入的欄位值
+		originalBean.setReplyStatus(replyBean.getReplyStatus());
 
-			// save原始物件
-			replyService.updateByReplyId(originalBean);
+		// save原始物件
+		replyService.updateByReplyId(originalBean);
 
-			// 將更新資料設定給session
-			model.addAttribute("updateReply", originalBean);
+		// 將更新資料設定給session
+		model.addAttribute("updateReply", originalBean);
 
-			// 更新成功訊息
-			updateMessage.put("updateMessage", "更新成功");
+		// 更新成功訊息
+		updateMessage.put("updateMessage", "更新成功");
 
-			return updateMessage;
-		}
-	
+		return updateMessage;
+	}
+
 	@PostMapping("/deleteReply/{replyId}")
 	public String changeStatus(@ModelAttribute("replyBean") ReplyBean replyChangeBean, BindingResult result,
 			Model model, @PathVariable Integer replyId, HttpServletRequest request) {
@@ -233,8 +301,7 @@ public class ReplyNeedLoginController {
 		replyChangeBean.setReplyStatus(GlobalService.REPLY_STATUS_BANNED);
 
 		// 修改Post
-		replyService.updateByReplyId(replyChangeBean)
-		;
+		replyService.updateByReplyId(replyChangeBean);
 
 		System.err.println("刪除了!!!");
 

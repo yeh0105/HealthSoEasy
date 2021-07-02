@@ -87,7 +87,7 @@ public class ShopSignInController {
 			}
 			
 			HttpSession session = request.getSession();
-			String nextPath = (String)session.getAttribute("servletPath");
+			String nextPath = (String)session.getAttribute("shopServletPath");
 			if (nextPath == null) {
 				nextPath = "/";
 			}

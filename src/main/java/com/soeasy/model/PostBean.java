@@ -40,7 +40,7 @@ public class PostBean implements Serializable {
 
 	@Column(length = 8000)
 	private String postContent;
-	
+
 	@JsonIgnore
 	private Blob postImg;
 
@@ -49,13 +49,18 @@ public class PostBean implements Serializable {
 
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
 	private Timestamp postUploadTime;
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date postUploadDate;
 
 	private Integer postLike;
 
 	private Integer postStatus;
+
+	// 判斷收藏
+	@Transient
+	private Boolean favoriteStatus;
+
 	// -------------------------------
 	// 會員
 	@Transient
@@ -139,7 +144,7 @@ public class PostBean implements Serializable {
 	public void setPostUploadTime(Timestamp postUploadTime) {
 		this.postUploadTime = postUploadTime;
 	}
-	
+
 	public Date getPostUploadDate() {
 		return postUploadDate;
 	}
@@ -204,6 +209,14 @@ public class PostBean implements Serializable {
 		this.postCategoryBean = postCategoryBean;
 	}
 
+	public Boolean getFavoriteStatus() {
+		return favoriteStatus;
+	}
+
+	public void setFavoriteStatus(Boolean favoriteStatus) {
+		this.favoriteStatus = favoriteStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "PostBean [postId=" + postId + ", postTitle=" + postTitle + ", postCategory=" + postCategory
@@ -214,6 +227,4 @@ public class PostBean implements Serializable {
 				+ postCategoryBean + "]";
 	}
 
-
-	
 }
