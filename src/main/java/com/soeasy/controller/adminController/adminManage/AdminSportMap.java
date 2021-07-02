@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.SportCategoryBean;
@@ -36,11 +38,39 @@ public class AdminSportMap {
 		
 	//顯示所有地圖(後台首頁)
 	@GetMapping("/adminSportMap")
-		public String list(Model model) {
-			model.addAttribute("sportMaps",sportMapService.getAllSportMaps());
+		public String list(Model model,HttpServletRequest request, HttpServletResponse response,
+				@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+		if (pageNo == null) {
+			pageNo = 1;     //網址加?pageNo=測試
+			}	
+		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMaps(pageNo);
+		model.addAttribute("pageNo", String.valueOf(pageNo));
+		model.addAttribute("totalPages", sportMapService.getTotalPages());
+			
+		model.addAttribute("sportMaps",sportsMap);
 			return "admin/adminSportMap/adminSportMap";
 		
 		}
+	
+	
+//	//顯示所有地圖(未用到，改有分頁)
+//		@GetMapping("/adminSportMap")
+//			public String list(Model model) {
+//				model.addAttribute("sportMaps",sportMapService.getAllSportMaps());
+//				return "admin/adminSportMap/adminSportMap";
+//			
+//			}
+	
+	//查詢單一ById
+	@GetMapping("/adminSportMap/search/{sportMapId}")
+	public String searchOne(@PathVariable("sportMapId") Integer sportMapId,Model model) {
+		SportMapBean sportMapBean = sportMapService.get(sportMapId);			
+		model.addAttribute("sportMapBean",sportMapBean);
+		
+		return "admin/adminSportMap/searchSportMap";
+	
+	}	
+	
 	
 	//Ajax顯示所有地圖(未用到，未測試)
 	@GetMapping(value="/getAllSportMaps.json",produces={ "application/json; charset=UTF-8" })

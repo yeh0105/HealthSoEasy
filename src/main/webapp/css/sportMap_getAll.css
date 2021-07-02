@@ -50,7 +50,7 @@ body {
     top: 20px;
     right: 20px;
     z-index: 1;
-    background: #7AFEC6 ;
+    background: #00db6d ;
     width: 55px;
     height: 55px;
     padding: 12.5px 0;
@@ -96,7 +96,7 @@ body {
     position: absolute;
     top: -34px;
     left: 0;
-    background: #7AFEC6;
+    background: #00db6d;
     padding: 10px 15px;
     color: #FFFFFF;
     font-size: 14px;
@@ -110,7 +110,8 @@ body {
     padding: 0 0 10px;
     color:#007979;
     font-size: 18px;
-    font-weight: 400;
+    font-weight:bold;
+    
     
   }
   .post-module .post-content .description {
@@ -131,6 +132,7 @@ body {
     /* 詳細資訊離運動地點的顏色與距離 */
     margin: 20px 0 0;
     color: #999999;
+    font-weight: bold;
   }
   .post-module .post-content .post-meta .timestamp {
     /* 類別跟詳細資訊的距離 */
@@ -194,5 +196,47 @@ body {
   margin:0px auto;
   padding:10px 10px;
   width:410px;
+  
+  }
+  
+  .style2{
+  font-size: 20px;
+  margin-top:20px;
+  display: flex;
+  justify-content: left;
+  width:100%;
+  }
+  
+  .category2{
+   position: absolute;
+    top: -34px;
+    left: 0;
+    background: #5ab500;
+    padding: 10px 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }  
+  
+  .date2{
+  position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    background: #ff9914 ;
+    width: 55px;
+    height: 55px;
+    padding: 12.5px 0;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    color: #FFFFFF;
+    font-weight: 700;
+    text-align: center;
+    -webkti-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 18px;
   
   }
