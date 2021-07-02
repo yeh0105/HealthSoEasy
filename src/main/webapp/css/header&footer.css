@@ -1,3 +1,5 @@
+@import url('flaticon.css');
+
 header {
     font-family: 'Montserrat', sans-serif;
     color: rgba(146, 146, 146, 1.00);
@@ -31,8 +33,13 @@ header nav a {
 
 header nav a:hover {
     background-color: #E0E0E0;
+    color: #3DCA79;
     border-radius: 5px;
     text-decoration: none;
+    transition: 0.1s;
+/*     transition-delay: 0.1s; */
+	font-family: Flaticon;
+	font-weight:bold;
 }
 
 #headerLinks {
