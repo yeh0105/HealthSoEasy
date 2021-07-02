@@ -28,6 +28,7 @@ import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.sportmapService.SportCategoryService;
 import com.soeasy.service.sportmapService.SportMapService;
+import com.soeasy.util.GlobalService;
 import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
@@ -236,9 +237,13 @@ public class SportMapController {
 		//撈這個分類的總頁數
 		model.addAttribute("totalPages", sportMapService.getTotalPagesBySportCategoryId(sportCategoryBean));
 		
-		model.addAttribute("saveSportCategoryBean", sportCategoryBean);
-		// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
-		model.addAttribute("sportMaps_category", sportsMap);
+		if (sportMapService.getTotalPagesBySportCategoryId(sportCategoryBean) == 0) {
+			return "sportMap/getNoSportMap";
+			}else {
+				model.addAttribute("saveSportCategoryBean", sportCategoryBean);
+				// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
+				model.addAttribute("sportMaps_category", sportsMap);
+			}
 		
 		return "sportMap/getAllSportMapsByCategoryId"; 
 		}		
@@ -275,15 +280,20 @@ public class SportMapController {
 		}
 		
 		Map<Integer,SportMapBean> sportsMap = sportMapService.getPageSportMapsBySportMapAddress(sportMapAddress,pageNo);
+				
 		//一個參數為
 		model.addAttribute("pageNo", String.valueOf(pageNo));
 		model.addAttribute("sportMapAddress",sportMapAddress);
 		//撈這個分類的總頁數
 		model.addAttribute("totalPages", sportMapService.getTotalPagesByBySportMapAddress(sportMapAddress));
 		
-		model.addAttribute("saveSportMapAddress", sportMapAddress);
-		// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
-		model.addAttribute("sportMaps_Address", sportsMap);
+		if (sportMapService.getTotalPagesByBySportMapAddress(sportMapAddress) == 0) {
+			return "sportMap/getNoSportMap";
+		}else {
+			model.addAttribute("saveSportMapAddress", sportMapAddress);
+			// 將讀到的一頁資料放入request物件內，成為它的屬性物件，送sportMaps_category到前端
+			model.addAttribute("sportMaps_Address", sportsMap);
+		}		
 		
 		return "sportMap/getAllSportMapsBySportMapAddress"; 
 		}				

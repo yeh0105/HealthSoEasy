@@ -86,7 +86,7 @@
  
  <div>
  <div class="blog-card">
-
+		
         <div> ${sportMapBean.sportMapMap} </div>
 
         <div class="rightC">
@@ -112,7 +112,7 @@
             <br>
             <br>
           </div>  
-             <div class="floatR">   來個評分吧！
+             <div class="floatR2">   來個評分吧！
                 <a class='getScore1Link'
                     href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"> 
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar1.png"></a>
@@ -130,8 +130,9 @@
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar5.png"></a>
 
 				</div>
-            	<div class="floatR">目前累積：${sportMapBean.sportMapScore}分</div>
+            	<div class="floatR2">目前累積：${sportMapBean.sportMapScore}分</div>
             	
+	<div class="style2 floatR2"><a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap"> 回首頁</a></div>
             	
             
         </div>

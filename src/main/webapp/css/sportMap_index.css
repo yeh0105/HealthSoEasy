@@ -68,3 +68,13 @@ padding:20px;
 /* 	background-color: #96C0B7; */	
 }
 
+.HotTitle{
+	font-size:30px;
+	display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    color:#e56b6f;
+	font-weight:bold;
+	
+}
+
