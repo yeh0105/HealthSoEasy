@@ -30,6 +30,8 @@
 <span class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a></span>
 <span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">分類</a></span>
 <span class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a></span>
+<span class="text-right"><a href="<c:url value='/mall/order/history'/>" class="btn btn-primary">Order History</a></span>
+
 </div>
 &nbsp;
 

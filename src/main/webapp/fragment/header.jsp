@@ -33,7 +33,7 @@
 				<c:if test="${!empty adminLoginSuccess}">
 					<jsp:include page="/fragment/adminMenu.jsp" />
 				</c:if>
-				<a href="#" title="Cart">購物車</a>
+				<a href="<c:url value='/mall/cart/index'/>" title="Cart">購物車</a>
 			</div>
 			<nav>
 				<a href="<c:url value='/'></c:url>" title="Link">首頁</a> 

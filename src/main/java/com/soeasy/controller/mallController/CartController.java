@@ -1,27 +1,41 @@
 package com.soeasy.controller.mallController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CartItem;
 import com.soeasy.model.CustomerBean;
-import com.soeasy.model.OrderBean;
+import com.soeasy.model.ProductBean;
+import com.soeasy.model.Order.OrderBean;
+import com.soeasy.model.Order.OrderDetailBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.mallService.OrderService;
 import com.soeasy.service.mallService.ProductService;
+import com.soeasy.service.mallService.impl.OrderDetailService;
 
 
 @Controller
@@ -32,6 +46,20 @@ public class CartController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	CustomerService customerService;
+	
+	@Autowired
+	OrderService orderService;
+	
+	@Autowired
+	OrderDetailService orderDetailService;
+	
+	@Autowired
+	ServletContext context;
+	
+
 	
 	//建立跳轉
 	@GetMapping("/index")
@@ -59,7 +87,7 @@ public class CartController {
 		}
 		model.addAttribute("countItems",countItems);
 		model.addAttribute("total",total);
-		return "mall/cartInfo";
+		return "mall/shoppingcart";
 //		}
 	}
 	
@@ -68,13 +96,13 @@ public class CartController {
 	
 	@GetMapping("/buy/{productId}")
 	public String buy(@PathVariable("productId") Integer productId, 
-			HttpSession session) {
-//		
-//		// 登入攔截
-//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-//		if (customerBean == null) {
-//			return "redirect:/customerController/customerSignIn";
-//		}
+			HttpSession session,Model model) {
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
 		
 		
 	
@@ -152,29 +180,137 @@ public class CartController {
 	@GetMapping("checkout")
 	public String checkout(Model model,HttpSession session){
 	
-		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-		if (customerBean == null) 
-			return "redirect:/customerController/customerSignIn";
-		
+		// 登入攔截
+			CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+			if (customerBean == null) {
+				return "redirect:/customerController/customerSignIn";
+			
+			}
+			
+			if(session.getAttribute("cart")!=null) {
+				
+				
+				
+					
+				
+			//保存新訂單
+			OrderBean orderBean = new OrderBean();
+			OrderDetailBean orderDetail = new OrderDetailBean();
+			CustomerBean originalBean = customerService.findByCustomerId(customerBean.getCustomerId());
+			
+			// 會員積分為+10
+			originalBean.setCustomerScore(originalBean.getCustomerScore() + 10);
+
+			// 會員ID
+			orderBean.setCustomerBean(originalBean);
+			orderBean.setOrderCustomerName("new Order");
+			
+			// 自動帶入創建時間
+			long miliseconds = System.currentTimeMillis();
+			Timestamp time = new Timestamp(miliseconds);
+			orderBean.setOrderRegisterTime(time);
+			
+			//訂單狀態
+			orderBean.setOrderStatus("pending");
 		
 
-//			// 保存新訂單
-//			OrderBean order = new OrderBean();
-//
-			return "/mall/checkoutThanks";
+			// 保存訂單總金額		(預設運費60)
+
+			int countItems=0;//顯示購物車內有幾項商品
+			double total=0;			//顯示總價
+
+			List<CartItem>cartTotalPrice=(List<CartItem>)session.getAttribute("cart");
+			countItems = cartTotalPrice.size();
+			for(CartItem item:cartTotalPrice) {
+				orderBean.setOrderTotalPrice(item.getProduct().getProductPrice()*item.getCartQuantity()+60);
+			}
+			
+			orderBean=orderService.save(orderBean);
+
+		
+			
+		//保存訂單細節=======
+				List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
+				
+				for(CartItem item:cart) {
+					OrderDetailBean orderDetailBean = new OrderDetailBean();
+					orderDetailBean.setOrderBean(orderService.findByOrderId(orderBean.getOrderId()));
+					System.out.println("訂單ID:"+orderBean.getOrderId());
+					orderDetailBean.setProductId(item.getProduct().getProductId());
+					System.out.println("產品ID:"+item.getProduct().getProductId());
+					orderDetailBean.setProductPrice(item.getProduct().getProductPrice());
+					System.out.println("產品價格:"+item.getProduct().getProductPrice());
+					orderDetailBean.setOrderItemQuantity(item.getCartQuantity());
+					orderDetailBean.setProductName(item.getProduct().getProductName());
+					orderDetailService.save(orderDetailBean);
+				}
+					
+				//Remove cart
+					session.removeAttribute("cart");
+					return "/mall/checkoutThanks";
+			}
+			
+			//如果購物車是空的則返回
+			else {
+				return "redirect:/mall/cart/index";
+				
+			}
+			
 		
 	}
 	
 	
 	
-	
-	
-	
-
-
-	
 //	============================= (END 結帳    ==========================================
 
+	// 讀圖轉成位元組陣列
+		@RequestMapping(value = "/getImage/{productId}", method = RequestMethod.GET)
+		public ResponseEntity<byte[]> getImage(HttpServletRequest resp,@PathVariable Integer productId ){
+			String filePath="/image/NoImage.jpg";
+			byte[] media = null;
+			String filename = "";
+			int len = 0;
+			ProductBean product = productService.findProductById(productId);
+			if(product !=null) {
+				Blob blob=product.getProductImg();
+				if(blob!=null) {
+					try {
+						len=(int)blob.length();
+						media = blob.getBytes(1, len);
+					}catch(SQLException e) {
+						throw new RuntimeException("StudentController的getPicture()發生SQLException: " + e.getMessage());
+					}
+				}else {
+					media = toByteArray(filePath);
+					filename = filePath;
+				}
+			}else {
+				media = toByteArray(filePath);
+				filename = filePath;
+			}
+			ResponseEntity<byte[]> re= new ResponseEntity<>(media, HttpStatus.OK);
+			
+			return re;
+		}
+		
+		// 方法toByteArray
+		private byte[] toByteArray(String filePath) {
+			byte[] b = null;
+			String realPath = context.getRealPath(filePath);
+			try {
+				File file = new File(realPath);
+				long size = file.length();
+				b = new byte[(int) size];
+				InputStream fis = context.getResourceAsStream(filePath);
+				fis.read(b);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return b;
+		}	
+		
 	
 	
 }

@@ -27,10 +27,29 @@
         <!--==================================================================== 
                                 End Header area
         =====================================================================-->
+  
+   
+            <!--==================================================================== 
+            Start Banner Section
+        =====================================================================-->
+        <section class="banner-section" style="background-image:url(${pageContext.request.contextPath}/images/mall/banner.jpg); margin-top:120px;">
+            <div class="container">
+                <div class="banner-inner text-center">
+                    <h2 class="page-title">Shop</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<c:url value='/mall'></c:url>" title="Mall">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <!--==================================================================== 
+            End Banner Section
+        =====================================================================-->
 
-        
-        
-        
+
         
         
         
@@ -59,7 +78,7 @@
                             <div class="footer-logo">
                             <br>
                             <br>
-                                <a href="#"><img src="images/ICON.png" alt="footer logo"></a>
+                                <a href="#"><img src="${pageContext.request.contextPath}/images/ICON.png" alt="footer logo"></a>
                             </div>
                             
                         </div>
@@ -133,12 +152,12 @@
 <!-- jequery plugins -->
 <script src="${pageContext.request.contextPath}/js/mall/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/mall/bootstrap-v4.1.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/mall/jquery.nice-select.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/mall/jquery.simpleLoadMore.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/mall/slick.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/mall/appear.js"></script>
+<script src="${pageContext.request.contextPath}js/mall/jquery.nice-select.min.js"></script>
+<script src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
+<script src="${pageContext.request.contextPath}js/mall/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}js/mall/appear.js"></script>
 <!-- Custom script -->
-<script src="${pageContext.request.contextPath}/js/mall/js/script.js"></script>
+<script src="${pageContext.request.contextPath}js/mall/js/script.js"></script>
  
 
 

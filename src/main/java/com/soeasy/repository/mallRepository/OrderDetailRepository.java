@@ -2,8 +2,8 @@ package com.soeasy.repository.mallRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.soeasy.model.OrderBean;
-import com.soeasy.model.OrderDetailBean;
+import com.soeasy.model.Order.OrderBean;
+import com.soeasy.model.Order.OrderDetailBean;
 
 
 
