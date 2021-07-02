@@ -39,389 +39,474 @@ span.error {
 }
 </style>
 
-<script type="text/javascript">
-	document.addEventListener("DOMContentLoaded",function(){
-		let showFavorite = document.getElementById("showFavorite");
-		let favoriteHeart = document.getElementById("favoriteHeart");
-		
-		//初始化XMLHttpRequest物件
-		let xhr = new XMLHttpRequest();
-		
-		//收藏按鈕
-		showFavorite.addEventListener("click",updateFavorite);
-		//按下收藏按鈕，送出JSON字串資料
-		function updateFavorite(){
-			console.log("觸發收藏點擊事件");
-			//建一支Object，裝收藏controller要的內容
-			let favoriteInfo = {
-				'favoriteCategory' : 'post'	,
-				'favoriteItemId' : ${getOnePostBean.postId}
-				
-			}
-			//將物件轉為json			
-			let json = JSON.stringify(favoriteInfo);
-			
-			console.log(json);
-			
-			xhr.open('POST',"<c:url value='/favoriteController/addFavorite'/>");
-			xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-			xhr.send(json);
-			
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState == 4 && xhr.status ==200){
-					
-					if(xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn"){
-						location.href="/soeasy/customerController/customerSignIn";
-					}
-					
-					let favoriteJson = JSON.parse(xhr.responseText);
-// 					console.log(favoriteJson);
-					//更改圖片
-					if (favoriteJson.favoriteExist){
-						favoriteHeart.src="${pageContext.request.contextPath}/images/post/heart.png";
-// 						favoriteHeart.d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z";
-					}else {
-						favoriteHeart.src="${pageContext.request.contextPath}/images/post/heart-empty.png";
-// 						favoriteHeart.d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z";
 
-					}
-					
-				}
-				
-			}
-			
-		}		
-		
-	} )
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let showFavorite = document.getElementById("showFavorite");
+            let favoriteHeart = document.getElementById("favoriteHeart");
+            let postLike = document.getElementById("postLike");
 
-</script>
+            //初始化XMLHttpRequest物件
+            let xhr = new XMLHttpRequest();
 
+            //收藏按鈕
+            showFavorite.addEventListener("click", updateFavorite);
+            //按下收藏按鈕，送出JSON字串資料
+            function updateFavorite() {
+                console.log("觸發收藏點擊事件");
+                //建一支Object，裝收藏controller要的內容
+                let favoriteInfo = {
+                    'favoriteCategory': 'post',
+                    'favoriteItemId': ${ getOnePostBean.postId }
 
-<script>
-	document.addEventListener("DOMContentLoaded",function() {
-		
-		//變數宣告------------------------------------------------------------
+            }
+            //將物件轉為json			
+            let json = JSON.stringify(favoriteInfo);
 
-		let replies;
-		let top3Replies;
-		let postBean=${getOnePostBean.postId}
-		// 查詢字串包含1.即將要讀取的類別(postCategoryBean),
-		// 注意，查詢字串的前面有問號
-		let queryString = "?postBean=" + postBean ;
+            console.log(json);
 
-		//變數宣告------------------------------------------------------------
-		
-		//載入時 取得所有此文章的留言-----------------------------------------------------
-		
-		
-		//新建XMLHttpRequest物件
-		let xhr = new XMLHttpRequest();
-		//設定連線內容
-		xhr.open("GET","<c:url value='/ReplyNeedLoginController/getAllReply.json'/>"+queryString,true);
-		//對伺服器發送請求
-		xhr.send();
-		//當readyState屬性值改變時呼叫此方法
-		xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
+            xhr.open('POST', "<c:url value='/favoriteController/addFavoritePost'/>");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(json);
 
-			replies = JSON.parse(xhr.responseText);
-// 			console.log(xhr.responseText);
-// 			console.log("replies="+replies);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
 
-			displayReplies(); 
-			}
-		}
-		
-		// 顯示送回來的所有留言
-		function displayReplies() {
-			
-// 	 		console.log(xhr.responseText);
-// 	 		console.log(replies);
-			
-			
-			let content = "";
-			
-			(replies).forEach(reply =>{
-				
-				content+='<div id="'
-						+'" class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
-						+'<div class="span11" style="display: flex;">'
-// 						留言者頭像
-						+'<img alt="留言者頭像" src="<c:url value="/customerController/getCustomerImgById/'+reply.customerBean.customerId+'" />" class="img-circle"'
-						+'style="width: 50px; height: 50px;" />&nbsp;&nbsp;'
-						+'<div>'
-// 						留言者暱稱+樓層+時間
-						+reply.customerBean.customerName+'<br> B'+reply.replyFloor+'&nbsp;&nbsp;‧&nbsp;&nbsp;'+reply.replyTime.substring(0,16)
-						+'</div>'
-						+'</div>'
-					
-						+'<div class="span1">'
-//						Like按鈕SVG
-						+ '<a href="#"> <svg viewBox="0 0 520 500" style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg">'
-						+ '<path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0" />'
-						+ '</svg>'
-// 						Like數量
-						+'</a>'+reply.replyLike
-						+'</div>'
-						+'</div>'
-					
-						+'<div style="display:flex;">'
-						
-						+'<div class="row-fluid">'
-						+'<div class="span10" style="padding: 2%;">'
-						+'<p>'
-// 						留言內容
-						+reply.replyContent
-						+'</p>'
-						+'</div>'
+                    if (xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn") {
+                        location.href = "/soeasy/customerController/customerSignIn";
+                    }
 
-// 						Update按鈕
-						+'<div class="span2">'
-						+'<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#replyInfoModal"'
-				        +'data-id="' + reply.replyId
-				        +'"data-content="' + reply.replyContent
-				        +'">Update</button>'
-				        
-// 						Delete按鈕
-						+'<button type="button" class="btn btn-success btn-sm" style="margin: 0% 1%;" data-toggle="modal" data-target="#replyDeleteModal"'
-				        +'data-id="' + reply.replyId
-				        +'"data-status="' + reply.replyStatus
-				        +'">Delete</button>'
+                    let favoriteJson = JSON.parse(xhr.responseText);
+                    console.log(favoriteJson);
+                    //更改圖片
+                    if (favoriteJson.favoriteExist) {
+                        favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart.png";
+                        postLike.innerHTML = favoriteJson.favoriteCount;
+                    } else {
+                        favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart-empty.png";
+                        postLike.innerHTML = favoriteJson.favoriteCount;
 
-				        +'</div>'
-				        
-						+'</div>'
-						
-						+'</div>';
-				
-			})
-			document.getElementById("insertReplies").innerHTML = content;
-		}
-		
-		
-//		互動視窗--更新留言
-//		開啟互動視窗表單
-		let inputReplyId = null;
-		$('#replyInfoModal').on('show.bs.modal', function (event) {
-//	 		取得代入update按鈕的值
-			let button = $(event.relatedTarget); 
-			let updateReplyId = button.data('id'); 
-			inputReplyId=updateReplyId;		//作為表單送出用ID
-			let updateReplyContent = button.data('content');
-			let modal = $(this);
-//			依照取得值寫入表單
-			modal.find('.modal-title').text('留言修改	ID: ' + updateReplyId);
-			modal.find('.modal-body #recipient-content').val(updateReplyContent);
-		})
-		
-//	 	互動視窗--更新留言--送出按鈕
-		let sendReplyInfo = document.getElementById("sendReplyInfo");
-		let replyInfo_form = document.getElementById("replyInfo_form");
-		
-		sendReplyInfo.addEventListener("click", function(){
-//			表單資料初始化
-		// ID使用原先取得的值
-			let inputRreplyContent = document.getElementById("recipient-content");
-			
-//	 		建立一支obj，將input內容裝入
-			
-			let updateReplyObj = {
-					"replyId" : inputReplyId,	//Id為Update代入的值(全域)
-					"replyContent" : inputRreplyContent.value
-			}
-			
-//	 		將物件轉為JSON字串
-			let json = JSON.stringify(updateReplyObj);
-			
-			xhr.open('POST', "<c:url value='/ReplyNeedLoginController/updateReply'/>" , true);
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(json);	
-			
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState == 4 && xhr.status == 200){
-//					接收回傳訊息，更新訊息框
-					let replyJSON = JSON.parse(xhr.responseText);
-//	 				infoMessage.innerHTML = replyJSON.updateMessage;
-					console.log(replyJSON);
-//					重新撈留言
+                    }
 
-					//設定連線內容
-					xhr.open("GET","<c:url value='/ReplyNeedLoginController/getAllReply.json'/>"+queryString,true);
-					//對伺服器發送請求
-					xhr.send();
-					//當readyState屬性值改變時呼叫此方法
-					xhr.onreadystatechange = function() {
-						if (xhr.readyState == 4 && xhr.status == 200) {
+                }
 
-							replies = JSON.parse(xhr.responseText);
-	
-							displayReplies(); 
-						}
-					}
-				}
-			}
-		
-		})
+            }
 
-		// --------------------------------------------------------------------------------------------------------------------------
-		
-// //		互動視窗--刪除留言
-// //		開啟互動視窗表單
-		let inputDeleteReplyId = null;
-		$('#replyDeleteModal').on('show.bs.modal', function (event) {
-// //	 		取得代入delete按鈕的值
-			let button = $(event.relatedTarget); 
-			let deleteReplyId = button.data('id'); 
-			inputDeleteReplyId=deleteReplyId;		//作為表單送出用ID
-			let deleteReplyStatus = button.data('status');
-			let modal = $(this);
-// //			依照取得值寫入表單
-			modal.find('.modal-title').text('留言刪除	ID: ' + deleteReplyId);
-			if(deleteReplyStatus == 1){
-	  			modal.find('.modal-body #recipient-status1').prop('checked',true);
-			}else if(deleteReplyStatus == 2){
-	  			modal.find('.modal-body #recipient-status2').prop('checked',true);
-			}
-		})
-		
-// //	 	互動視窗--刪除留言--送出按鈕
-		let sendReplyDelete = document.getElementById("sendReplyDelete");
-		let replyDelete_form = document.getElementById("replyDelete_form");
-		
-		sendReplyDelete.addEventListener("click", function(){
-// //			表單資料初始化
-// 		// ID使用原先取得的值
-			let inputReplyStatus1 = document.getElementById("recipient-status1");
-			let inputReplyStatus2 = document.getElementById("recipient-status2");
-			
-			let inputReplyStatus = null;
-			if(inputReplyStatus1.checked){
-				inputReplyStatus = inputReplyStatus1.value;
-			}else if(inputReplyStatus2.checked){
-				inputReplyStatus = inputReplyStatus2.value;				
-			}
-			
-// //	 		建立一支obj，將input內容裝入
-			
-			let deleteReplyObj = {
-					"replyId" : inputDeleteReplyId,	//Id為delete代入的值(全域)
-					"replyStatus" : inputReplyStatus
-			}
-			
-// //	 		將物件轉為JSON字串
-			let json = JSON.stringify(deleteReplyObj);
-			
-			xhr.open('POST', "<c:url value='/ReplyNeedLoginController/deleteReply'/>" , true);
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(json);	
-			
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState == 4 && xhr.status == 200){
-//					接收回傳訊息，更新訊息框
-					let replyJSON = JSON.parse(xhr.responseText);
-//	 				infoMessage.innerHTML = replyJSON.deleteMessage;
-					console.log(replyJSON);
-//					重新撈留言
+        }		
+                
+            })
 
-					//設定連線內容
-					xhr.open("GET","<c:url value='/ReplyNeedLoginController/getAllReply.json'/>"+queryString,true);
-// 					//對伺服器發送請求
-					xhr.send();
-// 					//當readyState屬性值改變時呼叫此方法
-					xhr.onreadystatechange = function() {
-						if (xhr.readyState == 4 && xhr.status == 200) {
-
-							replies = JSON.parse(xhr.responseText);
-	
-							displayReplies(); 
-						}
-					}
-				}
-			}
-		
-		})
-		
-	})
-</script>
+    </script>
 
 
-<script>
-document.addEventListener("DOMContentLoaded",function() {
-	
-	//變數宣告------------------------------------------------------------
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-	let top3Replies;
-	let postBean=${getOnePostBean.postId}
-	// 查詢字串包含1.即將要讀取的類別(postCategoryBean),
-	// 注意，查詢字串的前面有問號
-	let queryString = "?postBean=" + postBean ;
+            //變數宣告------------------------------------------------------------
 
-	//變數宣告------------------------------------------------------------
+            let replies;
+            let postBean = ${ getOnePostBean.postId }
+            // 查詢字串包含1.即將要讀取的類別(postCategoryBean),
+            // 注意，查詢字串的前面有問號
+            let queryString = "?postBean=" + postBean;
 
-	//新建XMLHttpRequest物件
-	let xhr = new XMLHttpRequest();
-	//設定連線內容
-	xhr.open("GET","<c:url value='/ReplyNeedLoginController/getTop3Reply.json'/>"+queryString,true);
-	//對伺服器發送請求
-	xhr.send();
-	//當readyState屬性值改變時呼叫此方法
-	xhr.onreadystatechange = function() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
+            //變數宣告------------------------------------------------------------
 
-		replies = JSON.parse(xhr.responseText);
-// 			console.log(xhr.responseText);
-// 			console.log("replies="+replies);
-
-		displayTop3Replies(); 
-		}
-	}
-	
-	// 顯示送回來的所有留言
-	function displayTop3Replies() {
-		
-// 		console.log(xhr.responseText);
-// 		console.log(replies);
+            //載入時 取得所有此文章的留言-----------------------------------------------------
 
 
-		let contentTop3 = "";
-		
-		(replies).forEach(reply =>{
-			
-			contentTop3+='<div class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
-				+'<div class="span11" style="display: flex;">'
-//					留言者頭像
-				+'<img alt="留言者頭像" src="<c:url value="/customerController/getCustomerImgById/'+reply.customerBean.customerId+'" />" class="img-circle"'
-				+'style="width: 50px; height: 50px;" />&nbsp;&nbsp;'
-				+'<div>'
-//					留言者暱稱+樓層+時間
-				+reply.customerBean.customerName+'<br> B'+reply.replyFloor+'&nbsp;&nbsp;‧&nbsp;&nbsp;'+reply.replyTime.substring(0,16)
-				+'</div>'
-				+'</div>'
-			
-				+'<div class="span1">'
-//				Like按鈕SVG
-				+ '<a href="#"> <svg viewBox="0 0 520 500" style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg">'
-				+ '<path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0" />'
-				+ '</svg>'
-//					Like數量
-				+'</a>'+reply.replyLike
-				+'</div>'
-				+'</div>'
-			
-				+'<div class="row-fluid">'
-				+'<div class="span12" style="padding: 2%;">'
-				+'<p>'
-//					留言內容
-				+reply.replyContent
-				+'</p>'
-				+'</div>'
-				+'</div>'
-			
-		})
-		document.getElementById("insertTop3Replies").innerHTML = contentTop3;
-	}
-})
-</script>
+            //新建XMLHttpRequest物件
+            let xhr = new XMLHttpRequest();
+            //設定連線內容
+            xhr.open("GET", "<c:url value='/ReplyNeedLoginController/getAllReply.json'/>" + queryString, true);
+            //對伺服器發送請求
+            xhr.send();
+            //當readyState屬性值改變時呼叫此方法
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    replies = JSON.parse(xhr.responseText);
+                    // 			console.log(xhr.responseText);
+                    // 			console.log("replies="+replies);
+
+                    displayReplies();
+                }
+            }
+
+            let inputFavoriteReplyId = null;
+            $("div").on('click', ".replyFavorite", function (event) {
+//             $(".replyShowFavorite").on('click', function (event) {
+//             $(".replyFavorite:has(.replyShowFavorite)").on('click', function (event) {
+
+                // 方法確保事件不會冒泡到所需類選擇器的子元素。
+                event.stopImmediatePropagation();
+                console.log("收藏功能觸發!!!!!!");
+                //	 		取得代入update按鈕的值
+                let button = $(event.relatedTarget);
+                let updateFavoriteReplyId = button.data('id');
+                inputFavoriteReplyId = updateFavoriteReplyId;		//作為表單送出用ID
+                console.log("button=" + button);
+                console.log("updateFavoriteReplyId=" + updateFavoriteReplyId);
+                console.log("inputFavoriteReplyId=" + inputFavoriteReplyId);
+
+//                 //建一支Object，裝收藏controller要的內容
+//                 let favoriteInfo = {
+//                     'favoriteCategory': 'reply',
+//                     'favoriteItemId': 3
+//                 }
+//                 //將物件轉為json			
+//                 let json = JSON.stringify(favoriteInfo);
+
+//                 console.log(json);
+
+//                 xhr.open('POST', "<c:url value='/favoriteController/addFavoriteReply'/>");
+//                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//                 xhr.send(json);
+
+//                 xhr.onreadystatechange = function () {
+//                     if (xhr.readyState == 4 && xhr.status == 200) {
+
+//                         if (xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn") {
+//                             location.href = "/soeasy/customerController/customerSignIn";
+//                         }
+
+//                         let favoriteJson = JSON.parse(xhr.responseText);
+//                         console.log(favoriteJson);
+//                         //更改圖片
+//                         if (favoriteJson.favoriteExist) {
+//                             favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart.png";
+//                             postLike.innerHTML = favoriteJson.favoriteCount;
+//                         } else {
+//                             favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart-empty.png";
+//                             postLike.innerHTML = favoriteJson.favoriteCount;
+
+//                         }
+
+//                     }
+
+//                 }
+
+
+
+
+
+            })
+
+
+            // 顯示送回來的所有留言
+            function displayReplies() {
+
+                // 	 		console.log(xhr.responseText);
+                // 	 		console.log(replies);
+
+
+                let content = "";
+
+                (replies).forEach(reply => {
+
+                    console.log("reply.favoriteStatus=" + reply.favoriteStatus);
+                    // 				無收藏
+                    if (reply.favoriteStatus == null) {
+                    	
+                          //							Like圖片(無收藏)ID
+                          img= '<img class="replyFavoriteHeart" '
+                          //							Like圖片(無收藏)
+                          + 'src="${pageContext.request.contextPath}/images/post/heart-empty.png">'
+                    }else{
+                    	  //							Like圖片(無收藏)ID
+                         img=  '<img class="replyFavoriteHeart" '
+                        //							Like圖片(無收藏)
+                       	  + 'src="${pageContext.request.contextPath}/images/post/heart.png">'
+                    }
+
+                        content += '<div class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
+                            + '<div class="span11" style="display: flex;">'
+                            //	 						留言者頭像
+                            + '<img alt="留言者頭像" src="<c:url value="/customerController/getCustomerImgById/' + reply.customerBean.customerId + '" />" class="img-circle"'
+                            + 'style="width: 50px; height: 50px;" />&nbsp;&nbsp;'
+                            + '<div>'
+                            // 							留言者暱稱+樓層+時間
+                            + reply.customerBean.customerName + '<br> B' + reply.replyFloor + '&nbsp;&nbsp;‧&nbsp;&nbsp;' + reply.replyTime.substring(0, 16)
+                            + '</div>'
+                            + '</div>'
+
+                            + '<div class="span1">'
+
+                            + '<div style="display:flex; align-items :end;" class="replyFavorite" data-id="' + reply.replyId + '">'
+                            //							Like按鈕(無收藏)ID
+                            + '<button class="replyShowFavorite"  data-id="'+reply.replyId +'"' 
+                            + 'style="border: none; background-color: transparent;">'
+                            + img
+                            + '</button>'
+                            //	 						Like數量
+                            + '<p class="replyLike" data-id="' + reply.replyId + '">'
+                            + reply.replyLike + '</p>'
+                            + '</div>'
+
+                            + '</div>'
+
+
+                            + '</div>'
+
+                            + '<div style="display:flex;">'
+
+                            + '<div class="row-fluid">'
+                            + '<div class="span10" style="padding: 2%;">'
+                            + '<p>'
+                            // 							留言內容
+                            + reply.replyContent
+                            + '</p>'
+                            + '</div>'
+
+                            // 							Update按鈕
+                            + '<div class="span2">'
+                            + '<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#replyInfoModal"'
+                            + 'data-id="' + reply.replyId
+                            + '"data-content="' + reply.replyContent
+                            + '">Update</button>'
+
+                            // 							Delete按鈕
+                            + '<button type="button" class="btn btn-success btn-sm" style="margin: 0% 1%;" data-toggle="modal" data-target="#replyDeleteModal"'
+                            + 'data-id="' + reply.replyId
+                            + '"data-status="' + reply.replyStatus
+                            + '">Delete</button>'
+
+                            + '</div>'
+
+                            + '</div>'
+
+                            + '</div>';
+
+
+
+                })
+                document.getElementById("insertReplies").innerHTML = content;
+            }
+
+
+            //		互動視窗--更新留言
+            //		開啟互動視窗表單
+            let inputReplyId = null;
+            $('#replyInfoModal').on('show.bs.modal', function (event) {
+                //	 		取得代入update按鈕的值
+                let button = $(event.relatedTarget);
+                let updateReplyId = button.data('id');
+                inputReplyId = updateReplyId;		//作為表單送出用ID
+                let updateReplyContent = button.data('content');
+                let modal = $(this);
+                //			依照取得值寫入表單
+                modal.find('.modal-title').text('留言修改	ID: ' + updateReplyId);
+                modal.find('.modal-body #recipient-content').val(updateReplyContent);
+            })
+
+            //	 	互動視窗--更新留言--送出按鈕
+            let sendReplyInfo = document.getElementById("sendReplyInfo");
+            let replyInfo_form = document.getElementById("replyInfo_form");
+
+            sendReplyInfo.addEventListener("click", function () {
+                //			表單資料初始化
+                // ID使用原先取得的值
+                let inputRreplyContent = document.getElementById("recipient-content");
+
+                //	 		建立一支obj，將input內容裝入
+
+                let updateReplyObj = {
+                    "replyId": inputReplyId,	//Id為Update代入的值(全域)
+                    "replyContent": inputRreplyContent.value
+                }
+
+                //	 		將物件轉為JSON字串
+                let json = JSON.stringify(updateReplyObj);
+
+                xhr.open('POST', "<c:url value='/ReplyNeedLoginController/updateReply'/>", true);
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.send(json);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        //					接收回傳訊息，更新訊息框
+                        let replyJSON = JSON.parse(xhr.responseText);
+                        //	 				infoMessage.innerHTML = replyJSON.updateMessage;
+                        console.log(replyJSON);
+                        //					重新撈留言
+
+                        //設定連線內容
+                        xhr.open("GET", "<c:url value='/ReplyNeedLoginController/getAllReply.json'/>" + queryString, true);
+                        //對伺服器發送請求
+                        xhr.send();
+                        //當readyState屬性值改變時呼叫此方法
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                replies = JSON.parse(xhr.responseText);
+
+                                displayReplies();
+                            }
+                        }
+                    }
+                }
+
+            })
+
+            // --------------------------------------------------------------------------------------------------------------------------
+
+            // //		互動視窗--刪除留言
+            // //		開啟互動視窗表單
+            let inputDeleteReplyId = null;
+            $('#replyDeleteModal').on('show.bs.modal', function (event) {
+                // //	 		取得代入delete按鈕的值
+                let button = $(event.relatedTarget);
+                let deleteReplyId = button.data('id');
+                inputDeleteReplyId = deleteReplyId;		//作為表單送出用ID
+                let deleteReplyStatus = button.data('status');
+                let modal = $(this);
+                // //			依照取得值寫入表單
+                modal.find('.modal-title').text('留言刪除	ID: ' + deleteReplyId);
+                if (deleteReplyStatus == 1) {
+                    modal.find('.modal-body #recipient-status1').prop('checked', true);
+                } else if (deleteReplyStatus == 2) {
+                    modal.find('.modal-body #recipient-status2').prop('checked', true);
+                }
+            })
+
+            // //	 	互動視窗--刪除留言--送出按鈕
+            let sendReplyDelete = document.getElementById("sendReplyDelete");
+            let replyDelete_form = document.getElementById("replyDelete_form");
+
+            sendReplyDelete.addEventListener("click", function () {
+                // //			表單資料初始化
+                // 		// ID使用原先取得的值
+                let inputReplyStatus1 = document.getElementById("recipient-status1");
+                let inputReplyStatus2 = document.getElementById("recipient-status2");
+
+                let inputReplyStatus = null;
+                if (inputReplyStatus1.checked) {
+                    inputReplyStatus = inputReplyStatus1.value;
+                } else if (inputReplyStatus2.checked) {
+                    inputReplyStatus = inputReplyStatus2.value;
+                }
+
+                // //	 		建立一支obj，將input內容裝入
+
+                let deleteReplyObj = {
+                    "replyId": inputDeleteReplyId,	//Id為delete代入的值(全域)
+                    "replyStatus": inputReplyStatus
+                }
+
+                // //	 		將物件轉為JSON字串
+                let json = JSON.stringify(deleteReplyObj);
+
+                xhr.open('POST', "<c:url value='/ReplyNeedLoginController/deleteReply'/>", true);
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.send(json);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        //					接收回傳訊息，更新訊息框
+                        let replyJSON = JSON.parse(xhr.responseText);
+                        //	 				infoMessage.innerHTML = replyJSON.deleteMessage;
+                        console.log(replyJSON);
+                        //					重新撈留言
+
+                        //設定連線內容
+                        xhr.open("GET", "<c:url value='/ReplyNeedLoginController/getAllReply.json'/>" + queryString, true);
+                        // 					//對伺服器發送請求
+                        xhr.send();
+                        // 					//當readyState屬性值改變時呼叫此方法
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                replies = JSON.parse(xhr.responseText);
+
+                                displayReplies();
+                            }
+                        }
+                    }
+                }
+
+            })
+
+        })
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            //變數宣告------------------------------------------------------------
+
+            let top3Replies;
+            let postBean = ${ getOnePostBean.postId }
+            // 查詢字串包含1.即將要讀取的類別(postCategoryBean),
+            // 注意，查詢字串的前面有問號
+            let queryString = "?postBean=" + postBean;
+
+            //變數宣告------------------------------------------------------------
+
+            //新建XMLHttpRequest物件
+            let xhr = new XMLHttpRequest();
+            //設定連線內容
+            xhr.open("GET", "<c:url value='/ReplyNeedLoginController/getTop3Reply.json'/>" + queryString, true);
+            //對伺服器發送請求
+            xhr.send();
+            //當readyState屬性值改變時呼叫此方法
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    replies = JSON.parse(xhr.responseText);
+                    // 			console.log(xhr.responseText);
+                    // 			console.log("replies="+replies);
+
+                    displayTop3Replies();
+                }
+            }
+
+            // 顯示送回來的所有留言
+            function displayTop3Replies() {
+
+                // 		console.log(xhr.responseText);
+                // 		console.log(replies);
+
+
+                let contentTop3 = "";
+
+                (replies).forEach(reply => {
+
+                    contentTop3 += '<div class="row-fluid" style="border-top: 4px #C9D8BF dotted; padding-top: 1%">'
+                        + '<div class="span11" style="display: flex;">'
+                        //					留言者頭像
+                        + '<img alt="留言者頭像" src="<c:url value="/customerController/getCustomerImgById/' + reply.customerBean.customerId + '" />" class="img-circle"'
+                        + 'style="width: 50px; height: 50px;" />&nbsp;&nbsp;'
+                        + '<div>'
+                        //					留言者暱稱+樓層+時間
+                        + reply.customerBean.customerName + '<br> B' + reply.replyFloor + '&nbsp;&nbsp;‧&nbsp;&nbsp;' + reply.replyTime.substring(0, 16)
+                        + '</div>'
+                        + '</div>'
+
+                        + '<div class="span1">'
+                        //				Like按鈕SVG
+                        + '<a href="#"> <svg viewBox="0 0 520 500" style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg">'
+                        + '<path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0" />'
+                        + '</svg>'
+                        //					Like數量
+                        + '</a>' + reply.replyLike
+                        + '</div>'
+                        + '</div>'
+
+                        + '<div class="row-fluid">'
+                        + '<div class="span12" style="padding: 2%;">'
+                        + '<p>'
+                        //					留言內容
+                        + reply.replyContent
+                        + '</p>'
+                        + '</div>'
+                        + '</div>'
+
+                })
+                document.getElementById("insertTop3Replies").innerHTML = contentTop3;
+            }
+        })
+    </script>
 
 </head>
 
@@ -537,29 +622,28 @@ document.addEventListener("DOMContentLoaded",function() {
 		<div class="row-fluid">
 			<div>
 				<c:choose>
-					<c:when test="${postpBean.favoriteStatus == true}">
-						<button id="showFavorite"
-							style="border: none; background-color: transparent;">
-							<img id="favoriteHeart" src="${pageContext.request.contextPath}/images/post/heart.png" style="width:10px; height:10px;">
-<!-- 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" -->
-<!-- 								style="fill: #DE2A42;" viewBox="0 0 24 24"> -->
-<!-- 								<path id="favoriteHeart" -->
-<!-- 									d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" /></svg> -->
-						</button>
+					<c:when test="${getOnePostBean.favoriteStatus == true}">
+						<div style="display: flex; align-items: end;">
+							<button id="showFavorite"
+								style="border: none; background-color: transparent;">
+								<img id="favoriteHeart"
+									src="${pageContext.request.contextPath}/images/post/heart.png">
+							</button>
+							<p id="postLike">${getOnePostBean.postLike}</p>
+						</div>
 					</c:when>
 					<c:otherwise>
-						<button id="showFavorite"
-							style="border: none; background-color: transparent;">
-							<img id="favoriteHeart" src="${pageContext.request.contextPath}/images/post/heart-empty.png">
-<!-- 							<svg id="favoriteHeart" xmlns="http://www.w3.org/2000/svg" -->
-<!-- 								width="24" height="24" viewBox="0 0 24 24"> -->
-<!-- 								<path id="favoriteHeart"  -->
-<!-- 									d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z" /></svg> -->
-						</button>
+						<div style="display: flex; align-items: end;">
+							<button id="showFavorite"
+								style="border: none; background-color: transparent;">
+								<img id="favoriteHeart"
+									src="${pageContext.request.contextPath}/images/post/heart-empty.png">
+							</button>
+							<p id="postLike">${getOnePostBean.postLike}</p>
+						</div>
 
 					</c:otherwise>
 				</c:choose>
-				${getOnePostBean.postLike}
 			</div>
 		</div>
 		<br>
@@ -603,7 +687,7 @@ document.addEventListener("DOMContentLoaded",function() {
 		<input type='hidden' name='_method' value='DELETE'>
 	</form>
 
-	<!-- ----------------------------刪除單筆文章用-------------------------------- -->
+	<!-- ----------------------------新增留言用-------------------------------- -->
 	<script>
 		//將 get 請求轉換為 post 請求提交
 		$(document).ready(function() {
@@ -619,8 +703,8 @@ document.addEventListener("DOMContentLoaded",function() {
 			});
 		})
 	</script>
-	<!-- ----------------------------刪除單筆文章用-------------------------------- -->
 	<!-- ----------------------------新增留言用-------------------------------- -->
+	<!-- ----------------------------刪除單筆文章用-------------------------------- -->
 	<script>
 		//將 get 請求轉換為 post 請求提交
 		$(document).ready(function() {
@@ -636,7 +720,7 @@ document.addEventListener("DOMContentLoaded",function() {
 			});
 		})
 	</script>
-	<!-- ----------------------------新增留言用-------------------------------- -->
+	<!-- ----------------------------刪除單筆文章用-------------------------------- -->
 
 	<div class="mainWrapper">
 		<section id="offer">

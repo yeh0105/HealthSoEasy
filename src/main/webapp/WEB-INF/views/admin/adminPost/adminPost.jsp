@@ -33,6 +33,36 @@
 		}
 	}
 </script>
+
+<script type="text/javascript">
+window.onload = function(){
+	//	----------------------------------------------------------------------------------------------
+	//初始化
+	let customerCategory = document.getElementById("customerCategory");
+	let customerStatus = document.getElementById("customerStatus");
+
+	//套用過濾器
+	applybtn.addEventListener("click", getCustomerByFilter);
+	//重製過濾器
+	resetbtn.addEventListener("click", resetFilter);
+	
+	//以過濾器取得會員
+	function getCustomerByFilter(){
+		xhr.open("GET", "<c:url value='/admin/adminManage/adminCustomer/getCustomerByStatus.json/' />" + customerCategory.value + "/conf/" + customerStatus.value, true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				
+				customers = JSON.parse(xhr.responseText, dateTimeReviver);
+				displayCustomers();
+				document.querySelector(".filter-menu").classList.toggle("active");
+			}
+		}
+	}
+}
+
+
+</script>
 </head>
 <body>
 	<div class="app-container">

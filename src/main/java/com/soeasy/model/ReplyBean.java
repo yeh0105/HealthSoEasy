@@ -36,9 +36,13 @@ public class ReplyBean implements Serializable {
 	private Integer replyLike;
 
 	private Integer replyStatus;
-	
+
 	private Integer replyFloor;
-	
+
+	// 判斷收藏
+	@Transient
+	private Boolean favoriteStatus;
+
 	// ---------------------------
 	// 會員
 	@Transient
@@ -104,7 +108,7 @@ public class ReplyBean implements Serializable {
 	public void setReplyStatus(Integer replyStatus) {
 		this.replyStatus = replyStatus;
 	}
-	
+
 	public Integer getReplyFloor() {
 		return replyFloor;
 	}
@@ -144,5 +148,15 @@ public class ReplyBean implements Serializable {
 	public void setPostBean(PostBean postBean) {
 		this.postBean = postBean;
 	}
+
+	public Boolean getFavoriteStatus() {
+		return favoriteStatus;
+	}
+
+	public void setFavoriteStatus(Boolean favoriteStatus) {
+		this.favoriteStatus = favoriteStatus;
+	}
+	
+	
 
 }

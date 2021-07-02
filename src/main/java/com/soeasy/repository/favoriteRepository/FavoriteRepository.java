@@ -11,5 +11,7 @@ public interface FavoriteRepository extends JpaRepository<FavoriteBean, Integer>
 	
 	public FavoriteBean findByFavoriteItemIdAndFavoriteCategoryAndCustomerBean(Integer favoriteItemId, String favoriteCategory, CustomerBean customerBean);
 
+	public List<FavoriteBean> findByFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory);
+	
 	public List<FavoriteBean> findByFavoriteCategory(String favoriteCategory);
 }

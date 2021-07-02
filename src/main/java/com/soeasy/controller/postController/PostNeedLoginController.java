@@ -28,16 +28,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
 import com.soeasy.model.PostUpdateBean;
 import com.soeasy.model.ReplyBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
 import com.soeasy.service.replyService.ReplyService;
@@ -61,6 +62,9 @@ public class PostNeedLoginController {
 
 	@Autowired
 	ReplyService replyService;
+
+	@Autowired
+	FavoriteService favoriteService;
 
 	@Autowired
 	ServletContext context;
@@ -213,6 +217,27 @@ public class PostNeedLoginController {
 		// 將更改過的內容塞入postBean
 		postBean.setPostContent(newContent);
 
+		String post = "post";
+
+		// 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+		if (customerBean != null) {
+			CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+			FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+
+			System.out.println("originalCustomer=" + originalCustomer);
+			System.out.println("postId=" + postId);
+			System.out.println("post=" + post);
+
+			// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+			if (checkFavoriteBean != null) {
+				// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+				// 4.將FavoriteStatus狀態存進model.addAttribute
+				postBean.setFavoriteStatus(true);
+			}
+//	    			postBean.setFavoriteStatus(false);
+
+		}
+
 		model.addAttribute("getOnePostBean", postBean);
 
 		// -------------------------------------------------------------------------------------
@@ -224,6 +249,7 @@ public class PostNeedLoginController {
 		replyBean.setReplyContent("　武藏：既然你誠心誠意的發問了\r\n" + "小次郎：我們就大發慈悲的告訴你\r\n" + "　武藏：為了防止世界被破壞\r\n"
 				+ "小次郎：為了守護世界的和平\r\n" + "　武藏：貫徹愛與真實的邪惡\r\n" + "小次郎：可愛又迷人的反派角色\r\n" + "　武藏：武藏！\r\n" + "小次郎：小次郎！\r\n"
 				+ "　武藏：我們是穿梭在銀河中的火箭隊\r\n" + "小次郎：白洞、白色的明天正等著我們\r\n" + "　喵喵：就是這樣喵！");
+
 
 		model.addAttribute("replyBean", replyBean);
 
@@ -275,8 +301,8 @@ public class PostNeedLoginController {
 			System.err.println(it.next());
 			floor++;
 		}
-		
-		System.err.println("floor="+floor);
+
+		System.err.println("floor=" + floor);
 
 		replyBean.setReplyFloor(floor);
 
