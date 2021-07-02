@@ -12,7 +12,184 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
+<script type="text/javascript">
+	window.onload = function(){
+		//初始化
+		let switch_moon = document.getElementById("switch_moon");
+		let xhr = new XMLHttpRequest();
+		let shops = null;
+		let tableView = document.getElementById("tableView");
+		let shopStatus = document.getElementById("shopStatus");
+		let applybtn = document.getElementById("applybtn");
+		let resetbtn = document.getElementById("resetbtn");
 
+		//載入時 取得所有廠商會員
+		xhr.open("GET", "<c:url value='/admin/adminManage/adminShop/getAllShop.json' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+			
+				shops = JSON.parse(xhr.responseText);
+				displayShops();
+			}
+		}
+
+		//印出廠商會員基本資料
+		function displayShops(){
+			//表頭欄位
+			let title = 
+				'<div class="products-header">'
+		    +   	'<div class="product-cell image">'
+	        +   	'Name'
+	        +   	'<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +   	'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell category">ID<button class="sort-button">'
+	        +   	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell status-cell">Status<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell sales">Email<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button></div>'
+	        +	'<div class="product-cell price">Phone<button class="sort-button">'
+	        +    	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>'
+	        +  		'</button>'
+	        +	'</div>'
+	        +	'<div class="product-cell price">Update</div>'
+	        +	'</div>';
+	        
+	        //內容
+	        let content = "";
+	        let status = "";
+			(shops).forEach(shop => {
+				
+				if(shop.shopStatus == 1){
+					status = '<span class="status active">Active</span>';
+				} else if(shop.shopStatus == 2){
+					status = '<span class="status disabled">Disabled</span>';
+				}
+				
+				content = content
+				+'<div class="products-row">'
+		        +	'<button class="cell-more-button">'
+		        +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
+		        +	'</button>'
+		        +	'<div class="product-cell image">'
+		        +   	'<img src="${pageContext.request.contextPath}/shopController/getShopImgById/' + shop.shopId + '" alt="product">'
+		        +   	'<span>' + shop.shopName + '</span>'
+		        +	'</div>'
+		        +	'<div class="product-cell category"><span class="cell-label">ID:</span>' + shop.shopId + '</div>'
+		        +	'<div class="product-cell status-cell">'
+		        +		'<span class="cell-label">Status:</span>'
+		        +		status
+		        +	'</div>'
+		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + shop.shopEmail + '</div>'
+		        +	'<div class="product-cell stock"><span class="cell-label">Phone:</span>' + shop.shopPhone + '</div>'
+		        +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#shopInfoModal"'
+		        +	'data-id="' + shop.shopId
+		        +	'"data-name="' + shop.shopName
+		        +	'"data-status="' + shop.shopStatus
+		        +	'"data-email="' + shop.shopEmail
+		        +	'"data-phone="' + shop.shopPhone
+		        + 	'">Update</button></div>'
+		      	+'</div>';
+			})
+			tableView.innerHTML = title + content;
+		}
+		
+// 		互動視窗--基本資料
+//   	開啟互動視窗表單
+		let inputShopId = null;
+		$('#shopInfoModal').on('show.bs.modal', function (event) {
+// 			取得代入update按鈕的值
+  			let button = $(event.relatedTarget); 
+  			let updateShopId = button.data('id'); 
+  			inputShopId = updateShopId;		//作為表單送出用ID
+  			let updateShopName = button.data('name'); 
+  			let updateShopStatus = button.data('status'); 
+  			let updateShopEmail = button.data('email'); 
+  			let updateShopPhone = button.data('phone'); 
+  			let modal = $(this);
+//   		依照取得值寫入表單
+ 			modal.find('.modal-title').text('基本資料修改	ID: ' + updateShopId);
+  			modal.find('.modal-body #recipient-name').val(updateShopName);
+  			if(updateShopStatus == 1){
+	  			modal.find('.modal-body #recipient-status1').prop('checked',true);
+  			}else if(updateShopStatus == 2){
+	  			modal.find('.modal-body #recipient-status2').prop('checked',true);
+  			}
+  			modal.find('.modal-body #recipient-email').val(updateShopEmail);
+  			modal.find('.modal-body #recipient-phone').val(updateShopPhone);
+		})
+		
+		// 		互動視窗--基本資料--送出按鈕
+		let sendShopInfo = document.getElementById("sendShopInfo");
+		let shopInfo_form = document.getElementById("shopInfo_form");
+		sendShopInfo.addEventListener("click", function(){
+// 			表單資料初始化
+			//ID使用原先取得的值
+			let inputShopName = document.getElementById("recipient-name");
+			let inputShopStatus1 = document.getElementById("recipient-status1");
+			let inputShopStatus2 = document.getElementById("recipient-status2");
+			let inputShopEmail = document.getElementById("recipient-email");
+			let inputShopPhone = document.getElementById("recipient-phone");
+			
+			let inputShopStatus = null;
+			if(inputShopStatus1.checked){
+				inputShopStatus = inputShopStatus1.value;
+			}else if(inputShopStatus2.checked){
+				inputShopStatus = inputShopStatus2.value;			
+			}
+//         	建立一支obj，將input內容裝入
+			
+			let updateShopObj = {
+					"shopId" : inputShopId,	//Id為Update代入的值(全域)
+					"shopName" : inputShopName.value,
+					"shopStatus" : inputShopStatus,
+					"shopEmail" : inputShopEmail.value,
+					"shopPhone" : inputShopPhone.value,
+			}
+			
+//			將物件轉為JSON字串
+			let json = JSON.stringify(updateShopObj);
+			
+			xhr.open('POST', "<c:url value='/admin/adminManage/adminUpdateShopInfo'/>" , true);
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(json);	
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200){
+// 					接收回傳訊息，更新訊息框
+					let shopJSON = JSON.parse(xhr.responseText);
+// 					infoMessage.innerHTML = shopJSON.updateMessage;
+					console.log(shopJSON);
+// 					重新搜尋目前類型資料
+					applybtn.click();
+					document.querySelector(".filter-menu").classList.toggle("active");
+				}
+			}
+			
+			
+		});
+// 		-------------------------------------------------------------------------------------------------
+		
+//		點擊日夜間模式設定session
+		switch_moon.addEventListener("click", function(){
+			document.documentElement.classList.toggle('dark');
+			switch_moon.classList.toggle('active');
+			xhr.open("GET", "<c:url value='/admin/switchMode.json' />", true);
+			xhr.send();
+		})
+		
+		if("${switchMode}" == "" || "${switchMode}" == "sun"){
+		} else if("${switchMode}" == "moon"){
+			document.documentElement.classList.toggle('dark');			
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="app-container">
@@ -84,13 +261,13 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>後台首頁</span>
         </a>
       </li>
-      <li class="sidebar-list-item  active">
+      <li class="sidebar-list-item ">
         <a href="<c:url value="/admin/adminManage/adminCustomer"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> -->
           <span>會員</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item  active">
         <a href="<c:url value="/admin/adminManage/adminShop"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg> -->
           <span>廠商</span>
@@ -156,7 +333,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Customer</h1>
+      <h1 class="app-content-headerText">Shop</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -168,26 +345,14 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     <div class="app-content-actions">
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">
-      <button id="basicInfobtn" class="app-content-headerButton" style="margin: 0px 0px 0px 5px">基本資料</button>
-      <button id="healthInfobtn" class="app-content-headerButton" style="margin: 0px 0px 0px 5px">健康資料</button>
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
           <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
           <div class="filter-menu">
-            <label>Category</label>
-            <select id="customerCategory">
-              <option value="all">All Categories</option>
-              <option value="male">男</option>                     
-              <option value="female">女</option>
-              <option value="meat">葷</option>
-              <option value="vegetable">素</option>
-              <option value="strong">運動(強)</option>
-              <option value="normal">運動(中)</option>
-              <option value="weak">運動(弱)</option>
-            </select>
+            
             <label>Status</label>
-            <select id="customerStatus">
+            <select id="shopStatus">
               <option value="all">All Status</option>
               <option value="active">Active</option>
               <option value="disabled">Disabled</option>
@@ -233,17 +398,6 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
         </div>
-        <div class="product-cell stock">Nickname<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button></div>
-        <div class="product-cell price">Score<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
-        <div class="product-cell price">RegisterTime<button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-        </div>
         <div class="product-cell price">Update</div>
       </div>
 	<!--       一筆資料內容--開始 -->
@@ -262,16 +416,13 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </div>
         <div class="product-cell sales"><span class="cell-label">Email:</span>Flanlove@outlook.com</div>
         <div class="product-cell stock"><span class="cell-label">Phone:</span>0939956219</div>
-        <div class="product-cell stock"><span class="cell-label">Nickname:</span>DDD</div>
-        <div class="product-cell price"><span class="cell-label">Score:</span>0</div>
-        <div class="product-cell price"><span class="cell-label">RegisterTime:</span>2021-06-22</div>
         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
       </div>
       <!--       一筆資料內容--結尾 -->
       
     </div>
 <!-- 			互動視窗--基本資料 -->
-<div class="modal fade" id="customerInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="shopInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -281,7 +432,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </button>
       </div>
       <div class="modal-body">
-        <form id="customerInfo_form" action="#" method="post">
+        <form id="shopInfo_form" action="#" method="post">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Name:</label>
             <input type="text" class="form-control" id="recipient-name">
@@ -300,83 +451,16 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
             <label for="recipient-phone" class="col-form-label">Phone:</label>
             <input type="text" class="form-control" id="recipient-phone">
           </div>
-          <div class="form-group">
-            <label for="recipient-nickname" class="col-form-label">Nickname:</label>
-            <input type="text" class="form-control" id="recipient-nickname">
-          </div>
-          <div class="form-group">
-            <label for="recipient-score" class="col-form-label">Score:</label>
-            <input type="text" class="form-control" id="recipient-score">
-          </div>
-          <div class="form-group">
-            <label for="recipient-birthday" class="col-form-label">BirthDay:</label>
-            <input type="date" class="form-control" id="recipient-birthday">
-          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendCustomerInfo" style="background-color: #007500; border-color: #007500">Send</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendShopInfo" style="background-color: #007500; border-color: #007500">Send</button>
       </div>
     </div>
   </div>
 </div>
-<!-- 			---------------------------------------------------------------------------------------------------------------- -->
-<!-- 			互動視窗--健康資料 -->
-<div class="modal fade" id="customerHealthInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ID:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="customerHealthInfo_form" action="#" method="post">
-          <div class="form-group">
-            <label for="recipient-health-name" class="col-form-label">Name:</label>
-            <input type="text" class="form-control" id="recipient-health-name">
-          </div>
-          <div class="form-group" style="display: flex; justify-content: flex-start;">
-            <label for="recipient-health-gender1" class="col-form-label">男:</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-gender1" name="radio-gender" style=" margin: 10px 5px 0px 5px" value="1">
-            <label for="recipient-health-gender2" class="col-form-label">女:</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-gender2" name="radio-gender" style=" margin: 10px 5px 0px 5px" value="2">
-          </div>
-          <div class="form-group" style="display: flex; justify-content: flex-start;">
-            <label for="recipient-health-diet1" class="col-form-label">葷:</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-diet1" name="radio-diet" style=" margin: 10px 5px 0px 5px" value="1">
-            <label for="recipient-health-diet2" class="col-form-label">素:</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-diet2" name="radio-diet" style=" margin: 10px 5px 0px 5px" value="2">
-          </div>
-          <div class="form-group" style="display: flex; justify-content: flex-start;">
-            <label for="recipient-health-exercise3" class="col-form-label">運動(強):</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise3" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="3">
-            <label for="recipient-health-exercise2" class="col-form-label">運動(中):</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise2" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="2">
-            <label for="recipient-health-exercise1" class="col-form-label">運動(弱):</label>
-            <input type="radio" class="form-control form-check-input" id="recipient-health-exercise1" name="radio-exercise" style=" margin: 10px 5px 0px 5px" value="1">
-          </div>
-          <div class="form-group">
-            <label for="recipient-health-height" class="col-form-label">Height:</label>
-            <input type="text" class="form-control" id="recipient-health-height">
-          </div>
-          <div class="form-group">
-            <label for="recipient-health-weight" class="col-form-label">Weight:</label>
-            <input type="text" class="form-control" id="recipient-health-weight">
-          </div>
-          
-          
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendCustomerHealthInfo" style="background-color: #007500; border-color: #007500">Send</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 		</div>
 </div>

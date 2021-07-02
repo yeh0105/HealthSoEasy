@@ -59,6 +59,11 @@ public class ShopServiceImpl implements ShopService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<ShopBean> getAllShop() {
+		return shopRepository.findAll();
+	}
 	
 	
 

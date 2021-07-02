@@ -1,5 +1,7 @@
 package com.soeasy.service.shopService;
 
+import java.util.List;
+
 import com.soeasy.model.ShopBean;
 
 public interface ShopService {
@@ -10,10 +12,10 @@ public interface ShopService {
 	// 檢查帳密是否正確
 	ShopBean checkEmailPassword(String shopEmail, String shopPassword);
 
-	// 新增會員
+	// 新增廠商會員
 	void addShop(ShopBean shop);
 
-	// ID查詢會員
+	// ID查詢廠商會員
 	ShopBean findByShopId(Integer shopId);
 	
 	// 修改基本資料
@@ -21,4 +23,7 @@ public interface ShopService {
 
 	// 變更會員狀態
 	void updateShopStatus(ShopBean shop, Integer shopStatus);
+	
+	//查詢所有廠商會員
+	List<ShopBean> getAllShop();
 }

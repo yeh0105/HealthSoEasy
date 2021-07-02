@@ -41,7 +41,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 		if(mustLoginAdmin()) {
 			if(checkAdminLogin(request)) {	//已登入
 				HttpSession session = request.getSession();
-				session.setAttribute("servletPath", servletPath);
+				session.setAttribute("adminServletPath", servletPath);
 				byPass = true;
 			} else {	//需登入但未登入，導向登入後台登入頁面
 				HttpSession session = request.getSession();
@@ -52,7 +52,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 					// 原本要執行的程式。
 //					System.out.println("CheckLoginInterceptor#preHandle, servletPath=" + servletPath );
 //					System.out.println("CheckLoginInterceptor#preHandle, session=" + session );
-					session.setAttribute("servletPath", servletPath);	
+					session.setAttribute("adminServletPath", servletPath);	
 				}
 				response.sendRedirect(contextPath + "/admin/adminLogin");
 				byPass = false;
