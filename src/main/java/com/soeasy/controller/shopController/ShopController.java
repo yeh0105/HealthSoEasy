@@ -1,16 +1,26 @@
 package com.soeasy.controller.shopController;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
 import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.model.member.ShopSignInBean;
@@ -24,6 +34,9 @@ public class ShopController {
 	
 	@Autowired
 	ShopService shopService;
+	
+	@Autowired
+	ServletContext servletContext;
 	
 	//表單初值--新增廠商_廠商登入--註冊
 	@GetMapping("/addShop")
@@ -95,5 +108,52 @@ public class ShopController {
 		model.addAttribute("signMode", signMode);
 		
 		return model;
+	}
+	
+	
+	// 以ID取得上傳頭像
+	@GetMapping("/getShopImgById/{shopId}")
+	public ResponseEntity<byte[]> getShopImgById(@PathVariable("shopId") Integer shopId) {
+		ShopBean originalShop = shopService.findByShopId(shopId);
+
+		Blob shopImg = originalShop.getShopImg();
+
+		InputStream is = null;
+		String fileName = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+
+		try {
+			if (shopImg != null) {
+				is = shopImg.getBinaryStream();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/salad.png)
+			if (is == null) {
+				fileName = "salad.png";
+				is = servletContext.getResourceAsStream("/images/" + fileName);
+			}
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[8192];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+
+			media = baos.toByteArray();
+			responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
 	}
 }
