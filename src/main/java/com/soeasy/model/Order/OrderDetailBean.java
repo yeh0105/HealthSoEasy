@@ -1,8 +1,9 @@
-package com.soeasy.model;
+package com.soeasy.model.Order;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,8 +22,8 @@ public class OrderDetailBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderItemId;
-
+	private Integer orderDetailId;
+	
 	private Integer productId;
 
 	private String productName;
@@ -44,29 +45,18 @@ public class OrderDetailBean implements Serializable {
 	public OrderDetailBean() {
 	}
 
-	public Integer getOrderItemId() {
-		return orderItemId;
+	
+
+	public Integer getOrderDetailId() {
+		return orderDetailId;
 	}
 
-	public void setOrderItemId(Integer orderItemId) {
-		this.orderItemId = orderItemId;
+
+	public void setOrderDetailId(Integer orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
 
-	public Integer getProductId() {
-		return productId;
-	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
 
 	public Integer getProductPrice() {
 		return productPrice;
@@ -100,6 +90,33 @@ public class OrderDetailBean implements Serializable {
 		this.orderBean = orderBean;
 	}
 
+
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+
+
+	public String getProductName() {
+		return productName;
+	}
+
+
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+
+
+//
 	// -------------------------------------
 	
 }

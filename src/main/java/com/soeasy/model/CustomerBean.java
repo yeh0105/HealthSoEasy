@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.soeasy.model.Order.OrderBean;
 
 @Entity
 @Table(name = "Customer")
@@ -102,7 +105,7 @@ public class CustomerBean implements Serializable {
 //	private Integer orderId;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customerBean", cascade = CascadeType.ALL)
-	Set<OrderBean> orderBeans = new LinkedHashSet<OrderBean>();
+	List<OrderBean> orderBeans = new ArrayList<OrderBean>();
 	
 	//購物車	
 //	@Column(name = "fk_shoppingcartId")
@@ -291,11 +294,11 @@ public class CustomerBean implements Serializable {
 		this.reservationBeans = reservationBeans;
 	}
 
-	public Set<OrderBean> getOrderBeans() {
+	public List<OrderBean> getOrderBeans() {
 		return orderBeans;
 	}
 
-	public void setOrderBeans(Set<OrderBean> orderBeans) {
+	public void setOrderBeans(List<OrderBean> orderBeans) {
 		this.orderBeans = orderBeans;
 	}
 
