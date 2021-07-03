@@ -26,4 +26,7 @@ public interface ShopService {
 	
 	//查詢所有廠商會員
 	List<ShopBean> getAllShop();
+	
+	//以狀態查詢廠商
+	List<ShopBean> getShopByStatus(Integer shopStatus);
 }
