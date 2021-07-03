@@ -28,7 +28,7 @@ public class PostUpdateBeanValidator implements Validator {
 			errors.rejectValue("postCategoryBean", "", "必須挑選分類欄的選項");
 		}
 		
-//		System.err.println(postUpdateBean.getPostCategoryBean().getPostCategoryId());
+		System.err.println(postUpdateBean.getPostCategoryBean().getPostCategoryId());
 
 	}
 

@@ -50,7 +50,7 @@ public class AdminPost {
 	ServletContext context;
 
 	// 查詢全部文章
-	@GetMapping({ "/adminPost" })
+	@GetMapping("/adminPost")
 	public String getAllPostById(Model model) {
 		List<PostBean> postBean = postService.findAllByPostId();
 		model.addAttribute("postList", postBean);

@@ -56,20 +56,13 @@ public class ReplyNeedLoginController {
 		List<ReplyBean> list = replyService.findByPostBean(postBean);
 
 		List<ReplyBean> newlist = new ArrayList();
+//
+		ReplyBean replyChangeBean = new ReplyBean();
 
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 		String reply = "reply";
 
 		for (ReplyBean replyBean : list) {
-
-			// 取得留言內容
-			String replyContent = replyBean.getReplyContent();
-
-			// 將換行(\n)換成<br>
-			String newReplyContent = replyContent.replaceAll("\n", "<br>");
-
-			// 將更改過的內容塞入newlist
-			replyBean.setReplyContent(newReplyContent);
 
 			// 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
 			if (customerBean != null) {
@@ -91,7 +84,20 @@ public class ReplyNeedLoginController {
 
 			}
 
-			newlist.add(replyBean);
+			// 取得留言內容
+			String replyContent = replyBean.getReplyContent();
+
+			// 將換行(\n)換成<br>
+			String newReplyContent = replyContent.replaceAll("\n", "<br>");
+			
+			replyChangeBean=replyBean;
+//
+//			// 將更改過的內容塞入newlist
+			replyChangeBean.setReplyContent(newReplyContent);
+			newlist.add(replyChangeBean);
+
+//			replyBean.setReplyContent(newReplyContent);
+//			newlist.add(replyBean);
 
 		}
 
@@ -248,7 +254,10 @@ public class ReplyNeedLoginController {
 		}
 
 		// 為原始物件設定傳入的欄位值
-		originalBean.setReplyContent(replyBean.getReplyContent());
+		String replyContent=replyBean.getReplyContent();
+		String newReplyContent = replyContent.replaceAll("\n", "<br>");
+		originalBean.setReplyContent(newReplyContent);
+//		originalBean.setReplyContent(replyBean.getReplyContent());
 
 		// save原始物件
 		replyService.updateByReplyId(originalBean);
