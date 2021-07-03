@@ -1,5 +1,6 @@
 .blog-card{
 	display: flex;
+	justify-content: center;	
 	border-top:	white 1px solid;
 	border-left: white 1px solid;
 	border-radius:30px;
@@ -38,4 +39,8 @@ h3{
 }
 p{
 	color:#252422;
+}
+h2{
+	color:#e76f51;
+	font-style: Italic;
 }
