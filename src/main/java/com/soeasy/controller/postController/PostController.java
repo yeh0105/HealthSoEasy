@@ -54,12 +54,12 @@ public class PostController {
 	// 查詢所有文章的 TOP10
 	@GetMapping(value = "/getTop10Post", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<PostBean> getTop10() {
-		System.err.println("進入getTop10Post");
+//		System.err.println("進入getTop10Post");
 		
 		List<PostBean> list = postService.findTop10();
 		
-		System.err.println("list=" + list);
-		System.err.println("出去PostController");
+//		System.err.println("list=" + list);
+//		System.err.println("出去PostController");
 		return list;
 	}
 

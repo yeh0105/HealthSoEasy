@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">河濱及公園</button></a>
 			
 				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">其他戶外場地</button></a>
+					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">游泳池</button></a>
 			</div>		
 				
 				

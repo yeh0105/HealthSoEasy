@@ -35,7 +35,7 @@
 </script>
 
 <script type="text/javascript">
-window.onload = function(){
+document.addEventListener("DOMContentLoaded", function(){
 	//	----------------------------------------------------------------------------------------------
 	//初始化
 	let customerCategory = document.getElementById("customerCategory");
@@ -59,7 +59,7 @@ window.onload = function(){
 			}
 		}
 	}
-}
+});
 
 
 </script>
@@ -232,11 +232,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 						</button>
 						<div class="filter-menu">
 							<label>Category</label> <select>
-								<option>All Categories</option>
-								<option>Furniture</option>
-								<option>Decoration</option>
-								<option>Kitchen</option>
-								<option>Bathroom</option>
+								<option>所有分類</option>
+								<option>減肥</option>
+								<option>飲食</option>
+								<option>運動</option>
+								<option>健康</option>
+								<option>健身</option>
+								<option>講座</option>
+								<option>商品</option>
+								<option>問答</option>
 							</select> <label>Status</label> <select>
 								<option>All Status</option>
 								<option>Active</option>

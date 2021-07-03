@@ -108,6 +108,7 @@
           <div class="">  
             <h1>${sportMapBean.sportMapName}</h1>
             <h3>${sportMapBean.sportMapAddress}</h3>
+            <h2>Information：</h2>
             <p> ${sportMapBean.sportMapInfo}</p>
             <br>
             <br>

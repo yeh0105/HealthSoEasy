@@ -64,6 +64,11 @@ public class ShopServiceImpl implements ShopService {
 	public List<ShopBean> getAllShop() {
 		return shopRepository.findAll();
 	}
+
+	@Override
+	public List<ShopBean> getShopByStatus(Integer shopStatus) {
+		return shopRepository.findByShopStatus(shopStatus);
+	}
 	
 	
 

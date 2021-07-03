@@ -12,4 +12,5 @@ public interface ShopRepository extends JpaRepository<ShopBean, Integer>{
 	
 	List<ShopBean> findByShopEmailAndShopPassword(String shopEmail, String shopPassword);
 	
+	List<ShopBean> findByShopStatus(Integer shopStatus);
 }
