@@ -7,13 +7,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
 import com.soeasy.service.shopService.ShopService;
+import com.soeasy.util.GlobalService;
 
 @Controller
 @RequestMapping("/admin/adminManage")
@@ -65,5 +68,19 @@ public class AdminShop {
 		// 更新成功訊息
 		updateMessage.put("updateSuccessMessage", "更新成功");
 		return updateMessage;
+	}
+	
+	// 以過濾取得會員(ajax)
+	@GetMapping(value = "/adminShop/getShopByStatus.json/{shopStatus}", produces = {"application/json; charset=UTF-8"})
+	public @ResponseBody List<ShopBean> getShopByFilterStatus(@PathVariable("shopStatus") String shopStatus) {
+		List<ShopBean> shopBeans = null;
+		if(shopStatus.equals("all")) {
+			shopBeans = shopService.getAllShop();
+		}else if(shopStatus.equals("active")) {
+			shopBeans = shopService.getShopByStatus(GlobalService.SHOP_STATUS_NORMAL);
+		}else if(shopStatus.equals("disabled")) {
+			shopBeans = shopService.getShopByStatus(GlobalService.SHOP_STATUS_BANNED);
+		}
+		return shopBeans;
 	}
 }

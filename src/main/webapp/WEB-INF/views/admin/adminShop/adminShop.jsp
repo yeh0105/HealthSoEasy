@@ -34,6 +34,32 @@
 			}
 		}
 
+		//套用過濾器
+		applybtn.addEventListener("click", getShopByFilter);
+		//重製過濾器
+		resetbtn.addEventListener("click", resetFilter);
+		
+		//以過濾器取得會員
+		function getShopByFilter(){
+			xhr.open("GET", "<c:url value='/admin/adminManage/adminShop/getShopByStatus.json/' />" + shopStatus.value, true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					
+					shops = JSON.parse(xhr.responseText);
+					displayShops();
+					document.querySelector(".filter-menu").classList.toggle("active");
+				}
+			}
+		}
+		
+		//重製過濾器並取得會員
+		function resetFilter(){
+			customerStatus.value = "all";
+			
+			getCustomerByFilter();
+		}
+		
 		//印出廠商會員基本資料
 		function displayShops(){
 			//表頭欄位

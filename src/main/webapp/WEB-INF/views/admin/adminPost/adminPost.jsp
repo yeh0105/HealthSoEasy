@@ -35,7 +35,7 @@
 </script>
 
 <script type="text/javascript">
-window.onload = function(){
+document.addEventListener("DOMContentLoaded", function(){
 	//	----------------------------------------------------------------------------------------------
 	//初始化
 	let customerCategory = document.getElementById("customerCategory");
@@ -59,7 +59,7 @@ window.onload = function(){
 			}
 		}
 	}
-}
+});
 
 
 </script>

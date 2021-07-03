@@ -29,6 +29,7 @@
 		let applybtn = document.getElementById("applybtn");
 		let resetbtn = document.getElementById("resetbtn");
 		
+		
 		//載入時 取得所有顧客會員
 		xhr.open("GET", "<c:url value='/admin/adminManage/adminCustomer/getAllCustomer.json' />", true);
 		xhr.send();
@@ -138,7 +139,9 @@
 				
 				content = content
 				+'<div class="products-row">'
-		        +	'<button class="cell-more-button">'
+		        +	'<button class="cell-more-button uploadImgbtns"' 
+		        + 'id="uploadimg' + customer.customerId
+		        + '"data-imgid="' + customer.customerId + '">'
 		        +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
 		        +	'</button>'
 		        +	'<div class="product-cell image">'
@@ -170,6 +173,13 @@
 			})
 			
 			tableView.innerHTML = title + content;
+			
+			//初始化上傳使用者頭貼按鈕
+			$(".uploadImgbtns").on("click", function(event){
+				let button = $(event.relatedTarget);
+	  			let customerId_uploadimg = button.data('imgid');
+	  			console.log(customerId_uploadimg);
+			})
 		}
 		
 		//印出顧客會員健康資料
@@ -209,7 +219,8 @@
 			//內容
 	        let content = "";
 	        let gender = "";
-	        
+	        let diet = "";
+	        let exercise = "";
 	        (customers).forEach(customer => {
 					
 				if(customer.customerHealthBean.customerGender == 1){
@@ -219,10 +230,28 @@
 				} else {
 					gender = '<span class="status null">null</span>';
 				}
-					
+				
+				if(customer.customerHealthBean.customerDiet == 1){
+					diet = "葷";
+				} else if(customer.customerHealthBean.customerDiet == 2){
+					diet = "素";
+				} else {
+					diet = "null";
+				} 
+				
+				if(customer.customerHealthBean.customerExerciseHabits == 3){
+					exercise = "強";
+				} else if(customer.customerHealthBean.customerExerciseHabits == 2){
+					exercise = "中";
+				} else if(customer.customerHealthBean.customerExerciseHabits == 1){
+					exercise = "弱";
+				} else {
+					exercise = "null";
+				}
 				content = content
 				+'<div class="products-row">'
-			    +	'<button class="cell-more-button">'
+				+	'<button class="cell-more-button uploadImgbtns"' 
+		        + 	'data-id="' + customer.customerId + '">'
 			    +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
 			    +	'</button>'
 			    +	'<div class="product-cell image">'
@@ -234,8 +263,8 @@
 			    +		'<span class="cell-label">Gender:</span>'
 			    +		gender
 			    +	'</div>'
-			    +	'<div class="product-cell email"><span class="cell-label">Diets Type:</span>' + customer.customerHealthBean.customerDiet + '</div>'
-			    +	'<div class="product-cell stock"><span class="cell-label">Excercise:</span>' + customer.customerHealthBean.customerExerciseHabits + '</div>'
+			    +	'<div class="product-cell email"><span class="cell-label">Diets Type:</span>' + diet + '</div>'
+			    +	'<div class="product-cell stock"><span class="cell-label">Excercise:</span>' + exercise + '</div>'
 			    +	'<div class="product-cell stock"><span class="cell-label">Height:</span>' + customer.customerHealthBean.customerHeight + '</div>'
 			    +	'<div class="product-cell price"><span class="cell-label">Weight:</span>' + customer.customerHealthBean.customerWeight + '</div>'
 			    +	'<div class="product-cell price"><button class="app-content-headerButton" data-toggle="modal" data-target="#customerHealthInfoModal"'
@@ -252,6 +281,8 @@
 			})
 				
 			tableView.innerHTML = title + content;
+	        
+	      	
 		}
 		
 //		點擊日夜間模式設定session
@@ -473,6 +504,8 @@
 				}
 			}
 		});
+		
+		
 	}
 
 </script>
@@ -710,26 +743,26 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell price">Update</div>
       </div>
 	<!--       一筆資料內容--開始 -->
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-          <div class="product-cell image">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product">
-            <span>許宸瑜</span>
-          </div>
-        <div class="product-cell category"><span class="cell-label">ID:</span>5</div>
-        <div class="product-cell status-cell">
-          <span class="cell-label">Status:</span>
-          <span class="status active">Active</span>
-        </div>
-        <div class="product-cell sales"><span class="cell-label">Email:</span>Flanlove@outlook.com</div>
-        <div class="product-cell stock"><span class="cell-label">Phone:</span>0939956219</div>
-        <div class="product-cell stock"><span class="cell-label">Nickname:</span>DDD</div>
-        <div class="product-cell price"><span class="cell-label">Score:</span>0</div>
-        <div class="product-cell price"><span class="cell-label">RegisterTime:</span>2021-06-22</div>
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-      </div>
+<!--       <div class="products-row"> -->
+<!--         <button class="cell-more-button"> -->
+<%--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg> --%>
+<!--         </button> -->
+<!--           <div class="product-cell image"> -->
+<!--             <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product"> -->
+<!--             <span>許宸瑜</span> -->
+<!--           </div> -->
+<!--         <div class="product-cell category"><span class="cell-label">ID:</span>5</div> -->
+<!--         <div class="product-cell status-cell"> -->
+<!--           <span class="cell-label">Status:</span> -->
+<!--           <span class="status active">Active</span> -->
+<!--         </div> -->
+<!--         <div class="product-cell sales"><span class="cell-label">Email:</span>Flanlove@outlook.com</div> -->
+<!--         <div class="product-cell stock"><span class="cell-label">Phone:</span>0939956219</div> -->
+<!--         <div class="product-cell stock"><span class="cell-label">Nickname:</span>DDD</div> -->
+<!--         <div class="product-cell price"><span class="cell-label">Score:</span>0</div> -->
+<!--         <div class="product-cell price"><span class="cell-label">RegisterTime:</span>2021-06-22</div> -->
+<!--         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div> -->
+<!--       </div> -->
       <!--       一筆資料內容--結尾 -->
       
     </div>
