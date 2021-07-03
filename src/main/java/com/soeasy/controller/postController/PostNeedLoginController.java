@@ -100,9 +100,11 @@ public class PostNeedLoginController {
 	public String updatePost(@ModelAttribute("postBean") PostUpdateBean postUpdateBean, BindingResult result,
 			Model model, @PathVariable Integer postId, HttpServletRequest request) {
 
+//		System.err.println("進入修改");
 		// 登入攔截
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 		if (customerBean == null) {
+//			System.err.println("出去修改1");
 			return "redirect:/customerController/customerSignIn";
 		}
 
@@ -121,6 +123,7 @@ public class PostNeedLoginController {
 		validator.validate(postUpdateBean, result);
 
 		if (result.hasErrors()) {
+//			System.err.println("出去修改2");
 			return "post/updatePost";
 		}
 
@@ -153,9 +156,13 @@ public class PostNeedLoginController {
 
 		try {
 			postService.updatePost(postOrginalBean);
+//			System.err.println("出去修改3");
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
+//			System.err.println("出去修改4");
 			return "post/updatePost";
 		}
+
+//		System.err.println("出去修改5");
 
 		// 跳轉至查詢單一文章頁面
 //		return "/post/getOnePost";
@@ -201,21 +208,13 @@ public class PostNeedLoginController {
 
 		// 取得文章物件
 		PostBean postBean = postService.findByPostId(postId);
+		PostBean postChangeBean = new PostBean();
 
 		// 假如文章狀態是2(禁止)就導到deletePost.jsp
 		// 取得文章狀態
 		if (postBean.getPostStatus() == GlobalService.POST_STATUS_BANNED) {
 			return "post/deletePost";
 		}
-
-		// 取得文章內容
-		String postContent = postBean.getPostContent();
-
-		// 將換行(\n)換成<br>
-		String newContent = postContent.replaceAll("\n", "<br>");
-
-		// 將更改過的內容塞入postBean
-		postBean.setPostContent(newContent);
 
 		String post = "post";
 
@@ -238,7 +237,18 @@ public class PostNeedLoginController {
 
 		}
 
-		model.addAttribute("getOnePostBean", postBean);
+		// 取得文章內容
+		String postContent = postBean.getPostContent();
+
+		// 將換行(\n)換成<br>
+		String newContent = postContent.replaceAll("\n", "<br>");
+
+		// 將更改過的內容塞入postBean
+		
+		postChangeBean=postBean;
+		postChangeBean.setPostContent(newContent);
+
+		model.addAttribute("getOnePostBean", postChangeBean);
 
 		// -------------------------------------------------------------------------------------
 
@@ -249,7 +259,6 @@ public class PostNeedLoginController {
 		replyBean.setReplyContent("　武藏：既然你誠心誠意的發問了\r\n" + "小次郎：我們就大發慈悲的告訴你\r\n" + "　武藏：為了防止世界被破壞\r\n"
 				+ "小次郎：為了守護世界的和平\r\n" + "　武藏：貫徹愛與真實的邪惡\r\n" + "小次郎：可愛又迷人的反派角色\r\n" + "　武藏：武藏！\r\n" + "小次郎：小次郎！\r\n"
 				+ "　武藏：我們是穿梭在銀河中的火箭隊\r\n" + "小次郎：白洞、白色的明天正等著我們\r\n" + "　喵喵：就是這樣喵！");
-
 
 		model.addAttribute("replyBean", replyBean);
 
