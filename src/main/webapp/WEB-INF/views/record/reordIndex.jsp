@@ -140,6 +140,13 @@ body * {
 				</ul>
 			</div>
 			<hr>
+
+			<section>
+				<img
+					src="${pageContext.request.contextPath}/images/reord/lt034.png"
+					width="100%" height="100%">
+			</section>
+
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
 					<th width='100'>日誌ID</th>
@@ -158,11 +165,9 @@ body * {
 						<td style="text-align: center">${record.recordWeight}</td>
 						<td style="text-align: center">${record.recordBmi}</td>
 						<td style="text-align: center">${record.recordDate}</td>
-						
-						<td><a
-							href="#">編輯</a></td>
-						<td><a class='deletelink'
-							href="#">刪除</a></td>
+
+						<td><a href="#">編輯</a></td>
+						<td><a class='deletelink' href="#">刪除</a></td>
 					</tr>
 				</c:forEach>
 			</table>

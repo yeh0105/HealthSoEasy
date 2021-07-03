@@ -140,6 +140,13 @@ body * {
 				</ul>
 			</div>
 			<hr>
+			
+			<section>
+				<img
+					src="${pageContext.request.contextPath}/images/reord/lt034.png"
+					width="100%" height="100%">
+			</section>
+			
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
 					<th width='100'>日誌ID</th>
