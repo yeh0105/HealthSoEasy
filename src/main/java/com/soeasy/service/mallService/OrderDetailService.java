@@ -1,4 +1,4 @@
-package com.soeasy.service.mallService.impl;
+package com.soeasy.service.mallService;
 
 import com.soeasy.model.Order.OrderDetailBean;
 
