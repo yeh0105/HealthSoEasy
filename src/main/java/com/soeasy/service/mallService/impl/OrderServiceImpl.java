@@ -27,15 +27,28 @@ public class OrderServiceImpl implements OrderService {
 	public OrderBean save(OrderBean order) {
 		return orderRepository.save(order);
 	}
-
+	
+	//尋找訂單 by 顧客ID (前台給顧客用)
 	@Override
 	public List<OrderBean> findAllwithOrder(Integer customerId){
 		return orderRepository.findAllWithOrder(customerId);
+	}
+	
+	//尋找訂單  (後端用)
+	@Override
+	public List<OrderBean> findAllwithOrder(){
+		return orderRepository.findAllWithOrder();
 	}
 
 	@Override
 	public OrderBean findByOrderId(Integer orderId) {
 		return orderRepository.findById(orderId).get();
+	}
+
+	@Override
+	public void deleteById(Integer orderId) {
+		orderRepository.deleteById(orderId);
+		
 	}
 
 }

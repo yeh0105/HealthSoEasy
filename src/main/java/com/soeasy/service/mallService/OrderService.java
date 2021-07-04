@@ -12,5 +12,9 @@ public interface OrderService {
 
 	List<OrderBean> findAllwithOrder(Integer customerId);
 
+	List<OrderBean> findAllwithOrder();
+
+	void deleteById(Integer orderId);
+
 
 }

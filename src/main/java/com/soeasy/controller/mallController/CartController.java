@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +33,10 @@ import com.soeasy.model.ProductBean;
 import com.soeasy.model.Order.OrderBean;
 import com.soeasy.model.Order.OrderDetailBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.mallService.OrderDetailService;
 import com.soeasy.service.mallService.OrderService;
+import com.soeasy.service.mallService.PaymentService;
 import com.soeasy.service.mallService.ProductService;
-import com.soeasy.service.mallService.impl.OrderDetailService;
 
 
 @Controller
@@ -58,6 +59,9 @@ public class CartController {
 	
 	@Autowired
 	ServletContext context;
+	
+	@Autowired
+	PaymentService paypalService;
 	
 
 	
@@ -123,7 +127,7 @@ public class CartController {
 					
 				}
 		}
-		return"redirect:/mall/cart/index";
+		return"redirect:/mall/lists";
 		
 	}
 	
@@ -175,7 +179,28 @@ public class CartController {
 	}
 	
 	
-//	=============================  結帳    ==========================================
+	
+	
+	//跳轉到結帳詳情
+	@GetMapping("checkoutinformation")
+	public String checkoutPage(Model model,HttpSession session) {
+
+		//顯示總價
+		double total=0;
+		
+		if(session.getAttribute("cart")!=null){
+			List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
+			for(CartItem item:cart) {
+				total +=item.getProduct().getProductPrice()*item.getCartQuantity();
+			}
+		}
+		model.addAttribute("total",total);
+		
+		return "/mall/checkout";
+	}
+	
+	
+//	=============================  結帳 (保存訂單並跳轉到paypal)    ==========================================
 
 	@GetMapping("checkout")
 	public String checkout(Model model,HttpSession session){
@@ -190,9 +215,6 @@ public class CartController {
 			if(session.getAttribute("cart")!=null) {
 				
 				
-				
-					
-				
 			//保存新訂單
 			OrderBean orderBean = new OrderBean();
 			OrderDetailBean orderDetail = new OrderDetailBean();
@@ -203,20 +225,20 @@ public class CartController {
 
 			// 會員ID
 			orderBean.setCustomerBean(originalBean);
-			orderBean.setOrderCustomerName("new Order");
+			orderBean.setOrderCustomerName(originalBean.getCustomerName());
+			
 			
 			// 自動帶入創建時間
-			long miliseconds = System.currentTimeMillis();
-			Timestamp time = new Timestamp(miliseconds);
-			orderBean.setOrderRegisterTime(time);
+			Date registerTime = new Date(System.currentTimeMillis());
+			orderBean.setOrderRegisterTime(registerTime);
 			
 			//訂單狀態
 			orderBean.setOrderStatus("pending");
-		
+			orderBean.setPayStatus("Unpaid");
 
 			// 保存訂單總金額		(預設運費60)
-
-			int countItems=0;//顯示購物車內有幾項商品
+			
+			int countItems=0; //顯示購物車內有幾項商品
 			double total=0;			//顯示總價
 
 			List<CartItem>cartTotalPrice=(List<CartItem>)session.getAttribute("cart");
@@ -225,7 +247,9 @@ public class CartController {
 				orderBean.setOrderTotalPrice(item.getProduct().getProductPrice()*item.getCartQuantity()+60);
 			}
 			
+			
 			orderBean=orderService.save(orderBean);
+			
 
 		
 			
@@ -235,19 +259,20 @@ public class CartController {
 				for(CartItem item:cart) {
 					OrderDetailBean orderDetailBean = new OrderDetailBean();
 					orderDetailBean.setOrderBean(orderService.findByOrderId(orderBean.getOrderId()));
-					System.out.println("訂單ID:"+orderBean.getOrderId());
 					orderDetailBean.setProductId(item.getProduct().getProductId());
-					System.out.println("產品ID:"+item.getProduct().getProductId());
 					orderDetailBean.setProductPrice(item.getProduct().getProductPrice());
-					System.out.println("產品價格:"+item.getProduct().getProductPrice());
 					orderDetailBean.setOrderItemQuantity(item.getCartQuantity());
 					orderDetailBean.setProductName(item.getProduct().getProductName());
+					
 					orderDetailService.save(orderDetailBean);
 				}
 					
 				//Remove cart
 					session.removeAttribute("cart");
-					return "/mall/checkoutThanks";
+				//return "/mall/checkoutThanks";
+					
+					//跳轉到paypal
+					return"redirect:/mall/cart/checkoutinformation";
 			}
 			
 			//如果購物車是空的則返回

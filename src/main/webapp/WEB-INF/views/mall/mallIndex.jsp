@@ -48,7 +48,7 @@
                             <p class="mb-40 mr-120 light"> 最健康的飲食都在這裡<br>
                                 一場精心給予您的味蕾饗宴</p>
                             <div class="hero-btn">
-                                <a href="<c:url value='/mall/mallindex' />" class="theme-btn">Order Now</a>
+                                <a href="<c:url value='/mall/lists' />" class="theme-btn">Order Now</a>
                             </div>
                         </div>
 

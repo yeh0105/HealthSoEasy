@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.mallService.OrderDetailService;
 import com.soeasy.service.mallService.OrderService;
 import com.soeasy.service.mallService.ProductService;
-import com.soeasy.service.mallService.impl.OrderDetailService;
 
 
 @Controller
@@ -82,19 +82,6 @@ public class OrderController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-//	============================= ( 結帳    ==========================================
-//	============================= (END 結帳    ==========================================
-
-//	CustomerBean customerSignInSuccess = (CustomerBean)model.getAttribute("customerSignInSuccess");
-//	CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
 
 }
 

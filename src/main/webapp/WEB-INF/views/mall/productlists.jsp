@@ -31,6 +31,7 @@
 <span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">分類</a></span>
 <span class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a></span>
 <span class="text-right"><a href="<c:url value='/mall/order/history'/>" class="btn btn-primary">Order History</a></span>
+<span class="text-right"><a href="<c:url value='/mall/paypal'/>" class="btn btn-primary">Paypal</a></span>
 
 </div>
 &nbsp;
@@ -59,6 +60,7 @@
  <tr>
 
  	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>"><button>#ID</button></a></th>
+ 	<th> </th>
  	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productName&sortDir=${reverSortDir}'/>"><button>產品名稱</button></a></th>
  	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}'/>"><button>產品分類</button></a></th>
  	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productCategory&sortDir=${reverSortDir}'/>"><button>分類(測試用)</button></a></th>
@@ -84,6 +86,8 @@
  <tr>
 
  <td>${product.productId}</td>
+ <td><img class="media-object" style="weight:70px;height:70px"src="<c:url value='/mall/getImage/${product.productId}' />"
+	alt="Product Image"></td>
  <td>${product.productName}</td>
 <%--  <td>${product.category}</td> --%>
  <td>

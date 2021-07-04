@@ -1,11 +1,9 @@
 package com.soeasy.model.Order;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,28 +33,30 @@ public class OrderBean implements Serializable {
 
 	private String orderCustomerName;
 
-//	private String orderAddress;
-//
-//	private String orderPhone;
+	private String orderAddress;
 
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
-	private Timestamp orderRegisterTime;
+	private String orderPhone;
+
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private Date orderRegisterTime;
 
 //	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
 //	private Timestamp orderArrviedTime;
 
 //	private String orderRemark;
 //
-//	private String orderPaytype;
 
 	private Integer orderTotalPrice;
+	private String shipping;
 
 	private String orderStatus;
 
-	//private Integer payStatus;
+	private String payStatus;
 
 	
-	// 會員
+	
+
+		// 會員
 		@Transient
 		@Column(name = "fk_customerId")
 		private Integer customerId;
@@ -107,11 +107,11 @@ public class OrderBean implements Serializable {
 //		this.orderPhone = orderPhone;
 //	}
 
-	public Timestamp getOrderRegisterTime() {
+	public Date getOrderRegisterTime() {
 		return orderRegisterTime;
 	}
 
-	public void setOrderRegisterTime(Timestamp orderRegisterTime) {
+	public void setOrderRegisterTime(Date orderRegisterTime) {
 		this.orderRegisterTime = orderRegisterTime;
 	}
 
@@ -139,16 +139,18 @@ public class OrderBean implements Serializable {
 //		this.orderPaytype = orderPaytype;
 //	}
 
+	
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
 	public Integer getOrderTotalPrice() {
 		return orderTotalPrice;
 	}
 
 	public void setOrderTotalPrice(Integer orderTotalPrice) {
 		this.orderTotalPrice = orderTotalPrice;
-	}
-
-	public String getOrderStatus() {
-		return orderStatus;
 	}
 
 	public void setOrderStatus(String orderStatus) {
@@ -185,6 +187,22 @@ public class OrderBean implements Serializable {
 
 	public void setOrderDetail(List<OrderDetailBean> orderDetail) {
 		OrderDetail = orderDetail;
+	}
+
+	public String getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(String shipping) {
+		this.shipping = shipping;
+	}
+	
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
 	}
 
 	
