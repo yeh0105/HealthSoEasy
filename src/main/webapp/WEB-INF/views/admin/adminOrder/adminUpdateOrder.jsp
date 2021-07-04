@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,241 +182,105 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
   </div>
   <div class="app-content">
-    <div class="app-content-header">
-      <h1 class="app-content-headerText">產品管理</h1>
-<!--       月亮 -->
-      <button class="mode-switch" title="Switch Theme" id="switch_moon">
-        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+			<div class="app-content-header">
+				<h1 class="app-content-headerText">Order</h1>
+				<!--       月亮 -->
+				<button class="mode-switch" title="Switch Theme" id="switch_moon">
+					<svg class="moon" fill="none" stroke="currentColor"
+						stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						width="24" height="24" viewBox="0 0 24 24">
           <defs></defs>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
-      </button>
-<!--   ===================  新增 =========================================================================-->
-   
-    
-  <!--   ===============(ENd) 新增 =========================================================================-->
-    
-
-
-  
-  
-  
-      <div class="app-content-actions-wrapper">
-        <div class="filter-button-wrapper">
-<!--         過濾器 -->
-          <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
-          <div class="filter-menu">
-            <label>Category</label>
-            <select>
-              <option>All Categories</option>
-              <option>Furniture</option>                     
-              <option>Decoration</option>
-              <option>Kitchen</option>
-              <option>Bathroom</option>
-            </select>
-            <label>Status</label>
-            <select>
-              <option>All Status</option>
-              <option>Active</option>
-              <option>Disabled</option>
-            </select>
-            <div class="filter-menu-buttons">
-              <button class="filter-button reset">
-                Reset
-              </button>
-              <button class="filter-button apply">
-                Apply
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="action-button list active" title="List View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        </button>
-        <button class="action-button grid" title="Grid View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </button>
-      </div>
-    </div>
-    
-    <div class="products-area-wrapper tableView">
-<!--  --------------------------- ----表頭欄位--------------------------- -->
-
-      <div class="products-header">
-        <div class="product-cell image">
-          產品編號
-          <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-          
-        </div>
-        <div class="product-cell category">Name
-         <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-          
-        </div>
-        <div class="product-cell category">Category< <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-          
-        </div>
-        
-        <div class="product-cell sales">Price <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-        </div>
-        
-        
-        <div class="product-cell stock">Cost<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-        </div>
-        
-        
-        <div class="product-cell status-cell">Amount<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-        </div>
-        <div class="product-cell status-cell">Date<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
-          <button class="sort-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-          </button>
-          </a>
-        </div>
-        
-        
-        <div class="product-cell price">
-          Update
-        </div>
-        
-        
-        
-        <div class="product-cell price">
-          Delete
-        </div>
-        
-        
-      </div>
-	<!--       ----------------------一筆資料內容--開始--------------------- -->
-     <c:forEach var='product' items="${product}">
-					<div class="products-row">
-						<button class="cell-more-button">
-							<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
+				</button>
+			</div>
+			<div class="app-content-actions">
+				<!--     搜尋 -->
+				<input class="search-bar" placeholder="Search..." type="text">
+				<div class="app-content-actions-wrapper">
+					<div class="filter-button-wrapper">
+						<!--         過濾器 -->
+						<button class="action-button filter jsFilter">
+							<span>Filter</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-more-vertical">
-								<circle cx="12" cy="12" r="1" />
-								
-								<circle cx="12" cy="5" r="1" />
-								
-								<circle cx="12" cy="19" r="1" /></svg>
+								class="feather feather-filter">
+								<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg>
 						</button>
-					
-						<div class="product-cell category">
-							<span class="cell-label">Id:</span> ${product.productId}
+						<div class="filter-menu">
+							<label>Category</label> <select>
+								<option>All Categories</option>
+								<option>Furniture</option>
+								<option>Decoration</option>
+								<option>Kitchen</option>
+								<option>Bathroom</option>
+							</select> <label>Status</label> <select>
+								<option>All Status</option>
+								<option>Active</option>
+								<option>Disabled</option>
+							</select>
+							<div class="filter-menu-buttons">
+								<button class="filter-button reset">Reset</button>
+								<button class="filter-button apply">Apply</button>
+							</div>
 						</div>
-						<div class="product-cell category">
-							<span class="cell-label">Name:</span><a href="<c:url value='/mall/lists/product/${product.productId}'/>">
-							${product.productName}</a>
-							
-						</div>
-						<div class="product-cell category">
-							<span class="cell-label">Category:</span> ${product.category}
-						</div>
-						
-						<div class="product-cell stock">
-							<span class="cell-label">Price:</span>${product.productPrice}
-						</div>
-						<div class="product-cell stock">
-							<span class="cell-label">Cost:</span>${product.productCost}
-						</div>
-						
-						<div class="product-cell stock">
-							<span class="cell-label">Amount:</span>${product.productAmount}
-						</div>
-						
-						<div class="product-cell stock">
-							<span class="cell-label">Date:</span>${product.productDate}
-						</div>
-
-									<!--       更新(JSPu頁面建置)/刪除 按鈕 -->
-					
-	
-						 <div class="product-cell price"><a	href="<c:url value='/admin/adminManage/adminUpdate/${product.productId}'/>"><button class="app-content-headerButton">Update</button></a></div>
-                  
-      					<div class="product-cell price"><a onclick="return del(this)" href="<c:url value='/admin/adminManage/adminDelete/${product.productId}'/>"><button class="app-content-headerButton">Delete</button></a></div>
 					</div>
-				</c:forEach>
-				<!--       一筆資料內容--結尾 -->
+					<button class="action-button list active" title="List View">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-list">
+							<line x1="8" y1="6" x2="21" y2="6" />
+							
+							<line x1="8" y1="12" x2="21" y2="12" />
+							
+							<line x1="8" y1="18" x2="21" y2="18" />
+							
+							<line x1="3" y1="6" x2="3.01" y2="6" />
+							
+							<line x1="3" y1="12" x2="3.01" y2="12" />
+							
+							<line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+					</button>
+					<button class="action-button grid" title="Grid View">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-grid">
+							<rect x="3" y="3" width="7" height="7" />
+							
+							<rect x="14" y="3" width="7" height="7" />
+							
+							<rect x="14" y="14" width="7" height="7" />
+							
+							<rect x="3" y="14" width="7" height="7" /></svg>
+					</button>
+				</div>
+			</div>
+			<div>
+				<a class="" href="<c:url value="/admin/adminManage/adminOrder"></c:url>">回上一頁</a>
+			</div>
+			<br>
+			<div style="padding:3% 5%; margin-top: -3%;">
+				<fieldset style="width: 90%; height: 100%;">
+					<legend>修改訂單</legend>
+					<form:form method="POST" modelAttribute="orderDetailBean"
+						enctype='multipart/form-data'> --%>
 
 			</div>
-		
-		
-		
- <!-- ---------------------------控制分頁用----------------------------------- -->
- <span>產品總數:<c:out value="${totalItems}"/></span>
- <nav style="width:300px;margin:0px auto">
- 
- 
-<ul class=pager>
-
-<!--  上頁 -->
-<li class=previous> 
-	<c:choose>
-		<c:when test="${currentPage > 1}">
-			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
-		</c:when>
-		<c:otherwise>
-			<a>Previous</a>
-		</c:otherwise>
-	</c:choose>
-</li>
-<!-- 上頁結束 -->
-
-<li style="font-style:italic;color:	#00477D">Page &nbsp;<c:out value="${currentPage}"/>&nbsp; of &nbsp;&nbsp;<c:out value="${totalPages}"/></li>
-
-&nbsp;
-
- <!--  下頁 -->
-<li class=next> 
-	<c:choose>
-		<c:when test="${currentPage < totalPages}">
-			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
-		</c:when>
-		<c:otherwise>
-			<a>Previous</a>
-		</c:otherwise>
-	</c:choose>
-</li>
-<!-- 下頁結束 -->
- 
-</ul>
- </nav>
-
-<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
-
-
- 
-		
-		</div>
-		
-		
-	</div>
+			</div>
+			
+			
+			</div>
+			
+			
+			
+			
+			
+			
 	<!-- partial -->
-	<script src="${pageContext.request.contextPath}/js/admin.js"></script>>
+	<script src="${pageContext.request.contextPath}/js/admin.js"></script>
 	<!-- 	---------------------用來接delete的post--------------------------	 -->
 	<form method='POST'>
 		<input type='hidden' name='_method' value='DELETE'>

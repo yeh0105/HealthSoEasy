@@ -16,6 +16,9 @@ public interface OrderRepository extends JpaRepository<OrderBean, Integer>{
 	@Query("from OrderBean where customerBean.customerId= :customerId order by orderId desc")
 	public List<OrderBean>findAllWithOrder(@Param("customerId")Integer customerId);
 	
+	@Query("from OrderBean order by orderId desc")
+	public List<OrderBean>findAllWithOrder();
+	
 
 
 	

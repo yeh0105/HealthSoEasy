@@ -36,7 +36,7 @@ import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
 @RequestMapping("/mall")
-public class MallProductController {
+public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
@@ -50,12 +50,19 @@ public class MallProductController {
 	
 	@GetMapping("/mallindex")
 	 public String getIndex(Model model) {
-	            return "mall/mallDetai";
+	            return "mall/mallDetail";
+	    }
+	
+	
+	//test
+	@GetMapping("/shoplist")
+	 public String getIndex1(Model model) {
+	            return "mall/productlists";
 	    }
 	
 	
 	
-	//測試用頁面跳轉
+	//頁面跳轉
 		@RequestMapping("/lists")
 		public String viewPage(Model model){
 			String keyword = null;
@@ -89,7 +96,7 @@ public class MallProductController {
 			    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";
 			    model.addAttribute("reverSortDir", reverseSortDir);
 			     
-			    return "mall/productlists";
+			    return "mall/mallDetail";
 			}
 	
 	

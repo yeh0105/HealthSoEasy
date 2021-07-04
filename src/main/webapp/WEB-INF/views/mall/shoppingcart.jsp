@@ -81,14 +81,13 @@
 
 											<!-- 			刪除紐 -->
 
-										
+
 											<a class="btn "
 												href="${pageContext.request.contextPath}/mall/cart/remove/${i.index}">X<i
 												class="icon-remove icon-white"></i></a>
 											<div class="product-img">
-
-												<img
-													src="<c:url value='${pageContext.request.contextPath}/mall/getImage/${product.productId}' />"
+												<img class="media-object"
+													src="<c:url value='/mall/getImage/${item.product.productId}' />"
 													alt="Product Image">
 											</div>
 											<h6 class="product-name">${item.product.productName}</h6>
@@ -107,29 +106,29 @@
 								<div class="row text-center text-lg-left">
 									<div class="col-lg-5">
 										<div class="continue-shopping">
-											<a class="theme-btn no-shadow bg-blue br-5" href="/soeasy/mall/lists">
-											Continue Shopping</a>
+											<a class="theme-btn no-shadow bg-blue br-5"
+												href="/soeasy/mall/lists"> Continue Shopping</a>
 										</div>
 									</div>
-									
-									
-									<div class="col-lg-7">
-									<div class="update-shopping text-lg-right">
-										<c:if test="${sessionScope.cart!=null}">
-											<button type="submit"
-												class="theme-btn no-shadow style-two br-10 rmt-30">Update
-												Cart</button>
-										</c:if>
 
+
+									<div class="col-lg-7">
+										<div class="update-shopping text-lg-right">
+											<c:if test="${sessionScope.cart!=null}">
+												<button type="submit"
+													class="theme-btn no-shadow style-two br-10 rmt-30">Update
+													Cart</button>
+											</c:if>
+
+										</div>
 									</div>
-								</div>
-									
-									
+
+
 
 								</div>
 							</div>
-							
-							</form>
+
+						</form>
 					</div>
 
 
@@ -148,7 +147,7 @@
 									<h6 class="mb-25 mt-30">Promo Code</h6>
 									<input class="w-100 br-5" type="text"
 										placeholder="Enter Discount Code">
-									<button class="theme-btn no-shadow bg-blue br-5" type="submit">Apply</button>
+									<button class="theme-btn no-shadow bg-blue br-2" type="submit">Apply</button>
 								</form>
 								<div class="total-item discount">
 									<span class="title">Discount</span> <span class="price">0</span>
@@ -157,8 +156,29 @@
 									<span class="title mb-0">Total</span> <span class="price mb-0">${total+60}</span>
 								</div>
 							</div>
+							<div>
+							
+<!-- 		===========paypal==================================== -->
+							
+
+							<form method="post"
+								action="/soeasy/mall/pay" >
+<!-- 								<label for="amount">Amount</label> -->
+<!-- 								<input id="currency" name="currency" type="text" value="TWD" /> -->
+<!-- 								<input id="description" name="description" type="text"  /> -->
+
+								<button type="submit">
+									<img
+										src="${pageContext.request.contextPath}/images/mall/paypal.png"
+										width="100px;" height="70px;" />
+								</button>
+							</form>
+							
+		<!-- ===========paypal==================================== -->
+							
+							</div>
 							<div class="proceed-btn mt-30">
-								<a href="<c:url value='/mall/cart/checkout'/>"
+								<a href="<c:url value='/mall/cart/checkoutinformation'/>"
 									class="theme-btn w-100 text-center br-10">Proceed Checkout</a>
 							</div>
 						</div>
@@ -281,7 +301,8 @@
 		src="${pageContext.request.contextPath}/js/mall/bootstrap-v4.1.3.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}js/mall/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
 	<script src="${pageContext.request.contextPath}js/mall/slick.min.js"></script>
 	<script src="${pageContext.request.contextPath}js/mall/appear.js"></script>
 	<!-- Custom script -->

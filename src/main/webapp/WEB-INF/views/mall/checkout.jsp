@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Order Detail</title>
+<title>MALL</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"
@@ -39,113 +39,180 @@
 			style="background-image:url(${pageContext.request.contextPath}/images/mall/indexbanner1.jpg); margin-top:120px;">
 			<div class="container">
 				<div class="banner-inner text-center">
-					<h2 class="page-title">Order Detail</h2>
+					<h2 class="page-title">Cart</h2>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
 								href="<c:url value='/mall'></c:url>" title="Mall">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Order Detail</li>
+							<li class="breadcrumb-item active" aria-current="page">Cart</li>
 						</ol>
 					</nav>
 				</div>
 			</div>
-
 		</section>
 		<!--==================================================================== 
             End Banner Section
         =====================================================================-->
 
-		<section class="my-80 rmy-500">
-
-			<div class="container" >
-
-				<h5 class="header-title text-lg-center">訂單編號# ${orderDetail.orderId} 詳情</h5>
-				<div class="login-information bg-white" >
-<!--=============================================================================== 
-            Start Content 
-      =====================================================================-->
-
-					<table class="table table-border">
-
-						<thead>
-
-							<tr>
-
-								<th class="text-lg-center">產品名稱</th>
-								<th class="text-lg-center">產品價格</th>
-								<th class="text-lg-center">產品數量</th>
-								<th class="text-lg-center">Subtotal</th>
-
-							</tr>
-
-						</thead>
 
 
+		<!--==================================================================== 
+           Start Checkout Page
+       =====================================================================-->
+		<section class="checkout-page mt-120 rmt-80 mb-120 rmb-80">
+			<div class="container">
+				<div class="row col-gap-60">
+					<div class="col-xl-8 col-lg-6">
+						<div class="checkout-form-wrap rmb-50">
 
-						<tbody>
-						<c:set var="total" value="0"></c:set>
-							<c:forEach var="orderDetail" items="${orderDetail.orderDetail}">
-						<c:set var="total" value="${total+orderDetail.orderItemQuantity*orderDetail.productPrice}"></c:set>
+							<div class="cart-title">
+								<h4>Billing Details</h4>
+							</div>
 
-								<tr>
-
-									<td class="text-lg-center">${orderDetail.productName}</td>
-									<td class="text-lg-center">${orderDetail.productPrice}</td>
-									<td class="text-lg-center">${orderDetail.orderItemQuantity}</td>
-									<td class="text-lg-center">$${orderDetail.orderItemQuantity*orderDetail.productPrice}</td>
-<!-- 									<td class="text-lg-center"><a class="theme-btn no-shadow style-two br-10 rmt-30" -->
-<%-- 										href="<c:url value='${pageContext.request.contextPath}/mall/order/history/${order.orderId}'/>" >Detail</a></td> --%>
-
-
-
-
-								</tr>
-
-							</c:forEach>
-							<tr>
-							<td colspan="3" class="text-lg-center" > Total: </td>
-							
-							<td colspan="" class="text-lg-center">&nbsp;$${total} &nbsp;(不含運費)</td>
-							<tr/>
-						</tbody>
-
-					</table>
+							<!-- Form Area Start -->
+							<form id="checkout-form" name="checkout-form"
+								class="checkout-form" action="sendmail.php" method="POST">
+								<div class="row col-gap-50 clearfix">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="f-name">姓名:</label> <input type="text"
+												class="form-control" id="f-name" placeholder="Jhon" required>
+										</div>
+									</div>
 
 
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="street-address">Shipping Address*</label> <input
+												type="text" class="form-control" id="street-address"
+												placeholder="Enter Your Delivery Address" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="phone-number">Phone Number*</label> <input
+												type="text" class="form-control" id="phone-number"
+												placeholder="+01 000...">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="email">Email <span>(optional)</span></label> <input
+												type="email" class="form-control" id="email"
+												placeholder="eg: yourmail@gmail.com" required>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="email">Other Note <span>(optional)</span></label>
+											<textarea class="form-control mb-0" placeholder="備註......"
+												rows="8" required></textarea>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!-- Form Area End -->
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-6">
+						<div class="checkout-cart-total clearfix">
+							<div class="cart-title">
+								<h4>Order Summary</h4>
+							</div>
+
+
+							<div class="total-item-wrap clearfix">
+									<c:forEach var="item" items="${sessionScope.cart}" varStatus="i">
+								<div class="total-item">
+										
+										<span class="product-name">${item.product.productName}</span>
+
+										<span class="price">${item.product.productPrice*item.cartQuantity}</span>
+
+								</div>
+									</c:forEach>
+
+								<div class="total-item">
+									<span class="title">Shipping Cost</span> <span class="price">60</span>
+								</div>
+								<div class="total-item discount">
+									<span class="title">Discount</span> <span class="price">0</span>
+								</div>
+								<div class="total-item total">
+									<span class="title">Total</span> <span class="price">${total+60}</span>
+								</div>
+							</div>
+
+
+							<div class="cart-title">
+								<h4 class="mb-25 mt-10">Payment</h4>
+							</div>
+							<ul id="accordionExample" class="mb-40">
 
 
 
-					<div class="row text-center text-lg-right">
-						<div class="col-lg-11">
-							<div class="continue-shopping">
-								<a class="theme-btn no-shadow bg-blue br-10"
-									href="/soeasy/mall/order/history"> Order History</a>
+								<!-- Default unchecked -->
+								
+
+								<!-- Default unchecked -->
+								<li class="custom-control custom-radio"><input type="radio"
+									class="custom-control-input" id="methodtwo"
+									name="defaultExampleRadios"> <label
+									class="custom-control-label collapsed" for="methodtwo"
+									data-toggle="collapse" data-target="#collapseTwo"
+									aria-controls="collapseTwo">Credit Card / Master Card</label>
+
+									<div id="collapseTwo" class="collapse"
+										data-parent="#accordionExample" style="">
+										<ul>
+											<li><a href="#"><img
+													src="assets/img/pay-method/visa.png" alt=""></a></li>
+											<li><a href="#"><img
+													src="assets/img/pay-method/mastercard.png" alt=""></a></li>
+											<li><a href="#"><img
+													src="assets/img/pay-method/discover.png" alt=""></a></li>
+											<li><a href="#"><img
+													src="assets/img/pay-method/americanexpress.png" alt=""></a></li>
+										</ul>
+									</div></li>
+
+								<!-- Default unchecked -->
+								<li class="custom-control custom-radio"><input type="radio"
+									class="custom-control-input" id="methodthree"
+									name="defaultExampleRadios"> <label
+									class="custom-control-label collapsed" for="methodthree"
+									data-toggle="collapse" data-target="#collapsethree"
+									aria-controls="collapsethree">Cash On Delivery</label>
+
+									<div id="collapsethree" class="collapse"
+										data-parent="#accordionExample" style="">
+										
+									</div></li>
+							</ul>
+<!-- ===========paypal==================================== -->
+<form method="post" action="${pageContext.request.contextPath}/mall/pay">
+							<div class="checkout-btn text-center">
+								<button
+									class="theme-btn br-5 w-70" type="submit" style="background">(PALPAL)</button>
+							</div>
+							</form>
+						
+							<br>
+							<div class="checkout-btn text-center">
+								<button
+									class="theme-btn br-5 w-70" type="submit">(綠界)Proceed Order</button>
 							</div>
 						</div>
-
-
-
 					</div>
-
-
 				</div>
 			</div>
-
-
-
-
 		</section>
 		
+		<!-- ===========paypal==================================== -->
 		
-					<!--==================================================================== 
-                            End Content section
-        ============
-
-
-
-
-
-
+		<!--==================================================================== 
+           End Checkout Page
+       =====================================================================-->
 
 
 		<!--==================================================================== 
@@ -243,59 +310,8 @@
 
 		<!--End pagewrapper-->
 	</div>
-
-
-	<!--==================================================================== 
-                              Start Script
-        =====================================================================-->
-
-
-
-	<!-- 用於將 POST 請求轉換為 DELETE請求 -->
-	<!--     暫時放棄 先直接用Post請求 -->
-	<form action="#" method="POST">
-		<input type="hidden" value="DELETE" name="_method" />
-	</form>
-	<script type="text/javascript">
-		//將 get 請求轉換為 post 請求提交
-		function del(tag) {
-			//獲取當前請求路徑
-			var href = tag.href;
-			//提交
-			$("form").attr("action", href).submit();
-			return delmag();
-
-			function delmag() {
-				var msg = "您確定要刪除這樣產品嗎？";
-				if (confirm(msg) == true) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-	</script>
-
-	<!-- ======================    綁定清除查詢 ================================-->
-
-
-	<script type="text/javascript">
-		function clearFilter() {
-			window.location = '/soeasy/mall/lists';
-		}
-	</script>
-
-	<!-- ==========================   (End) 綁定清除查詢========================-->
-
-
-
-
-	<!--==================================================================== 
-                              End Script
-        =====================================================================-->
-
 	<!-- Scroll Top Button -->
-	<button class="scroll-top scroll-to-target" data-target="jsp">
+	<button class="scroll-top scroll-to-target" data-target="html">
 		<span class="fa fa-angle-up"></span>
 	</button>
 	<!-- jequery plugins -->
