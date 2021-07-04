@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Admin Customer</title>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -140,8 +142,8 @@
 				content = content
 				+'<div class="products-row">'
 		        +	'<button class="cell-more-button uploadImgbtns"' 
-		        + 'id="uploadimg' + customer.customerId
-		        + '"data-imgid="' + customer.customerId + '">'
+		        + 	'id="uploadimg' + customer.customerId
+		        + 	'"data-imgid="' + customer.customerId + '">'
 		        +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
 		        +	'</button>'
 		        +	'<div class="product-cell image">'
@@ -174,11 +176,22 @@
 			
 			tableView.innerHTML = title + content;
 			
+			intitUploadIngbtns();
+		}
+		
+		function intitUploadIngbtns(){
 			//初始化上傳使用者頭貼按鈕
 			$(".uploadImgbtns").on("click", function(event){
-				let button = $(event.relatedTarget);
-	  			let customerId_uploadimg = button.data('imgid');
-	  			console.log(customerId_uploadimg);
+				console.log(this.dataset.imgid);
+//		 		送出表單鈕
+				let customerImgUploadId = document.getElementById("customerImgUploadId");
+				let customerImgUpload = document.getElementById("customerImgUpload");
+				customerImgUploadId.value = this.dataset.imgid;
+				customerImgUpload.click();
+				customerImgUpload.addEventListener("change", function(){
+					document.getElementById("customerImgSubmit").click();
+					
+				});
 			})
 		}
 		
@@ -409,12 +422,18 @@
 	  			modal.find('.modal-body #recipient-health-gender1').prop('checked',true);
   			}else if(updateCustomerGender == 2){
 	  			modal.find('.modal-body #recipient-health-gender2').prop('checked',true);
+  			}else{
+  				modal.find('.modal-body #recipient-health-gender1').prop('checked',false);
+  				modal.find('.modal-body #recipient-health-gender2').prop('checked',false);
   			}
   			
   			if(updateCustomerDiet == 1){
 	  			modal.find('.modal-body #recipient-health-diet1').prop('checked',true);
   			}else if(updateCustomerDiet == 2){
 	  			modal.find('.modal-body #recipient-health-diet2').prop('checked',true);
+  			}else{
+  				modal.find('.modal-body #recipient-health-diet1').prop('checked',false);
+  				modal.find('.modal-body #recipient-health-diet2').prop('checked',false);
   			}
   			
   			if(updateCustomerExerciseHabits == 3){
@@ -423,6 +442,10 @@
 	  			modal.find('.modal-body #recipient-health-exercise2').prop('checked',true);
   			}else if(updateCustomerExerciseHabits == 1){
 	  			modal.find('.modal-body #recipient-health-exercise1').prop('checked',true);
+  			}else{
+  				modal.find('.modal-body #recipient-health-exercise3').prop('checked',false);
+	  			modal.find('.modal-body #recipient-health-exercise2').prop('checked',false);
+	  			modal.find('.modal-body #recipient-health-exercise1').prop('checked',false);
   			}
 
   			modal.find('.modal-body #recipient-health-height').val(updateCustomerHeight);
@@ -874,6 +897,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
 </div>
 
+<!-- 	圖片上傳 -->
+			<form method="post" action="adminUploadCustomerImg" enctype="multipart/form-data" id="customerImgUploadForm">
+				<input id="customerImgUploadId" name="customerImgUploadId" type="text" style="display: none;"> 
+				<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;"> 
+				<input id="customerImgSubmit" type="submit" style="display: none">
+			</form>
 		</div>
 </div>
 <!-- partial -->

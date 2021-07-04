@@ -7,10 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- header的css -->
-
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/style.css"> --%>
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/responsive.css"> --%>
-
 <link href="${pageContext.request.contextPath}/css/header&footer.css"
 	rel="stylesheet">
 </head>
