@@ -54,6 +54,13 @@ public class ProductController {
 	    }
 	
 	
+	//test
+	@GetMapping("/shoplist")
+	 public String getIndex1(Model model) {
+	            return "mall/productlists";
+	    }
+	
+	
 	
 	//頁面跳轉
 		@RequestMapping("/lists")

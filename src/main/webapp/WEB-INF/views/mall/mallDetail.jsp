@@ -61,35 +61,21 @@
 
 
 		<div>
-			
-			<div>
-			<form action="<c:url value='/mall/lists/1'/>" class="d-lg-block" style="margin-left: 150px;margin-top:50px">
-				<input type="hidden" name="sortField" value="${sortField}" /> <input
-					type="hidden" name="sortDir" value="${sortDir}" /> &nbsp;
-					<input
-					type="text" name="keyword" value="${keyword}" placeholder="Enter Searching"  /> &nbsp;
-					 <input
-					type="submit" value="Search" class="theme-btn no-shadow bg-blue"/> &nbsp; 
-					<input type="button"
-					value="clear" onclick="clearFilter()" class="theme-btn no-shadow bg-blue">
-			</form>
-			</div>
-			
-			<div>
-			<div class="row text-center text-lg-left">
-									<div class="col-lg-5">
-										<div class="continue-shopping">
-											<a class="theme-btn no-shadow  br-5" href="/soeasy/mall/lists">
-	商城測試用頁面</a>
-										</div>
-									</div>
-			
-			</div>
-			
-			
-			
-			</div>
 
+			<div>
+				<form action="<c:url value='/mall/lists/1'/>" class="d-lg-block"
+					style="margin-left: 150px; margin-top: 50px">
+					<input type="hidden" name="sortField" value="${sortField}" />
+					 <input
+						type="hidden" name="sortDir" value="${sortDir}" /> &nbsp; <input
+						type="text" name="keyword" value="${keyword}"
+						placeholder="Enter Searching" /> &nbsp; 
+						<input type="submit"
+						value="Search" class="theme-btn no-shadow bg-blue" /> &nbsp; <input
+						type="button" value="clear" onclick="clearFilter()"
+						class="theme-btn no-shadow bg-blue">
+				</form>
+			</div>
 
 			<!--==================================================================== 
 								查詢用按鈕結束
@@ -134,6 +120,8 @@
 												Baby Care</a></li>
 									</ul>
 								</div>
+
+								<!-- 								=======best=========== -->
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
 										<h5>Best Sale Today</h5>
@@ -203,14 +191,19 @@
 								</div>
 							</div>
 						</div>
-						
-<!-- 						=====================product ===================--------------------------------->
+
+						<!-- 						=====================product ===================--------------------------------->
 
 						<div class="col-xl-9 col-lg-8">
 							<div class="shop-items">
 
+
 								<div class="search-result-header">
-									<h5>Showing Result 12 of 89 Product</h5>
+									<h5>
+										Showing Result of
+										<c:out value="${totalItems}" />
+										Product
+									</h5>
 									<div class="sort-by">
 										<h5>Sort:</h5>
 										<select name="#">
@@ -219,53 +212,178 @@
 										</select>
 									</div>
 								</div>
-
 								<div class="row">
-							 <c:forEach items="${product}" var="product">
-				
 
-									<!--single Product -->
-									<div class="col-xl-4 col-lg-6 col-sm-6">
-										<div class="product">
-											<div class="product-img-wrap">
-												<img class="media-object"
-													src="<c:url value='/mall/getImage/${product.productId}' />"
-													alt="Product Image">
-												<!-- Button trigger modal -->
-												<button class="quick-view" type="button" data-toggle="modal"
-													data-target="#quick-view">Quick View</button>
-											</div>
+									<c:forEach items="${product}" var="product">
 
-											<div class="product-content-wrap">
-												<div class="product-content">
-													<p>
-														<a href="shop-details.html">${product.productName} <br>
-														</a>
-													</p>
+
+										<!--single Product -->
+										<div class="col-xl-4 col-lg-6 col-sm-6">
+											<div class="product">
+												<div class="product-img-wrap">
+													<img class="media-object"
+														src="<c:url value='/mall/getImage/${product.productId}' />"
+														alt="Product Image">
+													<!-- Button trigger modal -->
+													<button class="quick-view" type="button"
+														data-toggle="modal" data-target="#quick-view">Quick
+														View</button>
 												</div>
-												<div class="product-action">
-													<a href="<c:url value='/mall/cart/buy/${product.productId}'/>" class="add-to-btn small-btn"> <i
-														class="flaticon-shopping-cart"></i> <span>Add to
-															Cart</span>
-														<h5 class="product-price">${product.productPrice}</h5>
-													</a>
-<!-- 													====收藏商品=== -->
-<!-- 													<div class="add-wishlist"> -->
-<!-- 														<i class="fa fa-heart-o"></i> -->
-<!-- 													</div> -->
+
+												<div class="product-content-wrap">
+													<div class="product-content">
+														<p>
+															<a href="shop-details.html">${product.productName} <br>
+															</a>
+														</p>
+													</div>
+													<div class="product-action">
+														<a
+															href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+															class="add-to-btn small-btn"> <i
+															class="flaticon-shopping-cart"></i> <span>Add to
+																Cart</span>
+															<h5 class="product-price">${product.productPrice}</h5>
+														</a>
+														<!-- 													====收藏商品=== -->
+														<!-- 													<div class="add-wishlist"> -->
+														<!-- 														<i class="fa fa-heart-o"></i> -->
+														<!-- 													</div> -->
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<!-- 										-----------singal product= -->
+										<!--==================================== Start product-quick-view //product-modal  ================-->
+										<div class="modal product-modal fade" id="quick-view"
+											tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body p-35 pt-0">
+
+
+														<div class="product-quick-view">
+															<div class="container">
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="product-preview-wrap">
+																			<div class="tab-content bg-white p-50 b1 br-5">
+																				<div class="tab-pane" id="preview1">
+																					<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Preview Image"
+																						data-magnify-src="<c:url value='/mall/getImage/${product.productId}' />" />
+																				</div>
+																				<div class="tab-pane active" id="preview2">
+																					<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Preview Image"
+																						data-magnify-src="<c:url value='/mall/getImage/${product.productId}' />" />
+																				</div>
+																				<div class="tab-pane" id="preview3">
+																					<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Preview Image"
+																						data-magnify-src="<c:url value='/mall/getImage/${product.productId}' />" />
+																				</div>
+																				<div class="tab-pane" id="preview4">
+																					<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Preview Image"
+																						data-magnify-src="<c:url value='/mall/getImage/${product.productId}' />" />
+																				</div>
+																			</div>
+
+																			<ul
+																				class="nav nav-tabs flex-nowrap align-content-between mt-30">
+																				<li><a data-toggle="tab" href="#preview1">
+																						<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Thumbnail Image" />
+																				</a></li>
+																				<li><a class="active" data-toggle="tab"
+																					href="#preview2"> <img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Thumbnail Image" />
+																				</a></li>
+																				<li><a data-toggle="tab" href="#preview3">
+																						<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Thumbnail Image" />
+																				</a></li>
+																				<li><a data-toggle="tab" href="#preview4">
+																						<img
+																						src="<c:url value='/mall/getImage/${product.productId}' />"
+																						alt="Product Thumbnail Image" />
+																				</a></li>
+																			</ul>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div
+																			class="product-details text-left bg-white ml-25 px-50 py-45 b1 br-5">
+																			<h3 class="mb-25 rmt-25">${product.productName}
+																			</h3>
+																			<div class="rating mb-25">
+																				<div class="star mr-15">
+																					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+																					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+																					<i class="fa fa-star"></i>
+																				</div>
+																				<div class="text">評論</div>
+																			</div>
+																			<div>
+																				<p>${product.productDescription}</p>
+																				<span>商品熱量:${product.productCalories}</span>
+																			</div>
+
+																			<h6>
+																				Availability: <span>InStock &nbsp;( Amount:
+																					${product.productAmount})</span>
+																			</h6>
+																			<h4 class="price">$${product.productPrice}</h4>
+
+																			<div class="product-spinner mt-20">
+
+																				<a
+																					href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+																					class="theme-btn br-30 ml-20">Add to Cart</a>
+																				<div class="add-wishlist">
+																					<i class="fa fa-heart-o"></i>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
 												</div>
 											</div>
 
 										</div>
-									</div>
 
-								</c:forEach>
+										<!--==================================== end product-quick-view //product-modal  ================-->
 
 
-									
 
+
+									</c:forEach>
 								</div>
+
+
+
+								<!-- 								============== -->
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -388,8 +506,17 @@
 				window.location = '/soeasy/mall/lists';
 			}
 		</script>
-
 		<!-- ==========================   (End) 綁定清除查詢========================-->
+		<!-- ==========================  quickview========================-->
+
+
+		<script>
+			function showModal() {
+				$('#quick-view').modal('show');
+			}
+		</script>
+
+		<!-- ==========================   (End) quickview========================-->
 
 		<!-- jequery plugins -->
 		<script src="${pageContext.request.contextPath}/js/mall/jquery.min.js"></script>
