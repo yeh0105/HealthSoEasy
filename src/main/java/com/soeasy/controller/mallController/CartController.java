@@ -273,6 +273,7 @@ public class CartController {
 					
 					//跳轉到paypal
 					return"redirect:/mall/cart/checkoutinformation";
+					//return"/mall/paypal/success";
 			}
 			
 			//如果購物車是空的則返回
