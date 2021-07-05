@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -31,8 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.CustomerHealthBean;
+import com.soeasy.model.FavoriteBean;
+import com.soeasy.model.SportMapBean;
 import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.favoriteService.FavoriteService;
+import com.soeasy.service.sportmapService.SportMapService;
 import com.soeasy.util.GlobalService;
 import com.soeasy.validator.customerValidator.CustomerBeanValidator;
 
@@ -46,6 +52,12 @@ public class CustomerController {
 	
 	@Autowired
 	ServletContext servletContext;
+		
+	@Autowired
+	FavoriteService favoriteService;
+	
+	@Autowired
+	SportMapService sportMapService;
 	
 	//表單初值--新增會員_會員登入--註冊
 	@GetMapping("/addCustomer")
@@ -130,7 +142,19 @@ public class CustomerController {
 	
 	//個人頁面
 	@GetMapping("/customerPage")
-	public String customerPage() {
+	public String customerPage(Model model) {
+		CustomerBean customerSignInSuccess = (CustomerBean)model.getAttribute("customerSignInSuccess");
+		CustomerBean originCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
+		//記錄map類型的ItemId
+		List<Integer> mapItemIds = new ArrayList<>();
+		for (FavoriteBean favoriteBean : originCustomer.getFavoriteBeans()) {
+			if(favoriteBean.getFavoriteCategory().equals("sportMap")) {
+				mapItemIds.add(favoriteBean.getFavoriteItemId());
+			}
+		}
+		//以mapItemIds查詢sportMap
+		List<SportMapBean> sportMaps = sportMapService.findAllById(mapItemIds);
+		model.addAttribute("sportMaps", sportMaps);
 		return "/customer/customerPage";
 	}
 	

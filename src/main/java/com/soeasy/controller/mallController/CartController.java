@@ -268,11 +268,12 @@ public class CartController {
 				}
 					
 				//Remove cart
-					session.removeAttribute("cart");
+//					session.removeAttribute("cart");
 				//return "/mall/checkoutThanks";
 					
 					//跳轉到paypal
 					return"redirect:/mall/cart/checkoutinformation";
+					//return"/mall/paypal/success";
 			}
 			
 			//如果購物車是空的則返回

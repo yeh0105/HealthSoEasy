@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 
 public interface CustomerRepository extends JpaRepository<CustomerBean, Integer> {
 	

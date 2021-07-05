@@ -58,4 +58,10 @@ public class FavoriteServiceImpl implements FavoriteService {
 		return count;
 	}
 
+	@Override
+	public List<FavoriteBean> findByCategoryAndCustomer(String favoriteCategory, CustomerBean customerBean) {
+		return favoriteRepository.findByFavoriteCategoryAndCustomerBean(favoriteCategory, customerBean);
+	}
+
+
 }

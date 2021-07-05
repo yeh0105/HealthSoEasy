@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.soeasy.model.CustomerBean;
 
 @Entity
@@ -54,13 +55,13 @@ public class OrderBean implements Serializable {
 	private String payStatus;
 
 	
-	
 
 		// 會員
 		@Transient
 		@Column(name = "fk_customerId")
 		private Integer customerId;
 
+		@JsonIgnore
 		@ManyToOne(fetch = FetchType.EAGER)
 		@JoinColumn(name = "fk_customerId")
 		private CustomerBean customerBean;
@@ -204,6 +205,23 @@ public class OrderBean implements Serializable {
 	public void setPayStatus(String payStatus) {
 		this.payStatus = payStatus;
 	}
+
+	public String getOrderAddress() {
+		return orderAddress;
+	}
+
+	public void setOrderAddress(String orderAddress) {
+		this.orderAddress = orderAddress;
+	}
+
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
+	}
+	
 
 	
 }

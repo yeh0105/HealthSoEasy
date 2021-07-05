@@ -23,6 +23,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<style type="text/css">
+	.addbtn{
+		border-radius: 20px; 
+		border: 3px solid #28A745; 
+		background-color: transparent; 
+		padding: 1% 3%; 
+		font-family: Microsoft JhengHei;
+	}
+	.addbtn:hover{
+		background-color: #28A745; 
+		color:white;
+	}
+</style>
 
 <script>
 	document.addEventListener("DOMContentLoaded",function() {
@@ -179,11 +192,38 @@
 			
 			let content = "";
 
+			console.log("totalPage="+totalPage);
+			
+			if(totalPage == 0){
+				content += '<div style="display:flex; width:100%">'
+				
+						+'<div class="span6">'
+						+'<img src="${pageContext.request.contextPath}/images/post/postNoFind.jpg" style="width:200%;">'
+						+'</div>'
+						
+						+'<div class="span6" style="padding-top:10%;">'
+						+'<h2 style="letter-spacing: 3px;font-family: Microsoft YaHei;">還未有人在此發過文章</h2>'
+						+'<h4 style="letter-spacing: 3px; line-height: 30px; font-family: Microsoft JhengHei;">還未有人在此發過文章。'
+						+'<br>'
+						+'趕快來分享你的故事。'
+						+'<br>'
+						+'成為第一個發文的人。'
+						+'</h4>'
+						+'<a href="<c:url value="/PostNeedLoginController/addPost "/>">'
+						+'<button class="addbtn" style="letter-spacing: 3px;">'
+						+'Add Share'
+						+'</button>'
+						+'</a>'
+						+'</div>'
+						
+						+'</div>'
+			}else{
 
 			//內容
 			(posts).forEach(post =>{
 // 			Object.entries(posts).forEach(([i,post]) =>{
-			
+			console.log("totalPage="+totalPage);
+	
 				content += '<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding: 1% 1% 0% 1%;">'
 						+ '<div class="row-<fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
 						+ '<div class="span9">'
@@ -222,8 +262,10 @@
 						+ '</div>'
 						+ '</div>'
 
-			});
-			
+				});
+				
+			}
+						
 			document.getElementById("insertPosts").innerHTML = content;
 		
 
@@ -246,7 +288,12 @@
 				navContent += "<li>&nbsp;</li>";
 				navContent += "<li>&nbsp;</li>";
 			}
-			document.getElementById("navigation").innerHTML = navContent;
+			
+			if(totalPage == 0){
+				document.getElementById("navigation").innerHTML ="";
+			}else{
+				document.getElementById("navigation").innerHTML = navContent;
+			}
 			
 			// 	頁數區塊----------------------------------------------------------------------------------------------
 			
@@ -388,7 +435,8 @@
 						<div class="span8" style="margin: 0px; margin-bottom: 1%;">
 							<nav class="menu">
 								<ol>
-									<li class="menu-item"><a class="navbara" href="#0" id="all">全部</a></li>
+									<li class="menu-item"><a class="navbara" href="#0"
+										id="all">全部</a></li>
 									<li class="menu-item"><a class="navbara" href="#0" id="c1">減肥</a></li>
 									<li class="menu-item"><a class="navbara" href="#0" id="c2">飲食</a></li>
 									<li class="menu-item"><a class="navbara" href="#0" id="c3">運動</a></li>
@@ -419,17 +467,13 @@
 						</div>
 						<hr style="color: transparent;">
 						<br> <br> <br> <br>
-						
+
 						<!-- ------------------------------內容區塊--------------------------------- -->
-						<div id="insertPosts">
-							
-						</div>
+						<div id="insertPosts"></div>
 						<!-- ------------------------------內容區塊--------------------------------- -->
-						
+
 						<!-- ------------------------------分頁區塊--------------------------------- -->
-						<div id='navigation' style='height: 60px;'>
-						
-						</div>
+						<div id='navigation' style='height: 60px;'></div>
 						<!-- ------------------------------分頁區塊--------------------------------- -->
 
 					</div>

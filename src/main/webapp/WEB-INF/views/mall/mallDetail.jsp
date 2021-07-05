@@ -12,6 +12,68 @@
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/responsive.css">
+	
+	
+	
+	<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded",function(){
+		let showFavorite = document.getElementById("showFavorite");
+		let favoriteHeart = document.getElementById("favoriteHeart");
+		
+		//初始化XMLHttpRequest物件
+		let xhr = new XMLHttpRequest();
+		
+		//收藏按鈕
+		showFavorite.addEventListener("click",updateFavorite);
+		//按下收藏按鈕，送出JSON字串資料
+		function updateFavorite(){
+			//建一支Object，裝收藏controller要的內容
+			let favoriteInfo = {
+				'productBean'	,
+				'favoriteItemId' : ${productBean.productId}
+				
+			}
+			//將物件轉為json			
+			let json = JSON.stringify(favoriteInfo);
+			
+			console.log(json);
+			
+			xhr.open('POST',"<c:url value='/favoriteController/addFavorite'/>");
+			xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			xhr.send(json);
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status ==200){
+					
+					if(xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn"){
+						location.href="/soeasy/customerController/customerSignIn";
+					}
+					
+					let favoriteJson = JSON.parse(xhr.responseText);
+// 					console.log(favoriteJson);
+					//更改圖片
+					if (favoriteJson.favoriteExist){
+						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like2.png";
+					}else {
+						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like1.png";
+
+					}
+					
+				}
+				
+				
+			}
+			
+			
+		}		
+		
+		
+		
+	} )
+
+
+</script>
+	
 
 </head>
 <body>
@@ -65,12 +127,10 @@
 			<div>
 				<form action="<c:url value='/mall/lists/1'/>" class="d-lg-block"
 					style="margin-left: 150px; margin-top: 50px">
-					<input type="hidden" name="sortField" value="${sortField}" />
-					 <input
+					<input type="hidden" name="sortField" value="${sortField}" /> <input
 						type="hidden" name="sortDir" value="${sortDir}" /> &nbsp; <input
 						type="text" name="keyword" value="${keyword}"
-						placeholder="Enter Searching" /> &nbsp; 
-						<input type="submit"
+						placeholder="Enter Searching" /> &nbsp; <input type="submit"
 						value="Search" class="theme-btn no-shadow bg-blue" /> &nbsp; <input
 						type="button" value="clear" onclick="clearFilter()"
 						class="theme-btn no-shadow bg-blue">
@@ -226,7 +286,8 @@
 														alt="Product Image">
 													<!-- Button trigger modal -->
 													<button class="quick-view" type="button"
-														data-toggle="modal" data-target="#quick-view">Quick
+														data-toggle="modal"
+														data-target="#quick-view${product.productId}">Quick
 														View</button>
 												</div>
 
@@ -256,8 +317,9 @@
 										</div>
 										<!-- 										-----------singal product= -->
 										<!--==================================== Start product-quick-view //product-modal  ================-->
-										<div class="modal product-modal fade" id="quick-view"
-											tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal product-modal fade"
+											id="quick-view${product.productId}" tabindex="-1"
+											role="dialog" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -337,7 +399,6 @@
 																					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 																					<i class="fa fa-star"></i>
 																				</div>
-																				<div class="text">評論</div>
 																			</div>
 																			<div>
 																				<p>${product.productDescription}</p>
@@ -356,7 +417,27 @@
 																					href="<c:url value='/mall/cart/buy/${product.productId}'/>"
 																					class="theme-btn br-30 ml-20">Add to Cart</a>
 																				<div class="add-wishlist">
-																					<i class="fa fa-heart-o"></i>
+																				
+																					<c:choose>
+																						<c:when
+																							test="${productBean.favoriteStatus == true}">
+																							<div class="floatR">
+																								<button id="showFavorite">
+																									<img id="favoriteHeart"
+																										src="${pageContext.request.contextPath}/images/mall/Like1.png">
+																								</button>
+																							</div>
+																						</c:when>
+																						<c:otherwise>
+																							<div class="floatR">
+																								<button id="showFavorite">
+																									<img id="favoriteHeart"
+																										src="${pageContext.request.contextPath}/images/mall/Like2.png">
+																								</button>
+																							</div>
+
+																						</c:otherwise>
+																					</c:choose>
 																				</div>
 																			</div>
 																		</div>
@@ -387,10 +468,52 @@
 						</div>
 					</div>
 				</div>
+
+
+				<!-- ---------------------------控制分頁用----------------------------------- -->
+				<nav style="width: 100px; margin: 30px auto">
+
+					<ul class=pager>
+
+						<!--  上頁 -->
+						<li class=previous><c:choose>
+								<c:when test="${currentPage > 1}">
+									<a
+										href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
+								</c:when>
+								<c:otherwise>
+									<a>Previous</a>
+								</c:otherwise>
+							</c:choose></li>
+						<!-- 上頁結束 -->
+
+						<li style="font-style: italic; color: #00477D">Page &nbsp;<c:out
+								value="${currentPage}" />&nbsp; of &nbsp;&nbsp;<c:out
+								value="${totalPages}" /></li>
+
+
+						<!--  下頁 -->
+						<li class=next><c:choose>
+								<c:when test="${currentPage < totalPages}">
+									<a
+										href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
+								</c:when>
+								<c:otherwise>
+									<a>Previous</a>
+								</c:otherwise>
+							</c:choose></li>
+						<!-- 下頁結束 -->
+
+					</ul>
+				</nav>
+
+				<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
+
 			</section>
 			<!--==================================================================== 
            End Shop Page
        =====================================================================-->
+
 
 
 
@@ -506,17 +629,10 @@
 				window.location = '/soeasy/mall/lists';
 			}
 		</script>
-		<!-- ==========================   (End) 綁定清除查詢========================-->
-		<!-- ==========================  quickview========================-->
-
-
-		<script>
-			function showModal() {
-				$('#quick-view').modal('show');
-			}
-		</script>
-
-		<!-- ==========================   (End) quickview========================-->
+		<!-- ------------------------------用來接POST-------------------------------- -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='score'>
+	</form>
 
 		<!-- jequery plugins -->
 		<script src="${pageContext.request.contextPath}/js/mall/jquery.min.js"></script>

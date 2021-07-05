@@ -253,6 +253,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  <option value=3>豬肉餐盒</option>
  <option value=4>牛肉餐盒</option>
  <option value=5>素食餐盒</option>
+ <option value=5>生鮮食品</option>
  
  </form:select>
  

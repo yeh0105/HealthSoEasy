@@ -189,6 +189,12 @@ public class SportMapServiceImpl implements SportMapService {
 		System.out.println("印出來的totalPages="+totalPages);
 		return totalPages;	
 	}
+
+	//以多個Id查詢多張地圖
+	@Override
+	public List<SportMapBean> findAllById(List<Integer> sportMapIds) {
+		return sportMapRepository.findAllById(sportMapIds);
+	}
 	
 	
 	

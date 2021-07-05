@@ -92,7 +92,7 @@ public class FavoriteController {
 
 	}
 	
-	// 新增or取消收藏By文章
+	// 新增or取消收藏By留言
 		@PostMapping(value = "/addFavoriteReply", produces = { "application/json; charset=UTF-8" })
 		public @ResponseBody Map<String, Object> addFavoriteByReply(@RequestBody FavoriteBean favoriteBean, Model model) {
 			CustomerBean customerSignInSuccess = (CustomerBean) model.getAttribute("customerSignInSuccess");
@@ -121,6 +121,8 @@ public class FavoriteController {
 			return favoriteMessage;
 
 		}
+		
+	
 	
 	
 }

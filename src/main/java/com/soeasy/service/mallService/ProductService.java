@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.soeasy.model.PostBean;
 import com.soeasy.model.ProductBean;
 import com.soeasy.repository.mallRepository.ProductRepository;
 
@@ -35,7 +36,7 @@ public class ProductService {
 		Sort sort = Sort.by(sortField);
 		sort = sortDir.equals("asc")?sort.ascending():sort.descending();
 
-	     int pageSize = 10;//每頁會顯示10個產品
+	     int pageSize = 15;//每頁會顯示10個產品
 	     Pageable pageable = PageRequest.of(pageNumber - 1, pageSize,sort);// 顯示的方式
 	     
 	     //查詢關鍵字並連動分頁
@@ -72,5 +73,26 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
 	}
+
+
+
+	// 查詢 TOP3
+	public List<ProductBean> findTop3() {
+		
+		Sort sort = Sort.by(Sort.Order.desc("productLike"));
+		
+		List<ProductBean> list = productRepository.findAll(sort);
+		
+		if(list.size()>=3) {
+			
+			List<ProductBean> newList = list.subList(0,3);
+			
+			return newList;
+		}
+		
+		return list;
+		
+	}
+	
 	
 }

@@ -18,6 +18,7 @@ public class PostCategoryBean implements Serializable {
 	private Integer postCategoryId;
 
 	private String postCategoryName;
+	
 
 	// ------------------------------------------
 	public PostCategoryBean() {

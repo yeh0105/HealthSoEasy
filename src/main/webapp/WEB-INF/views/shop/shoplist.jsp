@@ -8,7 +8,7 @@
 <head>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;charset=utf-8">
-<title>productList</title>
+<title>ShopList</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">
 
@@ -97,6 +97,7 @@
 <c:when test="${product.category==3}"><span>豬肉餐盒</span></c:when>
 <c:when test="${product.category==4}"><span>牛肉餐盒</span></c:when>
 <c:when test="${product.category==5}"><span>素食餐盒</span></c:when>
+<c:when test="${product.category==6}"><span>生鮮食品</span></c:when>
 </c:choose>
  </td>
  
@@ -132,7 +133,7 @@
 <li class=previous> 
 	<c:choose>
 		<c:when test="${currentPage > 1}">
-			<a href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
+			<a href="<c:url value='/shop/shoplist/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
 		</c:when>
 		<c:otherwise>
 			<a>Previous</a>
@@ -148,7 +149,7 @@
 <li class=next> 
 	<c:choose>
 		<c:when test="${currentPage < totalPages}">
-			<a href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
+			<a href="<c:url value='/shop/shoplist/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
 		</c:when>
 		<c:otherwise>
 			<a>Previous</a>

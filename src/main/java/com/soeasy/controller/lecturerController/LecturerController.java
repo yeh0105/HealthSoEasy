@@ -3,6 +3,7 @@ package com.soeasy.controller.lecturerController;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class LecturerController {
 	@Autowired
 	LecturerService lecturerService;
 
+	
 	// 查詢所有講師
 	@GetMapping("/getAllLecturers")
 	public String getAllLecturers(Model model) {

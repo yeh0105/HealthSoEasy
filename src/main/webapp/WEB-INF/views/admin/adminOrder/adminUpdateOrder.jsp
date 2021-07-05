@@ -265,8 +265,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 			<div style="padding:3% 5%; margin-top: -3%;">
 				<fieldset style="width: 90%; height: 100%;">
 					<legend>修改訂單</legend>
-					<form:form method="POST" modelAttribute="orderDetailBean"
-						enctype='multipart/form-data'> --%>
+					
 
 			</div>
 			</div>

@@ -45,7 +45,7 @@ public class ProductCategoryController {
 	@PostMapping("/add")
 	public String addCategory(@ModelAttribute("category")ProductCategoryBean category) {
 		
-		category.setCategory(null);
+		//category.setCategories(null);
 		//category.setCategory(new ProductCategoryBean(-1));
 		productCategoryService.save(category);
 		return "redirect:/mall/category";
@@ -75,7 +75,7 @@ public class ProductCategoryController {
 	
 	//更動可以保存
 	
-	@PostMapping("/update")
+	@PostMapping("/update/{productCategoryId}")
 	public String editCategory(
 			@ModelAttribute("category") ProductCategoryBean category,
 			BindingResult result, 

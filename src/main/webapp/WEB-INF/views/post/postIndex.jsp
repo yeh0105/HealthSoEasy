@@ -17,6 +17,19 @@
 	rel="stylesheet">
 <link rel="stylesheet" href="css/categoryNav.css">
 <link rel="stylesheet" href="css/header&footer.css">
+<style type="text/css">
+	.addbtn{
+		border-radius: 20px; 
+		border: 3px solid #28A745; 
+		background-color: transparent; 
+		padding: 1% 3%; 
+		font-family: Microsoft JhengHei;
+	}
+	.addbtn:hover{
+		background-color: #28A745; 
+		color:white;
+	}
+</style>
 <!-- -----------------------------取得所有文章的Top3區塊------------------------------------ -->
 <script>
 document.addEventListener("DOMContentLoaded",function() {
@@ -38,9 +51,9 @@ document.addEventListener("DOMContentLoaded",function() {
 	xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4 && xhr.status == 200) {
 
-		console.log(xhr.responseText);
+// 		console.log(xhr.responseText);
 		top3Posts = JSON.parse(xhr.responseText);
-		console.log("top3Posts="+top3Posts);
+// 		console.log("top3Posts="+top3Posts);
 
 		displaytop3Post(); // 顯示讀取到的非文字性資料
 		}
@@ -180,6 +193,32 @@ document.addEventListener("DOMContentLoaded",function() {
 		
 		
 		let contentTop10 = "";
+		console.log(top10PostsByCategory.length == 0);
+		
+		if(top10PostsByCategory.length == 0){
+			contentTop10 += '<div style="display:flex; width:100%">'
+				
+				+'<div class="span6">'
+				+'<img src="${pageContext.request.contextPath}/images/post/postNoFind.jpg" style="width:200%;">'
+				+'</div>'
+				
+				+'<div class="span6" style="padding-top:10%;">'
+				+'<h2 style="letter-spacing: 3px;font-family: Microsoft YaHei;">還未有人在此發過文章</h2>'
+				+'<h4 style="letter-spacing: 3px; line-height: 30px; font-family: Microsoft JhengHei;">還未有人在此發過文章。'
+				+'<br>'
+				+'趕快來分享你的故事。'
+				+'<br>'
+				+'成為第一個發文的人。'
+				+'</h4>'
+				+'<a href="<c:url value="/PostNeedLoginController/addPost "/>">'
+				+'<button class="addbtn" style="letter-spacing: 3px;">'
+				+'Add Share'
+				+'</button>'
+				+'</a>'
+				+'</div>'
+				
+				+'</div>'
+		}else{
 		
 		(top10PostsByCategory).forEach(post =>{
 			
@@ -224,6 +263,7 @@ document.addEventListener("DOMContentLoaded",function() {
 				+ '</div>'
 			
 		});
+		}
 // 		console.log(contentTop10);
 		document.getElementById("insertTop10").innerHTML = contentTop10;
 	}
