@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Nutritionist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+
+<title>Admin Record</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -29,22 +32,9 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
-	
-	
-	
-	
-	
+
 
 </script>
-<style>
-span.error {
-	color: red;
-	display: inline-block;
-	font-size: 8pt;
-}
-
-</style>
-
 </head>
 <body>
 	<div class="app-container">
@@ -152,13 +142,13 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>文章</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminNutritionist"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>營養師</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>日誌</span>
@@ -194,7 +184,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">營養師後台</h1>
+      <h1 class="app-content-headerText">Record</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -204,7 +194,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </button>
 <!--       新增 -->
       <a href="<c:url value='/admin/adminManage/adminNutritionist/add' />">
-      <button class="app-content-headerButton">新增營養師</button></a>
+      </a>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
@@ -248,68 +238,89 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
-<!--  --------------------------- ----內容開始--------------------------- -->
-<div>
-<a href="<c:url value="/admin/adminManage/adminNutritionist"></c:url>">回上一頁</a>
-</div>
-<br>
-<div>
-		<fieldset style="width: 900px;">
-			<legend>修改營養師</legend>
-			<form:form method="POST"
-				modelAttribute="nutritionistBean" enctype='multipart/form-data'>
-				<table>
-					<tr>
-						<td>營養師姓名 :</td>
-						<td width='600'><form:input path='nutritionistName'
-								type="text" /> <form:errors path="nutritionistName"
-								cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td>營養師性別：</td>
-						<td width='600'><form:radiobuttons path='nutritionistGender'
-								items="${genderMap}" /> <form:errors path="nutritionistGender"
-								cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td>營養師學位 :</td>
-						<td width='600'><form:input path='nutritionistDegree'
-								type="text" /> <form:errors path="nutritionistDegree"
-								cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td>營養師 E-mail :</td>
-						<td width='600'><form:input path='nutritionistEmail'
-								type="email" /> <form:errors path="nutritionistEmail"
-								cssClass="error" /></td>
-					</tr>
-					<tr>
-					<tr>
-						<td>營養師專長 :</td>
-						<td><form:select
-								path='nutritionistCategoryBean'>
-								<form:option label="請挑選" value="-1" />
-								<form:options items="${nutritionistCategoryList}"
-									itemLabel='nutritionistCategoryName'
-									itemValue='nutritionistCategoryId' />
-							</form:select> <form:errors path="nutritionistCategoryBean" cssClass="error" /></td>
-
-					</tr>
-					<tr>
-						<td>營養師圖片：</td>
-						<td width='600'><form:input path='nutritionistMultiImg'
-								type="file" /> <form:errors path="nutritionistMultiImg"
-								cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td><input type='submit'></td>
-					<tr>
-				</table>
-			</form:form>
-		</fieldset>
-	</div>
+<!--  --------------------------- ----表頭欄位--------------------------- -->
+        
+      <div class="products-header">
+        <div class="product-cell image">
+          ID
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>
+        <div class="product-cell category">CustomerName<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell status-cell">Height<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell sales">Weight<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell price">BMI<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>
+        <div class="product-cell price">Date<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>  
+        
+        <div class="product-cell price">
+          Update
+<!--           <button class="sort-button"> -->
+<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
+<!--           </button> -->
+        </div>
+        
+        <div class="product-cell price">
+          Delete
+        </div>
+      </div>
+	<!--       ----------------------一筆資料內容--開始--------------------- -->
+     <c:forEach var='record' items='${records}'> 
      
-<!-- --------------------------------一內容結尾---------------------------- -->
+      <div class="products-row">
+        <button class="cell-more-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        </button>
+          <div class="product-cell image">
+            <span>${record.recordId}</span>
+          </div>
+        <div class="product-cell category"><span class="cell-label">CustomerName :</span>${record.customerBean.customerName}</div>
+        <div class="product-cell price"><span class="cell-label">Height :</span>${record.recordHeight}</div>
+        <div class="product-cell sales"><span class="cell-label">Weight :</span>${record.recordWeight}</div>
+        <div class="product-cell price"><span class="cell-label">BMI :</span>${record.recordBmi}</div>
+        <div class="product-cell price"><span class="cell-label">Date :</span>${record.recordDate}</div>
+        
+         <div class="product-cell price"><a	class='updateSportMap' href="#"><button class="app-content-headerButton">Update</button></a></div>
+                  
+         <div class="product-cell price"><a	class='deleteSportMap' href="#"><button class="app-content-headerButton">Delete</button></a></div>
+        
+      </div>
+      
+      </c:forEach>
+    <!-- -------------------------一筆資料內容--結尾--------------------- -->
+	<!-- 	---------------------用來接delete的post-------------------- -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='DELETE'>
+	</form>
+
+
+<!-- ----------------------------刪除單筆資料用-------------------------- -->
+	<script>
+		$(document).ready(function() {
+			$('.deleteSportMap').click(function() {
+				alert('抱歉!你無法刪除資料。');
+			});
+		})
+		
+		$(document).ready(function() {
+			$('.updateSportMap').click(function() {
+				alert('抱歉!你無法修改資料。');
+			});
+		})
+	</script>
+	
 	
       
     </div>

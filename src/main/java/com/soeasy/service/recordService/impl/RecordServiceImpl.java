@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,16 +58,11 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public List<RecordBean> getCustomerId(CustomerBean customerBean) {
-		List<RecordBean> list = null;
-		list = recordRepository.findByCustomerBean(customerBean);
+		Sort sort = Sort.by(Sort.Order.desc("recordDate"));
+		
+		List<RecordBean> list = recordRepository.findByCustomerBean(customerBean,sort);
+		
 		return list;
 	}
-
-//	@Override
-//	public List<RecordBean> getCustomerId(CustomerBean customerBean,Integer customerId) {
-//		List<RecordBean> list = null;
-//		list = recordRepository.findByRecordId(customerBean,customerId);
-//		return list;
-//	}
 
 }
