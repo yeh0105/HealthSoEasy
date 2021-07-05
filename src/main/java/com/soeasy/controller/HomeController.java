@@ -22,7 +22,7 @@ public class HomeController {
 	public String postIndex() {
 		return "/post/postIndex";
 	}
-	
+
 	// 從SoEasy首頁跳至post首頁
 	@GetMapping({ "/postByCategory" })
 	public String postByCategory() {
@@ -53,5 +53,11 @@ public class HomeController {
 	@GetMapping("/lectureIndex")
 	public String lectureIndex() {
 		return "/lecture/lectureIndex";
+	}
+
+	// 從SoEasy首頁跳至講師首頁
+	@GetMapping("/lecturerIndex")
+	public String lecturerIndex() {
+		return "/lecturer/lecturerIndex";
 	}
 }

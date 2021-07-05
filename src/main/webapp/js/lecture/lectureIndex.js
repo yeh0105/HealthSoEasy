@@ -1,4 +1,4 @@
-
+//輪播區
 let slideNum=0;
 let slideCount=$(".slides li").length;
 let lastIndex=slideCount-1;

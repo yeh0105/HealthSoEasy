@@ -52,7 +52,7 @@ public class LectureController {
 	public String getOneByLectureId(@PathVariable("lectureId") Integer lectureId, Model model) {
 		LectureBean lectureBean = lectureService.getOneByLectureId(lectureId);
 		model.addAttribute("lectureBean", lectureBean);
-		return "/nutritionist/lectureIndex";
+		return "/lecture/lectureIndex";
 	}
 
 	// 新增講座，先送一個空白表單，並給予初值
