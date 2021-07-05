@@ -39,8 +39,7 @@ span.error {
 }
 </style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function () {
 			let showFavorite = document.getElementById("showFavorite");
 			let favoriteHeart = document.getElementById("favoriteHeart");
@@ -110,7 +109,7 @@ span.error {
 			// 注意，查詢字串的前面有問號
 			let queryString = "?postBean=" + postBean;
 			let customerId = ${ customerSignInSuccess.customerId }
-			console.log("customerId=" + customerId);
+// 			console.log("customerId=" + customerId);
 
 			//變數宣告------------------------------------------------------------
 
@@ -134,66 +133,55 @@ span.error {
 					displayReplies();
 				}
 			}
+			
+			function favoriteReply() {
+				let inputFavoriteReplyId = null;
+				$(".replyShowFavorite").on('click', function (event) {
+					console.log("點擊愛心");
+					console.log(this.dataset.id);
+					let updateFavoriteReplyId = this.dataset.id;
+					let replyLike = document.getElementById("replyLike"+updateFavoriteReplyId);
+					let replyImg = document.getElementById("replyImg"+updateFavoriteReplyId);
 
-			let inputFavoriteReplyId = null;
-			$("div").on('click', ".replyFavorite", function (event) {
-				//             $(".replyShowFavorite").on('click', function (event) {
-				//             $(".replyFavorite:has(.replyShowFavorite)").on('click', function (event) {
+					//建一支Object，裝收藏controller要的內容
+					let favoriteInfo = {
+						'favoriteCategory': 'reply',
+						'favoriteItemId': updateFavoriteReplyId
+					}
 
-				// 方法確保事件不會冒泡到所需類選擇器的子元素。
-				event.stopImmediatePropagation();
-				console.log("收藏功能觸發!!!!!!");
-				//	 		取得代入update按鈕的值
-				let button = $(event.relatedTarget);
-				let updateFavoriteReplyId = button.data('id');
-				inputFavoriteReplyId = updateFavoriteReplyId;		//作為表單送出用ID
-				console.log("button=" + button);
-				console.log("updateFavoriteReplyId=" + updateFavoriteReplyId);
-				console.log("inputFavoriteReplyId=" + inputFavoriteReplyId);
+					//將物件轉為json			
+					let json = JSON.stringify(favoriteInfo);
 
-				//                 //建一支Object，裝收藏controller要的內容
-				//                 let favoriteInfo = {
-				//                     'favoriteCategory': 'reply',
-				//                     'favoriteItemId': 3
-				//                 }
-				//                 //將物件轉為json			
-				//                 let json = JSON.stringify(favoriteInfo);
+					console.log(json);
 
-				//                 console.log(json);
+					xhr.open('POST', "<c:url value='/favoriteController/addFavoriteReply'/>");
+					xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+					xhr.send(json);
 
-				//                 xhr.open('POST', "<c:url value='/favoriteController/addFavoriteReply'/>");
-				//                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-				//                 xhr.send(json);
+					xhr.onreadystatechange = function () {
+						if (xhr.readyState == 4 && xhr.status == 200) {
 
-				//                 xhr.onreadystatechange = function () {
-				//                     if (xhr.readyState == 4 && xhr.status == 200) {
+							if (xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn") {
+								location.href = "/soeasy/customerController/customerSignIn";
+							}
 
-				//                         if (xhr.responseURL == "http://localhost:8080/soeasy/customerController/customerSignIn") {
-				//                             location.href = "/soeasy/customerController/customerSignIn";
-				//                         }
+							let favoriteJson = JSON.parse(xhr.responseText);
+							console.log(favoriteJson);
+							//更改圖片
+							if (favoriteJson.favoriteExist) {
+								replyImg.src = "${pageContext.request.contextPath}/images/post/heart.png";
+								replyLike.innerHTML = favoriteJson.favoriteCount;
+							} else {
+								replyImg.src = "${pageContext.request.contextPath}/images/post/heart-empty.png";
+								replyLike.innerHTML = favoriteJson.favoriteCount;
 
-				//                         let favoriteJson = JSON.parse(xhr.responseText);
-				//                         console.log(favoriteJson);
-				//                         //更改圖片
-				//                         if (favoriteJson.favoriteExist) {
-				//                             favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart.png";
-				//                             postLike.innerHTML = favoriteJson.favoriteCount;
-				//                         } else {
-				//                             favoriteHeart.src = "${pageContext.request.contextPath}/images/post/heart-empty.png";
-				//                             postLike.innerHTML = favoriteJson.favoriteCount;
+							}
 
-				//                         }
+						}
 
-				//                     }
-
-				//                 }
-
-
-
-
-
-			})
-
+					}
+				})
+			}
 
 			// 顯示送回來的所有留言
 			function displayReplies() {
@@ -235,12 +223,12 @@ span.error {
 						// 有無收藏
 						if (reply.favoriteStatus == null) {
 							// Like圖片(無收藏)ID
-							img = '<img class="replyFavoriteHeart" src="${pageContext.request.contextPath}/images/post/heart-empty.png">'
+							img = '<img id="replyImg'+reply.replyId+'" src="${pageContext.request.contextPath}/images/post/heart-empty.png">'
 						} else {
 							// Like圖片(有收藏)ID
-							img = '<img class="replyFavoriteHeart" src="${pageContext.request.contextPath}/images/post/heart.png">'
+							img = '<img id="replyImg'+reply.replyId+'" src="${pageContext.request.contextPath}/images/post/heart.png">'
 						}
-						console.log("reply.customerBean.customerId=" + reply.customerBean.customerId);
+// 						console.log("reply.customerBean.customerId=" + reply.customerBean.customerId);
 						// 是否是留言本人
 						if (reply.customerBean.customerId == customerId) {
 
@@ -282,7 +270,7 @@ span.error {
 							+ img
 							+ '</button>'
 							//	 						Like數量
-							+ '<p class="replyLike" data-id="' + reply.replyId + '">'
+							+ '<p id="replyLike'+reply.replyId+'">'
 							+ reply.replyLike + '</p>'
 							+ '</div>'
 
@@ -311,6 +299,7 @@ span.error {
 
 				})
 				document.getElementById("insertReplies").innerHTML = content;
+				favoriteReply();
 			}
 
 
@@ -557,6 +546,8 @@ span.error {
 				})
 				document.getElementById("insertTop3Replies").innerHTML = contentTop3;
 			}
+			
+			
 		})
 	</script>
 
