@@ -1,53 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+
+<title>Admin Record</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
 
 <script type="text/javascript">
 	window.onload = function(){
-		var adminLouout = function(evt){
-			location.href = "/soeasy/admin/logout";
-		}
-		
-		
-		console.log("${adminLoginSuccess.adminName}");
-		let admin_tableView = document.getElementById("admin_tableView");
-		if("${adminLoginSuccess.adminName}" != ""){
-			admin_tableView.innerHTML = 
-				'<div class="admin-header">'
-	      	+		'<div class="product-cell price" style="font-size: 20px">'
-	      	+		'您好，這裡是後台管理系統'
-	      	+		'</div>'
-	      	+	'</div>'
-				
-			+	'<div class="admin-header">'
-	    	+  		'<div class="product-cell price" style="font-size: 20px">'
-	    	+  			'登入人員：'
-			+      		'<input class="input-bar" placeholder="" type="text"  disabled="disabled" value="${adminLoginSuccess.adminName}"/>'
-	    	+  		'</div>'
-	    	+   '</div>'
-	    	
-			+	'<div class="admin-header">'
-	    	+  		'<div class="product-cell price" style="font-size: 20px">'
-	    	+  			'<button id="adminLogoutbtn" class="app-content-headerButton" >登出</button>'
-	    	+  		'</div>'
-	    	+   '</div>';
-		}
-		
-		
-		if("${customerSignInSuccess}" != "" || "${shopSignInSuccess}" != ""){
-			setTimeout("location.href='/soeasy/'",3000);
-		}
-		
 		let switch_moon = document.getElementById("switch_moon");
 		let xhr = new XMLHttpRequest();
 //		點擊日夜間模式設定session
@@ -62,11 +31,10 @@
 		} else if("${switchMode}" == "moon"){
 			document.documentElement.classList.toggle('dark');			
 		}
-		
-		document.getElementById('adminLogoutbtn').onclick = adminLouout;
 	}
-</script>
 
+
+</script>
 </head>
 <body>
 	<div class="app-container">
@@ -132,7 +100,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </div>
     </div>
     <ul class="sidebar-list">
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminLogin"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> -->
           <span>後台首頁</span>
@@ -180,7 +148,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <span>營養師</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>日誌</span>
@@ -214,9 +182,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
       </button>
     </div>
   </div>
-  <div class="app-content background-img">
+  <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Home</h1>
+      <h1 class="app-content-headerText">Record</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -224,71 +192,142 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
       </button>
+<!--       新增 -->
+      <a href="<c:url value='/admin/adminManage/adminNutritionist/add' />">
+      </a>
     </div>
     <div class="app-content-actions">
-<!--       <input class="search-bar" placeholder="Search..." type="text"> -->
+<!--     搜尋 -->
+      <input class="search-bar" placeholder="Search..." type="text">
       <div class="app-content-actions-wrapper">
-      
+        <div class="filter-button-wrapper">
+<!--         過濾器 -->
+          <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+          <div class="filter-menu">
+            <label>Category</label>
+            <select>
+              <option>All Categories</option>
+              <option>Furniture</option>                     
+              <option>Decoration</option>
+              <option>Kitchen</option>
+              <option>Bathroom</option>
+            </select>
+            <label>Status</label>
+            <select>
+              <option>All Status</option>
+              <option>Active</option>
+              <option>Disabled</option>
+            </select>
+            <div class="filter-menu-buttons">
+              <button class="filter-button reset">
+                Reset
+              </button>
+              <button class="filter-button apply">
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="action-button list active" title="List View">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+        <button class="action-button grid" title="Grid View">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </button>
       </div>
-      
     </div>
-    <div id="admin_tableView" class="products-area-wrapper tableView" style="max-width: 40%;text-align: ">
     
-      <div class="admin-header">
-      	<div class="product-cell price" style="font-size: 20px">
-      		您好，這裡是後台管理系統
-      	</div>
+    <div class="products-area-wrapper tableView">
+<!--  --------------------------- ----表頭欄位--------------------------- -->
+        
+      <div class="products-header">
+        <div class="product-cell image">
+          ID
+          <button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>
+        <div class="product-cell category">CustomerName<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell status-cell">Height<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell sales">Weight<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button></div>
+        <div class="product-cell price">BMI<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>
+        <div class="product-cell price">Date<button class="sort-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+        </div>  
+        
+        <div class="product-cell price">
+          Update
+<!--           <button class="sort-button"> -->
+<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
+<!--           </button> -->
+        </div>
+        
+        <div class="product-cell price">
+          Delete
+        </div>
+      </div>
+	<!--       ----------------------一筆資料內容--開始--------------------- -->
+     <c:forEach var='record' items='${records}'> 
+     
+      <div class="products-row">
+        <button class="cell-more-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        </button>
+          <div class="product-cell image">
+            <span>${record.recordId}</span>
+          </div>
+        <div class="product-cell category"><span class="cell-label">CustomerName :</span>${record.customerBean.customerName}</div>
+        <div class="product-cell price"><span class="cell-label">Height :</span>${record.recordHeight}</div>
+        <div class="product-cell sales"><span class="cell-label">Weight :</span>${record.recordWeight}</div>
+        <div class="product-cell price"><span class="cell-label">BMI :</span>${record.recordBmi}</div>
+        <div class="product-cell price"><span class="cell-label">Date :</span>${record.recordDate}</div>
+        
+         <div class="product-cell price"><a	class='updateSportMap' href="#"><button class="app-content-headerButton">Update</button></a></div>
+                  
+         <div class="product-cell price"><a	class='deleteSportMap' href="#"><button class="app-content-headerButton">Delete</button></a></div>
+        
       </div>
       
-      <div class="admin-header">
-      	<div class="product-cell price" style="font-size: 20px">
-      		<c:choose>
-      			<c:when test="${!empty customerSignInSuccess || !empty shopSignInSuccess}">
-      				已有其他會員帳號登入，請先登出，三秒後將回到首頁
-      			</c:when>
-      			<c:otherwise>
-		      		請先登入		
-      			</c:otherwise>
-      		</c:choose>
-      	</div>
-      </div>
+      </c:forEach>
+    <!-- -------------------------一筆資料內容--結尾--------------------- -->
+	<!-- 	---------------------用來接delete的post-------------------- -->
+	<form method='POST'>
+		<input type='hidden' name='_method' value='DELETE'>
+	</form>
 
-      <form:form method="Post" action="adminLogin" modelAttribute="adminBean" id="adminLoginForm">
-      <div class="admin-header">
-      	<div class="product-cell price" style="font-size: 20px">
-      		帳號
-	      	<form:input path="adminName" class="input-bar" placeholder="請輸入後台帳號..." type="text"/>
-	      	<form:errors path="adminName" class="input-bar" cssClass="error"/>
-      	</div>
-      </div>
-      
-      <div class="admin-header">
-      	<div class="product-cell price" style="font-size: 20px">
-      		密碼
-	      	<form:input path="adminPassword" class="input-bar" placeholder="請輸入後台密碼..." type="password"/>
-	      	<form:errors path="adminPassword" class="input-bar" cssClass="error"/>
-	      	<form:errors path="invalidCredentials" class="input-bar" cssClass="error"/>
-      	</div>
-      </div>
-      
-      <div class="admin-header">
-      	<div class="product-cell price">
-      		<form:errors path="accountConflict" class="input-bar" cssClass="error"/>
-      	</div>
-      </div>
-      
-      <div class="admin-header">
-      	<div class="product-cell price">
-		    <button id="adminbtn" class="app-content-headerButton" value="登入">登入</button>
-      	</div>
-      </div>
-      </form:form>
 
+<!-- ----------------------------刪除單筆資料用-------------------------- -->
+	<script>
+		$(document).ready(function() {
+			$('.deleteSportMap').click(function() {
+				alert('抱歉!你無法刪除資料。');
+			});
+		})
+		
+		$(document).ready(function() {
+			$('.updateSportMap').click(function() {
+				alert('抱歉!你無法修改資料。');
+			});
+		})
+	</script>
+	
+	
+      
     </div>
   </div>
 </div>
 <!-- partial -->
-<%--   <script  src="${pageContext.request.contextPath}/js/adminIndex.js"></script> --%>
+  <script  src="${pageContext.request.contextPath}/js/admin.js"></script>
 	
 </body>
 </html>
