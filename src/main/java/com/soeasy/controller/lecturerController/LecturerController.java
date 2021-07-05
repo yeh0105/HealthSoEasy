@@ -59,7 +59,7 @@ public class LecturerController {
 		validator.validate(lecturerBean, result);
 		if (result.hasErrors()) {
 
-			return "redirect:/lecturerController/addLecturer";
+			return "/admin/adminLecturer/adminAddLecturer";
 		}
 
 		// 如果新增成功就跳轉至查詢所有講師

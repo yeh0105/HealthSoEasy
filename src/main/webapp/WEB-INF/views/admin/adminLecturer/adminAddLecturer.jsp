@@ -312,7 +312,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 						<td width='600'><form:input path='lecturerExp' /> <form:errors path="lecturerExp" cssClass="error" /></td>
 					<tr>
 						<td>講師照片：</td>
-						<td width='600'><input type="file" /> <form:errors path="lecturerImg" cssClass="error" /></td>
+						<td width='600'><form:input path="lecturerMultiImg" type="file" style="width: 203px;"/> <form:errors path="lecturerMultiImg" cssClass="error" /></td>
+						
 					</tr>
 					<tr>
 						<td><input type='submit' value="送出"></td>
