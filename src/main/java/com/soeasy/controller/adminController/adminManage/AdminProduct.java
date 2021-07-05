@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.ProductBean;
+import com.soeasy.model.ProductCategoryBean;
+import com.soeasy.model.SportCategoryBean;
+import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
@@ -43,6 +46,9 @@ public class AdminProduct {
 		
 		@Autowired
 		ServletContext context;
+		
+		@Autowired
+		private ProductCategoryService productCategoryService;
 
 		
 		
@@ -126,10 +132,6 @@ public class AdminProduct {
 						@ModelAttribute("product") /* @Valid */ ProductBean product, 
 						BindingResult result, Model model,HttpServletRequest request) {
 				
-//				public String addProduct(
-//				@ModelAttribute("product") /* @Valid */ ProductBean product, 
-//				BindingResult result, final RedirectAttributes attributes,HttpServletRequest request) {
-		//	
 					
 				ProductBeanValidator validator = new ProductBeanValidator();
 				// 呼叫Validate進行資料檢查
@@ -160,16 +162,13 @@ public class AdminProduct {
 					} catch (org.hibernate.exception.ConstraintViolationException e) {
 						return "admin/adminMall/adminProduct";
 				}
-////					//顯示新增成功的訊息 
-////					//(model只能通用一個請求所以這裡用final RedirectAttributes attributes)
-//					ProductBean product1 = productService.save(product);
-//					if(product1 !=null) {
-//						attributes.addFlashAttribute("message", product1.getProductId());
-//						System.out.println("新增成功");}
+
 					
 				// 跳轉至查詢所有頁面
 					return "redirect:/admin/adminManage/adminProduct";
 				}
+			
+			
 			
 			// 讀圖轉成位元組陣列
 				@RequestMapping(value = "/getImage/{productId}", method = RequestMethod.GET)

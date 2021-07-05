@@ -29,14 +29,14 @@
  <div class="well" >
 <%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
  
- <form:form  modelAttribute='category'>
+ <form:form  modelAttribute='category' method="POST">
 
  <div class="form-group">
  <label for="productCategoryName">分類名稱 : </label>
  <form:input  class="form-control" type="text" path="productCategoryName" required="required"/>
  </div>
  
- <div class="checkbox">
+ <div class="checkbox" >
    &nbsp;
  <form:checkbox path="status"/>
   &nbsp;是否顯示

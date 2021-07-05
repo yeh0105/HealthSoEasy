@@ -1,4 +1,4 @@
-package com.soeasy.controller.mallController;
+package com.soeasy.controller.shopController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
@@ -42,46 +43,32 @@ import com.soeasy.service.mallService.ProductService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
-@RequestMapping("/mall")
-public class ProductController {
+@RequestMapping("/shop")
+@SessionAttributes({"shopSignInSuccess"})
+public class ShopProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
 	@Autowired
 	ServletContext context;
 	
 	@Autowired
 	private ProductCategoryService productCategoryService;
 	
-	@Autowired
-	FavoriteService favoriteService;
-	
-	//前端跳轉
-	
-	@GetMapping("/mallindex")
-	 public String getIndex(Model model) {
-	            return "mall/mallDetail";
-	    }
-	
-	
-	//test
-	@GetMapping("/shoplist")
-	 public String getIndex1(Model model) {
-	            return "mall/productlists";
-	    }
 	
 	
 	
 	//頁面跳轉
-		@RequestMapping("/lists")
-		public String viewPage(Model model){
+		@RequestMapping("/shoplist")
+		public String viewshopPage(Model model){
 			String keyword = null;
 			return ListByPage(model,1,"productName","asc",keyword);
 		}
 
 
 	//showProduct
-	@GetMapping("/lists/{pageNo}")
+	@GetMapping("/shoplist/{pageNo}")
 	public String ListByPage(Model model,
 	        @PathVariable("pageNo") int currentPage,
 	        @Param("sortField")String sortField,
@@ -106,22 +93,8 @@ public class ProductController {
 			    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";
 			    model.addAttribute("reverSortDir", reverseSortDir);
 			     
-			    return "mall/mallDetail";
+			    return "/shop/shoplist";
 			}
-	
-	
-	// 查詢所有文章的 TOP3
-		@GetMapping(value = "/getTop3Product", produces = { "application/json; charset=UTF-8" })
-		public @ResponseBody List<ProductBean> getTop3() {
-
-			List<ProductBean> list = productService.findTop3();
-
-			return list;
-		}
-		
-		
-		
-	
 	
 	
 	
@@ -131,7 +104,7 @@ public class ProductController {
 	      ProductBean product = productService.findProductById(productId);
       		model.addAttribute("product", product);
 	        	System.out.println("印出來單一產品了");
-	            return "mall/getOneProduct";
+	            return "/shop/getOneProduct";
 	       
 	    }
 	
@@ -156,7 +129,7 @@ public class ProductController {
 		//product.setProductDate(java.sql.Date.valueOf("2021-07-20"));
 		model.addAttribute("product", product);
 
-		return "mall/addProduct";
+		return "/shop/addProduct";
 	}
 	
 	
@@ -208,12 +181,12 @@ public class ProductController {
 			try {
 				productService.save(product);
 			} catch (org.hibernate.exception.ConstraintViolationException e) {
-				return "mall/addProduct";
+				return "shopaddProduct";
 		}
 
 			
 		// 跳轉至查詢所有頁面
-		return "redirect:/mall/lists";
+		return "redirect:/shop/shoplist";
 		}
 	
 	// 讀圖轉成位元組陣列
@@ -272,7 +245,7 @@ public class ProductController {
 		public String delete(@PathVariable("productId") Integer productId) {
 	        productService.deleteById(productId);
         	System.out.println("刪除products");
-			return "redirect:/mall/lists"; 
+			return "redirect:/shop/shoplist"; 
 		}
 		
 		

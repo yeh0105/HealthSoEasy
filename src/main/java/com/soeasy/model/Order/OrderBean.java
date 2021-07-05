@@ -55,7 +55,6 @@ public class OrderBean implements Serializable {
 	private String payStatus;
 
 	
-	
 
 		// 會員
 		@Transient
@@ -206,6 +205,23 @@ public class OrderBean implements Serializable {
 	public void setPayStatus(String payStatus) {
 		this.payStatus = payStatus;
 	}
+
+	public String getOrderAddress() {
+		return orderAddress;
+	}
+
+	public void setOrderAddress(String orderAddress) {
+		this.orderAddress = orderAddress;
+	}
+
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
+	}
+	
 
 	
 }
