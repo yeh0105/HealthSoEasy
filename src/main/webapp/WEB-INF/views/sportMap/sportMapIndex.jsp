@@ -28,8 +28,24 @@
 	rel="stylesheet">	
 
 
-<script>
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        
+      }
+      #map {
+        height: 80%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
 
+      }
+</style>
+
+<script>
+//---------------------------熱門場館場地用-開始--------------------------------------//
 document.addEventListener("DOMContentLoaded", function(){
 	let showTop = document.getElementById("showTopMaps")
 	let topMaps;
@@ -51,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		}
 		
 	}		
-		
+	//熱門場館場地用	
 	function displayTopMaps(){
 		
 		let content = "<div class='container'>";
@@ -81,8 +97,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	}
 )
+//---------------------------熱門場館場地用-結束--------------------------------------//
 
-// -----------------------------------------------------------------//
+// ---------------------------地圖切換區域用-開始--------------------------------------//
+	//地圖切換區域用
 	document.addEventListener("DOMContentLoaded", function () {
 
             // let areas = document.getElementsByTagName("area");
@@ -117,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 
-// ---------------------------------------------------------------//
+// ---------------------------地圖切換區域用-結束--------------------------------------//
 
 </script>
 
@@ -126,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-
+<!-- -------------------------So Map標題------------------------------ -->
 	<div class="mainWrapper">
 		<section id="offer">
 			<div style="background-color: #C9D8BF; text-align: center;">
@@ -145,10 +163,9 @@ document.addEventListener("DOMContentLoaded", function(){
 	</div>
 	
 	
-	<!-- ------------------------------內容1開始區塊--------------------------------- -->
+	<!-- ------------------------------內容1區塊-開始--------------------------------- -->	
 	
-	
-    <!-- --------------------------------依區域區塊--------------------------------- -->
+    <!-- ------------------------------依區域區塊1-開始--------------------------------- -->
 
 	<div class="centerDiv">
 		<div class="btnBy1">
@@ -157,61 +174,50 @@ document.addEventListener("DOMContentLoaded", function(){
 				<span>依區域：</span>
 			</div>
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北市' />"><button class="font1">所有台北市</button></a>
+				<a 	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=台北市' />"><button class="font1">所有台北市</button></a>
 				
 			</div>
 			
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中正區' />"><button class="font1">中正區</button></a>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=萬華區' />"><button class="font1">萬華區</button></a>
+				<a 	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中正區' />"><button class="font1">中正區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=萬華區' />"><button class="font1">萬華區</button></a>
 				
 			</div>
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大安區' />"><button class="font1">大安區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大安區' />"><button class="font1">大安區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=文山區' />"><button class="font1">文山區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=文山區' />"><button class="font1">文山區</button></a>
 				
 			</div>
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=信義區' />"><button class="font1">信義區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=信義區' />"><button class="font1">信義區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=南港區' />"><button class="font1">南港區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=南港區' />"><button class="font1">南港區</button></a>
 				
 			</div>
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=士林區' />"><button class="font1">士林區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=士林區' />"><button class="font1">士林區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=北投區' />"><button class="font1">北投區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=北投區' />"><button class="font1">北投區</button></a>
 				
 			</div>	
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中山區' />"><button class="font1">中山區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中山區' />"><button class="font1">中山區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大同區' />"><button class="font1">大同區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=大同區' />"><button class="font1">大同區</button></a>
 				
 			</div>	
 			<div>
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=松山區' />"><button class="font1">松山區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=松山區' />"><button class="font1">松山區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=內湖區' />"><button class="font1">內湖區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=內湖區' />"><button class="font1">內湖區</button></a>
 				
 			</div>	
 		 
 
 		</div>
+<!-- ------------------------------依區域區塊1-結束--------------------------------- -->
+		
 <!-- ------------------------------中間地圖區塊開始------------------------------ -->
 				
 		<div class="btnBy2">
@@ -221,15 +227,11 @@ document.addEventListener("DOMContentLoaded", function(){
 <!-- 			<input name="" id="" type="text" placeholder="今天 想找什麼地點呢？"> -->
 <!-- 			<input type='submit' value="Go"> -->
 <%-- 			</form> --%>
-<!-- 			</div> -->
-		
-		
-<%-- 			<a href="<c:url value='/sportMapController/displaySportMaps' />"><img --%>
-<%-- 				src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png" --%>
-<!-- 				width="120%" height="120%"></a> -->
-<!-------------------------------------測試區塊--------------------------------- -->
+<!-- 			</div> -->		
+
+<!-------------------------------------中間圖片區塊-開始--------------------------------- -->
 	
-        <img id="imgMap" alt="" src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png" usemap="#FPMap0"  />
+     <img id="imgMap" alt="" src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png" usemap="#FPMap0"  />
  
 
 	<map id="imgMap" name="FPMap0">
@@ -276,110 +278,87 @@ document.addEventListener("DOMContentLoaded", function(){
     	<area id="idYingge" class="imgbut"  href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=鶯歌區' ></c:url>" coords="125,348,132,344,137,338,142,330,147,322,144,313,131,313,122,312,115,312,110,317,110,327,110,338,105,344,102,352,110,353,121,354,123,349" shape="poly">
 	</map>
 
-
-
-
-
-	<!-------------------------------------測試區塊--------------------------------- -->				
-	
-<!-- -------------------------------中間地圖區塊結束------------------------------ -->
+<!-------------------------------------中間圖片區塊-結束--------------------------------- -->	
+<!-- -----------------------------------依分類區塊-開始------------------------------ -->
 			
 			<div>
-<!-- 			依分類： -->
 				<a href="<c:url value='/sportMapController/displaySportMaps' />"><button class="font2">所有運動地點</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font2">運動中心</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=1' />"><button class="font2">運動中心</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font2">室內場館</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=2' />"><button class="font2">室內場館</button></a>
 
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font2">戶外球場</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=3' />"><button class="font2">戶外球場</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">河濱及公園</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=4' />"><button class="font2">河濱及公園</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">游泳池</button></a>
-			</div>		
-				
-				
+				<a	href="<c:url value='/sportMapController/displaySportMapsByCategoryId?sportCategoryBean=5' />"><button class="font2">游泳池</button></a>
+			</div>								
 				
 		</div>
-<!-- 	----------------------------------依分類區塊----------------------------------- -->
+<!-- -----------------------------------依分類區塊-結束------------------------------ -->
+<!-- -----------------------------------依區域區塊2-開始------------------------------ -->
+
 		<div class="btnBy3">
 			<div>
 				<span>依區域：</span>
 			</div>
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新北市' />"><button class="font1">所有新北市</button></a>
 			</div>
 			
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=板橋區' />"><button class="font1">板橋區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=板橋區' />"><button class="font1">板橋區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中和區' />"><button class="font1">中和區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=中和區' />"><button class="font1">中和區</button></a>
 			</div>
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新莊區' />"><button class="font1">新莊區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新莊區' />"><button class="font1">新莊區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=淡水區' />"><button class="font1">淡水區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=淡水區' />"><button class="font1">淡水區</button></a>
 			</div>
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=三重區' />"><button class="font1">三重區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=三重區' />"><button class="font1">三重區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新店區' />"><button class="font1">新店區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=新店區' />"><button class="font1">新店區</button></a>
 			</div>
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=五股區' />"><button class="font1">五股區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=五股區' />"><button class="font1">五股區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=林口區' />"><button class="font1">林口區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=林口區' />"><button class="font1">林口區</button></a>
 			</div>	
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=蘆洲區' />"><button class="font1">蘆洲區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=蘆洲區' />"><button class="font1">蘆洲區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=八里區' />"><button class="font1">八里區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=八里區' />"><button class="font1">八里區</button></a>
 			</div>	
 			<div>
 				
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=土城區' />"><button class="font1">土城區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=土城區' />"><button class="font1">土城區</button></a>
 			
-				<a
-					href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=永和區' />"><button class="font1">永和區</button></a>
+				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=永和區' />"><button class="font1">永和區</button></a>
 			</div>	
 			
 				
 		</div>
 		
 	</div>
+<!-- -----------------------------------依區域區塊2-結束------------------------------ -->
 	
-	<!-- ------------------------------內容1結束區塊--------------------------------- -->
+<!-- -----------------------------------內容1區塊-結束--------------------------------- -->
 	
-	<!-- ------------------------------內容2開始區塊--------------------------------- -->	
+<!-- ------------------------------------內容2區塊-開始--------------------------------- -->	
 	<div class="centerDiv">
 		<div>
 		
-		<div class="HotTitle">
+		<div class="HotTitle" style="background-color: 	#fffae5;">
 		<img src="${pageContext.request.contextPath}/images/sportMap/Hot1.jpg" width="35px" height="35px">
 		熱門場館場地
 		</div><br>
@@ -390,37 +369,129 @@ document.addEventListener("DOMContentLoaded", function(){
 		</div>
 
 	</div>
-	<!-- ------------------------------內容2結束區塊--------------------------------- -->
+<!-- -----------------------------------內容2區塊-結束--------------------------------- -->
 		
-	<!-- ------------------------------內容3開始區塊--------------------------------- -->	
-	<div class="centerDiv">
+<!-- -----------------------------------內容3區塊-開始--------------------------------- -->	
+<!-- 	<div class="centerDiv"> -->
 
-<!-- 		<div> -->
+<!-- </div> -->
+<!----------------------------------- 測試Google Maps Api開始	--------------------- -->
+<!-- Google Maps 金鑰20210703 Create- -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAslkjoKdTG8kP9v47BpOssCN7VQ20oAFE&callback=initMap" async defer></script> -->
 
-<!-- 			<img -->
-<%-- 				src="${pageContext.request.contextPath}/images/sportMap/MapSport2.png" --%>
-<!-- 				width="90%" height="90%"> -->
-<!-- 		</div> -->
-<!-- 		<div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div> -->
-<!-- 			<div class="">說明文字說明文字說明文字說明文字說明文字說明文字</div>				 -->
+<div class="centerDiv" style="background-color: #f2f2f2;"><h3>Let's Show All Maps</h3></div>   
+<div id="map"></div>  
 
-<!-- 		</div> -->
-	</div>	
-	
 
-	<!-- ------------------------------內容3結束區塊--------------------------------- -->
 
-	
-	
-	
-	
-	
-	
+<script>
+var map;
+var markers = [];
+var position = [
+  {label:'1',lat:25.038644735174145,lng:121.51948345530062}, 
+  {label:'2',lat:25.0390672564532,lng:121.509871283183},
+  {label:'3',lat:25.0476608,lng:121.5067638},
+  {label:'4',lat:25.02207361,lng:121.5067318},
+  {label:'5',lat:25.02207361,lng:121.5067318},
+  {label:'6',lat:25.02082072,lng:121.54574},
+  {label:'7',lat:25.02289828,lng:121.5356686},
+  {label:'8',lat:25.03121642,lng:121.5355627},
+  {label:'9',lat:25.0247905,lng:121.5462804},
+  {label:'10',lat:25.01342204,lng:121.540205},
+  {label:'11',lat:24.99736765,lng:121.5592647},
+  {label:'12',lat:24.98715283,lng:121.5604168},
+  {label:'13',lat:24.99024539,lng:121.5598142},
+  {label:'14',lat:25.03187456,lng:121.5667817},
+  {label:'15',lat:25.02613813,lng:121.5704288},
+  {label:'16',lat:25.02597036,lng:121.5616911},
+  {label:'17',lat:25.02598008,lng:121.5616911},
+  {label:'18',lat:25.04905532,lng:121.5817973},
+  {label:'19',lat:25.04296751,lng:121.6178838},
+  {label:'20',lat:25.04296401,lng:121.5848328},
+  {label:'21',lat:25.05534678,lng:121.6036616},
+  {label:'22',lat:25.0471241,lng:121.6139101},
+  {label:'23',lat:25.08957743,lng:121.52149},
+  {label:'24',lat:25.09254198,lng:121.5172493},
+  {label:'25',lat:25.11342948,lng:121.5330396},
+  {label:'26',lat:25.10809268,lng:121.5219103},
+  {label:'27',lat:25.08612179,lng:121.5211944},
+  {label:'28',lat:25.11087685,lng:121.5315604},
+  {label:'29',lat:25.11666747,lng:121.5097726},
+  {label:'30',lat:25.13658619,lng:121.5012822},
+  {label:'31',lat:25.05512275,lng:121.5213503},
+  {label:'33',lat:25.07043091,lng:121.5287224},
+  {label:'34',lat:25.06512496,lng:121.5161826},
+  {label:'35',lat:25.04993147,lng:121.5138007},
+  {label:'36',lat:25.07372866,lng:121.510443},
+  {label:'37',lat:25.05818368,lng:121.5155188},
+  {label:'38',lat:25.04880138,lng:121.5503383},
+  {label:'39',lat:25.0613648,lng:121.5664167},
+  {label:'40',lat:25.05156091,lng:121.5508591},
+  {label:'41',lat:25.0498979,lng:121.5524425},
+  {label:'42',lat:25.07837987,lng:121.5750078},
+  {label:'43',lat:25.08293651,lng:121.5829353},
+  {label:'44',lat:25.06661251,lng:121.574362},
+  {label:'45',lat:25.06244523,lng:121.6045965},
+  {label:'46',lat:25.02290242,lng:121.4577281},
+  {label:'47',lat:24.99325477,lng:121.4874544},
+  {label:'49',lat:25.04000848,lng:121.4483854},
+  {label:'50',lat:25.02044232,lng:121.4336521},
+  {label:'51',lat:25.02362075,lng:121.4440153},
+  {label:'52',lat:25.02632434,lng:121.4240012},
+  {label:'53',lat:25.04163099,lng:121.4464303},
+  {label:'54',lat:25.04077787,lng:121.4518275},
+  {label:'55',lat:25.18757548,lng:121.4428718},
+  {label:'56',lat:25.05474423,lng:121.4879564},
+  {label:'57',lat:25.06156203,lng:121.4862319},
+  {label:'58',lat:25.088398,lng:121.4903423},
+  {label:'59',lat:25.05993588,lng:121.4809068},
+  {label:'60',lat:25.09531313,lng:121.4484301},
+  {label:'61',lat:25.08658865,lng:121.3805174},
+  {label:'62',lat:25.07810922,lng:121.3691106},
+  {label:'63',lat:25.06823069,lng:121.3997148},
+  {label:'64',lat:25.09133104,lng:121.462328},
+  {label:'65',lat:24.98572468,lng:121.4571864},
+  {label:'66',lat:25.00344901,lng:121.5244646},
+  {label:'67',lat:25.01098334,lng:121.508727},
+  {label:'68',lat:24.96740109,lng:121.5424829}
+
+];
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 13,
+    center: {
+      lat: 25.04993147,
+      lng: 121.5138007     
+    }
+  });
+
+  for (var i = 0; i < position.length; i++) {
+    addMarker(i);
+  }
+}
+
+function addMarker(e) {
+  markers[e] = new google.maps.Marker({
+    position: {
+      lat: position[e].lat,
+      lng: position[e].lng
+    },
+    map: map,
+    animation: google.maps.Animation.BOUNCE,
+    // label: 'SoEasy',
+    label: position[e].label,
+    icon:'${pageContext.request.contextPath}/images/sportMap/Lucky.jpg'
+    	
+  });
+}
+
+</script>
+
+
+
+<!----------------------------------- 測試Google Maps Api結束	--------------------- -->
+<!-- ------------------------------內容3區塊-結束--------------------------------- -->
 	
 		
 	<!-- 引入共同的頁尾  copy這行-->
