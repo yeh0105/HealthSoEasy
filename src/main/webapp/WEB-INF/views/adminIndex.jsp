@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 	window.onload = function(){
-		var adminLouout = function(evt){
+		var adminLogout = function(evt){
 			location.href = "/soeasy/admin/logout";
 		}
 		
@@ -63,7 +63,7 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 		
-		document.getElementById('adminLogoutbtn').onclick = adminLouout;
+		document.getElementById('adminLogoutbtn').onclick = adminLogout;
 	}
 </script>
 

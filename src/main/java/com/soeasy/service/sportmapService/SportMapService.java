@@ -66,5 +66,6 @@ public interface SportMapService {
 	//抓依照區域(地址關鍵字)總共有幾頁(搭配抓分頁一頁有哪些地圖，依照區域(地址關鍵字))
 	Integer getTotalPagesByBySportMapAddress(String sportMapAddress);	
 
-		
+	//以多個Id查詢多張地圖
+	List<SportMapBean> findAllById(List<Integer> sportMapIds);
 }

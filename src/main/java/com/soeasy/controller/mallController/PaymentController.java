@@ -1,6 +1,9 @@
 package com.soeasy.controller.mallController;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
+import com.soeasy.model.CartItem;
+import com.soeasy.model.CustomerBean;
 import com.soeasy.model.Order.OrderBean;
 import com.soeasy.model.Order.PaymentModel;
 import com.soeasy.service.customerService.CustomerService;
@@ -55,7 +60,7 @@ public class PaymentController {
     }
 
     @PostMapping("/mall/pay")
-   public String payment(HttpServletRequest request){
+   public String payment(HttpServletRequest request, Model model, HttpSession session){
         //     * 取消頁
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
         //獲取成功頁
@@ -64,14 +69,26 @@ public class PaymentController {
         
         PaymentModel paymentModel = new PaymentModel();
       // List <OrderBean> order =;
+//        CustomerBean customerSignIn = (CustomerBean)model.getAttribute("customerSignInSuccess");
+//        CustomerBean originCustomer = customerService.findByCustomerId(customerSignIn.getCustomerId());
+        List<CartItem> cartItems = (List<CartItem>)session.getAttribute("cart");
+        Integer amount = 0;
+        StringBuilder description = new StringBuilder("");
         
+        for (CartItem cartItem : cartItems) {
+			amount += cartItem.getCartQuantity() * cartItem.getProduct().getProductPrice();
+			description.append(cartItem.getProduct().getProductName() + "*" + cartItem.getCartQuantity() + "\r\n");
+		}
+        System.out.println(description);
+        //運費60
+        amount += 60;
         //如何獲取訂單金額
         	//paymentModel.setAmount(order.getOrderTotalPrice().toString());
-       paymentModel.setAmount("100");
+       paymentModel.setAmount(String.valueOf(amount));
         //貨幣
         paymentModel.setCurrency("TWD");
         //付款描述
-        paymentModel.setDescription("payment description");
+        paymentModel.setDescription(description.toString());
         try {
             payment = paymentService.createPayment(paymentModel, cancelUrl, successUrl);
         } catch (PayPalRESTException e) {

@@ -70,7 +70,7 @@
 .customer-information-items > div{
 	width: 100%;
 	height: 20%;
-	font-size: 30px;
+	font-size: 22px;
 	
 	display: flex;
 	align-items: center; 
@@ -87,7 +87,7 @@
 	margin: 0px;
 	height: 70%;
 	width: 100%;
-	font-size: 28px;
+	font-size: 22px;
 	cursor: auto;
 }
 
@@ -148,7 +148,7 @@
 .customer-health-information-items > div{
 	width: 100%;
 	height: 15%;
-	font-size: 30px;
+	font-size: 22px;
 
 	border: 5px;
 	border-color: #C9D8BF;
@@ -165,14 +165,14 @@
 }
 
 .customer-health-information-items > div > div label{
-	font-size: 28px;
+	font-size: 22px;
 }
 
 .customer-health-information-items > div > div input{
 	margin: 0px;
 	height: 70%;
 	width: 100%;
-	font-size: 28px;
+	font-size: 22px;
 	cursor: auto;
 }
 
@@ -202,7 +202,7 @@
 	opacity: 70%;
 }
 
-.customer-favorite {
+.customer-favorite-map {
 	background-color: #C9D8BF;
 	width: 40%;
 	height: 620px;
@@ -210,5 +210,9 @@
 	margin-right: 10%;
 }
 
-
+.customer-favorite-map-items {
+	height: 100%;
+	display: flex;
+	align-items: center; 
+}
 

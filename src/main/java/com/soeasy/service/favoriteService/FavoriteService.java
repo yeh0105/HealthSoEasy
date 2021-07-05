@@ -17,5 +17,7 @@ public interface FavoriteService {
 	
 	public List<FavoriteBean> findByFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory);
 	
+	public List<FavoriteBean> findByCategoryAndCustomer(String favoriteCategory, CustomerBean customerBean);
+		
 	public Integer countFavoriteItemIdAndFavoriteCategory(Integer favoriteItemId, String favoriteCategory);
 }

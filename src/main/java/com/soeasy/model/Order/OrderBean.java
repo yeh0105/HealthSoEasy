@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.soeasy.model.CustomerBean;
 
 @Entity
@@ -61,6 +62,7 @@ public class OrderBean implements Serializable {
 		@Column(name = "fk_customerId")
 		private Integer customerId;
 
+		@JsonIgnore
 		@ManyToOne(fetch = FetchType.EAGER)
 		@JoinColumn(name = "fk_customerId")
 		private CustomerBean customerBean;

@@ -178,7 +178,7 @@
 							
 							</div>
 							<div class="proceed-btn mt-30">
-								<a href="<c:url value='/mall/cart/checkoutinformation'/>"
+								<a href="<c:url value='/mall/cart/checkout'/>"
 									class="theme-btn w-100 text-center br-10">Proceed Checkout</a>
 							</div>
 						</div>

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "OrderDetail")
 public class OrderDetailBean implements Serializable {
@@ -37,6 +39,7 @@ public class OrderDetailBean implements Serializable {
 	@Column(name = "fk_orderId")
 	private Integer orderId;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_orderId")
 	private OrderBean orderBean;
