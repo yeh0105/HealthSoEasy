@@ -30,9 +30,9 @@ public class GlobalService {
 	public static final int SPORTMAPS_PER_PAGE = 6;
 
 	// 講座狀態
-	public static final Integer LECTURE_STATUS_TOBEHELD = 1; // 即將舉辦
+	public static final Integer LECTURE_STATUS_UPCOMING = 1; // 即將舉辦
 	public static final Integer LECTURE_STATUS_ONGOING = 2; // 進行中
-	public static final Integer LECTURE_STATUS_HISTORY = 3; // 精采回顧
+	public static final Integer LECTURE_STATUS_ARCHIVED = 3; // 精采回顧
 
 	// 講座分類
 	public static final Integer LECTURE_CATEGORY_EAT = 1; // 飲食

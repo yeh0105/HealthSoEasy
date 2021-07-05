@@ -115,20 +115,38 @@ ul.slides li img{
 	column-gap: 3em;
 }
 
-.box img.lectureImg{
+.lectureImg{
 /* 	width: 50%; */
 /* 	height: 50%; */
-	padding-top: 25%;
+	padding-top: 12%;
 }
 
-.box a{
-	float: right;
+/* .box boxRight{ */
+/* 	float: right; */
+/* } */
+
+p{
+/* 	padding-left: 1%; */
+font-weight: 80%;
 }
 
-.lectureTitle{
-	padding-top: 5%;
-	padding-left: 5%;
-	color: #1d3b2a;
+font.lectureTitle{
+	margin:auto;
+	padding: 2% 5%;
+/* 	padding-left: 5%; */
+	font-weight: bold;
+	font-size: x-large;
+	background: darkgreen;
+  	color: #fff;
+  	text-shadow: 0 0.05em 0.08em rgba(0,0,0,0.7);
+  	display: inline-block;
+}
+
+p.lectureDate, p.lectureCategory{
+	padding-top: 3%;
+/* 	padding-left: 5%; */
+	color: darkgreen;
+	font-size: large;
 }
 
 

@@ -5,11 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-</style>
 <title>講師介紹</title>
-<script type="text/javascript"
-	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">
@@ -21,11 +17,25 @@
 	rel="stylesheet">
 <link rel="stylesheet" href="css/categoryNav.css">
 <link href="css/header&footer.css" rel="stylesheet">
+
+<!-- 標題字型 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap"
+	rel="stylesheet">
+<!-- 輪播 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/lecture/lectureIndex.css">
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 
+	<!-- 	綠底標頭 -->
 	<div class="mainWrapper">
 		<section id="offer">
 			<div style="background-color: #C9D8BF; text-align: center;">
@@ -38,10 +48,26 @@
 		</section>
 	</div>
 
-	<section>
-		<a href="<c:url value='/lecturerController/getAllLecturers' />"><button class="btn1">查詢所有講師</button></a>
-		<a href='<c:url value='/lecturerController/addLecturer' />'><button class="btn1">新增講師資料</button></a>	
-	</section>
+	<!---------------------- 內容開始區 ---------------------->
+
+	<!------- 小表頭區 ------->
+	<div id='pageWrapper'>
+		<div id='headerBlank'>
+			<a href='<c:url value='/'></c:url>'><button
+					class="custom-btn btn-5">首頁</button></a> <a
+				href='<c:url value='lectureIndex' />'><button
+					class="custom-btn btn-5">講座介紹</button></a> <input type="text"
+				class="search-bar" placeholder="搜尋講座">
+		</div>
+		<hr>
+	</div>
+
+	<!-- 講師介紹 -->
+
+
+	<!-- JS引入 -->
+	<script
+		src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
 
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
