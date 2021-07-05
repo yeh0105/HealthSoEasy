@@ -33,7 +33,7 @@ public class LecturerBean implements Serializable {
 	private Blob lecturerImg;
 
 	@Transient
-	private MultipartFile lectureMultiImg;
+	private MultipartFile lecturerMultiImg;
 
 	// -------------------------------------
 	public LecturerBean() {
@@ -80,12 +80,12 @@ public class LecturerBean implements Serializable {
 		this.lecturerImg = lecturerImg;
 	}
 
-	public MultipartFile getLectureMultiImg() {
-		return lectureMultiImg;
+	public MultipartFile getLecturerMultiImg() {
+		return lecturerMultiImg;
 	}
 
-	public void setLectureMultiImg(MultipartFile lectureMultiImg) {
-		this.lectureMultiImg = lectureMultiImg;
+	public void setLecturerMultiImg(MultipartFile lecturerMultiImg) {
+		this.lecturerMultiImg = lecturerMultiImg;
 	}
 
 }
