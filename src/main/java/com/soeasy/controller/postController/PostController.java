@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,20 +18,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
+import com.soeasy.model.ReplyBean;
+import com.soeasy.service.customerService.CustomerService;
+import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.postService.PostCategoryService;
 import com.soeasy.service.postService.PostService;
 
 @Controller
 @RequestMapping("/PostController")
+@SessionAttributes({ "customerSignInSuccess" })
 public class PostController {
 
 	@Autowired
@@ -38,6 +47,12 @@ public class PostController {
 
 	@Autowired
 	PostCategoryService postCategoryService;
+
+	@Autowired
+	CustomerService customerService;
+
+	@Autowired
+	FavoriteService favoriteService;
 
 	@Autowired
 	ServletContext context;
@@ -50,14 +65,14 @@ public class PostController {
 
 		return list;
 	}
-	
+
 	// 查詢所有文章的 TOP10
 	@GetMapping(value = "/getTop10Post", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<PostBean> getTop10() {
 //		System.err.println("進入getTop10Post");
-		
+
 		List<PostBean> list = postService.findTop10();
-		
+
 //		System.err.println("list=" + list);
 //		System.err.println("出去PostController");
 		return list;
@@ -78,11 +93,13 @@ public class PostController {
 
 	// 取得所有文章
 	@GetMapping(value = "/getAllPost.json", produces = { "application/json; charset=UTF-8" })
-	public ResponseEntity<Map<String, Object>> getPageBook(
+	public @ResponseBody Map<String, Object> getPageBook(Model model,
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
 
-//		System.err.println("接收到/pagingPostData.json請求");
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+
+		// System.err.println("接收到/pagingPostData.json請求");
 
 		if (pageNo == null) {
 			pageNo = 1; // 網址加?pageNo=測試
@@ -95,17 +112,50 @@ public class PostController {
 		Map<String, Object> postmap = new HashMap<>();
 		List<PostBean> listTarget = postService.getPagePosts(pageNo);
 
+//		List<PostBean> newlist = new ArrayList();
+
 //		System.err.println("postmap=" + postmap);
+//		
+		String post = "post";
+//		
+		for (PostBean postBean : listTarget) {
+			Integer postId = postBean.getPostId();
+			System.err.println("postId=" + postId);
+
+//			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+
+//				System.err.println("originalCustomer=" + originalCustomer);
+				System.err.println("postId=" + postId);
+				System.err.println("post=" + post);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					postBean.setFavoriteStatus(true);
+				} else {
+					postBean.setFavoriteStatus(false);
+				}
+
+			}
+
+//			newlist.add(postBean);
+		}
 
 		postmap.put("currPage", String.valueOf(pageNo));
 		postmap.put("totalPage", totalPage);
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		postmap.put("post_DPP", postService.getPagePosts(pageNo));
+//		postmap.put("post_DPP", newlist);
+		postmap.put("post_DPP", listTarget);
 //		System.err.println("newpostmap=" + postmap);
 
-		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);
+//		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);
 
-		return re;
+//		return re;
+		return postmap;
 
 	}
 

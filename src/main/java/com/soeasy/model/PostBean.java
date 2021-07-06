@@ -72,7 +72,7 @@ public class PostBean implements Serializable {
 	private CustomerBean customerBean;
 
 	// 回覆(So分享)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "postBean", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "postBean", cascade = CascadeType.ALL)
 	Set<ReplyBean> replyBeans = new LinkedHashSet<ReplyBean>();
 
 	// 類別
