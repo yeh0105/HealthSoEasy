@@ -155,8 +155,8 @@
 		        +		'<span class="cell-label">Status:</span>'
 		        +		status
 		        +	'</div>'
-		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + customer.customerEmail + '</div>'
-		        +	'<div class="product-cell stock"><span class="cell-label">Phone:</span>' + customer.customerPhone + '</div>'
+		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + customer.customerEmail.substring(0,12) + '...</div>'
+		        +	'<div class="product-cell stock" style="letter-spacing: 1px;"><span class="cell-label">Phone:</span>' + customer.customerPhone + '</div>'
 		        +	'<div class="product-cell stock"><span class="cell-label">Nickname:</span>' + customer.customerNickname + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">Score:</span>' + customer.customerScore + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">BirthDay:</span>' + customer.customerBirthDay + '</div>'

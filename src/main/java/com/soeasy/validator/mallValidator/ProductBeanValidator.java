@@ -32,6 +32,9 @@ public class ProductBeanValidator implements Validator {
 		if (product.getProductMultiImg().isEmpty()) {
 			errors.rejectValue("productMultiImg", "", "要記得上傳圖片喔");
 		}
+		if (product.getProductDescription().length() > 800) {
+			errors.rejectValue("productMultiImg", "", "字數超過800");
+		}
 	}
 
 }

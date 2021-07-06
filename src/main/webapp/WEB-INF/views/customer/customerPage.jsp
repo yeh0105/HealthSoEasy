@@ -17,8 +17,8 @@
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/customerPage.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/sportMap_getAll.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/sportMap_getAll.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/customerPageSlide.css" rel="stylesheet">
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function(){
 // 		基本資料欄位
@@ -241,8 +241,56 @@
 		function imgSubmit () {
 			document.getElementById("customerImgSubmit").click();			
 		}
-	})
+// 		---------------------------------------------------------------------------------------
+// 		輪播JS
+		
 
+		var slideIndex = 1;
+		showSlides(slideIndex);
+
+		let dots = document.querySelectorAll(".dot");
+		for(let i = 0; i < dots.length; i++){
+			dots[i].addEventListener("click", function(){
+				currentSlide(i + 1);
+			});
+		}
+
+		let prevSlides = document.getElementById("prevSlides");
+		let nextSlides = document.getElementById("nextSlides");
+		prevSlides.addEventListener("click", function(){
+			plusSlides(-1);
+		});
+		nextSlides.addEventListener("click", function(){
+			plusSlides(1);
+		});
+		
+		// Next/previous controls
+		function plusSlides(n) {
+  			showSlides(slideIndex += n);
+		}
+
+		// Thumbnail image controls
+		function currentSlide(n) {
+  			showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+  			var i;
+  			var slides = document.getElementsByClassName("mySlides");
+  			var dots = document.getElementsByClassName("dot");
+  			if (n > slides.length) {slideIndex = 1}
+  			if (n < 1) {slideIndex = slides.length}
+  			for (i = 0; i < slides.length; i++) {
+      			slides[i].style.display = "none";
+  			}
+  			for (i = 0; i < dots.length; i++) {
+      			dots[i].className = dots[i].className.replace(" active", "");
+  			}
+  			slides[slideIndex-1].style.display = "block";
+  			dots[slideIndex-1].className += " active";
+		}
+	})
+	
 </script>
 
 </head>
@@ -436,51 +484,71 @@
 				
 			<div class="customer-favorite-map">
 				<div class="container customer-favorite-map-items">
-				<c:forEach var="sportMap" items="${sportMaps}">
-					<div class='column'>
-				<div class='demo-title'>${sportMap.sportCategoryBean.sportCategoryName}</div>
-				<div class='post-module'>
-					<div class='thumbnail'>
-						<div class='date'>
-							<div class='day'>go</div>
-							<div class='month'>go</div>
-														
-							
-						</div>
-						${sportMap.sportMapMap}
-					</div>
-					<div class='post-content'>
-						<div class='category'>Map</div>
-						<h3 class='sub_title'>運動地點：${sportMap.sportMapName}</h3>
-						<h3 class='description'>地址：${sportMap.sportMapAddress}</h3>
-						<div class='post-meta'>
-							<span class='timestamp'> <i class='fa fa-clock-o'></i>
-								${sportMap.sportCategoryBean.sportCategoryName}
-							</span>
-							<span class='comments'> <i class='fa fa-comments'></i> <a
-								href="<c:url value='/sportMapController/sportMap/${sportMap.sportMapId}' />">詳細資訊</a>
-							</span> 
+				
+<!-- 				------------------------- -->
+					<div class="slideshow-container">
+						<a class="prev" id="prevSlides">&#10094;</a> 
+
+					<c:forEach var="sportMap" items="${sportMaps}">
+						<div class="mySlides fade-map">
+					<div class='column' style="margin: 0 20px 10px 20px; height: 50%">
+						<div class='demo-title'>${sportMap.sportCategoryBean.sportCategoryName}</div>
+						<div class='post-module'>
+							<div class='thumbnail'>
+								<div class='date'>
+									<div class='day'>go</div>
+									<div class='month'>go</div>
+								</div>
+								${sportMap.sportMapMap}
+							</div>
+							<div class='post-content'>
+								<div class='category'>Map</div>
+								<h3 class='sub_title'>運動地點：${sportMap.sportMapName}</h3>
+								<h3 class='description'>地址：${sportMap.sportMapAddress}</h3>
+								<div class='post-meta'>
+									<span class='timestamp'> <i class='fa fa-clock-o'></i>
+										${sportMap.sportCategoryBean.sportCategoryName}
+									</span>
+									<span class='comments'> <i class='fa fa-comments'></i> <a
+										href="<c:url value='/sportMapController/sportMap/${sportMap.sportMapId}' />">詳細資訊</a>
+									</span> 
 <!-- 							<span class='comments'> <i class='fa fa-comments'></i>  -->
 <!-- 							<a	class='deleteSportMap' -->
 <%-- 								href="<c:url value='/' />sportMapController/del/${entry.value.sportMapId}">刪除</a> --%>
 <!-- 							</span> -->
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
 
-				</div>
-				</c:forEach>
+					</div>
+						</div>
+					</c:forEach>
+						<!-- Next and previous buttons -->
+						<a class="next" id="nextSlides">&#10095;</a>
+					<div style="text-align: center">
+					<c:forEach var="sportMap" items="${sportMaps}">
+						<span class="dot"></span> 
+					</c:forEach>
+						
+					</div>
+					</div>
+					<br>
+
+					<!-- The dots/circles -->
+
+
+					<!-- 				--------------------------------- -->
 				</div>
 			</div>
 <!-- 			---------------------------------------------------------------------------------------------------------- -->
 			<div>
 				<div class="customer-img">
 					<div id="imgUploadbtn">
-						<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg">
-						<form method="POST" action="uploadCustomerImg" enctype="multipart/form-data">
-							<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;">
-							<input id="customerImgSubmit" type="submit" style="display: none">
-						</form>
+<%-- 						<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg"> --%>
+<!-- 						<form method="POST" action="uploadCustomerImg" enctype="multipart/form-data"> -->
+<!-- 							<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;"> -->
+<!-- 							<input id="customerImgSubmit" type="submit" style="display: none"> -->
+<!-- 						</form> -->
 					</div>
 				</div>
 				<div class="customer-information" >
