@@ -2,7 +2,9 @@ package com.soeasy.service.shopService;
 
 import java.util.List;
 
+import com.soeasy.model.ProductBean;
 import com.soeasy.model.ShopBean;
+import com.soeasy.model.Order.OrderBean;
 
 public interface ShopService {
 
@@ -29,4 +31,10 @@ public interface ShopService {
 	
 	//以狀態查詢廠商
 	List<ShopBean> getShopByStatus(Integer shopStatus);
+	
+	//前台
+	public List<ProductBean> findAllwithProduct(Integer shopId);
+	
+
+	
 }

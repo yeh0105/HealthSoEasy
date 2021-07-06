@@ -27,17 +27,14 @@
 
 <div>
  
-<span class="text-right"><a href="<c:url value='/mall/add'/>" class="btn btn-primary">New Product</a></span>
-<span class="text-right"><a href="<c:url value='/mall/category'/>" class="btn btn-primary">分類</a></span>
-<span class="text-right"><a href="<c:url value='/mall/cart/index'/>" class="btn btn-primary">購物車</a></span>
-<span class="text-right"><a href="<c:url value='/mall/order/history'/>" class="btn btn-primary">Order History</a></span>
-<span class="text-right"><a href="<c:url value='/mall/paypal'/>" class="btn btn-primary">Paypal</a></span>
+<span class="text-right"><a href="<c:url value='/shop/add'/>" class="btn btn-primary">New Product</a></span>
+<%-- <span class="text-right" ><a href="<c:url value='/mall/category'/>" class="btn btn-primary">分類</a></span> --%>
 
 </div>
 &nbsp;
 
 <div >
-<form action="<c:url value='/mall/lists/1'/>">
+<form action="<c:url value='/shop/shoplist/1'/>">
 <input type="hidden" name="sortField"  value="${sortField}"/>
 <input type="hidden" name="sortDir"  value="${sortDir}"/>
 查詢:
@@ -59,18 +56,16 @@
 
  <tr>
 
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>"><button>#ID</button></a></th>
- 	<th> </th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productName&sortDir=${reverSortDir}'/>"><button>產品名稱</button></a></th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}'/>"><button>產品分類</button></a></th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productCategory&sortDir=${reverSortDir}'/>"><button>分類(測試用)</button></a></th>
- 	<th>產品描述</th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productCalories&sortDir=${reverSortDir}'/>"><button>熱量</button></a></th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productAmount&sortDir=${reverSortDir}'/>"><button>產品庫存</button></a></th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productPrice&sortDir=${reverSortDir}'/>"><button>產品價格</button></a></th>
- 	<th> <a href="<c:url value='/mall/lists/${currentPage}?sortField=productDate&sortDir=${reverSortDir}'/>"><button>產品上架日期</button></a></th>
+ 	<th> #ID</th>
+ 	<th>IMG</th>
+ 	<th>產品名稱</th>
+ 	<th>產品分類</th>
+ 	<th style="text-align:center">產品描述</th>
+ 	<th>熱量</th>
+ 	<th>產品庫存</th>
+ 	<th>產品價格</th>
+ 	<th> 產品上架日期</th>
  	<th>修改</th>
- 	<th>購買</th>
  	
 
  </tr>
@@ -86,7 +81,7 @@
  <tr>
 
  <td>${product.productId}</td>
- <td><img class="media-object" style="weight:70px;height:70px"src="<c:url value='/mall/getImage/${product.productId}' />"
+ <td><img class="media-object" style="weight:70px;height:70px"src="<c:url value='/shop/getImage/${product.productId}' />"
 	alt="Product Image"></td>
  <td>${product.productName}</td>
 <%--  <td>${product.category}</td> --%>
@@ -101,16 +96,14 @@
 </c:choose>
  </td>
  
- <td></td>
  <td>${product.productDescription}</td>
  <td>${product.productCalories}</td>
  <td>${product.productAmount}</td>
  <td>${product.productPrice}</td>
  <td>${product.productDate}</td>
- <td><a href="<c:url value='/mall/lists/product/${product.productId}'/>"><button>詳情</button></a>
- <a href="<c:url value='/mall/update/${product.productId}'/>"><button>更新</button></a>
- <a onclick="return del(this)" href="${pageContext.request.contextPath }/mall/delete/${product.productId}"><button >刪除</button></a></td>
- <td><a href="<c:url value='/mall/cart/buy/${product.productId}'/>"><button>加入購物車</button></a></td>
+ <td><a href="<c:url value='/shop/productdetail/${product.productId}'/>"><button>詳情</button></a>
+ <a href="<c:url value='/shop/update/${product.productId}'/>"><button>更新</button></a>
+ <a onclick="return del(this)" href="${pageContext.request.contextPath }/shop/delete/${product.productId}"><button >刪除</button></a></td>
  </tr>
  
 
@@ -121,48 +114,7 @@
  </table>
  
  
- <!-- ---------------------------控制分頁用----------------------------------- -->
- <span>產品總數:<c:out value="${totalItems}"/></span>
- <nav style="width:300px;margin:0px auto">
  
- 
- 
-<ul class=pager>
-
-<!--  上頁 -->
-<li class=previous> 
-	<c:choose>
-		<c:when test="${currentPage > 1}">
-			<a href="<c:url value='/shop/shoplist/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
-		</c:when>
-		<c:otherwise>
-			<a>Previous</a>
-		</c:otherwise>
-	</c:choose>
-</li>
-<!-- 上頁結束 -->
-
-<li style="font-style:italic;color:	#00477D">Page &nbsp;<c:out value="${currentPage}"/>&nbsp; of &nbsp;&nbsp;<c:out value="${totalPages}"/></li>
-
-
- <!--  下頁 -->
-<li class=next> 
-	<c:choose>
-		<c:when test="${currentPage < totalPages}">
-			<a href="<c:url value='/shop/shoplist/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
-		</c:when>
-		<c:otherwise>
-			<a>Previous</a>
-		</c:otherwise>
-	</c:choose>
-</li>
-<!-- 下頁結束 -->
- 
-</ul>
- </nav>
-
-<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
-
 
  
   <!-------------- end of container------------- -->

@@ -7,8 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.soeasy.model.CustomerBean;
+import com.soeasy.model.ProductBean;
 import com.soeasy.model.ShopBean;
+import com.soeasy.model.Order.OrderBean;
 import com.soeasy.repository.shopRepository.ShopRepository;
 import com.soeasy.service.shopService.ShopService;
 
@@ -33,7 +34,7 @@ public class ShopServiceImpl implements ShopService {
 	public ShopBean checkEmailPassword(String shopEmail, String shopPassword) {
 		ShopBean shopBean = null;
 		List<ShopBean> shopBeans = shopRepository.findByShopEmailAndShopPassword(shopEmail, shopPassword);
-		if(shopBeans.size() > 0) {
+		if (shopBeans.size() > 0) {
 			shopBean = shopBeans.get(0);
 		}
 		return shopBean;
@@ -57,7 +58,7 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public void updateShopStatus(ShopBean shop, Integer shopStatus) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -70,6 +71,19 @@ public class ShopServiceImpl implements ShopService {
 		return shopRepository.findByShopStatus(shopStatus);
 	}
 	
+	
+	//尋找訂單 by 顧客ID (前台給顧客用)
+		public List<ProductBean> findAllwithProduct(Integer shopId){
+			return shopRepository.findAllWithProduct(shopId);
+		}
+
+	
+
+
+
+
+
+
 	
 
 }

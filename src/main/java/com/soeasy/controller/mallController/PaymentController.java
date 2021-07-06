@@ -19,6 +19,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.soeasy.model.CartItem;
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.PostBean;
 import com.soeasy.model.Order.OrderBean;
 import com.soeasy.model.Order.PaymentModel;
 import com.soeasy.service.customerService.CustomerService;
@@ -111,7 +112,7 @@ public class PaymentController {
 
   //執行付款
     @GetMapping(value = PAYPAL_SUCCESS_URL)
-    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,HttpSession session,Model model){
         Payment payment = null;
         try {
             payment = paymentService.executePayment(paymentId, payerId);
@@ -121,8 +122,19 @@ public class PaymentController {
         if(payment.getState().equals("approved")){
         	System.out.println("支付成功"+"paymentId:"+paymentId+"====payerId:"+payerId);
         	
-            OrderBean order = new OrderBean();
+        	//根據最新的訂單ID 去修改付款狀態"paid"
+			CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+			//OrderBean orderBean=new OrderBean();
+            OrderBean order = orderService.getMaxIdOrder();
+            System.out.println("最新orderId:"+order+"會員:"+customerBean.getCustomerId());
+
 			order.setPayStatus("paid");
+			orderService.save(order);
+
+			
+			//Remove cart
+			List<CartItem>cartTotalPrice=(List<CartItem>)session.getAttribute("cart");
+			session.removeAttribute("cart");
             return "/mall/paypal/success";
         }
         

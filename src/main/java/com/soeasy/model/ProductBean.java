@@ -161,12 +161,11 @@ public class ProductBean  implements Serializable{
 		this.shopBean = shopBean;
 	}
 
+
 	public Integer getCategory() {
 		return category;
 	}
 
-
-	
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
