@@ -1,5 +1,6 @@
 package com.soeasy.controller.adminController.adminManage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,6 +34,7 @@ import com.soeasy.model.LectureBean;
 import com.soeasy.model.LectureCategoryBean;
 import com.soeasy.service.lectureService.LectureCategoryService;
 import com.soeasy.service.lectureService.LectureService;
+import com.soeasy.util.GlobalService;
 import com.soeasy.validator.lectureValidator.LectureBeanValidator;
 
 @Controller
@@ -46,12 +48,12 @@ public class AdminLecture {
 	LectureCategoryService lectureCategoryService;
 
 	@Autowired
-	ServletContext context;
+	ServletContext servletContext;
 
 	// 後台講座首頁
 	@GetMapping("/adminLecture")
 	public String adminLectureIndex(Model model) {
-		model.addAttribute("lecture", lectureService.getAllByLectureId());
+		model.addAttribute("lectures", lectureService.getAllByLectureId());
 		return "/admin/adminLecture/adminLecture";
 	}
 
@@ -100,6 +102,20 @@ public class AdminLecture {
 				}
 			}
 			
+			Date date = new Date(System.currentTimeMillis());
+			if((date.getTime()-lectureBean.getLectureDate().getTime()) / (86400000 *1) >= 1) {
+				System.out.println("精彩回顧");
+				lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
+			}else if((date.getTime()-lectureBean.getLectureDate().getTime()) / (86400000 *1) == 0) {
+				System.out.println("現正進行");
+				lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
+			}else if((date.getTime()-lectureBean.getLectureDate().getTime()) < 0) {
+				System.out.println("即將開始");
+				lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
+			}
+			
+			
+			
 			lectureService.addLecture(lectureBean);
 
 //			// 判斷講座時間
@@ -118,51 +134,50 @@ public class AdminLecture {
 		}
 	
 	// 讀圖轉成位元組陣列
-	@RequestMapping(value = "/getImage/{lectureId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getLectureImage/{lectureId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getImage(HttpServletRequest resp, @PathVariable Integer lectureId) {
-		String filePath = "/image/NoImage.jpg";
-		byte[] media = null;
-		String filename = "";
-		int len = 0;
 		LectureBean lectureBean = lectureService.getOneByLectureId(lectureId);
-		if (lectureBean != null) {
-			Blob blob = lectureBean.getLectureImg();
-			if (blob != null) {
-				try {
-					len = (int) blob.length();
-					media = blob.getBytes(1, len);
-				} catch (SQLException e) {
-					throw new RuntimeException("StudentController的getPicture()發生SQLException: " + e.getMessage());
-				}
-			} else {
-				media = toByteArray(filePath);
-				filename = filePath;
-			}
-		} else {
-			media = toByteArray(filePath);
-			filename = filePath;
-		}
-		ResponseEntity<byte[]> re = new ResponseEntity<>(media, HttpStatus.OK);
 
-		return re;
-	}
-
-	// 方法toByteArray
-	private byte[] toByteArray(String filePath) {
-		byte[] b = null;
-		String realPath = context.getRealPath(filePath);
+		
+		Blob customerImg = lectureBean.getLectureImg();
+		
+		InputStream is = null;
+		String fileName = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		
 		try {
-			File file = new File(realPath);
-			long size = file.length();
-			b = new byte[(int) size];
-			InputStream fis = context.getResourceAsStream(filePath);
-			fis.read(b);
-		} catch (FileNotFoundException e) {
+			if (customerImg != null) {
+				is = customerImg.getBinaryStream();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/salad.png)	
+			if(is == null) {
+				fileName = "salad.png";
+				is = servletContext.getResourceAsStream(
+						"/images/" + fileName);
+			}
+			
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[8192];
+			
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			
+			media = baos.toByteArray();
+			responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} finally{
+			try {
+				if (is != null) is.close();
+			} catch(IOException e) {
+				;
+			}
 		}
-		return b;
+		return responseEntity;
 	}
 
 	// 產生講座類型radio選單
@@ -198,7 +213,7 @@ public class AdminLecture {
 		return "redirect:/admin/adminManage/adminLecture";
 	}
 
-	// 查詢修改單筆講座表單
+	// 查詢單筆講座表單
 	@GetMapping(value = "/adminLecture/updateLecture/{lectureId}")
 	public String getOneByLectureId(@PathVariable("lectureId") Integer lectureId, Model model) {
 		LectureBean lectureBean = lectureService.getOneByLectureId(lectureId);

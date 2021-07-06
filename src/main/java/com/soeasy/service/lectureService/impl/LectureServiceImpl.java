@@ -30,7 +30,7 @@ public class LectureServiceImpl implements LectureService {
 	// 查詢一筆講座
 	@Override
 	public LectureBean getOneByLectureId(Integer lectureId) {
-		return lectureRepository.findByLectureId(lectureId).get(lectureId);
+		return lectureRepository.getById(lectureId);
 	}
 
 	// 查詢全部講座
