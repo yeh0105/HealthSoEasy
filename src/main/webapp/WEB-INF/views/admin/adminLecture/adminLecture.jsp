@@ -271,7 +271,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell category"><span class="cell-label">Title :</span>${lecture.lectureTitle}</div>
         <div class="product-cell status-cell"><span class="cell-label">Category :</span><span class="status active">${lecture.lectureCategory}</span></div>
         <div class="product-cell sales"><span class="cell-label">Content :</span>${lecture.lectureContent}</div>
-        <div class="product-cell image"><img src="<c:url value='/lectureController/getImage/${lecture.lectureId}' />" alt="lecture"><span>${lecture.lectureId}</span></div>
+        <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLectureImage/${lecture.lectureId}' />" alt="lecture"></div>
         <div class="product-cell price"><span class="cell-label">Date :</span>${lecture.lectureDate}</div>
         <div class="product-cell status-cell"><span class="cell-label">Status :</span><span class="status active">${lecture.lectureStatus}</span></div>
         
