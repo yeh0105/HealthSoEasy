@@ -27,5 +27,9 @@ public class NutritionistValidator implements Validator{
 		if(nutritionistBean.getNutritionistCategoryBean().getNutritionistCategoryId()== -1) {
 			errors.rejectValue("nutritionistCategoryBean", "","必須挑選專長分類欄的選項");
 		}
+		
+		if(nutritionistBean.getNutritionistMultiImg().isEmpty()) {
+			errors.rejectValue("nutritionistMultiImg","","必須挑選照片");
+		}
 	}
 }

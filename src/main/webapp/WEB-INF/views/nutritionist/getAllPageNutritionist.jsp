@@ -58,9 +58,15 @@ body * {
 .thumbnail {
 	float: left;
 	width: 320px;
+	height: 600px;
 	margin-left: 30px;
 	margin-right: 25px;
 	margin-top: 30px;
+}
+
+.imgvideo {
+	max-width: 100%;
+	height: 400px;
 }
 
 .page-icon {
@@ -218,7 +224,7 @@ document.addEventListener("DOMContentLoaded",function() {
 		//內容
 		(nutritionists).forEach(nutritionist =>{
 			content += '<div class="thumbnail">'
-					+ '<img src="<c:url value="/nutritionistController/getImage/'+nutritionist.nutritionistId+'" />"height="500px" width="300px" />'
+					+ '<img class="imgvideo" src="<c:url value="/nutritionistController/getImage/'+nutritionist.nutritionistId+'" />"height="500px" width="300px" />'
 					+ '<div class="caption">'
 					+ '<h3> 姓名 : <font id="h3css2">'+nutritionist.nutritionistName+'</font></h3>'
 					+ '<p> 專長 : <font id="pcss">'+nutritionist.nutritionistCategory+'</font></p>'
