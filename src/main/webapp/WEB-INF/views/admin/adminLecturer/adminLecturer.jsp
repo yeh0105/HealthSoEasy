@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Lecture</title>
+<title>Admin Lecturer</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -200,9 +200,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">&nbsp;
       <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>"><button class="app-content-headerButton">講座</button></a>&nbsp;
-      <button class="app-content-headerButton">講座預約</button>&nbsp;
-      <button class="app-content-headerButton">講座介紹</button>&nbsp;
-      <button class="app-content-headerButton">推薦文</button>
+      <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp;
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -259,23 +257,23 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell price">Delete</div>
       </div>
 	<!--       ----------------------一筆資料內容--開始--------------------- -->
-<%--       <c:forEach var='lecturer' items='${lecturer}'>  --%>
+      <c:forEach var='lecturer' items='${lecturers}'> 
       
-      <div id="showS" class="products-row">
+      <div class="products-row">
         <button class="cell-more-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
         </button>
-        <div class="product-cell image"><img src="${pageContext.request.contextPath}/images/lecturer/peeta葛格.PNG" alt="lecturerId"><span>${lecturerBean.lecturerId}</span></div>
-        <div class="product-cell category"><span class="cell-label">Category:</span>${lecturerBean.lecturerName}</div>
-        <div class="product-cell status-cell"><span class="cell-label"></span><span class="status active">${lecturerBean.lecturerTalent}</span></div>
-        <div class="product-cell sales"><span class="cell-label">Sales:</span>${lecturerBean.lecturerExp}</div>
-        <div class="product-cell image"><img src="https://media.gq.com.tw/photos/6020f92c227860657b96d7f3/16:9/w_3840%2cc_limit/%E5%9C%96%E7%89%872?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="lecturerImg"><span>${lecturerBean.lecturerImg}</span></div>
+        <div class="product-cell price"><span class="cell-label">ID :</span>${lecturer.lecturerId}</div>
+        <div class="product-cell category"><span class="cell-label">Name :</span>${lecturer.lecturerName}</div>
+        <div class="product-cell sales"><span class="cell-label">Degree :</span>${lecturer.lecturerTalent}</div>
+        <div class="product-cell price"><span class="cell-label">Email :</span>${lecturer.lecturerExp}</div>
+        <div class="product-cell image"><img src="<c:url value='/lecturerController/getImage/${lecturer.lecturerId}' />" alt="lecturer"><span>${lecturer.lecturerId}</span></div>
         
         <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
         <div class="product-cell price"><button class="app-content-headerButton">Delete</button></div>
         
       </div>
-<%--       </c:forEach> --%>
+      </c:forEach>
       <!-- -------------------------一筆資料內容--結尾--------------------- -->
 	
       

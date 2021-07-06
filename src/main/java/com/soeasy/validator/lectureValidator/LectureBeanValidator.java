@@ -24,6 +24,9 @@ public class LectureBeanValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lectureDate", "", "日期不得空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lectureStatus", "", "狀態不得空白");
 
+		if (lecture.getLectureMultiImg().isEmpty()) {
+            errors.rejectValue("lectureMultiImg", "", "必須挑選圖片");
+        }
 	}
 
 }
