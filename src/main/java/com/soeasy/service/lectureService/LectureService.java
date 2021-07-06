@@ -19,6 +19,6 @@ public interface LectureService {
 	void updateLecture(LectureBean lectureBean);
 
 	//刪除
-	void deleteLecture(Integer lecturerId);
+	void deleteLecture(Integer lectureId);
 
 }
