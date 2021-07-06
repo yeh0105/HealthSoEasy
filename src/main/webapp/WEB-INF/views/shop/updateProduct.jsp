@@ -62,11 +62,13 @@
  <c:if test="${product.category==3}"><option value=3>豬肉餐盒</option></c:if>
  <c:if test="${product.category==4}"><option value=4>牛肉餐盒</option></c:if>
  <c:if test="${product.category==5}"><option value=5>素食餐盒</option></c:if>
+ <c:if test="${product.category==6}"><option value=6>生鮮食品</option></c:if>
 <option value=1>海鮮餐盒</option>
 <option value=2>雞肉餐盒</option>
 <option value=3>豬肉餐盒</option>
 <option value=4>牛肉餐盒</option>
 <option value=5>素食餐盒</option>
+<option value=6>生鮮食品</option>
  
 
  </form:select>

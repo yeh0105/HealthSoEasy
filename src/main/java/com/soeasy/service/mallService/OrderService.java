@@ -15,6 +15,9 @@ public interface OrderService {
 	List<OrderBean> findAllwithOrder();
 
 	void deleteById(Integer orderId);
+	
+	OrderBean getMaxIdOrder(); 
+
 
 
 }

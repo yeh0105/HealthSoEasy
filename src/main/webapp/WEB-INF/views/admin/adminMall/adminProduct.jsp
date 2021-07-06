@@ -223,11 +223,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <div class="filter-menu">
             <label>Category</label>
             <select>
-              <option>All Categories</option>
-              <option>Furniture</option>                     
-              <option>Decoration</option>
-              <option>Kitchen</option>
-              <option>Bathroom</option>
+              <option></option>
+              <option></option>                     
+              <option></option>
+              <option></option>
+              <option></option>
             </select>
             <label>Status</label>
             <select>
@@ -275,7 +275,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           </a>
           
         </div>
-        <div class="product-cell category">Category<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+        <div class="product-cell category">Category<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=category&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
@@ -283,7 +283,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           
         </div>
         
-        <div class="product-cell sales">Price <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+        <div class="product-cell sales">Price <a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productPrice&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
@@ -291,7 +291,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </div>
         
         
-        <div class="product-cell stock">Cost<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+        <div class="product-cell stock">Cost<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productCost&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
@@ -299,15 +299,20 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </div>
         
         
-        <div class="product-cell status-cell">Amount<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+        <div class="product-cell status-cell">Amount<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productAmount&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
           </button>
           </a>
         </div>
-        <div class="product-cell status-cell">Date<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productId&sortDir=${reverSortDir}'/>">
+        <div class="product-cell status-cell">Date<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage}?sortField=productDate&sortDir=${reverSortDir}'/>">
           <button class="sort-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="5" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+          </button>
+          </a>
+        </div>
+        <div class="product-cell status-cell">Shop 
+          <button class="sort-button">
           </button>
           </a>
         </div>
@@ -366,6 +371,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 						<div class="product-cell stock">
 							<span class="cell-label">Date:</span>${product.productDate}
 						</div>
+						<div class="product-cell stock">
+							<span class="cell-label">Shop</span>${product.shopBean.shopName}
+						</div>
 
 									<!--       更新(JSPu頁面建置)/刪除 按鈕 -->
 					
@@ -392,7 +400,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <li class=previous> 
 	<c:choose>
 		<c:when test="${currentPage > 1}">
-			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
+			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage - 1}?sortField=${sortField}&sortDir=${sortDir}'/>">Previous</a>
 		</c:when>
 		<c:otherwise>
 			<a>Previous</a>
@@ -409,10 +417,10 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <li class=next> 
 	<c:choose>
 		<c:when test="${currentPage < totalPages}">
-			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
+			<a href="<c:url value='/admin/adminManage/adminProduct/${currentPage + 1}?sortField=${sortField}&sortDir=${sortDir}'/>">Next</a>
 		</c:when>
 		<c:otherwise>
-			<a>Previous</a>
+			<a>Next</a>
 		</c:otherwise>
 	</c:choose>
 </li>

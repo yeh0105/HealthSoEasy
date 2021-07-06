@@ -63,20 +63,11 @@ public class ProductController {
 	            return "mall/mallDetail";
 	    }
 	
-	
-	//test
-	@GetMapping("/shoplist")
-	 public String getIndex1(Model model) {
-	            return "mall/productlists";
-	    }
-	
-	
-	
 	//頁面跳轉
 		@RequestMapping("/lists")
 		public String viewPage(Model model){
 			String keyword = null;
-			return ListByPage(model,1,"productName","asc",keyword);
+			return ListByPage(model,1,"productId","asc",keyword);
 		}
 
 
@@ -86,7 +77,8 @@ public class ProductController {
 	        @PathVariable("pageNo") int currentPage,
 	        @Param("sortField")String sortField,
 	        @Param("sortDir")String sortDir,
-	        @Param("keyword")String keyword)
+	        @Param("keyword")String keyword
+	        )
 			{
 			Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword);
 			    
@@ -110,7 +102,8 @@ public class ProductController {
 			}
 	
 	
-	// 查詢所有文章的 TOP3
+	
+	// 查詢產品的 TOP3
 		@GetMapping(value = "/getTop3Product", produces = { "application/json; charset=UTF-8" })
 		public @ResponseBody List<ProductBean> getTop3() {
 
@@ -120,10 +113,6 @@ public class ProductController {
 		}
 		
 		
-		
-	
-	
-	
 	
 	//使用ID查詢單一產品
 	@GetMapping("/lists/product/{productId}")
@@ -134,6 +123,10 @@ public class ProductController {
 	            return "mall/getOneProduct";
 	       
 	    }
+	
+	
+//	==============Add============================
+
 	
 	//新增產品 使用product請求
 	//跳轉add提交頁  於新增時，送出空白的表單讓使用者輸入資料
@@ -148,7 +141,7 @@ public class ProductController {
 				+ "回歸清爽無負擔。\r\n"
 				+ "細嚼慢品，菜根清香，肉味鮮甜。\r\n"
 				+ "食材鮮甜×簡單烹調×新鮮現做=營養滿分堅持新鮮現做，選購當季的食材，無隔夜菜，採預約制拒絕食材耗費。");
-		product.setCategory(5);
+		product.setCategory(2);
 		product.setProductAmount(120);
 		product.setProductCalories(450);
 		product.setProductPrice(120);
@@ -160,11 +153,6 @@ public class ProductController {
 	}
 	
 	
-	
-	
-	
-//	=========================
-
 	// 當使用者填妥資料按下Submit按鈕後，本方法接收將瀏覽器送來的會員資料，新進行資料的檢查，
 	// 若資料有誤，轉向寫入錯誤訊息的網頁，若資料無誤，則呼叫Service元件寫入資料庫
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
@@ -199,8 +187,6 @@ public class ProductController {
 			}
 		}
 		
-		
-		
 			// 自動帶入創建時間
 			long miliseconds = System.currentTimeMillis();
 			Date Date = new Date(miliseconds);
@@ -215,6 +201,12 @@ public class ProductController {
 		// 跳轉至查詢所有頁面
 		return "redirect:/mall/lists";
 		}
+	
+	
+	//==============(E)Add==========================================
+	
+	//==============讀取圖片==========================================
+
 	
 	// 讀圖轉成位元組陣列
 		@RequestMapping(value = "/getImage/{productId}", method = RequestMethod.GET)
@@ -265,6 +257,12 @@ public class ProductController {
 		}	
 		
 		
+//=============(E)=讀取圖片==========================================
+
+		
+// ==================DELETE==============================================
+
+		
 		
 	// 刪除一筆紀錄
 	//送不出DELETE 先用product
@@ -276,7 +274,12 @@ public class ProductController {
 		}
 		
 		
+// =================(E)DELETE===============================================
 		
+		
+		
+
+// ==================UPDATE===============================================
 		
 	// 修改時，送回含有會員資料的表單，讓使用者進行修改
 	// 由這個方法送回修改記錄的表單...
@@ -323,6 +326,27 @@ public class ProductController {
 		
 			return "redirect:/mall/lists";
 		}
+		
+		
+		// ==================(E)UPDATE===============================================
+
+		
+		
+		
+		
+		//===============查詢所有文章的 TOP3========================
+		
+//		
+//		// 查詢所有文章的 TOP3
+//		@GetMapping(value = "/getTop3Product")
+//		public @ResponseBody List<ProductBean> getTop3() {
+//
+//			List<PostBean> list = postService.findTop3();
+//
+//			return list;
+//		}
+		
+		//===================================================
 		
 		
 //		//上傳個人
