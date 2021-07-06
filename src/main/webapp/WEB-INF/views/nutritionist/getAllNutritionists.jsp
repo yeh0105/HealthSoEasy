@@ -53,13 +53,18 @@ body * {
 	color: #B22222;
 }
 
-
 .thumbnail {
 	float: left;
 	width: 320px;
+	height: 600px;
 	margin-left: 30px;
 	margin-right: 25px;
 	margin-top: 30px;
+}
+
+.imgvideo {
+	max-width: 100%;
+	height: 400px;
 }
 
 .page-icon {
@@ -141,7 +146,7 @@ body * {
 				</ul>
 			</div>
 			<hr>
-			
+
 			<h3 id="h3css">營養師列表</h3>
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -150,9 +155,8 @@ body * {
 						<c:forEach var='nutritionist' items='${nutritionists}'>
 
 							<div class="thumbnail">
-								<img
-									src="<c:url value='/nutritionistController/getImage/${nutritionist.nutritionistId}' />"
-									height="500px" width="300px" />
+								<img class="imgvideo"
+									src="<c:url value='/nutritionistController/getImage/${nutritionist.nutritionistId}' />" />
 
 								<div class="caption">
 									<h3>
@@ -177,17 +181,17 @@ body * {
 
 			<div class="page-icon">
 				<span class="page-disabled"><i></i>上一頁</span> <span
-					class="page-current">1</span> 
-					<a href="#">2</a> 
-					 
-					<a class="page-next" href="#">下一頁<i></i></a>
+					class="page-current">1</span> <a href="#">2</a> <a
+					class="page-next" href="#">下一頁<i></i></a>
 			</div>
 			<br>
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
-				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
-				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
+				<a href="<c:url value='/recordController/getAllRecords'/>"><button>
+						所有日誌</button></a> <a
+					href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button>
+						會員日誌</button></a>
 			</div>
 
 
