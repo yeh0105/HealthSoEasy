@@ -36,7 +36,7 @@ public class ProductService {
 		Sort sort = Sort.by(sortField);
 		sort = sortDir.equals("asc")?sort.ascending():sort.descending();
 
-	     int pageSize = 15;//每頁會顯示10個產品
+	     int pageSize = 12;//每頁會顯示15個產品
 	     Pageable pageable = PageRequest.of(pageNumber - 1, pageSize,sort);// 顯示的方式
 	     
 	     //查詢關鍵字並連動分頁
@@ -46,12 +46,23 @@ public class ProductService {
 	     
 	     return productRepository.findAll(pageable);
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	// 使用ID查詢一個產品
 
 	public ProductBean findProductById(Integer productId) {
 		return productRepository.findById(productId).get();
 	}
+
+	
+	
+	
 
 	// 刪除產品
 	public void deleteById(Integer productId) {

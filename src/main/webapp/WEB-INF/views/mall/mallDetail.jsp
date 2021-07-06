@@ -153,31 +153,25 @@
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
 										<h5>
-											<i class="flaticon-list"></i>Categories
+											<i></i>Categories
 										</h5>
 									</div>
 									<ul>
 										<li><a href="shop.html"><i class="flaticon-apple"></i>
 												Fruits and Vegetables</a></li>
 										<li><a href="shop.html"><i
-												class="flaticon-chicken-hand-drawn-outline"></i> Meat and
-												Fish</a></li>
+												class="flaticon-chicken-hand-drawn-outline"></i> Chickenen MealBox</a></li>
 										<li><a href="shop.html"><i
-												class="flaticon-pressure-washer"></i> Home and Cleaning</a></li>
+												class="flaticon-pressure-washer"></i>  Beef Meal Box</a></li>
 										<li><a href="shop.html"><i class="flaticon-pest"></i>
-												Pest Control</a></li>
+												Pork Meal Boxl</a></li>
 										<li><a href="shop.html"><i
-												class="flaticon-stationery"></i> Office Products</a></li>
-										<li><a href="shop.html"><i class="flaticon-make-up"></i>
-												Beauty Products</a></li>
-										<li><a href="shop.html"><i
-												class="flaticon-first-aid-kit"></i> Health Products</a></li>
-										<li><a href="shop.html"><i class="flaticon-track"></i>
-												Pet Care</a></li>
-										<li><a href="shop.html"><i class="flaticon-sketch"></i>
-												Home Appliances</a></li>
-										<li><a href="shop.html"><i class="flaticon-baby-boy"></i>
-												Baby Care</a></li>
+												class="flaticon-stationery"></i> Fish Meal Box</a></li>
+										<li><a href=""><i class="flaticon-make-up"></i>
+												Meal Box for vagetarien</a></li>
+												
+										
+										
 									</ul>
 								</div>
 
@@ -280,7 +274,7 @@
 										<!--single Product -->
 										<div class="col-xl-4 col-lg-6 col-sm-6">
 											<div class="product">
-												<div class="product-img-wrap">
+												<div class="product-img-wrap" style="weight:70px;height:100px">
 													<img class="media-object"
 														src="<c:url value='/mall/getImage/${product.productId}' />"
 														alt="Product Image">
@@ -395,9 +389,8 @@
 																			</h3>
 																			<div class="rating mb-25">
 																				<div class="star mr-15">
-																					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-																					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-																					<i class="fa fa-star"></i>
+																						<img
+																						src="${pageContext.request.contextPath}/images/mall/line2.png" style="weight:50px;"/>
 																				</div>
 																			</div>
 																			<div>
@@ -479,7 +472,7 @@
 						<li class=previous><c:choose>
 								<c:when test="${currentPage > 1}">
 									<a
-										href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Previous</a>
+										href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Previous</a>
 								</c:when>
 								<c:otherwise>
 									<a>Previous</a>
@@ -496,10 +489,10 @@
 						<li class=next><c:choose>
 								<c:when test="${currentPage < totalPages}">
 									<a
-										href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${reverSortDir}'/>">Next</a>
+										href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Next</a>
 								</c:when>
 								<c:otherwise>
-									<a>Previous</a>
+									<a>Next</a>
 								</c:otherwise>
 							</c:choose></li>
 						<!-- 下頁結束 -->

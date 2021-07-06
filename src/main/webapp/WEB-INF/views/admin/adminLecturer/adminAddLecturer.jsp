@@ -149,6 +149,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </a>
       </li>
       <li class="sidebar-list-item">
+        <a href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
+<!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
+          <span>日誌</span>
+        </a>
+      </li>
+      <li class="sidebar-list-item">
         <a href="<c:url value="/admin/adminManage/adminPost"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>分享</span>
@@ -193,9 +199,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">&nbsp;
       <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>"><button class="app-content-headerButton">講座</button></a>&nbsp;
-      <button class="app-content-headerButton">講座預約</button>&nbsp;
-      <button class="app-content-headerButton">講座介紹</button>&nbsp;
-      <button class="app-content-headerButton">推薦文</button>
+      <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp;
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->

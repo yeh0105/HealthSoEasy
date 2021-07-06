@@ -268,7 +268,7 @@ public class CartController {
 				}
 					
 				//Remove cart
-//					session.removeAttribute("cart");
+					//session.removeAttribute("cart");
 				//return "/mall/checkoutThanks";
 					
 					//跳轉到paypal

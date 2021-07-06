@@ -39,8 +39,8 @@ body * {
 
 #nutritImage01 {
 	width: auto;
-	width: 80%;
-	height: 70%;
+	width: 70%;
+	height: 80%;
 	border: black 1px solid;
 }
 

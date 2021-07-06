@@ -16,9 +16,11 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Reply")
+//@JsonIgnoreProperties({"postBean","hibernateLazyInitializer","handler","customerBean","hibernateLazyInitializer","handler"})
 public class ReplyBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

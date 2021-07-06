@@ -56,7 +56,7 @@ public class AdminProduct {
 				@RequestMapping("/adminProduct")
 				public String viewPage(Model model){
 					String keyword = null;
-					return ListByPage(model,1,"productName","asc",keyword);
+					return ListByPage(model,1,"productId","asc",keyword);
 				}
 
 
@@ -83,6 +83,7 @@ public class AdminProduct {
 					    model.addAttribute("sortDir", sortDir);
 					    model.addAttribute("keyword",keyword);
 					    
+					    //用來翻轉排序的參數
 					    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";
 					    model.addAttribute("reverSortDir", reverseSortDir);
 					     
@@ -110,7 +111,7 @@ public class AdminProduct {
 				ProductBean product = new ProductBean();
 				product.setProductName("麥當勞歡樂全家餐");
 				product.setProductDescription("快樂肥宅餐");
-				product.setCategory(5);
+				product.setCategory(2);
 				product.setProductAmount(100);
 				product.setProductCalories(500);
 				product.setProductPrice(210);

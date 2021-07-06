@@ -69,8 +69,7 @@ public class FavoriteController {
 		CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
 		Map<String, Object> favoriteMessage = new HashMap<String, Object>();
 		// 查詢有無該收藏
-		FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(favoriteBean.getFavoriteItemId(),
-				favoriteBean.getFavoriteCategory(), originalCustomer);
+		FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(favoriteBean.getFavoriteItemId(),favoriteBean.getFavoriteCategory(), originalCustomer);
 		PostBean originalPost = postService.findByPostId(favoriteBean.getFavoriteItemId());
 		if (checkFavoriteBean == null) {
 			// 若查無收藏則新增收藏

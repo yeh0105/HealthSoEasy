@@ -155,8 +155,8 @@
 		        +		'<span class="cell-label">Status:</span>'
 		        +		status
 		        +	'</div>'
-		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + customer.customerEmail + '</div>'
-		        +	'<div class="product-cell stock"><span class="cell-label">Phone:</span>' + customer.customerPhone + '</div>'
+		        +	'<div class="product-cell email"><span class="cell-label">Email:</span>' + customer.customerEmail.substring(0,12) + '...</div>'
+		        +	'<div class="product-cell stock" style="letter-spacing: 1px;"><span class="cell-label">Phone:</span>' + customer.customerPhone + '</div>'
 		        +	'<div class="product-cell stock"><span class="cell-label">Nickname:</span>' + customer.customerNickname + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">Score:</span>' + customer.customerScore + '</div>'
 		        +	'<div class="product-cell price"><span class="cell-label">BirthDay:</span>' + customer.customerBirthDay + '</div>'
@@ -643,6 +643,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <a href="<c:url value="/admin/adminManage/adminNutritionist"></c:url>">
 <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
           <span>營養師</span>
+        </a>
+      </li>
+           <li class="sidebar-list-item">
+        <a href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
+<!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
+          <span>日誌</span>
         </a>
       </li>
       <li class="sidebar-list-item">
