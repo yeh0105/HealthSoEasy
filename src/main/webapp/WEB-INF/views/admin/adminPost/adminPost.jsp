@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Customer</title>
+<title>Admin Post</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
@@ -381,7 +381,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 								
 								<circle cx="12" cy="19" r="1" /></svg>
 						</button>
-						<div class="product-cell image">
+						<div class="product-cell sales">
 							<span>${post.postId}</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
 								class="media-object"
 								src="<c:url value='/PostController/getPicture/${post.postId}' />"
