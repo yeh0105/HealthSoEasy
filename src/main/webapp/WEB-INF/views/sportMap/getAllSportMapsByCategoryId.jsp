@@ -156,7 +156,7 @@
 	</div>
 
 <!-- ------------------------------控制分頁結束區塊--------------------------------- -->
-	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
+<%-- 	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a> --%>
 
 	<jsp:include page="/fragment/footer.jsp" />
 

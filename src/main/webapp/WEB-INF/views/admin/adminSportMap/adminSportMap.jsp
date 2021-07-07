@@ -332,8 +332,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 				<td width='80' height='20'><c:if test="${pageNo > 1}">
 						<div id="">
 							<a href="<c:url value='adminSportMap?pageNo=1' />"> 
-							<img src="${pageContext.request.contextPath}/images/sportMap/iconStart.png"
-								border='0' alt='第一頁' height='30' width='30' />
+							第一頁 
 							</a>
 						</div>
 					</c:if></td>
@@ -359,9 +358,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 						<div id="">
 							<a
 								href="<c:url value='adminSportMap?pageNo=${totalPages}' />">
-								<img 
-								src="${pageContext.request.contextPath}/images/sportMap/iconEnd.png"
-								border='0' alt='最末頁' height='30' width='30' />
+								最末頁
 							</a>
 						</div>
 					</c:if></td>

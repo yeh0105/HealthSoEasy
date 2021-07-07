@@ -63,9 +63,8 @@
 	<div><div class="btn1"><img src="${pageContext.request.contextPath}/images/sportMap/NotFound.png" >	
 	</div>
 	<div class="btn1">
-				<h2>這個地方沒有運動地點唷！</h2><br />
 				
-				<h2>回<a href="<c:url value='/showSportMapIndex'></c:url>">首頁</a>吧</h2>
+				<h2><a href="<c:url value='/showSportMapIndex'></c:url>" style="color:#e76f51;">這個地方沒有運動地點唷！回首頁吧</a></h2>
 				
 	</div>
 	

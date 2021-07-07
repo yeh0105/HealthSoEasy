@@ -87,7 +87,7 @@
  <div>
  <div class="blog-card">
 		
-        <div> ${sportMapBean.sportMapMap} </div>
+        <div style="margin-top:50px;"> ${sportMapBean.sportMapMap} </div>
 
         <div class="rightC">
             
@@ -97,10 +97,10 @@
 <%--                 <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>   --%>
 		<c:choose>
 			<c:when test="${sportMapBean.favoriteStatus == true}">
-                <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like2.png"></button></div>  
+                <div  class="floatR"><button id="showFavorite" style="border: none; background-color: transparent;"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like2.png"></button></div>  
 			</c:when>
 			<c:otherwise>
-			   <div  class="floatR"><button id="showFavorite"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
+			   <div  class="floatR"><button id="showFavorite" style="border: none; background-color: transparent;"><img id="favoriteHeart" src="${pageContext.request.contextPath}/images/sportMap/Like1.png"></button></div>  
 			
 			</c:otherwise>
 		</c:choose>
@@ -113,7 +113,8 @@
             <br>
             <br>
           </div>  
-             <div class="floatR2">   來個評分吧！
+             <div class="floatR2">   
+             <div style="color:#ff9e00;font-weight: bold;">來個評分吧！</div>
                 <a class='getScore1Link'
                     href="<c:url value='/' />sportMapNeedLogin/getScore/${sportMapBean.sportMapId}/1"> 
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar1.png"></a>
@@ -131,9 +132,9 @@
                     <img src="${pageContext.request.contextPath}/images/sportMap/MapSportstar5.png"></a>
 
 				</div>
-            	<div class="floatR2">目前累積：${sportMapBean.sportMapScore}分</div>
+            	<div class="floatR2" style="color:#ff9e00;font-weight: bold;">目前累積：${sportMapBean.sportMapScore}分</div>
             	
-	<div class="style2 floatR2"><a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap"> 回首頁</a></div>
+	<div class="style2 floatR2"><a href="<c:url value='/showSportMapIndex'></c:url>" title="SportMap"> <img src="${pageContext.request.contextPath}/images/sportMap/home.png"></a></div>
             	
             
         </div>
