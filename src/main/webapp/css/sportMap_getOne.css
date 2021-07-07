@@ -21,6 +21,7 @@
 	
 	float:right;
 	padding:10px;
+	
 }
 
 .floatR2{
@@ -38,9 +39,13 @@ h3{
 	color:#adb5bd;
 }
 p{
-	color:#252422;
+	color:#495057;
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
 }
 h2{
 	color:#e76f51;
 	font-style: Italic;
 }
+
+
