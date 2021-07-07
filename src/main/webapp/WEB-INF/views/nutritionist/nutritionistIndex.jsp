@@ -52,12 +52,27 @@ body * {
 
 #nutrit03 {
 	float: left;
-	width: 1000px;
-	height: 400px;
+	width: 1250px;
+	height: 650px;
+}
+
+#h3css{
+	color: #ff6666;
+	font-family: '微軟正黑體';
+	font-size: 24px;
+	font-weight:bold;
+}
+
+#h4css{
+	font-family: '微軟正黑體';
+	font-weight:bold;
+	color: #008000;
 }
 
 #content1 {
 	text-decoration: none;
+	font-family: '微軟正黑體';
+	
 	color: #008000;
 }
 
@@ -77,6 +92,7 @@ body * {
 	color: #FF9900;
 	border-bottom: black 3px solid;
 	font-family: '微軟正黑體';
+	font-weight:bold;
 }
 
 #slim {
@@ -123,34 +139,45 @@ body * {
 				<br> <font size="5">5. 專長 : <a id='content1'>${nutritionistBean.nutritionistCategory}</a></font><br>
 				<br>
 			</div>
-
+			
+			
 			<div id="nutrit03">
-				<h3>推薦菜單</h3>
+			<br>
+				<h3 id="h3css">推薦菜單</h3>
+				<hr>
+				<h4 id="h4css">時下正夯吃飽飽不挨餓，營養師提倡的「減醣飲食法」，只要天天將飲食中的醣類攝取量控制在60g左右，健康又享瘦！</h4>
+				<h4 id="h4css">營養師達人減醣廚房用最新鮮的食材、用心的料理方式，推出忙碌上班族們省時又美味的減醣豪華餐！！配菜多樣化，餐餐減醣，減醣美味計畫就從現在開始！</h4>
 				<div id="slim">
-					<h4>A套餐 (減肥)</h4>
+					<h4>A套餐</h4>
+					<h5>※商品名稱※</h5>
 					<button type="button">
 						<img
 							src="${pageContext.request.contextPath}/images/nutritionist/food_01.png">
 					</button>
-					<br>
+					
+					<h5>價格:XXX元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 				<div id="slim">
-					<h4>B套餐 (健身)</h4>
+					<h4>B套餐</h4>
+					<h5>※商品名稱※</h5>
 					<button type="button">
 						<img
 							src="${pageContext.request.contextPath}/images/nutritionist/food_02.png">
 					</button>
-					<br>
+					
+					<h5>價格:XXX元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 				<div id="slim">
-					<h4>C套餐 (加鈣)</h4>
+					<h4>C套餐</h4>
+					<h5>※商品名稱※</h5>
 					<button type="button">
 						<img
 							src="${pageContext.request.contextPath}/images/nutritionist/food_03.png">
 					</button>
-					<br>
+					
+					<h5>價格:XXX元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 			</div>
