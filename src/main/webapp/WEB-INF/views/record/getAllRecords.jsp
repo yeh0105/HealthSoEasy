@@ -15,6 +15,7 @@
 	rel="stylesheet" media="screen">
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <title>查詢全部營養師列表</title>
 <style>
 #mainWrapper2 {
@@ -51,6 +52,11 @@ body * {
 #pcss {
 	font-family: '微軟正黑體';
 	color: #B22222;
+}
+
+#linechart {
+	width: 1200px;
+	height: 300px;
 }
 
 .thumbnail {
@@ -140,12 +146,11 @@ body * {
 				</ul>
 			</div>
 			<hr>
-			
-			<section>
-				<img
-					src="${pageContext.request.contextPath}/images/reord/lt034.png"
-					width="100%" height="100%">
-			</section>
+			<h4>成果記錄圖表</h4>
+			<div id="linechart">
+				<canvas id="myChart2" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+			</div>
+			<h4>成果記錄列表</h4>
 			
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
@@ -183,8 +188,8 @@ body * {
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
-				<a href="<c:url value='/recordController/getAllRecords'/>"><button>
-						所有日誌</button></a>
+				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
+				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
 			</div>
 
 
@@ -192,5 +197,21 @@ body * {
 	</div>
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
+	
+	<script>
+		var ctx = document.getElementById('myChart2');
+		var myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : 'BMI',
+					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
+					fill : false,
+					borderColor : '#3DCA79',
+				} ]
+			},
+		});
+	</script>
 </body>
 </html>

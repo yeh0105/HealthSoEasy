@@ -23,7 +23,7 @@ public class HomeController {
 		return "/post/postIndex";
 	}
 
-	// 從SoEasy首頁跳至post首頁
+	// 從SoEasy首頁跳至post類別
 	@GetMapping({ "/postByCategory" })
 	public String postByCategory() {
 		return "/post/postByCategory";

@@ -208,7 +208,9 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
-      <input class="search-bar" placeholder="Search..." type="text">
+<!--       <input class="search-bar" placeholder="Search..." type="text"> -->
+<a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">回上一頁</a>
+
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -250,16 +252,16 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     <div class="products-area-wrapper tableView">
 <!--  --------------------------- ----內容開始--------------------------- -->
 <div>
-<a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">回上一頁</a>
+<%-- <a href="<c:url value="/admin/adminManage/adminSportMap"></c:url>">回上一頁</a> --%>
 </div><br>
 <div>
-		<fieldset style="width: 900px;">
-			<legend>新增運動地圖</legend>
+		<fieldset style="width: 900px;background-color: #f2f2f2;border-radius: 20px;">
+			<legend style="color:#3a7ca5;font-weight: bold;font-size: large;margin-bottom: 20px;">新增運動地圖</legend>
 			<form:form method="POST" action ="" modelAttribute="sportMapBean"
 				enctype='multipart/form-data'>
-			<table>
+			<table >
 				<tr>
-				<td>地點分類</td>
+				<td>地點分類：</td>
 				<td>
 				<form:select path='sportCategoryBean.sportCategoryId'>
 					<form:option label="請挑選" value="-1"/>
@@ -304,15 +306,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!-- 				</tr> -->
 				
 				<tr>	
-					<td>地圖：</td>
+					<td >地圖：</td>
 					<td width='600'><form:textarea path='sportMapMap'
 					style="width:100%;height:100px;overflow-y: scroll;" /> 
 					<form:errors path="sportMapMap" cssClass="error" />
 					</td>
 				</tr>
 				<tr>
-				<td><input type='submit' value='Submit'></td>
-					<td><input type="reset" value="Reset"></td>
+				<td ><input type='submit' value='Submit' style="background-color: #3a7ca5;color:white;margin-top: 20px"></td>
+					<td><input type="reset" value="Reset" style="background-color: #3a7ca5;color:white;margin-top: 20px;"></td>
 				
 				<tr>
 

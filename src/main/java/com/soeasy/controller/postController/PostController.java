@@ -68,10 +68,41 @@ public class PostController {
 
 	// 查詢所有文章的 TOP10
 	@GetMapping(value = "/getTop10Post", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<PostBean> getTop10() {
+	public @ResponseBody List<PostBean> getTop10(Model model) {
 //		System.err.println("進入getTop10Post");
 
 		List<PostBean> list = postService.findTop10();
+
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//		System.err.println("customerBean="+customerBean);
+		String post = "post";
+//		
+		for (PostBean postBean : list) {
+			Integer postId = postBean.getPostId();
+			System.err.println("postId=" + postId);
+
+//			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+
+//				System.err.println("originalCustomer=" + originalCustomer);
+				System.err.println("postId=" + postId);
+				System.err.println("post=" + post);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					postBean.setFavoriteStatus(true);
+				} else {
+					postBean.setFavoriteStatus(false);
+				}
+
+			}
+
+//			newlist.add(postBean);
+		}
 
 //		System.err.println("list=" + list);
 //		System.err.println("出去PostController");
@@ -80,11 +111,42 @@ public class PostController {
 
 	// 查詢文章類別的 TOP10
 	@GetMapping(value = "/getTop10PostByPostCategoryId.json", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<PostBean> getTop10ByPostCategoryBean(
+	public @ResponseBody List<PostBean> getTop10ByPostCategoryBean(Model model,
 			@RequestParam(value = "postCategoryBean", required = false) PostCategoryBean postCategoryBean) {
 //		System.err.println("進入getTop10PostByPostCategoryId");
 
 		List<PostBean> list = postService.findTop10ByPostCategoryBean(postCategoryBean);
+
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//		System.err.println("customerBean="+customerBean);
+		String post = "post";
+//		
+		for (PostBean postBean : list) {
+			Integer postId = postBean.getPostId();
+			System.err.println("postId=" + postId);
+
+//			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+
+//				System.err.println("originalCustomer=" + originalCustomer);
+				System.err.println("postId=" + postId);
+				System.err.println("post=" + post);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					postBean.setFavoriteStatus(true);
+				} else {
+					postBean.setFavoriteStatus(false);
+				}
+
+			}
+
+//			newlist.add(postBean);
+		}
 
 //		System.err.println("list=" + list);
 //		System.err.println("出去PostController");
@@ -161,12 +223,10 @@ public class PostController {
 
 	// 取得所有文章By PostCategoryId
 	@GetMapping(value = "/getAllPostByPostCategoryId.json", produces = { "application/json; charset=UTF-8" })
-	public ResponseEntity<Map<String, Object>> getByPostCategoryBean(
+	public ResponseEntity<Map<String, Object>> getByPostCategoryBean(Model model,
 			@RequestParam(value = "postCategoryBean", required = false) PostCategoryBean postCategoryBean,
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "totalPage", required = false) Integer totalPage) {
-
-//			System.err.println("接收到/pagingPostData.json請求");
 
 		if (pageNo == null) {
 			pageNo = 1; // 網址加?pageNo=測試
@@ -177,13 +237,45 @@ public class PostController {
 		}
 
 		Map<String, Object> postmap = new HashMap<>();
+		List<PostBean> listTarget = postService.getPageByPostCategoryBean(postCategoryBean, pageNo);
+
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+
+		String post = "post";
+//		
+		for (PostBean postBean : listTarget) {
+			Integer postId = postBean.getPostId();
+			System.err.println("postId=" + postId);
+
+//			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+
+//				System.err.println("originalCustomer=" + originalCustomer);
+				System.err.println("postId=" + postId);
+				System.err.println("post=" + post);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					postBean.setFavoriteStatus(true);
+				} else {
+					postBean.setFavoriteStatus(false);
+				}
+
+			}
+
+//			newlist.add(postBean);
+		}
 
 //			System.err.println("postmap=" + postmap);
 
 		postmap.put("currPage", String.valueOf(pageNo));
 		postmap.put("totalPage", totalPage);
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		postmap.put("post_DPP", postService.getPageByPostCategoryBean(postCategoryBean, pageNo));
+		postmap.put("post_DPP", listTarget);
 //		System.err.println("newpostmap=" + postmap);
 
 		ResponseEntity<Map<String, Object>> re = new ResponseEntity<>(postmap, HttpStatus.OK);

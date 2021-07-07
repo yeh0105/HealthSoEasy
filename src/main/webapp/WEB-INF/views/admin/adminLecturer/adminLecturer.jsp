@@ -267,15 +267,35 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell category"><span class="cell-label">Name :</span>${lecturer.lecturerName}</div>
         <div class="product-cell sales"><span class="cell-label">Degree :</span>${lecturer.lecturerTalent}</div>
         <div class="product-cell price"><span class="cell-label">Email :</span>${lecturer.lecturerExp}</div>
-        <div class="product-cell image"><img src="<c:url value='/lecturerController/getImage/${lecturer.lecturerId}' />" alt="lecturer"><span>${lecturer.lecturerId}</span></div>
+        <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLecturerImage/${lecturer.lecturerId}' />" alt="lecturer"></div>
         
-        <div class="product-cell price"><button class="app-content-headerButton">Update</button></div>
-        <div class="product-cell price"><button class="app-content-headerButton">Delete</button></div>
+        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/updateLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
+        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/deleteLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Delete</button></a></div>
         
       </div>
       </c:forEach>
-      <!-- -------------------------一筆資料內容--結尾--------------------- -->
-	
+	  <!-- 	---------------------用來接delete的post-------------------- -->
+		<form method='POST'>
+			<input type='hidden' name='_method' value='DELETE'>
+		</form>
+
+
+	  <!-- ----------------------------刪除單筆資料用-------------------------- -->
+	<script>
+		$(document).ready(function() {
+			$('.deleteLecturer').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+	</script>
+	  
       
     </div>
   </div>

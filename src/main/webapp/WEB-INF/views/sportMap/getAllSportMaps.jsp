@@ -217,7 +217,7 @@
 
 <!-- ------------------------------內容結束區塊--------------------------------- -->
 <%-- 	<a href="<c:url value='/sportMapController/add' />"><button>新增運動地圖</button></a> --%>
-	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a>
+<%-- 	<a href="<c:url value='/sportMapController/displaySportMaps' />"><button>所有運動地點</button></a> --%>
 
 	<jsp:include page="/fragment/footer.jsp" />
 

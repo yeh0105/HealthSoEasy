@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded",function() {
 					+ '<h3> 姓名 : <font id="h3css2">'+nutritionist.nutritionistName+'</font></h3>'
 					+ '<p> 專長 : <font id="pcss">'+nutritionist.nutritionistCategory+'</font></p>'
 					+ '<p> 學位 : <font>'+nutritionist.nutritionistDegree+'</font></p>'
-					+ '<p><a class="btn btn-primary" href="<c:url value="/nutritionistController/nutritionist/'+nutritionist.nutritionistId+'"/>">營養師詳細資料</a></p>'
+					+ '<p><a class="btn btn-primary" href="<c:url value="/nutritionistController/nutritionist/'+nutritionist.nutritionistId+'"/>">進入營養師推薦套餐</a></p>'
 					+ '</div>'
 					+ '</div>'
 		});
