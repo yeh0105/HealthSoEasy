@@ -491,7 +491,7 @@
 
 					<c:forEach var="sportMap" items="${sportMaps}">
 						<div class="mySlides fade-map">
-					<div class='column' style="margin: 0 20px 10px 20px; height: 50%">
+					<div class='column' style="margin: 0 20px 10px 20px;">
 						<div class='demo-title'>${sportMap.sportCategoryBean.sportCategoryName}</div>
 						<div class='post-module'>
 							<div class='thumbnail'>
