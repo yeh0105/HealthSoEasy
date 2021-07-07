@@ -29,7 +29,7 @@ public class LecturerServiceImpl implements LecturerService {
 	// 查詢一筆講師
 	@Override
 	public LecturerBean getOneByLecturerId(Integer lecturerId) {
-		return lecturerRepository.findByLecturerId(lecturerId).get(lecturerId);
+		return lecturerRepository.getById(lecturerId);
 	}
 
 	// 查詢全部講師
@@ -41,7 +41,7 @@ public class LecturerServiceImpl implements LecturerService {
 	// 更新講師
 	@Override
 	public void updateLecturer(LecturerBean lecturerBean) {
-		
+		lecturerRepository.save(lecturerBean);
 	}
 
 	// 刪除講師

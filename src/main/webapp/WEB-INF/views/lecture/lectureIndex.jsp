@@ -77,8 +77,8 @@
 				<li>
 					<div class="box">
 						<div class="lectureImg">
-<%-- 							<img src="<c:url value='/lectureController/getImage/${lectureBean.lectureId}' />" alt=""> --%>
-							<img src="${pageContext.request.contextPath}/images/lecture/講座2.PNG" alt="">
+							<img src="<c:url value='/lectureController/getLectureImage/${lecture.lectureId}' />" alt="">
+<%-- 							<img src="${pageContext.request.contextPath}/images/lecture/講座2.PNG" alt=""> --%>
 						</div>
 						<div class="boxRight">
 						<br>

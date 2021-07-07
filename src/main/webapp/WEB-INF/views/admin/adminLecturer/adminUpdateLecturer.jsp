@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Lecturer</title>
+<title>Admin Lecture</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -14,7 +15,6 @@
 <script type="text/javascript">
 	window.onload = function(){
 		let switch_moon = document.getElementById("switch_moon");
-		let xhr = new XMLHttpRequest();
 //		點擊日夜間模式設定session
 		switch_moon.addEventListener("click", function(){
 			document.documentElement.classList.toggle('dark');
@@ -184,7 +184,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">講師</h1>
+      <h1 class="app-content-headerText">新增講師</h1>
 <!--       月亮 -->
       <button class="mode-switch" title="Switch Theme" id="switch_moon">
         <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -193,8 +193,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         </svg>
       </button>
 <!--       新增 -->
-	<a href="<c:url value='/admin/adminManage/adminLecturer/addLecturer' />">
-      <button class="app-content-headerButton">新增講師</button></a>
+<!--       <button class="app-content-headerButton">新增講師</button> -->
     </div>
     <div class="app-content-actions">
 <!--     搜尋 -->
@@ -240,62 +239,44 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
-<!--  --------------------------- ----表頭欄位--------------------------- -->
-      <div class="products-header">
-        <div class="product-cell image">講師編號<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
-        <div class="product-cell category">講師姓名<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
-        <div class="product-cell status-cell">講師專長<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
-        <div class="product-cell sales">講師經歷<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
-        <div class="product-cell image">講師照片<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
-        
-        <div class="product-cell price">Update
-<!--           <button class="sort-button"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg> -->
-<!--           </button> -->
-        </div>
-        
-        <div class="product-cell price">Delete</div>
-      </div>
-	<!--       ----------------------一筆資料內容--開始--------------------- -->
-      <c:forEach var='lecturer' items='${lecturers}'> 
-      
-      <div class="products-row">
-        <button class="cell-more-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-        <div class="product-cell price"><span class="cell-label">ID :</span>${lecturer.lecturerId}</div>
-        <div class="product-cell category"><span class="cell-label">Name :</span>${lecturer.lecturerName}</div>
-        <div class="product-cell sales"><span class="cell-label">Degree :</span>${lecturer.lecturerTalent}</div>
-        <div class="product-cell price"><span class="cell-label">Email :</span>${lecturer.lecturerExp}</div>
-        <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLecturerImage/${lecturer.lecturerId}' />" alt="lecturer"></div>
-        
-        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/updateLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
-        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/deleteLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Delete</button></a></div>
-        
-      </div>
-      </c:forEach>
-	  <!-- 	---------------------用來接delete的post-------------------- -->
-		<form method='POST'>
-			<input type='hidden' name='_method' value='DELETE'>
-		</form>
-
-
-	  <!-- ----------------------------刪除單筆資料用-------------------------- -->
-	<script>
-		$(document).ready(function() {
-			$('.deleteLecturer').click(function() {
-				if (confirm('確定刪除此筆紀錄? ')) {
-					var href = $(this).attr('href');
-					$('form').attr('action', href).submit();
-
-					console.log(href);
-				}
-				return false;
-
-			});
-		})
-	</script>
-	  
+<!--  --------------------------------內容開始--------------------------- -->
+	<div><a href="<c:url value="/admin/adminManage/adminLecture/lecturer" /> ">回上一頁</a></div>
+	<br>
+	
+	<div>
+	
+		<fieldset style="width: 900px;">
+			<legend>新增講師</legend>
+			<form:form method="POST" action="" modelAttribute="lecturerBean"
+				enctype='multipart/form-data'>
+				<table>
+					<tr>
+						<td>講師姓名：</td>
+						<td width='600'><form:input path='lecturerName' /> <form:errors path="lecturerName" cssClass="error" /></td>
+					</tr>
+					<tr>
+						<td>講師專長：</td>
+						<td width='600'><form:input path='lecturerTalent' /> <form:errors path="lecturerTalent" cssClass="error" /></td>
+					</tr>
+					<tr>
+						<td>講師經歷：</td>
+						<td width='600'><form:input path='lecturerExp' /> <form:errors path="lecturerExp" cssClass="error" /></td>
+					<tr>
+						<td>講師照片：</td>
+						<td width='600'><form:input path="lecturerMultiImg" type="file" style="width: 203px;"/> <form:errors path="lecturerMultiImg" cssClass="error" /></td>
+						
+					</tr>
+					<tr>
+						<td><input type='submit' value="送出"></td>
+						<td><input type='reset' value="清除重填"></td>
+					<tr>
+				</table>
+			</form:form>
+		</fieldset>
+	</div>
+      <!-- ---------------------------內容結尾--------------------->		
+	
+	
       
     </div>
   </div>

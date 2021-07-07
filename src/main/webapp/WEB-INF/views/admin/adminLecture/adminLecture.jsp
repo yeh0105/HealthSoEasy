@@ -242,7 +242,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     <div class="products-area-wrapper tableView">
 <!--  --------------------------- ----表頭欄位--------------------------- -->
       <div class="products-header">
-        <div class="product-cell image">講座編號<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
+        <div class="product-cell price">講座編號<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
         <div class="product-cell category">講座標題<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
         <div class="product-cell status-cell">講座類型<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
         <div class="product-cell sales">講座內容<button class="sort-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg></button></div>
@@ -270,13 +270,32 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell price"><span class="cell-label">ID :</span>${lecture.lectureId}</div>
         <div class="product-cell category"><span class="cell-label">Title :</span>${lecture.lectureTitle}</div>
         <div class="product-cell status-cell"><span class="cell-label">Category :</span><span class="status active">${lecture.lectureCategory}</span></div>
-        <div class="product-cell sales"><span class="cell-label">Content :</span>${lecture.lectureContent}</div>
+        <div class="product-cell sales"><span class="cell-label">Content :</span>${fn:substring(lecture.lectureContent,0,10)}...</div>
         <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLectureImage/${lecture.lectureId}' />" alt="lecture"></div>
         <div class="product-cell price"><span class="cell-label">Date :</span>${lecture.lectureDate}</div>
-        <div class="product-cell status-cell"><span class="cell-label">Status :</span><span class="status active">${lecture.lectureStatus}</span></div>
+<%--         <div class="product-cell status-cell"><span class="cell-label">Status :</span><span class="status active">${lecture.lectureStatus}</span></div> --%>
+        <c:choose>
+			<c:when test="${lecture.lectureStatus == 1}">
+				<div class="product-cell status-cell">
+					<span class="cell-label">Status:</span> <span class="status active">即將舉辦</span>
+				</div>
+			</c:when>
+			<c:when test="${lecture.lectureStatus == 2}">
+				<div class="product-cell status-cell">
+					<span class="cell-label">Status:</span> <span class="status active">進行中</span>
+				</div>
+			</c:when>
+			<c:when test="${lecture.lectureStatus == 3}">
+				<div class="product-cell status-cell">
+					<span class="cell-label">Status:</span> <span class="status disabled">精彩回顧</span>
+				</div>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+		</c:choose>
         
         <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecture/updateLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
-        <div class="product-cell price"><a class='deleteSportMap' href="<c:url value='/admin/adminManage/adminLecture/deleteLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Delete</button></a></div>
+        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecture/deleteLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Delete</button></a></div>
         
       	</div>
         </c:forEach>
@@ -290,7 +309,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 	  <!-- ----------------------------刪除單筆資料用-------------------------- -->
 	<script>
 		$(document).ready(function() {
-			$('.deleteSportMap').click(function() {
+			$('.deleteLecture').click(function() {
 				if (confirm('確定刪除此筆紀錄? ')) {
 					var href = $(this).attr('href');
 					$('form').attr('action', href).submit();
