@@ -13,7 +13,7 @@
 	<jsp:include page="/fragment/header.jsp" />
 	
 	<div style="display: flex;justify-content:center;width: 800px" >
-	<img src="${pageContext.request.contextPath}/images/pic6.jpg">
+	<img src="${pageContext.request.contextPath}/images/pic8.jpg">
     </div>
 	
 	
