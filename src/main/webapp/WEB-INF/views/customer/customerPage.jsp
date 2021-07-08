@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,52 +243,96 @@
 			document.getElementById("customerImgSubmit").click();			
 		}
 // 		---------------------------------------------------------------------------------------
-// 		輪播JS
-		
+// 		輪播地圖JS
+		var slideMapsIndex = 1;
+		showMapsSlides(slideMapsIndex);
 
-		var slideIndex = 1;
-		showSlides(slideIndex);
-
-		let dots = document.querySelectorAll(".dot");
-		for(let i = 0; i < dots.length; i++){
-			dots[i].addEventListener("click", function(){
-				currentSlide(i + 1);
+		let dotsOfMaps = document.querySelectorAll(".dotOfMap");
+		for(let i = 0; i < dotsOfMaps.length; i++){
+			dotsOfMaps[i].addEventListener("click", function(){
+				currentMapsSlide(i + 1);
 			});
 		}
 
-		let prevSlides = document.getElementById("prevSlides");
-		let nextSlides = document.getElementById("nextSlides");
-		prevSlides.addEventListener("click", function(){
-			plusSlides(-1);
+		let prevMapsSlides = document.getElementById("prevMapsSlides");
+		let nextMapsSlides = document.getElementById("nextMapsSlides");
+		prevMapsSlides.addEventListener("click", function(){
+			plusMapsSlides(-1);
 		});
-		nextSlides.addEventListener("click", function(){
-			plusSlides(1);
+		nextMapsSlides.addEventListener("click", function(){
+			plusMapsSlides(1);
 		});
 		
 		// Next/previous controls
-		function plusSlides(n) {
-  			showSlides(slideIndex += n);
+		function plusMapsSlides(n) {
+  			showMapsSlides(slideMapsIndex += n);
 		}
 
 		// Thumbnail image controls
-		function currentSlide(n) {
-  			showSlides(slideIndex = n);
+		function currentMapsSlide(n) {
+  			showMapsSlides(slideMapsIndex = n);
 		}
 
-		function showSlides(n) {
-  			var i;
-  			var slides = document.getElementsByClassName("mySlides");
-  			var dots = document.getElementsByClassName("dot");
-  			if (n > slides.length) {slideIndex = 1}
-  			if (n < 1) {slideIndex = slides.length}
+		function showMapsSlides(n) {
+  			let i;
+  			let slides = document.getElementsByClassName("mapSlides");
+  			let dotsOfMaps = document.getElementsByClassName("dotOfMap");
+  			if (n > slides.length) {slideMapsIndex = 1}
+  			if (n < 1) {slideMapsIndex = slides.length}
   			for (i = 0; i < slides.length; i++) {
       			slides[i].style.display = "none";
   			}
-  			for (i = 0; i < dots.length; i++) {
-      			dots[i].className = dots[i].className.replace(" active", "");
+  			for (i = 0; i < dotsOfMaps.length; i++) {
+      			dotsOfMaps[i].className = dotsOfMaps[i].className.replace(" active", "");
   			}
-  			slides[slideIndex-1].style.display = "block";
-  			dots[slideIndex-1].className += " active";
+  			slides[slideMapsIndex-1].style.display = "block";
+  			dotsOfMaps[slideMapsIndex-1].className += " active";
+		}
+// 		---------------------------------------------------------------------------------------
+// 		輪播分享Post
+		var slidePostsIndex = 1;
+		showPostsSlides(slidePostsIndex);
+
+		let dotsOfPosts = document.querySelectorAll(".dotOfPost");
+		for(let i = 0; i < dotsOfPosts.length; i++){
+			dotsOfPosts[i].addEventListener("click", function(){
+				currentPostsSlide(i + 1);
+			});
+		}
+
+		let prevPostsSlides = document.getElementById("prevPostsSlides");
+		let nextPostsSlides = document.getElementById("nextPostsSlides");
+		prevPostsSlides.addEventListener("click", function(){
+			plusPostsSlides(-1);
+		});
+		nextPostsSlides.addEventListener("click", function(){
+			plusPostsSlides(1);
+		});
+		
+		// Next/previous controls
+		function plusPostsSlides(n) {
+  			showPostsSlides(slidePostsIndex += n);
+		}
+
+		// Thumbnail image controls
+		function currentPostsSlide(n) {
+  			showPostsSlides(slidePostsIndex = n);
+		}
+
+		function showPostsSlides(n) {
+  			let i;
+  			let slides = document.getElementsByClassName("postSlides");
+  			let dotsOfPosts = document.getElementsByClassName("dotOfPost");
+  			if (n > slides.length) {slidePostsIndex = 1}
+  			if (n < 1) {slidePostsIndex = slides.length}
+  			for (i = 0; i < slides.length; i++) {
+      			slides[i].style.display = "none";
+  			}
+  			for (i = 0; i < dotsOfPosts.length; i++) {
+      			dotsOfPosts[i].className = dotsOfPosts[i].className.replace(" active", "");
+  			}
+  			slides[slidePostsIndex-1].style.display = "block";
+  			dotsOfPosts[slidePostsIndex-1].className += " active";
 		}
 	})
 	
@@ -487,10 +532,10 @@
 				
 <!-- 				------------------------- -->
 					<div class="slideshow-container">
-						<a class="prev" id="prevSlides">&#10094;</a> 
+						<a class="prev" id="prevMapsSlides">&#10094;</a> 
 
 					<c:forEach var="sportMap" items="${sportMaps}">
-						<div class="mySlides fade-map">
+						<div class="mySlides fade-map mapSlides">
 					<div class='column' style="margin: 0 20px 10px 20px;">
 						<div class='demo-title'>${sportMap.sportCategoryBean.sportCategoryName}</div>
 						<div class='post-module'>
@@ -524,17 +569,17 @@
 						</div>
 					</c:forEach>
 						<!-- Next and previous buttons -->
-						<a class="next" id="nextSlides">&#10095;</a>
+						<a class="next" id="nextMapsSlides">&#10095;</a>
 					<div style="text-align: center">
 					<c:forEach var="sportMap" items="${sportMaps}">
-						<span class="dot"></span> 
+						<span class="dot dotOfMap"></span> 
 					</c:forEach>
 						
 					</div>
 					</div>
 					<br>
 
-					<!-- The dots/circles -->
+					<!-- The dotsOfMaps/circles -->
 
 
 					<!-- 				--------------------------------- -->
@@ -542,13 +587,50 @@
 			</div>
 <!-- 			---------------------------------------------------------------------------------------------------------- -->
 			<div>
-				<div class="customer-img">
-					<div id="imgUploadbtn">
-<%-- 						<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg"> --%>
-<!-- 						<form method="POST" action="uploadCustomerImg" enctype="multipart/form-data"> -->
-<!-- 							<input id="customerImgUpload" name="customerImgUpload" type="file" style="display: none;"> -->
-<!-- 							<input id="customerImgSubmit" type="submit" style="display: none"> -->
-<!-- 						</form> -->
+				<div class="customer-post">
+					<div id="customer-post-items">
+<!-- 						----------------------------------------------------------------------------------------- -->
+						<div class="slideshow-container">
+						<a class="prev" id="prevPostsSlides">&#10094;</a>
+						<c:forEach var="post" items="${posts}">
+						<div class="mySlides fade-post postSlides">
+						<div class="span4" style="margin: 0 0 10px 0;background-color: #fff">
+							<div class="thumbnail">
+<!-- //						文章圖片 -->
+						<img alt="" src="<c:url value='/PostController/getPicture/${post.postId}'></c:url>" style="width: 300px; height: 300px; object-fit: cover;"/>
+						
+						<div class="caption">
+<!-- //						文章標題 -->
+						<h3>${post.postTitle}</h3>
+<!-- //						文章內容 -->
+						<p>${fn:substring(post.postContent,0,20)}...</p>
+<!-- //						觀看更多 -->
+						<a href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />"> >>>觀看更多 </a>
+						<div style="display: block; text-align: right;">
+<!-- //						Like按鈕SVG -->
+<!-- // 						<svg id="color" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m22.843 12.586c-.169-.372-.169-.8 0-1.172l.895-1.969c.333-.733.348-1.58.04-2.323-.309-.744-.917-1.333-1.671-1.615l-2.024-.76c-.384-.144-.686-.445-.829-.829l-.76-2.024c-.282-.754-.871-1.362-1.615-1.671-.741-.308-1.59-.293-2.323.04l-1.969.895c-.373.17-.801.17-1.172 0l-1.97-.895c-.732-.334-1.581-.349-2.323-.04-.744.308-1.333.917-1.615 1.671l-.76 2.024c-.143.384-.445.685-.829.829l-2.024.76c-.754.282-1.363.871-1.671 1.615-.308.743-.293 1.59.04 2.323l.895 1.969c.169.372.169.8 0 1.172l-.895 1.969c-.333.733-.348 1.58-.04 2.323.309.744.917 1.333 1.671 1.615l2.024.76c.384.144.686.445.829.829l.76 2.024c.282.754.871 1.362 1.615 1.671.355.147.735.221 1.115.221.413 0 .826-.087 1.208-.261l1.969-.895c.373-.17.801-.17 1.172 0l1.969.895c.732.334 1.581.348 2.323.04.744-.309 1.333-.917 1.615-1.671l.76-2.024c.144-.384.445-.686.829-.829l2.024-.76c.754-.282 1.362-.871 1.671-1.615.308-.743.293-1.59-.04-2.323z" fill="#f44336"/><g fill="#fafafa"><path d="m13.414 9.702c-.877-.877-2.305-.877-3.182 0s-.877 2.305 0 3.182l1.414 1.414c.438.438 1.015.658 1.591.658s1.152-.22 1.591-.658c.877-.877.877-2.305 0-3.182zm.354 3.535c-.293.293-.768.293-1.061 0l-1.414-1.414c-.292-.292-.292-.769 0-1.061.146-.147.338-.219.53-.219s.384.072.53.219l1.414 1.414c.293.293.293.769.001 1.061z"/><path d="m8.818 12.177c-.293-.293-.768-.293-1.061 0s-.293.768 0 1.061l1.237 1.237-1.061 1.062-1.238-1.238c-.293-.293-.768-.293-1.061 0s-.293.768 0 1.061l3.536 3.536c.146.146.338.22.53.22s.384-.073.53-.22c.293-.293.293-.768 0-1.061l-1.237-1.237 1.061-1.062 1.237 1.237c.146.146.338.22.53.22s.384-.073.53-.22c.293-.293.293-.768 0-1.061z"/><path d="m18.364 9.702-3.006-3.006.53-.53c.293-.293.293-.768 0-1.061s-.768-.293-1.061 0l-1.059 1.06-.002.001-.001.001-1.06 1.061c-.293.293-.293.768 0 1.061.146.146.339.22.53.22.192 0 .384-.073.53-.22l.53-.531 3.006 3.006c.146.146.338.22.53.22s.384-.073.53-.22c.296-.294.296-.769.003-1.062z"/></g><path d="m13.025 11.435-1.061 1.061.742.742c.146.146.338.22.53.22s.384-.073.53-.22c.292-.292.292-.769 0-1.061zm6.809-6.809-3.273 3.273 1.803 1.803c.293.293.293.768 0 1.061-.146.146-.338.22-.53.22s-.384-.073-.53-.22l-1.804-1.804-1.415 1.415.742.742c.877.877.877 2.305 0 3.182-.438.438-1.015.658-1.591.658s-1.152-.22-1.591-.658l-.742-.742-.354.354 1.803 1.803c.293.293.293.768 0 1.061-.146.146-.338.22-.53.22s-.384-.073-.53-.22l-1.237-1.237-1.061 1.062 1.237 1.237c.293.293.293.768 0 1.061-.146.146-.338.22-.53.22s-.384-.073-.53-.22l-1.803-1.803-2.743 2.743c.048.078.089.161.121.248l.76 2.024c.282.754.871 1.362 1.615 1.671.355.147.735.221 1.115.221.413 0 .826-.087 1.208-.261l1.969-.895c.187-.085.387-.127.587-.127s.4.042.585.127l1.969.895c.381.174.795.261 1.208.261.38 0 .76-.074 1.116-.221.744-.309 1.333-.917 1.615-1.671l.76-2.024c.144-.384.445-.686.829-.829l2.024-.76c.754-.282 1.362-.871 1.671-1.615.308-.743.293-1.59-.04-2.323l-.895-1.969c-.169-.372-.169-.8 0-1.172l.895-1.969c.333-.733.348-1.58.04-2.323-.309-.744-.917-1.333-1.671-1.615l-2.024-.76c-.087-.036-.17-.076-.248-.124z" fill="#d43a2f"/><path d="m14.086 10.374-1.061 1.061.742.742c.292.292.292.768 0 1.061-.147.146-.338.22-.53.22s-.384-.073-.53-.22l-.742-.742-1.061 1.061.742.742c.438.438 1.015.658 1.591.658s1.152-.22 1.591-.658c.877-.877.877-2.305 0-3.182z" fill="#dadada"/><path d="m10.551 13.909-3.182 3.182 1.803 1.803c.146.146.338.22.53.22s.384-.073.53-.22c.293-.293.293-.768 0-1.061l-1.237-1.237 1.061-1.062 1.237 1.237c.146.146.338.22.53.22s.384-.073.53-.22c.293-.293.293-.768 0-1.061z" fill="#dadada"/><path d="m16.561 7.899-1.061 1.06 1.803 1.803c.146.146.338.22.53.22s.384-.073.53-.22c.293-.293.293-.768 0-1.061z" fill="#dadada"/></svg> -->
+<!-- // 						<svg enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g id="color"><g><g><path d="m21.758 12.527c-.152-.335-.152-.72 0-1.055l.805-1.772c.3-.66.313-1.422.036-2.091-.278-.67-.825-1.2-1.504-1.454l-1.822-.684c-.345-.129-.617-.401-.746-.746l-.684-1.822c-.253-.677-.783-1.225-1.453-1.503-.667-.277-1.431-.264-2.091.036l-1.772.805c-.336.153-.721.153-1.055 0l-1.771-.805c-.659-.3-1.423-.313-2.091-.036-.67.278-1.2.825-1.454 1.504l-.684 1.822c-.129.346-.4.617-.746.746l-1.822.684c-.678.254-1.226.784-1.504 1.454-.276.669-.263 1.431.036 2.091l.805 1.772c.152.335.152.72 0 1.055l-.805 1.772c-.3.66-.313 1.422-.036 2.091.278.67.825 1.2 1.504 1.454l1.822.684c.345.129.617.401.746.746l.684 1.822c.254.677.784 1.225 1.454 1.503.32.133.662.199 1.004.199.372 0 .744-.078 1.087-.235l1.772-.805c.336-.153.721-.153 1.055 0l1.772.805c.659.301 1.423.313 2.091.036.67-.278 1.2-.825 1.454-1.504l.684-1.822c.129-.345.401-.617.746-.746l1.822-.684c.679-.254 1.226-.784 1.504-1.454.277-.669.264-1.431-.036-2.091z" fill="#f44336"/></g></g></g><g id="_x31_.5"><g><g><path d="m8.237 23.998c-.38 0-.76-.073-1.115-.221-.744-.309-1.333-.917-1.615-1.671l-.76-2.024c-.144-.384-.445-.686-.829-.829l-2.024-.76c-.754-.282-1.362-.871-1.671-1.615-.308-.743-.293-1.59.04-2.323l.895-1.969c.169-.372.169-.8 0-1.172l-.895-1.969c-.333-.733-.348-1.58-.04-2.323.308-.744.917-1.333 1.671-1.615l2.024-.76c.384-.144.686-.445.829-.829l.76-2.024c.282-.754.871-1.363 1.615-1.671.742-.309 1.591-.294 2.323.04l1.969.895c.371.17.799.17 1.172 0l1.969-.895c.733-.333 1.582-.348 2.323-.04.744.309 1.333.917 1.615 1.671l.76 2.024c.144.384.445.686.829.829l2.024.76c.754.282 1.362.871 1.671 1.615.308.743.293 1.59-.04 2.323l-.895 1.969c-.169.372-.169.8 0 1.172l.895 1.969c.333.733.348 1.58.04 2.323-.309.744-.917 1.333-1.671 1.615l-2.024.76c-.384.144-.686.445-.829.829l-.76 2.024c-.282.754-.871 1.362-1.615 1.671-.741.308-1.59.294-2.323-.04l-1.969-.895c-.371-.17-.799-.17-1.172 0l-1.969.895c-.382.174-.795.261-1.208.261zm.001-22.498c-.184 0-.367.036-.543.108-.366.152-.645.44-.784.812l-.76 2.024c-.296.788-.918 1.41-1.706 1.706l-2.024.76c-.372.14-.66.418-.812.784-.151.367-.145.768.02 1.129l.895 1.969c.349.768.349 1.646 0 2.414l-.895 1.969c-.164.361-.171.762-.02 1.129.152.366.44.645.812.784l2.024.76c.788.296 1.41.918 1.706 1.706l.76 2.024c.14.372.418.66.784.812.366.15.767.144 1.129-.02l1.969-.895c.768-.35 1.646-.35 2.414 0l1.969.895c.361.163.763.171 1.129.02.366-.152.645-.44.784-.812l.76-2.024c.296-.788.918-1.41 1.706-1.706l2.024-.76c.372-.14.66-.418.812-.784.151-.367.145-.768-.02-1.129l-.895-1.969c-.349-.768-.349-1.646 0-2.414l.895-1.969c.164-.361.171-.762.02-1.129-.152-.366-.44-.645-.812-.784l-2.024-.76c-.788-.296-1.41-.918-1.706-1.706l-.76-2.024c-.14-.372-.418-.66-.784-.812-.367-.15-.767-.144-1.129.02l-1.969.895c-.768.35-1.646.35-2.414 0l-1.969-.895c-.187-.085-.386-.128-.586-.128z"/></g></g><g><g><g><path d="m13.237 14.956c-.576 0-1.152-.22-1.591-.658l-1.414-1.414c-.877-.877-.877-2.305 0-3.182s2.305-.877 3.182 0l1.414 1.414c.877.877.877 2.305 0 3.182-.438.438-1.015.658-1.591.658zm-1.414-4.412c-.192 0-.384.072-.53.219-.292.292-.292.769 0 1.061l1.414 1.414c.293.293.768.293 1.061 0 .292-.292.292-.769 0-1.061l-1.414-1.414c-.147-.147-.338-.219-.531-.219z"/></g></g><g><g><path d="m13.237 8.508c-.191 0-.384-.073-.53-.22-.293-.293-.293-.768 0-1.061l2.121-2.122c.293-.293.768-.293 1.061 0s.293.768 0 1.061l-2.121 2.122c-.147.147-.338.22-.531.22z"/></g></g><g><g><path d="m9.702 19.114c-.192 0-.384-.073-.53-.22l-3.536-3.536c-.293-.293-.293-.768 0-1.061s.768-.293 1.061 0l3.536 3.536c.293.293.293.768 0 1.061-.147.147-.338.22-.531.22z"/></g></g><g><g><path d="m11.823 16.992c-.192 0-.384-.073-.53-.22l-3.535-3.535c-.293-.293-.293-.768 0-1.061s.768-.293 1.061 0l3.535 3.535c.293.293.293.768 0 1.061-.147.147-.338.22-.531.22z"/></g></g><g><g><path d="m17.834 10.982c-.192 0-.384-.073-.53-.22l-3.536-3.536c-.293-.293-.293-.768 0-1.061s.768-.293 1.061 0l3.536 3.536c.293.293.293.768 0 1.061-.147.147-.339.22-.531.22z"/></g></g><g><g><path d="m7.935 17.347c-.192 0-.384-.073-.53-.22-.293-.293-.293-.768 0-1.061l2.121-2.122c.292-.292.767-.294 1.061 0 .293.293.293.768 0 1.061l-2.121 2.122c-.148.146-.339.22-.531.22z"/></g></g></g></g></svg> -->
+						<img src="${pageContext.request.contextPath}/images/post/heart.png">&nbsp;&nbsp;&nbsp;
+						
+<!-- //						Like數量 -->
+						 ${post.postLike}
+						<p style="font-size: 15px; color: grey;">By &nbsp;${post.customerBean.customerNickname}</p>
+<!-- //						文章上傳時間 -->
+						<p style="font-size: 15px; color: grey;">${fn:substring(post.postUploadTime,0,16)}</p>
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>
+						</c:forEach>
+						<a class="next" id="nextPostsSlides">&#10095;</a>
+						<div style="text-align: center">
+						<c:forEach var="post" items="${posts}">
+							<span class="dot dotOfPost"></span> 
+						</c:forEach>
+						</div>
+						</div>
+<!-- 						----------------------------------------------------------------------------------------- -->
 					</div>
 				</div>
 				<div class="customer-information" >

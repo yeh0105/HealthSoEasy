@@ -48,7 +48,8 @@
 <body>
 <!-- 		<div class="drop-down-menu"> -->
 				<a id="customerImg" href="#" title="${customerSignInSuccess.customerName}" class="drop-down-menu">
-					${customerSignInSuccess.customerName}
+					<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg" style="width: 20px; height: 20px; vertical-align:text-bottom;">
+					<span style="vertical-align: top;;">${customerSignInSuccess.customerName}</span>
 				</a>
 				
 				<div id="customerMenu">

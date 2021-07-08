@@ -51,7 +51,7 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public void updateShopBasicInfo(ShopBean shop) {
+	public void updateShop(ShopBean shop) {
 		shopRepository.save(shop);
 	}
 
