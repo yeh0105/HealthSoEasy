@@ -86,7 +86,44 @@
     </script>
 </head>
 <body>
-	<jsp:include page="/fragment/header.jsp" />
+	<jsp:include page="/fragment/header.jsp" />	
+<!-- <div class="mainWrapper"> -->
+<!-- 				<header> -->
+<!-- 					<div id="logo"> -->
+<%-- 						<a href="<c:url value="/"></c:url>"> --%>
+<%-- 						<img src="${pageContext.request.contextPath}/images/ICON.png" style="margin-left:52.5%; margin-top:-3.7%; "></a> --%>
+<!-- 					</div> -->
+<%-- 					<a href="<c:url value='/admin/adminLogin'></c:url>"><button --%>
+<!-- 							style="position: absolute; color: white; background-color: white;border: none;margin-left:7%;">admin</button></a> -->
+<!-- 					<div id="headerLinks" style="margin-right:7.59%; margin-top:-0.43%; width:60%;"> -->
+<%-- 						<c:if --%>
+<%-- 							test="${empty customerSignInSuccess && empty shopSignInSuccess && empty adminLoginSuccess}"> --%>
+<%-- 							<a href="<c:url value='/customerController/addCustomer'></c:url>" --%>
+<!-- 								title="Login/Register">登入/註冊</a> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${!empty customerSignInSuccess}"> --%>
+<%-- 							<jsp:include page="/fragment/customerMenu.jsp" /> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${!empty shopSignInSuccess}"> --%>
+<%-- 							<jsp:include page="/fragment/shopMenu.jsp" /> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${!empty adminLoginSuccess}"> --%>
+<%-- 							<jsp:include page="/fragment/adminMenu.jsp" /> --%>
+<%-- 						</c:if> --%>
+<%-- 						<a href="<c:url value='/mall/cart/index'/>" title="Cart">購物車</a> --%>
+<!-- 					</div> -->
+<!-- 					<nav style="margin-right:7.55%; width:60%;"> -->
+<%-- 						<a href="<c:url value='/'></c:url>" title="Link">首頁</a> <a --%>
+<!-- 							href="#" title="Link">園地</a> <a -->
+<%-- 							href="<c:url value='/lectureIndex'></c:url>" title="SoLecture">講座</a> --%>
+<%-- 						<a href="<c:url value='/mall'></c:url>" title="Mall">商城</a> <a --%>
+<%-- 							href="<c:url value='/postIndex'></c:url>" title="So Share">分享</a> --%>
+<%-- 						<a href="<c:url value='/showSportMapIndex'></c:url>" --%>
+<!-- 							title="SportMap">地圖</a> <a -->
+<%-- 							href="<c:url value='/nutritionist'></c:url>" title="Link">營養師</a> --%>
+<!-- 					</nav> -->
+<!-- 				</header> -->
+<!-- 			</div> -->
 	<div class = "imgbg">
 	<div class="container right-panel-active">
         <!-- Sign Up -->

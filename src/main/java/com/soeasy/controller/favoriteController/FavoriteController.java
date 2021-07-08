@@ -71,15 +71,21 @@ public class FavoriteController {
 		// 查詢有無該收藏
 		FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(favoriteBean.getFavoriteItemId(),favoriteBean.getFavoriteCategory(), originalCustomer);
 		PostBean originalPost = postService.findByPostId(favoriteBean.getFavoriteItemId());
+		CustomerBean authorCustomer =originalPost.getCustomerBean();
+		Integer customerScore = authorCustomer.getCustomerScore();
+//		System.err.println("customerScore="+customerScore);
+		
 		if (checkFavoriteBean == null) {
-			// 若查無收藏則新增收藏
+			// 若查無收藏則新增收藏，文章作者積分+1
 			favoriteBean.setCustomerBean(originalCustomer);
 			favoriteService.addFavorite(favoriteBean);
 			favoriteMessage.put("favoriteExist", true);
+			authorCustomer.setCustomerScore(customerScore+1);
 		} else if (checkFavoriteBean != null) {
-			// 若已有收藏則取消收藏
+			// 若已有收藏則取消收藏，文章作者積分-1
 			favoriteService.removeFavorite(checkFavoriteBean.getFavoriteId());
 			favoriteMessage.put("favoriteExist", false);
+			authorCustomer.setCustomerScore(customerScore-1);
 		}
 		Integer count = favoriteService.countFavoriteItemIdAndFavoriteCategory(favoriteBean.getFavoriteItemId(),
 				favoriteBean.getFavoriteCategory());
@@ -101,15 +107,20 @@ public class FavoriteController {
 			FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(favoriteBean.getFavoriteItemId(),
 					favoriteBean.getFavoriteCategory(), originalCustomer);
 			ReplyBean originalReply = replyService.findByReplyId(favoriteBean.getFavoriteItemId());
+			CustomerBean authorCustomer =originalReply.getCustomerBean();
+			Integer customerScore = authorCustomer.getCustomerScore();
+			
 			if (checkFavoriteBean == null) {
 				// 若查無收藏則新增收藏
 				favoriteBean.setCustomerBean(originalCustomer);
 				favoriteService.addFavorite(favoriteBean);
 				favoriteMessage.put("favoriteExist", true);
+				authorCustomer.setCustomerScore(customerScore+1);
 			} else if (checkFavoriteBean != null) {
 				// 若已有收藏則取消收藏
 				favoriteService.removeFavorite(checkFavoriteBean.getFavoriteId());
 				favoriteMessage.put("favoriteExist", false);
+				authorCustomer.setCustomerScore(customerScore-1);
 			}
 			Integer count = favoriteService.countFavoriteItemIdAndFavoriteCategory(favoriteBean.getFavoriteItemId(),
 					favoriteBean.getFavoriteCategory());
