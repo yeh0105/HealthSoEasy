@@ -16,7 +16,7 @@
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<title>成果記錄</title>
+<title>成果記錄日誌</title>
 <style>
 #mainWrapper2 {
 	width: 80%;
@@ -148,7 +148,12 @@ body * {
 			<hr>
 			<h4>成果記錄圖表</h4>
 			<div id="linechart">
-				<canvas id="myChart2" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+				<canvas id="myChart2"
+					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+			</div>
+			<div id="linechart">
+				<canvas id="myChart3"
+					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
 			<h4>成果記錄列表</h4>
 			<table border='1' cellpadding="3" cellspacing="1">
@@ -179,8 +184,10 @@ body * {
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
-				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
-				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
+				<a href="<c:url value='/recordController/getAllRecords'/>"><button>
+						所有日誌</button></a> <a
+					href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button>
+						會員日誌</button></a>
 			</div>
 
 
@@ -190,6 +197,35 @@ body * {
 	<jsp:include page="/fragment/footer.jsp" />
 
 	<script>
+		var xmlhttp = new XMLHttpRequest();
+		var url = "";
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
+
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(this.responseText);
+				var recordId = data.recordBeans.map(function(elem) {
+					return elem.recordId;
+				});
+				var customerId = data.months_temperature.map(function(elem) {
+					return elem.customerId;
+				});
+				var recordHeight = data.months_temperature.map(function(elem) {
+					return elem.recordHeight;
+				});
+				var recordWeight = data.months_temperature.map(function(elem) {
+					return elem.recordWeight;
+				});
+				var recordBmi = data.months_temperature.map(function(elem) {
+					return elem.recordBmi;
+				});
+				var recordDate = data.months_temperature.map(function(elem) {
+					return elem.recordDate;
+				});
+
+			}
+		}
 		var ctx = document.getElementById('myChart2');
 		var myChart = new Chart(ctx, {
 			type : 'line',
@@ -200,9 +236,36 @@ body * {
 					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
 					fill : false,
 					borderColor : '#3DCA79',
-				} ]
+				}]
+
 			},
 		});
+		var ctx = document.getElementById('myChart3');
+		var myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : '體重',
+					data : [ 55, 54, 54, 54, 53, 52, 51 ],
+					fill : false,
+					borderColor : '#E800E8',
+				}]
+			},
+		});
+		// 		var ctx = document.getElementById('myChart2');
+		// 		var myChart = new Chart(ctx, {
+		// 			type : 'line',
+		// 			data : {
+		// 				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+		// 				datasets : [ {
+		// 					label : 'BMI',
+		// 					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
+		// 					fill : false,
+		// 					borderColor : '#3DCA79',
+		// 				} ]
+		// 			},
+		// 		});
 	</script>
 </body>
 </html>
