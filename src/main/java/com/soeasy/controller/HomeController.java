@@ -1,13 +1,23 @@
 package com.soeasy.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.soeasy.model.LectureBean;
+import com.soeasy.service.lectureService.LectureService;
 
 @Controller
 public class HomeController {
+
+	@Autowired
+	LectureService lectureService;
 
 	// 首頁
 	@GetMapping({ "/", "/index" })
@@ -51,7 +61,9 @@ public class HomeController {
 
 	// 從SoEasy首頁跳至講座首頁
 	@GetMapping("/lectureIndex")
-	public String lectureIndex() {
+	public String lectureIndex(Model model) {
+		List<LectureBean> lectures = lectureService.updateLectureStatus();
+		model.addAttribute("lectures", lectures);
 		return "/lecture/lectureIndex";
 	}
 

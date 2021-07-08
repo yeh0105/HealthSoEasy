@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +76,9 @@
 		<!-------------------------------- 輪播測試區 -------------------------------->
 		<div class="wrapper">
 			<ul class="slides">
+		<c:forEach var='lecture' items='${lectures}'>
 				<li>
+<!-- 					用box把圖片和文字包起來 -->
 					<div class="box">
 						<div class="lectureImg">
 							<img src="<c:url value='/lectureController/getLectureImage/${lecture.lectureId}' />" alt="">
@@ -82,35 +86,40 @@
 						</div>
 						<div class="boxRight">
 						<br>
-<%-- 							<p class="lectureTitle">${lectureBean.lectureTitle}</p> --%>
+							<font class="lectureTitle">${lecture.lectureTitle}</font>
 
-							<font class="lectureTitle">拒絕垃圾食物是健康的第一步</font>
-<%-- 							<p class="lectureDate">講座時間：<a>${lectureBean.lectureDate}</a></p> --%>
-							<p class="lectureDate">講座時間：<font>2021/07/06</font></p>
-							<p class="lectureCategory">講座分類：<font>${lectureBean.lectureCategory == "飲食"? "飲食": "運動"}</font></p>
-							<p class="lectureContent">講座內容：<font>${lectureBean.lectureContent}</font></p>
-
+<!-- 							<font class="lectureTitle">拒絕垃圾食物是健康的第一步</font> -->
+							<p class="lectureDate">講座時間：<font>${lecture.lectureDate}</font></p>
+<!-- 							<p class="lectureDate">講座時間：<font>2021/07/06</font></p> -->
+							<p class="lectureCategory">講座分類：<font>${lecture.lectureCategory == "Eat"? "飲食": "運動"}</font></p>
+							<p class="lectureContent">講座內容：<font>${fn:substring(lecture.lectureContent,0,200)}...</font></p>
+																
 							<a
-								href="<c:url value='/lectureController/lecture/${lectureBean.lectureId}' />"><button
+								href="<c:url value='/lectureController/lecture/${lecture.lectureId}' />"><button
 									class="custom2-btn btn-4">(查看更多...)</button></a>
 						</div>
 					</div>
+<!-- 					用box把圖片和文字包起來 -->
 				</li>
-				<li><img class="lectureImg"
-					src="${pageContext.request.contextPath}/images/lecture/講座2.PNG"
-					alt=""></li>
-				<li><img class="lectureImg"
-					src="${pageContext.request.contextPath}/images/lecture/講座3.PNG"
-					alt=""></li>
-				<li><img class="lectureImg"
-					src="${pageContext.request.contextPath}/images/lecture/peeta葛格.PNG"
-					alt=""></li>
+						</c:forEach>
+<!-- 				<li><img class="lectureImg" -->
+<%-- 					src="${pageContext.request.contextPath}/images/lecture/講座2.PNG" --%>
+<!-- 					alt=""></li> -->
+<!-- 				<li><img class="lectureImg" -->
+<%-- 					src="${pageContext.request.contextPath}/images/lecture/講座3.PNG" --%>
+<!-- 					alt=""></li> -->
+<!-- 				<li><img class="lectureImg" -->
+<%-- 					src="${pageContext.request.contextPath}/images/lecture/peeta葛格.PNG" --%>
+<!-- 					alt=""></li> -->
 			</ul>
+			
 			<ul class="dot">
-				<li id="1"></li>
-				<li id="2"></li>
-				<li id="3"></li>
-				<li id="4"></li>
+			<c:forEach var='lecture' items='${lectures}'>
+				<li id="${lecture.lectureId}"></li>
+			</c:forEach>
+<!-- 				<li id="2"></li> -->
+<!-- 				<li id="3"></li> -->
+<!-- 				<li id="4"></li> -->
 			</ul>
 			<div id="prevSlide" class="slide_btn">
 				<i class="fas fa-caret-left"></i>
@@ -118,12 +127,16 @@
 			<div id="nextSlide" class="slide_btn">
 				<i class="fas fa-caret-right"></i>
 			</div>
+		
 		</div>
+		
+		
 		<hr>
 		<script
 			src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
 		<!--  ------ -->
 	</div>
+	
 	<!-- ------------------------------------------------------------------------------>
 
 	<!-- 即將舉辦講座區 -->
