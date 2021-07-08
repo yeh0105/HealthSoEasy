@@ -59,4 +59,6 @@ public interface PostService {
 	// 刪除
 	void deleteByPostId(Integer postId);
 
+	// 以多個ID查詢多篇文章
+	List<PostBean> findAllById(List<Integer> postIds);
 }

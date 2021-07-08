@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Shop")
 public class ShopBean implements Serializable {
@@ -38,6 +40,7 @@ public class ShopBean implements Serializable {
 	
 	private String shopPhone;
 
+	@JsonIgnore
 	private Blob shopImg;
 
 	@Transient

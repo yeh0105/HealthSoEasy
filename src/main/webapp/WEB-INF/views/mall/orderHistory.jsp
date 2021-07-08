@@ -73,12 +73,12 @@
 							<tr>
 
 								<th class="text-lg-center">訂單編號</th>
-								<th class="text-lg-center">account</th>
+								<th class="text-lg-center">會員帳號</th>
 								<th class="text-lg-center">訂購日期</th>
-								<th class="text-lg-center">產品狀態</th>
+								<th class="text-lg-center">訂單狀態</th>
 								<th class="text-lg-center">總金額</th>
 								<th class="text-lg-center">付款狀態</th>
-								<th class="text-lg-center">ID</th>
+<!-- 								<th class="text-lg-center">ID</th> -->
 								<th class="text-lg-center">Detail</th>
 
 
@@ -99,7 +99,7 @@
 									<td class="text-lg-center">${order.orderStatus}</td>
 									<td class="text-lg-center">${order.orderTotalPrice}</td>
 									<td class="text-lg-center">${order.payStatus}</td>
-									<td class="text-lg-center">${order.customerBean.customerId}</td>
+<%-- 									<td class="text-lg-center">${order.customerBean.customerId}</td> --%>
 									<td class="text-lg-center"><a class="theme-btn no-shadow style-two br-10 rmt-30"
 										href="<c:url value='/mall/order/orderDetail/${order.orderId}'/>" >Detail</a>
 									</td>

@@ -216,4 +216,22 @@
 	align-items: center; 
 	justify-content: center;
 }
+.customer-post {
+	background-color: rgb(29, 59, 42);
+	width: 40%;
+	height: 620px;
+	float: left;
+	margin-left: 10%;
+/* 	水平垂直置中 */
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
 
+.customer-post-items {
+	background-color: white;
+	height: 100%;
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+}

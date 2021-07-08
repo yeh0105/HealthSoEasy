@@ -48,7 +48,8 @@
 <body>
 <!-- 		<div class="drop-down-menu"> -->
 				<a id="customerImg" href="#" title="${customerSignInSuccess.customerName}" class="drop-down-menu">
-					${customerSignInSuccess.customerName}
+					<img alt="" src="${pageContext.request.contextPath}/customerController/getCustomerImg" style="width: 20px; height: 20px; vertical-align:text-bottom;">
+					<span style="vertical-align: top;;">${customerSignInSuccess.customerName}</span>
 				</a>
 				
 				<div id="customerMenu">
@@ -76,13 +77,10 @@
                         </svg>
                         <span>Order</span>
                     </a>
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                        </svg>
-                        <span>Settings</span>
+                    <a href="#">  
+        	          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:#007500;">
+        	          <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.834 9.686l-4.166.575 3.032 2.914-.74 4.139 3.708-1.982 3.708 1.983-.74-4.139 3.032-2.915-4.166-.575-1.834-3.784-1.834 3.784z"/></svg>
+        	          <span>${customerSignInSuccess.customerScore}</span>
                     </a>
                     <a href="<c:url value='/recordController/record/getRecordByCustomerId'/>">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"

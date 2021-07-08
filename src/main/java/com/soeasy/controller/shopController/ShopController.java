@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
-import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.model.member.ShopSignInBean;
 import com.soeasy.service.shopService.ShopService;
 import com.soeasy.util.GlobalService;
@@ -30,6 +29,7 @@ import com.soeasy.validator.shopValidator.ShopBeanValidator;
 
 @Controller
 @RequestMapping("/shopController")
+@SessionAttributes("shopSignInSuccess")
 public class ShopController {
 	
 	@Autowired
@@ -110,6 +110,53 @@ public class ShopController {
 		return model;
 	}
 	
+	// 取得登入者個人上傳頭像
+	@GetMapping("/getShopImg")
+	public ResponseEntity<byte[]> getShopImg(Model model) {
+		// 從session取得登入者ID
+		Integer shopId = ((ShopBean) model.getAttribute("shopSignInSuccess")).getShopId();
+		ShopBean originalShop = shopService.findByShopId(shopId);
+
+		Blob shopImg = originalShop.getShopImg();
+
+		InputStream is = null;
+		String fileName = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+
+		try {
+			if (shopImg != null) {
+				is = shopImg.getBinaryStream();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/salad.png)
+			if (is == null) {
+				fileName = "salad.png";
+				is = servletContext.getResourceAsStream("/images/" + fileName);
+			}
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[8192];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+
+			media = baos.toByteArray();
+			responseEntity = new ResponseEntity<>(media, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
+	}
 	
 	// 以ID取得上傳頭像
 	@GetMapping("/getShopImgById/{shopId}")

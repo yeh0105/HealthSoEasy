@@ -1,10 +1,14 @@
 package com.soeasy.controller.recordController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,6 +53,21 @@ public class RecordController {
 		List<RecordBean> recordBean=recordService.getCustomerId(customerBean);
 		model.addAttribute("recordBean", recordBean);
 		return "/record/reordIndex";
+	}
+	
+	// 由customerId查詢日誌(json)
+	@GetMapping(value = "/record/getJsonRecordByCustomerId.json",produces = { "application/json; charset=UTF-8" })
+	public ResponseEntity<Map<String, Object>> getJsonCustomerById( Model model) {
+		
+		Map<String, Object> genderMap=new HashMap<>();
+		
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		List<RecordBean> recordBean=recordService.getCustomerId(customerBean);
+		
+		genderMap.put("recordBeans", recordBean);
+		
+		ResponseEntity<Map<String, Object>> re=new ResponseEntity<>(genderMap, HttpStatus.OK);
+		return re;
 	}
 
 	// 新增日誌，先送一個空白表單，並給予初值

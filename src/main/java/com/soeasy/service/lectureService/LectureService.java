@@ -12,7 +12,7 @@ public interface LectureService {
 	//查詢一筆
 	LectureBean getOneByLectureId(Integer lectureId);
 
-	//查詢全部
+	//查詢全部講座
 	List<LectureBean> getAllByLectureId();
 
 	//修改
@@ -20,5 +20,8 @@ public interface LectureService {
 
 	//刪除
 	void deleteLecture(Integer lectureId);
+	
+	//依據講座日期更新講座狀態
+	List<LectureBean> updateLectureStatus();
 
 }
