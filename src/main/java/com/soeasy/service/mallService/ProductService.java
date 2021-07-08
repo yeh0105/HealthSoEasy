@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.soeasy.model.PostBean;
 import com.soeasy.model.ProductBean;
+import com.soeasy.model.Order.OrderBean;
+import com.soeasy.model.Order.OrderDetailBean;
+import com.soeasy.repository.mallRepository.OrderDetailRepository;
 import com.soeasy.repository.mallRepository.ProductRepository;
 
 @Service
@@ -18,6 +21,10 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	
+	private OrderDetailRepository orderDetailRepository;
 
 	
 	
@@ -48,20 +55,12 @@ public class ProductService {
 	}
 	
 	
-	
-	
-	
-	
-	
-
 	// 使用ID查詢一個產品
 
 	public ProductBean findProductById(Integer productId) {
 		return productRepository.findById(productId).get();
 	}
 
-	
-	
 	
 
 	// 刪除產品
@@ -85,25 +84,15 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-
-
-	// 查詢 TOP3
-	public List<ProductBean> findTop3() {
-		
-		Sort sort = Sort.by(Sort.Order.desc("productLike"));
-		
-		List<ProductBean> list = productRepository.findAll(sort);
-		
-		if(list.size()>=3) {
-			
-			List<ProductBean> newList = list.subList(0,3);
-			
-			return newList;
-		}
-		
-		return list;
-		
-	}
+	//尋找最新被訂購個產品  
+		public List<OrderDetailBean> findNewestProduct(){
+			List<OrderDetailBean> list = orderDetailRepository.findAll();	
+			if(list.size()>=5) {
+				List<OrderDetailBean> newList = list.subList(0,5);
+				return newList;
+			}
+			return list;
+		} 
 	
 	
 }

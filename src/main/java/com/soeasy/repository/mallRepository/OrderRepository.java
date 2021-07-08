@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<OrderBean, Integer>{
 		
 	//根據最大的訂單ID尋找訂單
 	@Query("SELECT p FROM OrderBean p WHERE p.orderId = (SELECT max(p2.orderId) FROM OrderBean p2)") 
-	OrderBean getMaxIdOrder(); 
+	public OrderBean getMaxIdOrder(); 
 
 	
 
