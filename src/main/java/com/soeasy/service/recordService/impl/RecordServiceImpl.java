@@ -58,7 +58,7 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public List<RecordBean> getCustomerId(CustomerBean customerBean) {
-		Sort sort = Sort.by(Sort.Order.asc("recordDate"));
+		Sort sort = Sort.by(Sort.Order.desc("recordDate"));
 		
 		List<RecordBean> list = recordRepository.findByCustomerBean(customerBean,sort);
 		
