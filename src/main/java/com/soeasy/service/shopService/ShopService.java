@@ -21,7 +21,7 @@ public interface ShopService {
 	ShopBean findByShopId(Integer shopId);
 	
 	// 修改基本資料
-	void updateShopBasicInfo(ShopBean shop);
+	void updateShop(ShopBean shop);
 
 	// 變更會員狀態
 	void updateShopStatus(ShopBean shop, Integer shopStatus);

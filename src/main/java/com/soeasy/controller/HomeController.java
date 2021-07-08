@@ -52,6 +52,7 @@ public class HomeController {
 	// 從SoEasy首頁跳至講座首頁
 	@GetMapping("/lectureIndex")
 	public String lectureIndex() {
+		
 		return "/lecture/lectureIndex";
 	}
 
