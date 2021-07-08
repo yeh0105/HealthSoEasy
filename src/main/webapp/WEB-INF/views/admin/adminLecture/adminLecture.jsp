@@ -295,7 +295,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 		</c:choose>
         
         <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecture/updateLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
-        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecture/deleteLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Delete</button></a></div>
+        <div class="product-cell price"><a class="deleteLecture" href="<c:url value='/admin/adminManage/adminLecture/deleteLecture/${lecture.lectureId}' />"><button class="app-content-headerButton">Delete</button></a></div>
         
       	</div>
         </c:forEach>

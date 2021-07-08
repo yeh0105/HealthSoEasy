@@ -7,7 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Lecturer</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
 
@@ -270,7 +273,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLecturerImage/${lecturer.lecturerId}' />" alt="lecturer"></div>
         
         <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/updateLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
-        <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/deleteLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Delete</button></a></div>
+        <div class="product-cell price"><a class="deleteLecturer" href="<c:url value='/admin/adminManage/adminLecturer/deleteLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Delete</button></a></div>
         
       </div>
       </c:forEach>

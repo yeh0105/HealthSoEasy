@@ -313,10 +313,10 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 						<td>講座內容：</td>
 						<td width='600'><form:input path='lectureContent' /> <form:errors path="lectureContent" cssClass="error" /></td>
 					<tr>
-					<tr>
-						<td>講座狀態：</td>
-						<td width='600'><form:input path='lectureStatus' /> <form:errors path="lectureStatus" cssClass="error" /></td>
-					<tr>
+<!-- 					<tr> -->
+<!-- 						<td>講座狀態：</td> -->
+<%-- 						<td width='600'><form:input path='lectureStatus' /> <form:errors path="lectureStatus" cssClass="error" /></td> --%>
+<!-- 					<tr> -->
 						<td>講座圖片：</td>
 						<td width='600'><form:input path="lectureMultiImg" type="file" style="width: 203px;"/> <form:errors path="lectureMultiImg" cssClass="error" /></td>
 						
