@@ -59,7 +59,7 @@
 
 			<div class="container" >
 
-				<h5 class="header-title text-lg-center">訂單編號# ${orderDetail.orderId} 詳情</h5>
+				<h5 class="header-title text-lg-center">訂單詳情  &nbsp; 編號# ${orderDetail.orderId} </h5>
 				<div class="login-information bg-white" >
 <!--=============================================================================== 
             Start Content 
@@ -72,7 +72,7 @@
 							<tr>
 
 								<th class="text-lg-center">產品名稱</th>
-								<th class="text-lg-center">產品價格</th>
+								<th class="text-lg-center">單價</th>
 								<th class="text-lg-center">產品數量</th>
 								<th class="text-lg-center">Subtotal</th>
 
@@ -90,7 +90,7 @@
 								<tr>
 
 									<td class="text-lg-center">${orderDetail.productName}</td>
-									<td class="text-lg-center">${orderDetail.productPrice}</td>
+									<td class="text-lg-center">$${orderDetail.productPrice}</td>
 									<td class="text-lg-center">${orderDetail.orderItemQuantity}</td>
 									<td class="text-lg-center">$${orderDetail.orderItemQuantity*orderDetail.productPrice}</td>
 <!-- 									<td class="text-lg-center"><a class="theme-btn no-shadow style-two br-10 rmt-30" -->
@@ -103,9 +103,14 @@
 
 							</c:forEach>
 							<tr>
+							<td colspan="3" class="text-lg-center" > 運費:</td>
+							
+							<td colspan="" class="text-lg-center">&nbsp;$60 &nbsp;</td>
+							<tr/>
+							<tr>
 							<td colspan="3" class="text-lg-center" > Total: </td>
 							
-							<td colspan="" class="text-lg-center">&nbsp;$${total} &nbsp;(不含運費)</td>
+							<td colspan="" class="text-lg-center">&nbsp;$${total+60} &nbsp;</td>
 							<tr/>
 						</tbody>
 

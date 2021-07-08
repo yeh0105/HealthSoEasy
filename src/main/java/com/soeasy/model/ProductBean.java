@@ -3,7 +3,10 @@ package com.soeasy.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,61 +14,70 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.soeasy.model.Order.OrderReviewBean;
 
 @Entity
-@Table(name="Product")
-public class ProductBean  implements Serializable{
+@Table(name = "Product")
+public class ProductBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@GeneratedValue：告訴此Column的生成方式
-	//GenerationType.IDENTITY 讓資料庫自己維護
-	
+	// @GeneratedValue：告訴此Column的生成方式
+	// GenerationType.IDENTITY 讓資料庫自己維護
+
 	private Integer productId;
-		
+
 	private String productName;
-	
+
 	private String productDescription;
-	
+
 	private Integer productPrice;
-	
+
 	private Integer productAmount;
-	
+
 	private Integer productCalories;
-	
+
 	private Integer category;
-	
+
 	private String productCategory;
-	
+
+	// 判斷收藏
+	@Transient
+	private Boolean favoriteStatus;
 
 	private Blob productImg;
-	
+
 	@Transient
 	private MultipartFile productMultiImg;
 //	
-	@JsonFormat(pattern ="yyyy-MM-dd",timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date productDate;
-	
+
 	private Integer productCost;
-	//廠商
+	// 廠商
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_shopId")
-    private ShopBean shopBean;
+	@JoinColumn(name = "fk_shopId")
+	private ShopBean shopBean;
 	
 	
+//	// 評價
+//		@OneToMany(fetch = FetchType.EAGER, mappedBy = "productBean", cascade = CascadeType.ALL)
+//		Set<OrderReviewBean> replyBeans = new LinkedHashSet<OrderReviewBean>();
+
+
 //	購物車	商品不需找回購物車	單向關聯	
-	
-	
+
 	// ------------------------------------------
-	public ProductBean() {	
+	public ProductBean() {
 	}
 	// ------------------------------------------
 
@@ -133,9 +145,8 @@ public class ProductBean  implements Serializable{
 	public void setProductMultiImg(MultipartFile productMultiImg) {
 		this.productMultiImg = productMultiImg;
 	}
-	
-//	==============(E)ProductImg======================
 
+//	==============(E)ProductImg======================
 
 	public Date getProductDate() {
 		return productDate;
@@ -161,7 +172,6 @@ public class ProductBean  implements Serializable{
 		this.shopBean = shopBean;
 	}
 
-
 	public Integer getCategory() {
 		return category;
 	}
@@ -178,13 +188,14 @@ public class ProductBean  implements Serializable{
 		this.productCategory = productCategory;
 	}
 
-	
+	public Boolean getFavoriteStatus() {
+		return favoriteStatus;
+	}
+
+	public void setFavoriteStatus(Boolean favoriteStatus) {
+		this.favoriteStatus = favoriteStatus;
+	}
+
 //	===========
 
-
-	
-
-	
-	
-	
 }

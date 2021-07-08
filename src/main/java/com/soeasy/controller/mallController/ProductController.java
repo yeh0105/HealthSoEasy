@@ -31,11 +31,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.ProductBean;
+import com.soeasy.model.SportMapBean;
+import com.soeasy.model.Order.OrderDetailBean;
+import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
@@ -43,6 +48,8 @@ import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
 @RequestMapping("/mall")
+@SessionAttributes("customerSignInSuccess")
+
 public class ProductController {
 	
 	@Autowired
@@ -56,14 +63,12 @@ public class ProductController {
 	@Autowired
 	FavoriteService favoriteService;
 	
-	//前端跳轉
+	@Autowired
+	CustomerService customerService;
 	
-	@GetMapping("/mallindex")
-	 public String getIndex(Model model) {
-	            return "mall/mallDetail";
-	    }
 	
-	//頁面跳轉
+	
+	//商城頁面跳轉
 		@RequestMapping("/lists")
 		public String viewPage(Model model){
 			String keyword = null;
@@ -80,13 +85,17 @@ public class ProductController {
 	        @Param("keyword")String keyword
 	        )
 			{
+
 			Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword);
 			    
+			
 			    System.out.println("印出來all products");
 			    //分頁參數
 			    model.addAttribute("currentPage", currentPage);
 			    model.addAttribute("totalPages", page.getTotalPages());
 			    model.addAttribute("totalItems", page.getTotalElements());
+			    
+			    
 			   //羅列產品
 			    List<ProductBean> list = page.getContent();
 			    model.addAttribute("product", list);
@@ -95,6 +104,37 @@ public class ProductController {
 			    model.addAttribute("sortDir", sortDir);
 			    model.addAttribute("keyword",keyword);
 			    
+			    List<OrderDetailBean> list5 = productService.findNewestProduct();
+			    model.addAttribute("productTop3", list5);
+			    
+			    			    
+//			    
+//				String favoriteProduct = "product";
+//				for (ProductBean product : list) {
+//					Integer productId = product.getProductId();
+//					System.err.println("productId=" + productId);
+//				
+//			  //1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false 
+//			    if (customerSignInSuccess != null) {
+//			    	
+//			    	CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
+//			     	FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(productId, favoriteProduct, originalCustomer);
+//			     	
+//			     	System.out.println("originalCustomer="+originalCustomer);
+//			     	System.out.println("productId="+productId);
+//			     	System.out.println("favoriteProduct="+favoriteProduct);     	
+//			     	
+//			    		//2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+//			    		if(checkFavoriteBean != null) {
+//			    			//3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+//			    			//4.將FavoriteStatus狀態存進model.addAttribute
+//			    			product.setFavoriteStatus(true);
+//			    			}
+////			    			sportMapBean.setFavoriteStatus(false);
+//			    				
+//			    }
+//				}
+//			    
 			    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";
 			    model.addAttribute("reverSortDir", reverseSortDir);
 			     
@@ -102,27 +142,53 @@ public class ProductController {
 			}
 	
 	
-	
-	// 查詢產品的 TOP3
-		@GetMapping(value = "/getTop3Product", produces = { "application/json; charset=UTF-8" })
-		public @ResponseBody List<ProductBean> getTop3() {
 
-			List<ProductBean> list = productService.findTop3();
-
-			return list;
-		}
-		
 		
 	
-	//使用ID查詢單一產品
+	//========================使用ID查詢單一產品(進入商品詳情)====================================
 	@GetMapping("/lists/product/{productId}")
 	 public String getOne(@PathVariable Integer productId,Model model) {
-	      ProductBean product = productService.findProductById(productId);
-      		model.addAttribute("product", product);
+		
+	      	ProductBean product = productService.findProductById(productId);
+	      	model.addAttribute("product", product);
+	      
+	    	//存取登入訊息
+			CustomerBean customerSignInSuccess = (CustomerBean) model.getAttribute("customerSignInSuccess");
+			String favoriteProduct = "productFavorite";
+
+		  //1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false 
+		    if (customerSignInSuccess != null) {
+		    	
+		    	CustomerBean originalCustomer = customerService.findByCustomerId(customerSignInSuccess.getCustomerId());
+		     	FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(productId, favoriteProduct, originalCustomer);
+		     	
+		     	System.out.println("originalCustomer="+originalCustomer);
+		     	System.out.println("productId="+productId);
+		     	System.out.println("favoriteProduct="+favoriteProduct);     	
+		     	
+		    		//2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+		    		if(checkFavoriteBean != null) {
+		    			//3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+		    			//4.將FavoriteStatus狀態存進model.addAttribute
+		    			product.setFavoriteStatus(true);
+		    			}
+//		    			sportMapBean.setFavoriteStatus(false);
+		    				
+		    }
+		    
+		    List<OrderDetailBean> list5 = productService.findNewestProduct();
+		    model.addAttribute("productTop3", list5);
+
+	      
+	      
 	        	System.out.println("印出來單一產品了");
-	            return "mall/getOneProduct";
+	            return "mall/mallGoodsDetail";
 	       
 	    }
+	
+	
+	//========================(End)使用ID查詢單一產品====================================
+
 	
 	
 //	==============Add============================
@@ -374,6 +440,9 @@ public class ProductController {
 //			return "/mall/updateProduct";
 //		}
 //		
+		
+		
+		
 	
 
 	
