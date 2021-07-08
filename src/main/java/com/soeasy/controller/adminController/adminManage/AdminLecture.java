@@ -29,12 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.LectureBean;
 import com.soeasy.model.LectureCategoryBean;
-import com.soeasy.model.SportMapBean;
 import com.soeasy.service.lectureService.LectureCategoryService;
 import com.soeasy.service.lectureService.LectureService;
 import com.soeasy.util.GlobalService;
 import com.soeasy.validator.lectureValidator.LectureBeanValidator;
-import com.soeasy.validator.sportMapValidator.SportMapBeanValidator;
 
 @Controller
 @RequestMapping("/admin/adminManage")

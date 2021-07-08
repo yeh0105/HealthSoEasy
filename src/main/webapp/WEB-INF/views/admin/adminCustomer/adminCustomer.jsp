@@ -176,10 +176,10 @@
 			
 			tableView.innerHTML = title + content;
 			
-			intitUploadIngbtns();
+			intitUploadImgbtns();
 		}
 		
-		function intitUploadIngbtns(){
+		function intitUploadImgbtns(){
 			//初始化上傳使用者頭貼按鈕
 			$(".uploadImgbtns").on("click", function(event){
 				console.log(this.dataset.imgid);

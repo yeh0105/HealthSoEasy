@@ -193,4 +193,10 @@ public class PostServiceImpl implements PostService {
 		postRepository.deleteById(postId);
 	}
 
+	// 以多個ID查詢多篇文章
+	@Override
+	public List<PostBean> findAllById(List<Integer> postIds) {
+		return postRepository.findAllById(postIds);
+	}
+
 }

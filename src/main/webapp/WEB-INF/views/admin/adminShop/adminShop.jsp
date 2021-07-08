@@ -55,9 +55,9 @@
 		
 		//重製過濾器並取得會員
 		function resetFilter(){
-			customerStatus.value = "all";
+			shopStatus.value = "all";
 			
-			getCustomerByFilter();
+			getShopByFilter();
 		}
 		
 		//印出廠商會員基本資料
@@ -100,7 +100,9 @@
 				
 				content = content
 				+'<div class="products-row">'
-		        +	'<button class="cell-more-button">'
+		        +	'<button class="cell-more-button uploadImgbtns"'
+		        + 	'id="uploadimg' + shop.shopId
+		        + 	'"data-imgid="' + shop.shopId + '">'
 		        +  	'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>'
 		        +	'</button>'
 		        +	'<div class="product-cell image">'
@@ -124,7 +126,25 @@
 		      	+'</div>';
 			})
 			tableView.innerHTML = title + content;
+			intitUploadIngbtns();
 		}
+		
+		function intitUploadIngbtns(){
+			//初始化上傳使用者頭貼按鈕
+			$(".uploadImgbtns").on("click", function(event){
+				console.log(this.dataset.imgid);
+//		 		送出表單鈕
+				let shopImgUploadId = document.getElementById("shopImgUploadId");
+				let shopImgUpload = document.getElementById("shopImgUpload");
+				shopImgUploadId.value = this.dataset.imgid;
+				shopImgUpload.click();
+				shopImgUpload.addEventListener("change", function(){
+					document.getElementById("shopImgSubmit").click();
+					
+				});
+			})
+		}
+		
 		
 // 		互動視窗--基本資料
 //   	開啟互動視窗表單
@@ -492,7 +512,12 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
   </div>
 </div>
-
+<!-- 	圖片上傳 -->
+			<form method="post" action="adminUploadShopImg" enctype="multipart/form-data" id="shopImgUploadForm">
+				<input id="shopImgUploadId" name="shopImgUploadId" type="text" style="display: none;"> 
+				<input id="shopImgUpload" name="shopImgUpload" type="file" style="display: none;"> 
+				<input id="shopImgSubmit" type="submit" style="display: none">
+			</form>
 
 		</div>
 </div>

@@ -12,8 +12,9 @@
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 	
-	<div style="display: flex;justify-content:center;width: 800px" >
-	<img src="${pageContext.request.contextPath}/images/pic8.jpg">
+	<div style="display: flex;justify-content:center;width: 80%;height: 800px;background-image: url('${pageContext.request.contextPath}/images/indexImg.jpg');background-repeat: no-repeat;background-position: center;background-size: cover;margin: 0 10% 0 10%">
+<%-- 	<img src="${pageContext.request.contextPath}/images/pic8.jpg"> --%>
+		
     </div>
 	
 	

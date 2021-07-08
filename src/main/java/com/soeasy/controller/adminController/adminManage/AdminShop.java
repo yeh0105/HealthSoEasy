@@ -1,8 +1,11 @@
 package com.soeasy.controller.adminController.adminManage;
 
+import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ShopBean;
@@ -63,7 +68,7 @@ public class AdminShop {
 		originalShop.setShopPhone(updateShopBean.getShopPhone());
 
 		// save原始物件
-		shopService.updateShopBasicInfo(originalShop);
+		shopService.updateShop(originalShop);
 
 		// 更新成功訊息
 		updateMessage.put("updateSuccessMessage", "更新成功");
@@ -82,5 +87,30 @@ public class AdminShop {
 			shopBeans = shopService.getShopByStatus(GlobalService.SHOP_STATUS_BANNED);
 		}
 		return shopBeans;
+	}
+	
+	// 上傳個人頭像
+	@PostMapping(value = "/adminUploadShopImg")
+	public String adminUploadShopImg(@RequestParam("shopImgUploadId") Integer shopId, @RequestParam("shopImgUpload") MultipartFile shopMultiImg) {
+
+		ShopBean originalShop = shopService.findByShopId(shopId);
+//			//更新檢查訊息
+		Map<String, String> updateMessage = new HashMap<String, String>();
+
+		// 處理圖片MultipartFile --> Blob
+		if (shopMultiImg != null && !shopMultiImg.isEmpty()) {
+			try {
+				byte[] bImg = shopMultiImg.getBytes();
+				Blob blob = new SerialBlob(bImg);
+				originalShop.setShopImg(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// save原始物件
+		shopService.updateShop(originalShop);
+		updateMessage.put("updateSuccessMessage", "圖片更新成功");
+		return "/admin/adminShop/adminShop";
 	}
 }
