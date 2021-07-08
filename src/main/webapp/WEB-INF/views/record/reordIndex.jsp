@@ -190,19 +190,75 @@ body * {
 	<jsp:include page="/fragment/footer.jsp" />
 
 	<script>
-		var ctx = document.getElementById('myChart2');
-		var myChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
-				datasets : [ {
-					label : 'BMI',
-					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
-					fill : false,
-					borderColor : '#3DCA79',
-				} ]
-			},
-		});
+	var xmlhttp = new XMLHttpRequest();
+	var url = "";
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+			var recordId = data.recordBeans.map(function(elem) {
+				return elem.recordId;
+			});
+			var customerId = data.months_temperature.map(function(elem) {
+				return elem.customerId;
+			});
+			var recordHeight = data.months_temperature.map(function(elem) {
+				return elem.recordHeight;
+			});
+			var recordWeight = data.months_temperature.map(function(elem) {
+				return elem.recordWeight;
+			});
+			var recordBmi = data.months_temperature.map(function(elem) {
+				return elem.recordBmi;
+			});
+			var recordDate = data.months_temperature.map(function(elem) {
+				return elem.recordDate;
+			});
+
+		}
+	}
+	var ctx = document.getElementById('myChart2');
+	var myChart = new Chart(ctx, {
+		type : 'line',
+		data : {
+			labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+			datasets : [ {
+				label : 'BMI',
+				data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
+				fill : false,
+				borderColor : '#3DCA79',
+			}]
+
+		},
+	});
+	var ctx = document.getElementById('myChart3');
+	var myChart = new Chart(ctx, {
+		type : 'line',
+		data : {
+			labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+			datasets : [ {
+				label : '體重',
+				data : [ 55, 54, 54, 54, 53, 52, 51 ],
+				fill : false,
+				borderColor : '#E800E8',
+			}]
+		},
+	});
+	// 		var ctx = document.getElementById('myChart2');
+	// 		var myChart = new Chart(ctx, {
+	// 			type : 'line',
+	// 			data : {
+	// 				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+	// 				datasets : [ {
+	// 					label : 'BMI',
+	// 					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
+	// 					fill : false,
+	// 					borderColor : '#3DCA79',
+	// 				} ]
+	// 			},
+	// 		});
 	</script>
 </body>
 </html>
