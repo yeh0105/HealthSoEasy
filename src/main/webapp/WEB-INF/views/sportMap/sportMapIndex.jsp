@@ -118,12 +118,12 @@ document.addEventListener("DOMContentLoaded", function(){
         function mouseOver() {
             console.log(this);
             console.log(this.id);
-            document.images[1].src ="${pageContext.request.contextPath}/images/sportMap/Map" + this.id.substr(2) + ".png";
+            document.getElementById("imgMap").src ="${pageContext.request.contextPath}/images/sportMap/Map" + this.id.substr(2) + ".png";
         }
 
 
         function mouseOut() {
-            document.images[1].src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png";
+        	document.getElementById("imgMap").src="${pageContext.request.contextPath}/images/sportMap/MapSport4.png";
         }
 
 
