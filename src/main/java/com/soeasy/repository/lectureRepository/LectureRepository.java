@@ -12,4 +12,7 @@ public interface LectureRepository extends JpaRepository<LectureBean, Integer> {
 	List<LectureBean> findByLectureId(Integer lectureId);
 	
 	List<LectureBean> findByLectureCategory(String lectureCategory);
+	
+	List<LectureBean> findByLectureStatus(Integer lectureStatus);
+	
 }

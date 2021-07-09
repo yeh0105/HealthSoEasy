@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.soeasy.model.LectureBean;
 import com.soeasy.service.lectureService.LectureService;
+import com.soeasy.util.GlobalService;
 
 @Controller
 public class HomeController {
@@ -63,7 +64,12 @@ public class HomeController {
 	@GetMapping("/lectureIndex")
 	public String lectureIndex(Model model) {
 		List<LectureBean> lectures = lectureService.updateLectureStatus();
-		model.addAttribute("lectures", lectures);
+		List<LectureBean> upcomingLectures = lectureService.findByLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
+		List<LectureBean> ongoingLectures = lectureService.findByLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
+//		List<LectureBean> archivedLectures = lectureService.findByLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
+		model.addAttribute("upcomingLectures", upcomingLectures);
+		model.addAttribute("ongoingLectures", ongoingLectures);
+//		model.addAttribute("archivedLectures", archivedLectures);
 		return "/lecture/lectureIndex";
 	}
 
