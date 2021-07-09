@@ -134,7 +134,7 @@
 											<div class="product-content-wrap">
 												<div class="product-content">
 													<p>
-														<a href="shop-details.html">${productTop.productName}
+														<a href="<c:url value='/mall/lists/product/${productTop.productId}'/>">${productTop.productName}
 														</a>
 													</p>
 												</div>

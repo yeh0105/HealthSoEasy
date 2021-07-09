@@ -44,6 +44,7 @@ import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
+import com.soeasy.service.shopService.ShopService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
 
 @Controller
@@ -65,6 +66,9 @@ public class ProductController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	ShopService shopService;
 	
 	
 	
@@ -176,9 +180,20 @@ public class ProductController {
 		    				
 		    }
 		    
+		    //印出最新售出的產品
+		
 		    List<OrderDetailBean> list5 = productService.findNewestProduct();
 		    model.addAttribute("productTop3", list5);
-
+		    
+		    //印出相關類別的產品
+		    List<ProductBean> sameCategory= productService.findByRelatedCategory(product.getCategory());
+		    model.addAttribute("sameCategory", sameCategory);
+		    
+		    //印出相關店家的產品
+		    List<ProductBean> sameShop= shopService.findByRelatedShop(product.getShopBean().getShopId());
+		    model.addAttribute("sameShop", sameShop);
+		    
+		    
 	      
 	      
 	        	System.out.println("印出來單一產品了");

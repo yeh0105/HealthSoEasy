@@ -3,10 +3,7 @@ package com.soeasy.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,14 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.soeasy.model.Order.OrderReviewBean;
 
 @Entity
 @Table(name = "Product")
