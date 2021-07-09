@@ -32,6 +32,15 @@ body{
     overflow: hidden;
     margin: 50px auto;
 }
+.archivedLectures_wrapper{
+    border: 1px solid grey;
+/*     border-radius: 10px; */
+    position: relative;
+    width:100%;
+    height:300px;
+    overflow: hidden;
+    margin: 50px auto;
+}
 ul{
     margin:0;
     padding: 0;
@@ -55,7 +64,7 @@ ul.slides li{
 }
 ul.slides li img{
     width: 100%;
-    height: 100%;
+    max-height: 500px;
     object-fit: cover;
 }
 ul.dot{
@@ -87,10 +96,16 @@ ul.dot li:hover{
     position: absolute;
     font-size:40px;
 }
-#prevSlide{            
+#ongoingLecture_prevSlide{            
     left:0;                    
 }
-#nextSlide{            
+#ongoingLecture_nextSlide{            
+    right:0;                
+}
+#upcomingLecture_prevSlide{            
+    left:0;                    
+}
+#upcomingLecture_nextSlide{            
     right:0;                
 }
 .slide_btn i{
@@ -113,6 +128,15 @@ ul.dot li:hover{
 .box{
 	column-count: 2;
 /* 	column-rule: 2px dotted orangered; */
+/* 	float: left; */
+	column-gap: 2em;
+	padding-right: 5%;
+/* 	background-attachment: fixed; */
+}
+
+.archivedLectures_box{
+	column-count: 2;
+/* 	column-rule: 2px dotted orangered; */
 	float: left;
 	column-gap: 2em;
 	padding-right: 5%;
@@ -121,11 +145,22 @@ ul.dot li:hover{
 
 .lectureImg{
 	width: 370px;
-	height: auto;
+	max-height: 500px;
 	padding-top: 5%;
 }
 
+/* .archivedLectures_lectureImg{ */
+/* 	width: auto; */
+/* 	max-height: 200px; */
+/* 	padding-top: 5%; */
+/* } */
+
 .box boxRight{
+/* 	float: right; */
+	position:relative;
+}
+
+.archivedLectures_box boxRight{
 /* 	float: right; */
 	position:relative;
 }

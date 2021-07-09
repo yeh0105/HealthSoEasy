@@ -59,10 +59,10 @@
 	<!------- 小表頭區 ------->
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
-			<a href='<c:url value='/'></c:url>'><button class="custom-btn btn-5">首頁</button></a> 
+			<a href='<c:url value='/'></c:url>'><button	class="custom-btn btn-5">首頁</button></a> 
 			<a href='<c:url value='/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
-			<a href='#ongoingLecture'><button class="custom-btn btn-5">進行中講座</button></a> 
-			<a href='#upcomingLecture'><button class="custom-btn btn-5">即將舉辦講座</button></a> 
+			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">進行中講座</button></a> 
+			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">即將舉辦講座</button></a>
 			<a href='<c:url value='/lectureController/lecture/archivedLectures' />'><button class="custom-btn btn-5">精彩回顧講座</button></a> 
 			<input type="text" class="search-bar" placeholder="搜尋講座">
 		</div>
@@ -72,29 +72,28 @@
 	
 	<!-- 進行中講座區 -->
 	<div id='pageWrapper'>
-		<div class="header-title" id="ongoingLecture">Ongoing Lecture</div>
+		<div class="header-title">${lecture.lectureStatus} Lecture</div>
 		<hr>
 
-		<!-------------------------------- 進行中輪播區 -------------------------------->
+		<!-------------------------------- 輪播測試區 -------------------------------->
 		<div class="wrapper">
 			<ul class="slides">
-		<c:forEach var='ongoingLecture' items='${ongoingLectures}'>
-			
+		<c:forEach varStatus="" var='lecture' items='${lectures}'>
 				<li>
 <!-- 					用box把圖片和文字包起來 -->
 					<div class="box">
 						<div class="lectureImg">
-							<img src="<c:url value='/lectureController/getLectureImage/${ongoingLecture.lectureId}' />" alt="">
+							<img src="<c:url value='/lectureController/getLectureImage/${lecture.lectureId}' />" alt="">
 						</div>
 						<div class="boxRight">
 						<br>
-							<font class="lectureTitle">${ongoingLecture.lectureTitle}</font>
-							<p class="lectureDate">講座時間：<font>${ongoingLecture.lectureDate}</font></p>
-							<p class="lectureCategory">講座分類：<font>${ongoingLecture.lectureCategory == "Eat"? "飲食": "運動"}</font></p>
-							<p class="lectureContent">講座內容：<font>${fn:substring(ongoingLecture.lectureContent,0,200)}...</font></p>
+							<font class="lectureTitle">${lecture.lectureTitle}</font>
+							<p class="lectureDate">講座時間：<font>${lecture.lectureDate}</font></p>
+							<p class="lectureCategory">講座分類：<font>${lecture.lectureCategory == "Eat"? "飲食": "運動"}</font></p>
+							<p class="lectureContent">講座內容：<font>${fn:substring(lecture.lectureContent,0,200)}...</font></p>
 <%-- 							<p class=lectureStatus>講座狀態：<font>${lecture.lectureStatus == 2}</font></p> --%>
 																
-							<a href="<c:url value='/lectureController/lecture/${ongoingLecture.lectureId}' />"><button
+							<a href="<c:url value='/lectureController/lecture/${lecture.lectureId}' />"><button
 									class="custom2-btn btn-4">(查看更多...)</button></a>
 						</div>
 					</div>
@@ -104,14 +103,14 @@
 			</ul>
 			
 			<ul class="dot">
-			<c:forEach var='ongoingLecture' items='${ongoingLectures}'>
-				<li id="${ongoingLecture.lectureId}"></li>
+			<c:forEach var='lecture' items='${lectures}'>
+				<li id="${lecture.lectureId}"></li>
 			</c:forEach>
 			</ul>
-			<div id="ongoingLecture_prevSlide" class="slide_btn">
+			<div id="prevSlide" class="slide_btn">
 				<i class="fas fa-caret-left"></i>
 			</div>
-			<div id="ongoingLecture_nextSlide" class="slide_btn">
+			<div id="nextSlide" class="slide_btn">
 				<i class="fas fa-caret-right"></i>
 			</div>
 		
@@ -126,59 +125,21 @@
 	
 	<!-- ------------------------------------------------------------------------------>
 
-
-
 	<!-- 即將舉辦講座區 -->
 	<div id='pageWrapper'>
-		<div class="header-title" id="upcomingLecture">Upcoming Lecture</div>
+		<div class="header-title">Upcoming Lecture</div>
 		<hr>
 
-<!-------------------------------- 即將舉辦輪播區 -------------------------------->
-		<div class="wrapper">
-			<ul class="slides">
-		<c:forEach var='upcomingLecture' items='${upcomingLectures}'>
-			
-				<li>
-<!-- 					用box把圖片和文字包起來 -->
-					<div class="box">
-						<div class="lectureImg">
-							<img src="<c:url value='/lectureController/getLectureImage/${upcomingLecture.lectureId}' />" alt="">
-						</div>
-						<div class="boxRight">
-						<br>
-							<font class="lectureTitle">${upcomingLecture.lectureTitle}</font>
-							<p class="lectureDate">講座時間：<font>${upcomingLecture.lectureDate}</font></p>
-							<p class="lectureCategory">講座分類：<font>${upcomingLecture.lectureCategory == "Eat"? "飲食": "運動"}</font></p>
-							<p class="lectureContent">講座內容：<font>${fn:substring(upcomingLecture.lectureContent,0,200)}...</font></p>
-<%-- 							<p class=lectureStatus>講座狀態：<font>${lecture.lectureStatus == 2}</font></p> --%>
-																
-							<a href="<c:url value='/lectureController/lecture/${upcomingLecture.lectureId}' />"><button
-									class="custom2-btn btn-4">(查看更多...)</button></a>
-						</div>
-					</div>
-<!-- 					用box把圖片和文字包起來 -->
-				</li>
-						</c:forEach>
-			</ul>
-			
-			<ul class="dot">
-			<c:forEach var='upcomingLecture' items='${upcomingLectures}'>
-				<li id="${upcomingLecture.lectureId}"></li>
-			</c:forEach>
-			</ul>
-			<div id="upcomingLecture_prevSlide" class="slide_btn">
-				<i class="fas fa-caret-left"></i>
-			</div>
-			<div id="upcomingLecture_nextSlide" class="slide_btn">
-				<i class="fas fa-caret-right"></i>
-			</div>
-		
-		</div>
-		<hr>
-<!--  ------ -->
+
 	</div>
-	<!-- ------------------------------------------------------------------------------>
 
+
+	<!-- 精采回顧區 -->
+	<div id='pageWrapper'>
+		<div class="header-title">Archived Lecture</div>
+		<hr>
+
+	</div>
 
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
