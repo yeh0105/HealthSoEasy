@@ -76,6 +76,20 @@ public class ShopServiceImpl implements ShopService {
 		public List<ProductBean> findAllwithProduct(Integer shopId){
 			return shopRepository.findAllWithProduct(shopId);
 		}
+		
+		
+		
+	//尋找相同店家的產品
+		@Override
+		public List<ProductBean> findByRelatedShop(Integer shopId){
+			
+			List<ProductBean> list = shopRepository.findAllWithProduct(shopId);	
+			if(list.size()>=4) {
+				List<ProductBean> newList = list.subList(0,4);
+				return newList;
+			}
+			return list;
+		} 
 
 	
 

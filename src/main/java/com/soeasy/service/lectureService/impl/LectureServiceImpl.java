@@ -75,4 +75,9 @@ public class LectureServiceImpl implements LectureService {
 		}
 		return lectures;
 	}
+
+	@Override
+	public List<LectureBean> findByLectureStatus(Integer lectureStatus) {
+		return lectureRepository.findByLectureStatus(lectureStatus);
+	}
 }

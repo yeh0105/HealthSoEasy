@@ -203,12 +203,13 @@ public class NutritionistIdController {
 		
 		Map<String, Object> genderMap=new HashMap<>();
 		List<NutritionistBean> listTarget= nutritionistService.getAllPageNutritionist(pageNo);
-		
+
 		genderMap.put("currPage", String.valueOf(pageNo));
 		genderMap.put("totalPage", totalPage);
 		genderMap.put("nutritionistPage", nutritionistService.getAllPageNutritionist(pageNo));
 		
 		ResponseEntity<Map<String, Object>> re =new ResponseEntity<>(genderMap, HttpStatus.OK);
+		System.out.println("re="+re);
 		return re;
 	}
 }

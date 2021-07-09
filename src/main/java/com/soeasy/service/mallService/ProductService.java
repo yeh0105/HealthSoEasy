@@ -93,6 +93,20 @@ public class ProductService {
 			}
 			return list;
 		} 
+		
+		
+		//尋找相同類別的產品
+		public List<ProductBean> findByRelatedCategory(Integer category){
+			
+			List<ProductBean> list = productRepository.findBycategory(category);	
+			if(list.size()>=5) {
+				List<ProductBean> newList = list.subList(0,5);
+				return newList;
+			}
+			return list;
+		} 
 	
+	
+		
 	
 }

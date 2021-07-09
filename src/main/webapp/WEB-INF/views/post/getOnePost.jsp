@@ -700,7 +700,7 @@ span.error {
 
 					</c:otherwise>
 				</c:choose>
-				<div style="margin-left: 1%;">
+				<div style="margin: 0% 1%;">
 					<!-- Load Facebook SDK for JavaScript -->
 					<div id="fb-root"></div>
 					<script>
@@ -719,12 +719,80 @@ span.error {
 					}(document, 'script', 'facebook-jssdk'));</script>
 
 					<!-- Your share button code -->
-<!-- 					要改發表的那台點腦的IP -->
+					<!-- 					要改發表的那台點腦的IP -->
 					<div class="fb-share-button"
 						data-href="http://192.168.10.79:8080/soeasy/PostNeedLoginController/getPost/${getOnePostBean.postId}"
-						data-layout="button_count"
-						data-name="SoEasy Share"></div>
+						data-layout="button_count" data-name="SoEasy Share"></div>
 				</div>
+				<!-- 				Line Share -->
+				<div style="margin-top: 0.5%;">
+					<div class="line-it-button" data-lang="zh_Hant" data-type="share-a"
+						data-ver="3"
+						data-url="http://192.168.10.79:8080/soeasy/PostNeedLoginController/getPost/${getOnePostBean.postId}"
+						data-color="default" data-size="small" data-count="true"
+						style="display: none;"></div>
+				</div>
+				<script
+					src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js"
+					async="async" defer="defer"></script>
+				<!-- 				Line Share -->
+				<!-- 				Twitter Share -->
+				<script>
+				window.twttr = (function(d, s, id) {
+  					var js, fjs = d.getElementsByTagName(s)[0],
+  					t = window.twttr || {};
+					if (d.getElementById(id)) return t;
+  					js = d.createElement(s);
+ 			 		js.id = id;
+  					js.src = "https://platform.twitter.com/widgets.js";
+  					fjs.parentNode.insertBefore(js, fjs);
+
+  					t._e = [];
+  					t.ready = function(f) {
+    				t._e.push(f);
+  					};
+
+ 					return t;
+				}(document, "script", "twitter-wjs"));
+				</script>
+				<div style="margin-top: 0.5%; margin-left: 1%;">
+					<a class="twitter-share-button"
+						href="http://192.168.10.79:8080/soeasy/PostNeedLoginController/getPost/${getOnePostBean.postId}">
+						Tweet</a>
+				</div>
+				<!-- 				Twitter Share -->
+				<!-- 				Skype Share -->
+				<script>
+				// Place this code in the head section of your HTML file 
+				(function(r, d, s) {
+					r.loadSkypeWebSdkAsync = r.loadSkypeWebSdkAsync || function(p) {
+					var js, sjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(p.id)) { return; }
+					js = d.createElement(s);
+					js.id = p.id;
+					js.src = p.scriptToLoad;
+					js.onload = p.callback
+					sjs.parentNode.insertBefore(js, sjs);
+				};
+				var p = {
+					scriptToLoad: 'https://swx.cdn.skype.com/shared/v/latest/skypewebsdk.js',
+					id: 'skype_web_sdk'
+				};
+				r.loadSkypeWebSdkAsync(p);
+			})(window, document, 'script');
+			</script>
+
+				<!-- Add class skype-share and data-style attribute with value (large, small, circle, square) to get the default button style -->
+				<!-- Additional attributes: data-lang='en-US' (for language) data-href='' (use '' for page URL, 'www.skype.com' for specific URL) -->
+				<!-- data-text = 'some message' (to pre-fill the message to that will be shared by the user, use '' to prompt user to enter a message) -->
+				<!-- Place the code of the share button where you what the share button to appear -->
+				<div style="margin-top: 0.5%; margin-left: 1%;">
+					<div role='link' aria-labelledby='shareButtonLabel' tabindex='0'
+						onKeydown='skypeShareKeyDownHandler(event)' class='skype-share'
+						data-href='http://192.168.10.79:8080/soeasy/PostNeedLoginController/getPost/${getOnePostBean.postId}'
+						data-lang='' data-text='' data-style='small'></div>
+				</div>
+				<!-- 				Skype Share -->
 			</div>
 			<br>
 			<!-- 			文章likes -->

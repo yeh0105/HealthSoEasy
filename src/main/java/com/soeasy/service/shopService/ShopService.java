@@ -34,6 +34,9 @@ public interface ShopService {
 	
 	//前台
 	public List<ProductBean> findAllwithProduct(Integer shopId);
+
+	//印出相關店家產品
+	List<ProductBean> findByRelatedShop(Integer shopId);
 	
 
 	

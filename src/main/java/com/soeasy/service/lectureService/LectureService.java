@@ -23,5 +23,8 @@ public interface LectureService {
 	
 	//依據講座日期更新講座狀態
 	List<LectureBean> updateLectureStatus();
+	
+	//
+	List<LectureBean> findByLectureStatus(Integer lectureStatus);
 
 }

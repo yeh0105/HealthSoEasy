@@ -27,6 +27,8 @@ public interface ProductRepository
 	public Page<ProductBean> findAll(String keyword, Pageable pageable);
 
 	List<ProductBean> findByProductName(String productName);
+	List<ProductBean> findBycategory(Integer category);
+	
 
 	
 	
