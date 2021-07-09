@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded",function() {
 	
 	// 顯示送回來的所有文章
 	function displayPageNutritionists(responseData) {
-		console.log("123");
+// 		console.log("123");
 		var mapObj = JSON.parse(responseData);
 		var nutritionists = mapObj.nutritionistPage;
 		pageNo = mapObj.currPage;

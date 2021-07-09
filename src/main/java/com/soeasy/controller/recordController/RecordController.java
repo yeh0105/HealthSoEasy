@@ -1,5 +1,6 @@
 package com.soeasy.controller.recordController;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.RecordBean;
+import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.recordService.RecordService;
 import com.soeasy.validator.recordValidator.RecordValidator;
 
@@ -30,6 +33,9 @@ public class RecordController {
 
 	@Autowired
 	RecordService recordService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	// 查詢全部日誌
 	@GetMapping("/getAllRecords")
@@ -57,17 +63,22 @@ public class RecordController {
 	
 	// 由customerId查詢日誌(json)
 	@GetMapping(value = "/record/getJsonRecordByCustomerId.json",produces = { "application/json; charset=UTF-8" })
-	public ResponseEntity<Map<String, Object>> getJsonCustomerById( Model model) {
+	public @ResponseBody List<RecordBean> getJsonCustomerById( Model model) {
 		
-		Map<String, Object> genderMap=new HashMap<>();
+//		Map<String, Object> genderMap=new HashMap<>();
 		
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-		List<RecordBean> recordBean=recordService.getCustomerId(customerBean);
 		
-		genderMap.put("recordBeans", recordBean);
+		System.out.println("customerBean="+customerBean);
 		
-		ResponseEntity<Map<String, Object>> re=new ResponseEntity<>(genderMap, HttpStatus.OK);
-		return re;
+		CustomerBean  recordCustomer= customerService.findByCustomerId(customerBean.getCustomerId());
+		
+		List<RecordBean> recordBean=recordService.getCustomerId(recordCustomer);
+		
+//		genderMap.put("recordBeans", recordBean);
+//		
+//		ResponseEntity<Map<String, Object>> re=new ResponseEntity<>(genderMap, HttpStatus.OK);
+		return recordBean;
 	}
 
 	// 新增日誌，先送一個空白表單，並給予初值
@@ -77,6 +88,7 @@ public class RecordController {
 		// 預設表單資料
 		recordBean.setRecordWeight(67.0);
 		recordBean.setRecordHeight(192.0);
+		recordBean.setRecordDate(new Date(System.currentTimeMillis()));
 		model.addAttribute("recordBean", recordBean);
 
 		return "/record/addRecord";

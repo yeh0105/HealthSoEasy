@@ -151,6 +151,10 @@ body * {
 				<canvas id="myChart2" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
 			<h4>成果記錄列表</h4>
+			<div id="linechart">
+				<canvas id="myChart3" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+			</div>
+			<h4>成果記錄列表</h4>
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
 					<th width='100'>日誌ID</th>
@@ -191,61 +195,62 @@ body * {
 
 	<script>
 	var xmlhttp = new XMLHttpRequest();
-	var url = "";
+	var url = "http://localhost:8080/soeasy/recordController/record/getJsonRecordByCustomerId.json";
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
 
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-			var recordId = data.recordBeans.map(function(elem) {
-				return elem.recordId;
-			});
-			var customerId = data.months_temperature.map(function(elem) {
-				return elem.customerId;
-			});
-			var recordHeight = data.months_temperature.map(function(elem) {
-				return elem.recordHeight;
-			});
-			var recordWeight = data.months_temperature.map(function(elem) {
-				return elem.recordWeight;
-			});
-			var recordBmi = data.months_temperature.map(function(elem) {
+			console.log(data);
+			
+			var recordBmi = data.map(function(elem) {	
 				return elem.recordBmi;
 			});
-			var recordDate = data.months_temperature.map(function(elem) {
+			console.log(recordBmi);
+			
+			var recordDate = data.map(function(elem) {	
 				return elem.recordDate;
 			});
+			console.log(recordDate);
+			
+			var recordWeight = data.map(function(elem) {	
+				return elem.recordWeight;
+			});
+			console.log(recordWeight);
+			
+			var ctx = document.getElementById('myChart2');
+			var myChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : recordDate,
+					datasets : [ {
+						label : 'BMI',
+						data : recordBmi,
+						fill : false,
+						borderColor : '#3DCA79',
+					}]
 
+				},
+			});
+			
+			var ctx = document.getElementById('myChart3');
+			var myChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : recordDate,
+					datasets : [ {
+						label : '體重',
+						data : recordWeight,
+						fill : false,
+						borderColor : '#E800E8',
+					}]
+				},
+			});
 		}
 	}
-	var ctx = document.getElementById('myChart2');
-	var myChart = new Chart(ctx, {
-		type : 'line',
-		data : {
-			labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
-			datasets : [ {
-				label : 'BMI',
-				data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
-				fill : false,
-				borderColor : '#3DCA79',
-			}]
-
-		},
-	});
-	var ctx = document.getElementById('myChart3');
-	var myChart = new Chart(ctx, {
-		type : 'line',
-		data : {
-			labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
-			datasets : [ {
-				label : '體重',
-				data : [ 55, 54, 54, 54, 53, 52, 51 ],
-				fill : false,
-				borderColor : '#E800E8',
-			}]
-		},
-	});
+	
+	
 	// 		var ctx = document.getElementById('myChart2');
 	// 		var myChart = new Chart(ctx, {
 	// 			type : 'line',
