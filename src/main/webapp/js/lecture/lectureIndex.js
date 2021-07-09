@@ -4,14 +4,14 @@ let slideCount=$(".slides li").length;
 let lastIndex=slideCount-1;
 
     
-$(".dot li").eq(0).css("background-color","white");
+$(".dot li").eq(0).css("background-color","darkgreen");
 $(".dot li").mouseenter(function(){
     slideNum=$(".dot li").index($(this));
     show();
 })
 
 function show(){
-    $(".dot li").eq(slideNum).css("background-color","#fff")
+    $(".dot li").eq(slideNum).css("background-color","darkgreen")
     .siblings().css("background-color","transparent");
 
     let slidemove=0-800*slideNum;
