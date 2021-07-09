@@ -152,29 +152,29 @@
 							<!-- 								=======best=========== -->
 							<div class="shop-widget b1">
 								<div class="shop-widget-title">
-									<h5>Newest Sale Today</h5>
+									<h5>Related Product</h5>
 								</div>
-								<c:forEach items="${productTop3}" var="productTop">
+								<c:forEach items="${sameCategory}" var="relatedCategory">
 									<div
 										class="product list-product d-flex align-items-center bg-white br-5 mb-30">
 										<div class="product-img-wrap">
 											<img
-												src="<c:url value='/mall/getImage/${productTop.productId}' />"
+												src="<c:url value='/mall/getImage/${relatedCategory.productId}' />"
 												alt="img">
 										</div>
 										<div class="product-content-wrap">
 											<div class="product-content">
 												<p>
-													<a href="shop-details.html">${productTop.productName} </a>
+													<a href="<c:url value='/mall/lists/product/${relatedCategory.productId}'/>">${relatedCategory.productName} </a>
 												</p>
 											</div>
 											<div class="product-action">
 												<a
-													href="<c:url value='/mall/cart/buy/${productTop.productId}'/>"
+													href="<c:url value='/mall/cart/buy/${relatedCategory.productId}'/>"
 													class="add-to-btn small-btn"> <i
 													class="flaticon-shopping-cart"></i> <span>Add to
 														Cart</span>
-													<h5 class="product-price">$${productTop.productPrice}</h5>
+													<h5 class="product-price">$${relatedCategory.productPrice}</h5>
 												</a>
 											</div>
 										</div>
@@ -346,17 +346,14 @@
 													</div>
 													<div class="comments-text">
 														<div class="avatar-name">
-															<h5>Daniel R. Stockton</h5>
-															<span>3 Days Ago</span>
+															<h5>h188472r</h5>
 															<div class="ratings">
 																<i class="flaticon-star"></i> <i class="flaticon-star"></i>
 																<i class="flaticon-star"></i> <i class="flaticon-star"></i>
 																<i class="flaticon-star"></i>
 															</div>
 														</div>
-														<p>Sed egestas, ante et vulputate volutpat, eros pede
-															semper est, vitaus metus eu augue. Morbi purus libero,
-															faucibus adipiscing, commodo quis, grav, est. Sed lectus.</p>
+														<p>食材超新鮮，回購很多次了!</p>
 													</div>
 												</div>
 											</div>
@@ -369,17 +366,14 @@
 													</div>
 													<div class="comments-text">
 														<div class="avatar-name">
-															<h5>Daniel R. Stockton</h5>
-															<span>3 Days Ago</span>
+															<h5>senyaky</h5>
 															<div class="ratings">
 																<i class="flaticon-star"></i> <i class="flaticon-star"></i>
 																<i class="flaticon-star"></i> <i class="flaticon-star"></i>
 																<i class="flaticon-star"></i>
 															</div>
 														</div>
-														<p>Sed egestas, ante et vulputate volutpat, eros pede
-															semper est, vitaus metus eu augue. Morbi purus libero,
-															faucibus adipiscing, commodo quis, grav, est. Sed lectus.</p>
+														<p>送貨超級快速~</p>
 													</div>
 												</div>
 											</div>
@@ -393,10 +387,164 @@
 						</div>
 
 					</div>
-					<!-- ============================================= -->
-				</div>
+					<!-- ========================================================================================= -->
+					<!-- Related Product -->
+					<!-- ========================================================================================= -->
 
-			</div>
+					<div class="related-product mt-110 rmt-75">
+						<h4 class="mb-35">Others  form  Shop</h4>
+						<div class="row">
+
+							<!--single Product -->
+							<c:forEach items="${sameShop}" var="relatedShop">
+								<div class="col-xl-4 col-md-6 col-md-4 mb-30" >
+									<div class="product">
+										<div class="product-img-wrap" style="weight: 70px; height: 100px">
+											<img src="<c:url value='/mall/getImage/${relatedShop.productId}'/>" alt="img">
+<!-- 											<button class="quick-view" type="button" data-toggle="modal" -->
+<!-- 												data-target="#quick-view">Quick View</button> -->
+										</div>
+										<div class="product-content-wrap">
+											<div class="product-content">
+												<p>
+													<a href="<c:url value='/mall/lists/product/${relatedShop.productId}'/>">${relatedShop.productName} </a>
+												</p>
+											</div>
+											<div class="product-action">
+												<a href="<c:url value='/mall/cart/buy/${relatedShop.productId}'/>" class="add-to-btn small-btn"> <i
+													class="flaticon-shopping-cart"></i> <span>Add to
+														Cart</span>
+													<h5 class="product-price">$${relatedShop.productPrice}</h5>
+												</a>
+												
+											</div>
+										</div>
+									</div>
+									
+								</div>
+									</c:forEach>
+
+
+
+
+<!-- 								==================================== Start product-quick-view //product-modal  ================ -->
+<!-- 								<div class="modal product-modal fade" id="quick-view" -->
+<!-- 									tabindex="-1" role="dialog" aria-hidden="true"> -->
+<!-- 									<div class="modal-dialog" role="document"> -->
+<!-- 										<div class="modal-content"> -->
+<!-- 											<div class="modal-header"> -->
+<!-- 												<button type="button" class="close" data-dismiss="modal" -->
+<!-- 													aria-label="Close"> -->
+<!-- 													<span aria-hidden="true">&times;</span> -->
+<!-- 												</button> -->
+<!-- 											</div> -->
+<!-- 											<div class="modal-body p-35 pt-0"> -->
+
+
+<!-- 												<div class="product-quick-view"> -->
+<!-- 													<div class="container"> -->
+<!-- 														<div class="row"> -->
+<!-- 															<div class="col-lg-6"> -->
+<!-- 																<div class="product-preview-wrap"> -->
+<!-- 																	<div class="tab-content bg-white p-50 b1 br-5"> -->
+<!-- 																		<div class="tab-pane" id="preview_1"> -->
+<!-- 																			<img src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Preview Image" -->
+<!-- 																				data-magnify-src="assets/img/product/product23.png" /> -->
+<!-- 																		</div> -->
+<!-- 																		<div class="tab-pane active" id="preview_2"> -->
+<!-- 																			<img src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Preview Image" -->
+<!-- 																				data-magnify-src="assets/img/product/product23.png" /> -->
+<!-- 																		</div> -->
+<!-- 																		<div class="tab-pane" id="preview_3"> -->
+<!-- 																			<img src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Preview Image" -->
+<!-- 																				data-magnify-src="assets/img/product/product23.png" /> -->
+<!-- 																		</div> -->
+<!-- 																		<div class="tab-pane" id="preview_4"> -->
+<!-- 																			<img src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Preview Image" -->
+<!-- 																				data-magnify-src="assets/img/product/product23.png" /> -->
+<!-- 																		</div> -->
+<!-- 																	</div> -->
+
+<!-- 																	<ul -->
+<!-- 																		class="nav nav-tabs flex-nowrap align-content-between mt-30"> -->
+<!-- 																		<li><a data-toggle="tab" href="#preview_1"> <img -->
+<!-- 																				src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Thumbnail Image" /> -->
+<!-- 																		</a></li> -->
+<!-- 																		<li><a class="active" data-toggle="tab" -->
+<!-- 																			href="#preview_2"> <img -->
+<!-- 																				src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Thumbnail Image" /> -->
+<!-- 																		</a></li> -->
+<!-- 																		<li><a data-toggle="tab" href="#preview_3"> <img -->
+<!-- 																				src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Thumbnail Image" /> -->
+<!-- 																		</a></li> -->
+<!-- 																		<li><a data-toggle="tab" href="#preview_4"> <img -->
+<!-- 																				src="assets/img/product/product23.png" -->
+<!-- 																				alt="Product Thumbnail Image" /> -->
+<!-- 																		</a></li> -->
+<!-- 																	</ul> -->
+<!-- 																</div> -->
+<!-- 															</div> -->
+<!-- 															<div class="col-lg-6"> -->
+<!-- 																<div -->
+<!-- 																	class="product-details text-left bg-white ml-25 px-50 py-45 b1 br-5"> -->
+<!-- 																	<h3 class="mb-25 rmt-25">Fresh Onion 1kg</h3> -->
+<!-- 																	<div class="rating mb-25"> -->
+<!-- 																		<div class="star mr-15"> -->
+<!-- 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i> -->
+<!-- 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i> -->
+<!-- 																			<i class="fa fa-star"></i> -->
+<!-- 																		</div> -->
+<!-- 																		<div class="text">(13 Review)</div> -->
+<!-- 																	</div> -->
+<!-- 																	<p>Sed egestas, ante et vulputate volutpat, eropede -->
+<!-- 																		semper est, vitluctus metus libero eu augue. Morbi -->
+<!-- 																		purus libero, faucibus adipiscing.</p> -->
+<!-- 																	<p>commodo quis, gravida id, est. Sed lectus. -->
+<!-- 																		Praest elemhendrerit tortor. Sed semper lorem at -->
+<!-- 																		felis. Vestibulum volutpat.lacus a ultrices.</p> -->
+
+<!-- 																	<h6> -->
+<!-- 																		Availability: <span>In Stock</span> -->
+<!-- 																	</h6> -->
+<!-- 																	<h4 class="price">$120.00</h4> -->
+
+<!-- 																	<div class="product-spinner mt-20"> -->
+<!-- 																		<div class="number-input b1"> -->
+<!-- 																			<button class="minus"></button> -->
+<!-- 																			<input min="1" name="quantity" value="2" -->
+<!-- 																				type="number"> -->
+<!-- 																			<button class="plus"></button> -->
+<!-- 																		</div> -->
+<!-- 																		<a href="#" class="theme-btn br-30 ml-20">Add to -->
+<!-- 																			Cart</a> -->
+<!-- 																		<div class="add-wishlist"> -->
+<!-- 																			<i class="fa fa-heart-o"></i> -->
+<!-- 																		</div> -->
+<!-- 																	</div> -->
+<!-- 																</div> -->
+<!-- 															</div> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+
+
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+								</div>
+						</div>
+
+						<!--==================================== end product-quick-view //product-modal  ================-->
+
+					</div>
+				</div>
 		</section>
 		<!--==================================================================== 
            End Shop Details Page
