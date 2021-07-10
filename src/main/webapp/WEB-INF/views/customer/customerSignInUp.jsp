@@ -161,7 +161,7 @@
                 <form:errors path="customerSignInPassword" cssClass="error" />
                 <form:errors path="invalidCredentials" cssClass="error" />
 
-                <a href="<c:url value='/customerController/sendValidationEmail'></c:url>" class="link">Forgot your password?</a>
+                <a href="<c:url value='/customerController/customerForgotPassword'></c:url>" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>
             </form:form>
         </div>

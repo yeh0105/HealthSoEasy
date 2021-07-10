@@ -17,6 +17,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Product")
@@ -49,6 +50,7 @@ public class ProductBean implements Serializable {
 	@Transient
 	private Boolean favoriteStatus;
 
+	@JsonIgnore
 	private Blob productImg;
 
 	@Transient
@@ -59,6 +61,7 @@ public class ProductBean implements Serializable {
 
 	private Integer productCost;
 	// 廠商
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_shopId")
 	private ShopBean shopBean;

@@ -13,8 +13,8 @@ public interface CustomerService {
 	void addCustomer(CustomerBean customer);
 	//ID查詢會員
 	CustomerBean findByCustomerId(Integer customerId);
-//	//Email查詢會員
-//	CustomerBean findCustomerByEmail(String customerEmail);
+	//Email查詢會員
+	List<CustomerBean> findByCustomerEmail(String customerEmail);
 	//修改基本資料
 	void updateCustomer(CustomerBean customer);
 	//變更會員狀態
