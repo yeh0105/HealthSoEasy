@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
+import com.soeasy.model.ProductBean;
 
 public interface PostService {
+	
+	// 文章模糊查詢
+	List<PostBean> findAllForKeyword(String keyword);
 
 	// 查詢所有文章的 TOP3
 	List<PostBean> findTop3();
