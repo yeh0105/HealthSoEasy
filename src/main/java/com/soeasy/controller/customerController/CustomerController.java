@@ -35,10 +35,12 @@ import com.soeasy.model.CustomerBean;
 import com.soeasy.model.CustomerHealthBean;
 import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
+import com.soeasy.model.ProductBean;
 import com.soeasy.model.SportMapBean;
 import com.soeasy.model.member.CustomerSignInBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
+import com.soeasy.service.mallService.ProductService;
 import com.soeasy.service.postService.PostService;
 import com.soeasy.service.sportmapService.SportMapService;
 import com.soeasy.util.GlobalService;
@@ -64,6 +66,9 @@ public class CustomerController {
 	@Autowired
 	PostService postService;
 	
+	@Autowired
+	ProductService productService;
+
 	//表單初值--新增會員_會員登入--註冊
 	@GetMapping("/addCustomer")
 	public String addCustomerSendForm(Model model) {
@@ -170,9 +175,20 @@ public class CustomerController {
 		}
 		//以mapItemIds查詢sportMap
 		List<PostBean> posts = postService.findAllById(postItemIds);
+		//------------------------------------------------------------------------
+		//記錄product類型的ItemId
+		List<Integer> productItemIds = new ArrayList<>();
+		for(FavoriteBean favoriteBean : originCustomer.getFavoriteBeans()) {
+			if(favoriteBean.getFavoriteCategory().equals("productFavorite")) {
+				productItemIds.add(favoriteBean.getFavoriteItemId());
+			}
+		}
+		//以mapItemIds查詢sportMap
+		List<ProductBean> products = productService.findAllById(productItemIds);
 		
 		model.addAttribute("sportMaps", sportMaps);
 		model.addAttribute("posts", posts);
+		model.addAttribute("products", products);
 		return "/customer/customerPage";
 	}
 	
@@ -355,6 +371,12 @@ public class CustomerController {
 				}
 			}
 			return responseEntity;
+		}
+		
+		//導向忘記密碼
+		@GetMapping("/customerForgotPassword")
+		public String customerForgotPassword() {
+			return "/customer/customerPasswordReset";
 		}
 		
 		
