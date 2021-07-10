@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +14,14 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,6 @@ import com.soeasy.model.CustomerBean;
 import com.soeasy.model.FavoriteBean;
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
-import com.soeasy.model.ReplyBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
 import com.soeasy.service.postService.PostCategoryService;
@@ -56,6 +56,24 @@ public class PostController {
 
 	@Autowired
 	ServletContext context;
+
+	// 文章模糊查詢
+	@GetMapping(value = "/getAllPostsForKeyword")
+	public String findAllForKeyword( @Param("keyword") String keyword, Model model) {
+		
+		System.err.println("進入查詢");
+		System.err.println("keyword="+keyword);
+		
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+
+		List<PostBean> postBeans = postService.findAllForKeyword(keyword);
+		System.err.println(postBeans);
+
+
+		model.addAttribute("postBeans", postBeans);
+
+		return "post/postByKeyword";
+	}
 
 	// 查詢所有文章的 TOP3
 	@GetMapping(value = "/getTop3Post", produces = { "application/json; charset=UTF-8" })
