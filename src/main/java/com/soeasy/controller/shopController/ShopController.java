@@ -7,6 +7,7 @@ import java.sql.Blob;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.ShopBean;
 import com.soeasy.model.member.ShopSignInBean;
@@ -203,4 +205,79 @@ public class ShopController {
 		}
 		return responseEntity;
 	}
+	
+	
+	
+	
+//=======================================================================	
+	
+	//顯示前台廠商個人頁面
+	@GetMapping("/showShopPage")
+	public String showShopPage(Model model) {
+		ShopBean shopSignInSuccess=(ShopBean)model.getAttribute("shopSignInSuccess");
+		ShopBean origionShop = shopService.findByShopId(shopSignInSuccess.getShopId());
+		model.addAttribute("shopBean",origionShop);
+		return "shop/shopPage";
+	}
+	//修改前台廠商個人頁面
+	@GetMapping(value="/updateShopPage/{shopId}")
+	public String updateShopPage(@PathVariable("shopId")Integer shopId,Model model) {
+		
+		ShopBean shopBean = shopService.findByShopId(shopId);
+		model.addAttribute("shopBean",shopBean);
+		return "shop/updateShopPage";
+		
+	}
+	
+	//修改前台廠商頁面，將送來修改過的資料用本方法檢核，若無誤則寫入資料庫
+	@PostMapping("/updateShopPage/{shopId}")
+	public String modify(
+	@ModelAttribute("shopBean")ShopBean shopBean,BindingResult result,
+	Model model,@PathVariable Integer shopId,HttpServletRequest request) {
+		
+		System.out.println("進來囉1");
+		
+		//取得原始shop物件
+		ShopBean shopOriginBean = shopService.findByShopId(shopId);
+		System.out.println("進來囉2");
+		//取得廠商照片
+		MultipartFile shopImg = shopBean.getShopMultiImg();
+		System.out.println("進來囉3");
+		System.out.println("shopBean="+shopBean);
+		//檢測欄位
+		ShopBeanValidator validator = new ShopBeanValidator();
+		
+//		validator.validate(shopBean, result);		
+//		if (result.hasErrors()) {
+//			return "shop/updateShopPage";		
+//				
+//		}
+		//圖片傳入資料庫
+		if (shopImg != null && !shopImg.isEmpty()) {
+			try {
+				byte[] b = shopImg.getBytes();
+				Blob blob = new SerialBlob(b);
+				shopOriginBean.setShopImg(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}else {
+			shopOriginBean.setShopImg(shopOriginBean.getShopImg());
+		}
+		
+		shopOriginBean.setShopName(shopBean.getShopName());
+		shopOriginBean.setShopPhone(shopBean.getShopPhone());
+		
+		try {
+			shopService.updateShop(shopOriginBean);
+			}catch(org.hibernate.exception.ConstraintViolationException e){
+				return "shop/updateShopPage";
+			}
+
+		return "redirect:/shopController/showShopPage"; 
+	
+	}
+//======================================================================	
+	
 }

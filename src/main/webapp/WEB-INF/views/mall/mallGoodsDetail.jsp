@@ -132,19 +132,20 @@
 									</h5>
 								</div>
 								<ul>
-									<li><a href="shop.html"><i class="flaticon-apple"></i>
-											Fruits and Vegetables</a></li>
-									<li><a href="shop.html"><i
-											class="flaticon-chicken-hand-drawn-outline"></i> Chickenen
-											MealBox</a></li>
-									<li><a href="shop.html"><i
-											class="flaticon-pressure-washer"></i> Beef Meal Box</a></li>
-									<li><a href="shop.html"><i class="flaticon-pest"></i>
-											Pork Meal Boxl</a></li>
-									<li><a href="shop.html"><i class="flaticon-stationery"></i>
-											Fish Meal Box</a></li>
-									<li><a href=""><i class="flaticon-make-up"></i> Meal
-											Box for vagetarien</a></li>
+									<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><i class="flaticon-apple"></i>
+												Fruits and Vegetables</a></li>
+										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><i
+												class="flaticon-chicken-hand-drawn-outline"></i> Chickenen
+												MealBox</a></li>
+										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><i
+												class="flaticon-pressure-washer"></i> Beef Meal Box</a></li>
+										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><i class="flaticon-pest"></i>
+												Pork Meal Boxl</a></li>
+										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><i
+												class="flaticon-stationery"></i> Fish Meal Box</a></li>
+										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><i class="flaticon-make-up"></i> Meal
+												Box for vagetarien</a></li>
+
 
 								</ul>
 							</div>
@@ -285,7 +286,7 @@
 														<div class="floatR">
 															<button id="showFavorite">
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like1.png">
+																	src="${pageContext.request.contextPath}/images/mall/Like2.png">
 															</button>
 														</div>
 													</c:when>
@@ -293,7 +294,7 @@
 														<div class="floatR">
 															<button id="showFavorite">
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like2.png">
+																	src="${pageContext.request.contextPath}/images/mall/Like1.png">
 															</button>
 														</div>
 
@@ -392,7 +393,7 @@
 					<!-- ========================================================================================= -->
 
 					<div class="related-product mt-110 rmt-75">
-						<h4 class="mb-35">Others  form  Shop</h4>
+						<h4 class="mb-35">Others Form  Shop</h4>
 						<div class="row">
 
 							<!--single Product -->

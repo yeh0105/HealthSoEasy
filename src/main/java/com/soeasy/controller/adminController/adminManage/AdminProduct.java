@@ -56,7 +56,7 @@ public class AdminProduct {
 				@RequestMapping("/adminProduct")
 				public String viewPage(Model model){
 					String keyword = null;
-					return ListByPage(model,1,"productId","asc",keyword);
+					return ListByPage(model,1,"productId","asc",keyword,null);
 				}
 
 
@@ -66,9 +66,12 @@ public class AdminProduct {
 			        @PathVariable("pageNo") int currentPage,
 			        @Param("sortField")String sortField,
 			        @Param("sortDir")String sortDir,
-			        @Param("keyword")String keyword)
+			        @Param("keyword")String keyword,
+			        @Param("category")Integer category
+			        
+			        )
 					{
-					Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword);
+					Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword,category);
 					    
 					    System.out.println("印出來all products");
 					    //分頁參數
@@ -82,6 +85,7 @@ public class AdminProduct {
 					    model.addAttribute("sortField", sortField);
 					    model.addAttribute("sortDir", sortDir);
 					    model.addAttribute("keyword",keyword);
+					    ProductBean product=new ProductBean();
 					    
 					    //用來翻轉排序的參數
 					    String reverseSortDir =sortDir.equals("asc") ? "desc":"asc";

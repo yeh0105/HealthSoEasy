@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -120,4 +121,12 @@ public class RecordController {
 
 		return "redirect:/recordController/getAllRecords";
 	}
+	
+	// 刪除日誌
+	@PostMapping("/deleteRecord/{recordId}")
+	public String deleteRecord(@PathVariable("recordId") Integer recordId) {
+		recordService.deleteByRecordId(recordId);
+		return "redirect:/recordController/record/getRecordByCustomerId";
+	}
+	
 }

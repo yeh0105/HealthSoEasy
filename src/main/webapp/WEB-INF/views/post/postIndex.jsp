@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -269,7 +270,7 @@ document.addEventListener("DOMContentLoaded",function() {
 				+'</h4>'
 				+'<a href="<c:url value="/PostNeedLoginController/addPost "/>">'
 				+'<button class="addbtn" style="letter-spacing: 3px;">'
-				+'Add Share'
+				+'新增分享'
 				+'</button>'
 				+'</a>'
 				+'</div>'
@@ -467,9 +468,11 @@ document.addEventListener("DOMContentLoaded",function() {
 					<div class="span4">
 						<div>
 							<div class="span10">
-								<form class="form-search">
-									<input class="input-medium search-query" type="text" />
+								<form class="form-search" method="get"
+									action="<c:url value='/PostController/getAllPostsForKeyword'/>">
+									<input class="input-medium search-query" type="text" name="keyword"/>
 									<button type="submit" class="btn">Search</button>
+
 								</form>
 							</div>
 							<div class="span1 text-right">
@@ -483,11 +486,7 @@ document.addEventListener("DOMContentLoaded",function() {
 					</div>
 
 					<hr style="color: transparent;">
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br> <br>
 
 					<!-- 	---------------------------insertTop10區塊------------------------------ -->
 					<div class="row-fluid" id="insertTop10"></div>
@@ -499,5 +498,22 @@ document.addEventListener("DOMContentLoaded",function() {
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />
 
+	<!-- ----------------------------模糊查詢用-------------------------------- -->
+	<script>
+		//將 get 請求轉換為 post 請求提交
+		$(document).ready(function() {
+			$('.submitBtn').click(function() {
+				if (confirm('確定要新增此留言嗎? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+	</script>
+	<!-- ----------------------------模糊查詢用-------------------------------- -->
 </body>
 </html>

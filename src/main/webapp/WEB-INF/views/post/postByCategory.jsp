@@ -260,7 +260,7 @@
 						+'</h4>'
 						+'<a href="<c:url value="/PostNeedLoginController/addPost "/>">'
 						+'<button class="addbtn" style="letter-spacing: 3px;">'
-						+'Add Share'
+						+'新增分享'
 						+'</button>'
 						+'</a>'
 						+'</div>'
@@ -285,7 +285,7 @@
 			}
 	
 			content += '<div class="row-fluid" style="border-bottom: 4px #325b43 dotted; margin-bottom: 1%; padding: 1% 1% 0% 1%;">'
-				+ '<div class="row-<fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
+				+ '<div class="row-fluid" style="margin-bottom: 1%; padding-bottom: 1%;">'
 				+ '<div class="span9">'
 				+ '<div class="media">'
 				// 						文章圖片

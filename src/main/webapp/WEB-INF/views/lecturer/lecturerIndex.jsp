@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +30,7 @@
 	crossorigin="anonymous"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'
 	crossorigin='anonymous'></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/lecture/lectureIndex.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lecture/lecturer.css">
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
@@ -53,19 +54,42 @@
 	<!------- 小表頭區 ------->
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
-			<a href='<c:url value='/'></c:url>'><button
-					class="custom-btn btn-5">首頁</button></a> <a
-				href='<c:url value='lectureIndex' />'><button
-					class="custom-btn btn-5">講座介紹</button></a> <input type="text"
-				class="search-bar" placeholder="搜尋講座">
+			<a href='<c:url value='/'></c:url>'><button class="custom-btn btn-5">首頁</button></a> 
+			<a href='<c:url value='/lectureController/lectureIndex' />'><button class="custom-btn btn-5">講座介紹</button></a> 
+			<input type="text" class="search-bar" placeholder="搜尋講座">
 		</div>
 		<hr>
 	</div>
 
 	<!-- 講師介紹 -->
+	<c:forEach var='lecturer' items='${lecturers}'>
+		<div class="wrapper">
+			<ul>
+
+				<li>
+					<!-- 					用box把圖片和文字包起來 -->
+					<div class="box">
+						<div class="lectureImg">
+							<img src="<c:url value='/lecturerController/getLecturerImage/${lecturer.lecturerId}' />" alt="">
+						</div>
+						<div class="archivedLectures_boxRight">
+							<br> 
+							<font class="lecturerName">${lecturer.lecturerName}</font><br>
+							<p class="custom-eft eft12"><span>講師專長</span></p><br><font class="lecturerTalent">${lecturer.lecturerTalent}</font><br>
+							<p class="custom-eft eft12"><span>講師經歷</span></p><br><font class="lecturerExp">${fn:substring(lecturer.lecturerExp,0,150)}</font></p>
+
+<%-- 							<a href="<c:url value='/lecturerController/lecturer/${lecturer.lecturerId}' />"><button class="custom2-btn btn-4">(查看更多...)</button></a> --%>
+						</div>
+					</div> <!-- 					用box把圖片和文字包起來 -->
+				</li>
+
+			</ul>
 
 
+		</div>
+	</c:forEach>
 	<!-- JS引入 -->
+	
 	<script
 		src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
 

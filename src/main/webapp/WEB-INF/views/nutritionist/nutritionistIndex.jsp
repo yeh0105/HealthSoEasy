@@ -180,6 +180,17 @@ body * {
 					<h5>價格:XXX元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
+				<div id="slim">
+					<h4>D套餐</h4>
+					<h5>※商品名稱※</h5>
+					<button type="button">
+						<img
+							src="${pageContext.request.contextPath}/images/nutritionist/food_04.png">
+					</button>
+					
+					<h5>價格:XXX元整</h5>
+					<button type="button">加入購物車</button>
+				</div>
 			</div>
 		</section>
 

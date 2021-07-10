@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
+import com.soeasy.model.ProductBean;
 import com.soeasy.repository.postRepository.PostRepository;
 import com.soeasy.service.postService.PostService;
 import com.soeasy.util.GlobalService;
@@ -197,6 +198,19 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<PostBean> findAllById(List<Integer> postIds) {
 		return postRepository.findAllById(postIds);
+	}
+
+	// 文章模糊查詢
+	@Override
+	public List<PostBean> findAllForKeyword(String keyword) {
+		Sort sort = Sort.by(Sort.Order.desc("postUploadDate"), Sort.Order.desc("postLike"));
+		System.err.println("進入Service");
+		System.err.println("keyword="+keyword);
+		
+		System.err.println(postRepository.findAllForKeyword(keyword, sort));
+		
+		System.err.println("出去Service");
+		return postRepository.findAllForKeyword(keyword, sort);
 	}
 
 }

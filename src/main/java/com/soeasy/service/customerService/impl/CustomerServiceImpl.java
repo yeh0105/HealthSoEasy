@@ -131,5 +131,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerBean> getCustomerByStatusAndExercise(Integer customerStatus, Integer customerExerciseHabits) {
 		return customerRepository.findCustomerByStatusAndExercise(customerStatus, customerExerciseHabits);
 	}
+
+	@Override
+	public List<CustomerBean> findByCustomerEmail(String customerEmail) {
+		return customerRepository.findByCustomerEmail(customerEmail);
+	}
 	
 }

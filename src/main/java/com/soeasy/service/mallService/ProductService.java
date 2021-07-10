@@ -37,7 +37,7 @@ public class ProductService {
 	
 
 	//查詢分頁&排序 
-	public Page<ProductBean> findAllByPage(int pageNumber,String sortField, String sortDir,String keyword) {
+	public Page<ProductBean> findAllByPage(int pageNumber,String sortField, String sortDir,String keyword, Integer category) {
 		
 		//設定分類排序
 		Sort sort = Sort.by(sortField);
@@ -50,6 +50,10 @@ public class ProductService {
 	     if(keyword != null) {
 				return productRepository.findAll(keyword,pageable);
 			}
+	     //查詢分類並連動分頁(如果分類的參數不是null)
+	     if(category != null) {
+	    	 return productRepository.findByCategory(category,pageable);
+	     }
 	     
 	     return productRepository.findAll(pageable);
 	}
@@ -60,9 +64,14 @@ public class ProductService {
 	public ProductBean findProductById(Integer productId) {
 		return productRepository.findById(productId).get();
 	}
-
 	
-
+	// 使用分類查詢一個產品
+	
+	public ProductBean findProductBycategory(Integer category) {
+		return productRepository.findBycategory(category).get(category);
+	}
+	
+	
 	// 刪除產品
 	public void deleteById(Integer productId) {
 		productRepository.deleteById(productId);
@@ -87,8 +96,9 @@ public class ProductService {
 	//尋找最新被訂購個產品  
 		public List<OrderDetailBean> findNewestProduct(){
 			List<OrderDetailBean> list = orderDetailRepository.findAll();	
+			
 			if(list.size()>=5) {
-				List<OrderDetailBean> newList = list.subList(0,5);
+				List<OrderDetailBean> newList = list.subList(1,6);
 				return newList;
 			}
 			return list;
@@ -100,13 +110,25 @@ public class ProductService {
 			
 			List<ProductBean> list = productRepository.findBycategory(category);	
 			if(list.size()>=5) {
-				List<ProductBean> newList = list.subList(0,5);
+				List<ProductBean> newList = list.subList(1,6);
 				return newList;
 			}
 			return list;
 		} 
 	
-	
 		
 	
+		
+		
+		
+		
+		
+		
+		
+		
+		//以多個ID查詢多個商品
+		public List<ProductBean> findAllById(List<Integer> productItemIds){
+			return productRepository.findAllById(productItemIds);
+		}
+		
 }

@@ -836,23 +836,6 @@ span.error {
 			<input type='hidden' name='_method' value='DELETE'>
 		</form>
 
-		<!-- ----------------------------新增留言用-------------------------------- -->
-		<script>
-		//將 get 請求轉換為 post 請求提交
-		$(document).ready(function() {
-			$('.submitBtn').click(function() {
-				if (confirm('確定要新增此留言嗎? ')) {
-					var href = $(this).attr('href');
-					$('form').attr('action', href).submit();
-
-					console.log(href);
-				}
-				return false;
-
-			});
-		})
-	</script>
-		<!-- ----------------------------新增留言用-------------------------------- -->
 		<!-- ----------------------------刪除單筆文章用-------------------------------- -->
 		<script>
 		//將 get 請求轉換為 post 請求提交
