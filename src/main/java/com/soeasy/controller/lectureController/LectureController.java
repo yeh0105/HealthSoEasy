@@ -34,7 +34,7 @@ public class LectureController {
 	ServletContext servletContext;
 
 	// 查詢所有講座
-	@GetMapping("/getAllLectures")
+	@GetMapping("/lectureIndex")
 	public String getAllLectures(Model model) {
 		model.addAttribute("lectures", lectureService.getAllByLectureId());
 
@@ -96,10 +96,10 @@ public class LectureController {
 	}
 
 	// 查詢所有精彩回顧
-		@GetMapping("/lecture/archivedLectures")
-		public String lectureIndex(Model model) {
-			List<LectureBean> archivedLectures = lectureService.findByLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
-			model.addAttribute("archivedLectures", archivedLectures);
-			return "/lecture/archivedLectures";
-		}
+	@GetMapping("/lecture/archivedLectures")
+	public String lectureIndex(Model model) {
+		List<LectureBean> archivedLectures = lectureService.findByLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
+		model.addAttribute("archivedLectures", archivedLectures);
+		return "/lecture/archivedLectures";
+	}
 }

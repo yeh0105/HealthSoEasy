@@ -21,7 +21,7 @@ public class CustomerResetPassword {
 
 	@GetMapping("/sendValidationEmail")
 	public String sendValidationEmail(){
-		// 设置邮件内容
+		// 設置郵件內容
         SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
         passwordResetEmail.setFrom(from);
         passwordResetEmail.setTo("a0939956219@gmail.com");

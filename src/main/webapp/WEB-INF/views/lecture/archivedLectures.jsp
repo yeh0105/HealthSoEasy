@@ -60,7 +60,7 @@
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
 			<a href='<c:url value='/'></c:url>'><button	class="custom-btn btn-5">首頁</button></a> 
-			<a href='<c:url value='/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
+			<a href='<c:url value='/lecturerController/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
 			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">進行中講座</button></a> 
 			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">即將舉辦講座</button></a> 
 			<a href='#archivedLecture'><button class="custom-btn btn-5">精彩回顧講座</button></a> 
@@ -76,7 +76,7 @@
 		<hr>
 
 		<!-------------------------------- 精彩回顧內容區 -------------------------------->
-				<c:forEach var='archivedLecture' items='${archivedLectures}'>
+ <c:forEach var='archivedLecture' items='${archivedLectures}'>
 		<div class="archivedLectures_wrapper">
 			<ul>
 
@@ -89,7 +89,7 @@
 									alt="">
 							</div>
 							<div class="archivedLectures_boxRight">
-								<br> <font class="lectureTitle">${archivedLecture.lectureTitle}</font>
+								<br> <font class="archivedLectures_lectureTitle">${archivedLecture.lectureTitle}</font>
 								<p class="lectureDate">
 									講座時間：<font>${archivedLecture.lectureDate}</font>
 								</p>

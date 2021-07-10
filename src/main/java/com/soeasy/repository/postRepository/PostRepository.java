@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
+import com.soeasy.model.ProductBean;
 
 public interface PostRepository extends JpaRepository<PostBean, Integer> {
 
@@ -20,20 +22,21 @@ public interface PostRepository extends JpaRepository<PostBean, Integer> {
 //	
 //	 查詢所有文章的 TOP3
 //	List<PostBean> findTop3(Sort sort);
-	
+
 	// 查詢類別文章的 TOP10
-	List<PostBean> findTop10ByPostCategoryBean(PostCategoryBean postCategoryBean,Sort sort);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	List<PostBean> findTop10ByPostCategoryBean(PostCategoryBean postCategoryBean, Sort sort);
+
+	// 文章模糊查詢
+	@Query("SELECT p FROM PostBean p WHERE p.postTitle Like %?1%"
+			+ " OR p.postCategory Like %?1%" 
+			+ " OR p.postContent Like %?1%" 
+			+ " OR p.postUploadTime Like %?1%"
+			+ " OR p.postUploadDate Like %?1%" 
+			+ " OR p.postLike Like %?1%" 
+			+ " OR p.postStatus Like %?1%"
+			+ " OR p.customerBean.customerName Like %?1%")
+	List<PostBean> findAllForKeyword(String keyword, Sort sort);
+
 //	List<PostBean> findByPostId(Integer postId);
 ////	
 //	

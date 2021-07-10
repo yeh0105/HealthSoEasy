@@ -118,4 +118,17 @@ public class ProductService {
 	
 		
 	
+		
+		
+		
+		
+		
+		
+		
+		
+		//以多個ID查詢多個商品
+		public List<ProductBean> findAllById(List<Integer> productItemIds){
+			return productRepository.findAllById(productItemIds);
+		}
+		
 }

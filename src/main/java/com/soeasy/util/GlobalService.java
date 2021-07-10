@@ -28,6 +28,9 @@ public class GlobalService {
 
 	// 地圖
 	public static final int SPORTMAPS_PER_PAGE = 6;
+	
+	// 講座分頁(精彩回顧)
+	public static final Integer LECTURE_PER_PAGE = 5;
 
 	// 講座狀態
 	public static final Integer LECTURE_STATUS_UPCOMING = 1; // 即將舉辦
@@ -44,6 +47,9 @@ public class GlobalService {
 	public static final Integer RESERVATION_STATUS_CANCEL = 3; // 取消預約
 	public static final Integer RESERVATION_STATUS_ATTEND = 4; // 出席
 	public static final Integer RESERVATION_STATUS_ABSENCE = 5; // 缺席
+	
+	// 講師分頁
+	public static final Integer LECTURER_PER_PAGE = 6;
 
 	// 分享
 	// 文章狀態

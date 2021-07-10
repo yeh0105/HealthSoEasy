@@ -9,7 +9,7 @@
 <title>SOEASY</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/responsive.css">
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
