@@ -53,7 +53,7 @@
 				</a>
 				
 				<div id="shopMenu">
-                    <a href="#">
+                   <a href="<c:url value='//shopController/showShopPage'/>">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
