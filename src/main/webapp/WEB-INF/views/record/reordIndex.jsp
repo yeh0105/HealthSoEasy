@@ -148,11 +148,13 @@ body * {
 			<hr>
 			<h4>成果記錄圖表</h4>
 			<div id="linechart">
-				<canvas id="myChart2" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+				<canvas id="myChart2"
+					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
 			<h4>成果記錄列表</h4>
 			<div id="linechart">
-				<canvas id="myChart3" style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
+				<canvas id="myChart3"
+					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
 			<h4>成果記錄列表</h4>
 			<table border='1' cellpadding="3" cellspacing="1">
@@ -175,18 +177,25 @@ body * {
 						<td style="text-align: center">${record.recordDate}</td>
 
 						<td><a href="#">編輯</a></td>
-						<td><a class='deletelink' href="#">刪除</a></td>
+						<td><a class='deleteSportMap'
+							href="<c:url value='/recordController/deleteRecord/${record.recordId}' />">刪除</a></td>
 					</tr>
 				</c:forEach>
+
+
 			</table>
 			<br>
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
-				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
-				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
+<%-- 				<a href="<c:url value='/recordController/getAllRecords'/>"><button>所有日誌</button></a>  --%>
+				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button>會員日誌</button></a>
 			</div>
 
+
+			<form method='POST'>
+				<input type='hidden' name='_method' value='DELETE'>
+			</form>
 
 		</section>
 	</div>
@@ -194,76 +203,88 @@ body * {
 	<jsp:include page="/fragment/footer.jsp" />
 
 	<script>
-	var xmlhttp = new XMLHttpRequest();
-	var url = "http://localhost:8080/soeasy/recordController/record/getJsonRecordByCustomerId.json";
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+		var xmlhttp = new XMLHttpRequest();
+		var url = "http://localhost:8080/soeasy/recordController/record/getJsonRecordByCustomerId.json";
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
 
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
-			console.log(data);
-			
-			var recordBmi = data.map(function(elem) {	
-				return elem.recordBmi;
-			});
-			console.log(recordBmi);
-			
-			var recordDate = data.map(function(elem) {	
-				return elem.recordDate;
-			});
-			console.log(recordDate);
-			
-			var recordWeight = data.map(function(elem) {	
-				return elem.recordWeight;
-			});
-			console.log(recordWeight);
-			
-			var ctx = document.getElementById('myChart2');
-			var myChart = new Chart(ctx, {
-				type : 'line',
-				data : {
-					labels : recordDate,
-					datasets : [ {
-						label : 'BMI',
-						data : recordBmi,
-						fill : false,
-						borderColor : '#3DCA79',
-					}]
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(this.responseText);
+				console.log(data);
 
-				},
-			});
-			
-			var ctx = document.getElementById('myChart3');
-			var myChart = new Chart(ctx, {
-				type : 'line',
-				data : {
-					labels : recordDate,
-					datasets : [ {
-						label : '體重',
-						data : recordWeight,
-						fill : false,
-						borderColor : '#E800E8',
-					}]
-				},
-			});
+				var recordBmi = data.map(function(elem) {
+					return elem.recordBmi;
+				});
+				console.log(recordBmi);
+
+				var recordDate = data.map(function(elem) {
+					return elem.recordDate;
+				});
+				console.log(recordDate);
+
+				var recordWeight = data.map(function(elem) {
+					return elem.recordWeight;
+				});
+				console.log(recordWeight);
+
+				var ctx = document.getElementById('myChart2');
+				var myChart = new Chart(ctx, {
+					type : 'line',
+					data : {
+						labels : recordDate,
+						datasets : [ {
+							label : 'BMI',
+							data : recordBmi,
+							fill : false,
+							borderColor : '#3DCA79',
+						} ]
+
+					},
+				});
+
+				var ctx = document.getElementById('myChart3');
+				var myChart = new Chart(ctx, {
+					type : 'line',
+					data : {
+						labels : recordDate,
+						datasets : [ {
+							label : '體重',
+							data : recordWeight,
+							fill : false,
+							borderColor : '#E800E8',
+						} ]
+					},
+				});
+			}
 		}
-	}
-	
-	
-	// 		var ctx = document.getElementById('myChart2');
-	// 		var myChart = new Chart(ctx, {
-	// 			type : 'line',
-	// 			data : {
-	// 				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
-	// 				datasets : [ {
-	// 					label : 'BMI',
-	// 					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
-	// 					fill : false,
-	// 					borderColor : '#3DCA79',
-	// 				} ]
-	// 			},
-	// 		});
+
+		$(document).ready(function() {
+			$('.deleteSportMap').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+
+		// 		var ctx = document.getElementById('myChart2');
+		// 		var myChart = new Chart(ctx, {
+		// 			type : 'line',
+		// 			data : {
+		// 				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+		// 				datasets : [ {
+		// 					label : 'BMI',
+		// 					data : [ 20, 18.6, 18, 17.8, 17.5, 17.1, 16.9 ],
+		// 					fill : false,
+		// 					borderColor : '#3DCA79',
+		// 				} ]
+		// 			},
+		// 		});
 	</script>
 </body>
 </html>
