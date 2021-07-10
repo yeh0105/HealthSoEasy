@@ -84,8 +84,8 @@ public class ShopServiceImpl implements ShopService {
 		public List<ProductBean> findByRelatedShop(Integer shopId){
 			
 			List<ProductBean> list = shopRepository.findAllWithProduct(shopId);	
-			if(list.size()>=4) {
-				List<ProductBean> newList = list.subList(0,4);
+			if(list.size()>=3) {
+				List<ProductBean> newList = list.subList(0,3);
 				return newList;
 			}
 			return list;
