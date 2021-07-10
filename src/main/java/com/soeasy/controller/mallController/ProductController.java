@@ -71,12 +71,25 @@ public class ProductController {
 	ShopService shopService;
 	
 	
-	
-	//商城頁面跳轉
+//	
+//	//商城頁面跳轉
+//		@RequestMapping("/")
+//		public String viewPage1(Model model){
+//			
+//			List<OrderDetailBean> list=productService.findNewestProduct();
+//			
+//			model.addAttribute("newest",list);
+//			System.out.println("最新的產品:"+list);
+//			return "mall/mallIndex";
+//			
+//			
+//		}
+		
+		//商城頁面跳轉
 		@RequestMapping("/lists")
 		public String viewPage(Model model){
 			String keyword = null;
-			return ListByPage(model,1,"productId","asc",keyword);
+			return ListByPage(model,1,"productId","asc",keyword,null);
 		}
 
 
@@ -86,11 +99,13 @@ public class ProductController {
 	        @PathVariable("pageNo") int currentPage,
 	        @Param("sortField")String sortField,
 	        @Param("sortDir")String sortDir,
-	        @Param("keyword")String keyword
+	        @Param("keyword")String keyword,
+	        @Param("category")Integer category
+	        
 	        )
 			{
 
-			Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword);
+			Page<ProductBean> page = productService.findAllByPage(currentPage,sortField,sortDir,keyword,category);
 			    
 			
 			    System.out.println("印出來all products");
@@ -100,6 +115,7 @@ public class ProductController {
 			    model.addAttribute("totalItems", page.getTotalElements());
 			    
 			    
+			    
 			   //羅列產品
 			    List<ProductBean> list = page.getContent();
 			    model.addAttribute("product", list);
@@ -107,9 +123,14 @@ public class ProductController {
 			    model.addAttribute("sortField", sortField);
 			    model.addAttribute("sortDir", sortDir);
 			    model.addAttribute("keyword",keyword);
+			    model.addAttribute("category",category);
+			    
 			    
 			    List<OrderDetailBean> list5 = productService.findNewestProduct();
 			    model.addAttribute("productTop3", list5);
+			    
+			    
+			    
 			    
 			    			    
 //			    
