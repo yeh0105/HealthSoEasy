@@ -24,22 +24,15 @@ body{
     background-attachment: fixed;
 }  
 .wrapper{
-    border: 1px solid;
+    border: 1px solid grey;
     border-radius: 10px;
     position: relative;
-    width:800px;
-    height:500px;
+    width:38%;
+    height:430px;
     overflow: hidden;
-    margin: 50px auto;
-}
-.archivedLectures_wrapper{
-    border: 1px solid grey;
-/*     border-radius: 10px; */
-    position: relative;
-    width:100%;
-    height:300px;
-    overflow: hidden;
-    margin: 50px auto;
+    margin: 3% 3%;
+    margin-left:7%;
+    float: left;
 }
 ul{
     margin:0;
@@ -50,67 +43,6 @@ li{
     margin:0;
     padding: 0;
     list-style: none;
-}
-ul.slides{
-    width: 32000px;
-    left: 0px;
-    transition: all .5s;
-}
-ul.slides li{
-    width:800px;
-    height:500px;
-    overflow: hidden;
-    float: left;
-}
-ul.slides li img{
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-}
-ul.dot{
-    bottom:10px;
-    width:100%;
-    display: flex;
-    justify-content: center;
-/*     color: #89d8d3; */
-}
-ul.dot li{
-    border:1px solid darkgreen;
-/*     border-radius: 40%; */
-    margin: 0 5px;
-    width:24px;
-    height: 10px;
-    transition: .2s;
-}
-ul.dot li:hover{
-    background: darkgreen;
-    color: #89d8d3;
-}
-.slide_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0px;
-    bottom:0;
-    width: 30px;
-    position: absolute;
-    font-size:40px;
-}
-#ongoingLecture_prevSlide{            
-    left:0;                    
-}
-#ongoingLecture_nextSlide{            
-    right:0;                
-}
-#upcomingLecture_prevSlide{            
-    left:0;                    
-}
-#upcomingLecture_nextSlide{            
-    right:0;                
-}
-.slide_btn i{
-    color:#89d8d3;
-    transition: .5s;
 }
 
 /* 講座列表字型樣式 */
@@ -124,36 +56,19 @@ ul.dot li:hover{
 	margin: 0;
 }
 
-/* 輪播內容 */
 .box{
 	column-count: 2;
-/* 	column-rule: 2px dotted orangered; */
 /* 	float: left; */
 	column-gap: 2em;
 	padding-right: 5%;
 /* 	background-attachment: fixed; */
 }
 
-.archivedLectures_box{
-	column-count: 2;
-/* 	column-rule: 2px dotted orangered; */
-	float: left;
-	column-gap: 2em;
-	padding-right: 5%;
-/* 	background-attachment: fixed; */
-}
-
 .lectureImg{
-	width: 370px;
+	width: 350px;
 	max-height: auto;
-	padding-top: 7%;
 }
 
-/* .archivedLectures_lectureImg{ */
-/* 	width: auto; */
-/* 	max-height: 200px; */
-/* 	padding-top: 5%; */
-/* } */
 
 .box boxRight{
 /* 	float: right; */
@@ -167,41 +82,31 @@ ul.dot li:hover{
 }
 
 p{
-/* 	padding-left: 1%; */
-font-weight: 80%;
-}
-
-font.lectureTitle{
-	margin:1.5% 0% 3% 0%;
-	padding: 2% 5%;
-/* 	padding-left: 5%; */
-	font-weight: bold;
-	font-size: x-large;
-	background: darkgreen;
-  	color: #fff;
-  	text-shadow: 0 0.05em 0.08em rgba(0,0,0,0.7);
-  	display: inline-block;
-  	line-height: 1;
-}
-
-font.archivedLectures_lectureTitle{
-	padding: 2% 5%;
-/* 	padding-left: 5%; */
-	font-weight: bold;
-	font-size: x-large;
-	background: darkgreen;
-  	color: #fff;
-  	text-shadow: 0 0.05em 0.08em rgba(0,0,0,0.7);
-  	display: inline-block;
-  	line-height: 1;
-}
-
-p.lectureDate, p.lectureCategory{
-	padding-top: 3%;
-/* 	padding-left: 5%; */
 	color: darkgreen;
 	font-size: large;
 	font-weight:bold;
+	line-height: 1.5;
+	padding-top: 3%;
+}
+
+font.lecturerName{
+	padding: 2% 5%;
+/* 	padding-left: 5%; */
+	font-weight: bold;
+	font-size: x-large;
+	background: darkgreen;
+  	color: #fff;
+  	text-shadow: 0 0.05em 0.08em rgba(0,0,0,0.7);
+  	display: inline-block;
+  	line-height: 1;
+}
+
+font.lecturerTalent, font.lecturerExp{
+	padding-top: 3%;
+/* 	padding-left: 5%; */
+	color: darkgreen;
+	font-size: medium;
+/* 	font-weight:bold; */
 }
 
 
@@ -354,4 +259,43 @@ background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
 }
 .btn-4 span:hover:after {
   width: 100%;
+}
+.custom-eft {
+  margin: 2% 0 2% 0;
+  padding: 0 10px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  font-size: 2em;
+}
+.eft12 {
+  position: relative;
+  padding-top: 3%;
+}
+.eft12:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  width:90px; 
+  background: #c2e7cb;
+  bottom: 9px;
+}
+ .eft12 span{
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to bottom, #045518, #045518 50%, #045518 50%, #fff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  font-size: large;
+  font-weight: bold;
 }

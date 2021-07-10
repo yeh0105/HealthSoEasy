@@ -60,10 +60,10 @@
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
 			<a href='<c:url value='/'></c:url>'><button class="custom-btn btn-5">首頁</button></a> 
-			<a href='<c:url value='/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
-			<a href='#ongoingLecture'><button class="custom-btn btn-5">進行中講座</button></a> 
-			<a href='#upcomingLecture'><button class="custom-btn btn-5">即將舉辦講座</button></a> 
-			<a href='<c:url value='/lectureController/lecture/archivedLectures' />'><button class="custom-btn btn-5">精彩回顧講座</button></a> 
+			<a href='<c:url value='/lecturerController/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
+			<a href='<c:url value="/lectureIndex/#ongoingLecture" />'><button class="custom-btn btn-5">進行中講座</button></a> 
+			<a href='<c:url value="/lectureIndex/#upcomingLecture" />'><button class="custom-btn btn-5">即將舉辦講座</button></a> 
+			<a href='<c:url value="/lectureController/lecture/archivedLectures" />'><button class="custom-btn btn-5">精彩回顧講座</button></a> 
 			<input type="text" class="search-bar" placeholder="搜尋講座">
 		</div>
 		<hr>
@@ -77,10 +77,10 @@
 
 		<!-------------------------------- 進行中輪播區 -------------------------------->
 		<div class="wrapper">
-			<ul class="slides">
+			<ul class="slides ongoing_slides">
 		<c:forEach var='ongoingLecture' items='${ongoingLectures}'>
 			
-				<li>
+				<li class="ongoingLecture_li">
 <!-- 					用box把圖片和文字包起來 -->
 					<div class="box">
 						<div class="lectureImg">
@@ -105,7 +105,7 @@
 			
 			<ul class="dot">
 			<c:forEach var='ongoingLecture' items='${ongoingLectures}'>
-				<li id="${ongoingLecture.lectureId}"></li>
+				<li class="ongoingLecture_dot_li" id="${ongoingLecture.lectureId}"></li>
 			</c:forEach>
 			</ul>
 			<div id="ongoingLecture_prevSlide" class="slide_btn">
@@ -119,8 +119,8 @@
 		
 		
 		<hr>
-		<script
-			src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
+		<script src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
+		
 		<!--  ------ -->
 	</div>
 	
@@ -135,10 +135,10 @@
 
 <!-------------------------------- 即將舉辦輪播區 -------------------------------->
 		<div class="wrapper">
-			<ul class="slides">
+			<ul class="slides upcoming_slides">
 		<c:forEach var='upcomingLecture' items='${upcomingLectures}'>
 			
-				<li>
+				<li class="upcomingLecture_li">
 <!-- 					用box把圖片和文字包起來 -->
 					<div class="box">
 						<div class="lectureImg">
@@ -163,7 +163,7 @@
 			
 			<ul class="dot">
 			<c:forEach var='upcomingLecture' items='${upcomingLectures}'>
-				<li id="${upcomingLecture.lectureId}"></li>
+				<li class="upcomingLecture_dot_li"  id="${upcomingLecture.lectureId}"></li>
 			</c:forEach>
 			</ul>
 			<div id="upcomingLecture_prevSlide" class="slide_btn">
@@ -175,6 +175,7 @@
 		
 		</div>
 		<hr>
+		<script src="${pageContext.request.contextPath}/js/lecture/lectureUpcomingSlides.js"></script>
 <!--  ------ -->
 	</div>
 	<!-- ------------------------------------------------------------------------------>

@@ -73,9 +73,15 @@ public class HomeController {
 		return "/lecture/lectureIndex";
 	}
 
-	// 從SoEasy首頁跳至講師首頁
-	@GetMapping("/lecturerIndex")
-	public String lecturerIndex() {
-		return "/lecturer/lecturerIndex";
-	}
+//	// 從SoEasy首頁跳至講師首頁
+//	@GetMapping("/lecturerIndex")
+//	public String lecturerIndex() {
+//		return "/lecturer/lecturerIndex";
+//	}
+	
+	// 從SoEasy首頁跳至文章首頁
+		@GetMapping("/admin/adminManage/adminArticle")
+		public String articleIndex() {
+			return "redirect:/admin/adminLogin";
+		}
 }
