@@ -188,7 +188,7 @@ body * {
 
 			<div>
 				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
-				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a>
+<%-- 				<a href="<c:url value='/recordController/getAllRecords'/>"><button>	所有日誌</button></a> --%>
 				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button> 會員日誌</button></a>
 			</div>
 

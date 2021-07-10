@@ -28,6 +28,14 @@ body * {
 	font-family: '微軟正黑體';
 }
 
+#offer{
+	border:1px solid #C9D8BF;
+	margin-top: 70px;
+	background-color: #C9D8BF;
+	width: 100%;
+	height: 320px;
+}
+
 #uk_breadcrumb {
 	flex-wrap: wrap;
 	list-style: none;
@@ -296,11 +304,24 @@ document.addEventListener("DOMContentLoaded",function() {
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 
-	<section>
-		<img
-			src="${pageContext.request.contextPath}/images/nutritionist/nutritionistHeader.png"
-			width="100%" height="100%">
-	</section>
+	<br>
+	<br>
+	<br>
+		<section id="offer">
+			<div style="background-color: #C9D8BF; text-align: center;">
+				<div style="margin: 5% auto;">
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Nutritionist</h1>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						營養師職業的出現，是適應社會健康的需求而產生的。他們不但是食物的專家，更是營養檢測、營養強化、</p>
+
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						營養評估等領域的專家，幫助人們獲取健康。營養師的職業要求是專心專業服務於健康。</p>
+				</div>
+			</div>
+		</section>
+	
+	
+	
 	<div id='mainWrapper2'>
 		<section>
 			<br>
