@@ -245,97 +245,9 @@
 			document.getElementById("customerImgSubmit").click();			
 		}
 // 		---------------------------------------------------------------------------------------
-// 		輪播地圖JS
-		var slideMapsIndex = 1;
-		showMapsSlides(slideMapsIndex);
 
-		let dotsOfMaps = document.querySelectorAll(".dotOfMap");
-		for(let i = 0; i < dotsOfMaps.length; i++){
-			dotsOfMaps[i].addEventListener("click", function(){
-				currentMapsSlide(i + 1);
-			});
-		}
-
-		let prevMapsSlides = document.getElementById("prevMapsSlides");
-		let nextMapsSlides = document.getElementById("nextMapsSlides");
-		prevMapsSlides.addEventListener("click", function(){
-			plusMapsSlides(-1);
-		});
-		nextMapsSlides.addEventListener("click", function(){
-			plusMapsSlides(1);
-		});
-		
-		// Next/previous controls
-		function plusMapsSlides(n) {
-  			showMapsSlides(slideMapsIndex += n);
-		}
-
-		// Thumbnail image controls
-		function currentMapsSlide(n) {
-  			showMapsSlides(slideMapsIndex = n);
-		}
-
-		function showMapsSlides(n) {
-  			let i;
-  			let slides = document.getElementsByClassName("mapSlides");
-  			let dotsOfMaps = document.getElementsByClassName("dotOfMap");
-  			if (n > slides.length) {slideMapsIndex = 1}
-  			if (n < 1) {slideMapsIndex = slides.length}
-  			for (i = 0; i < slides.length; i++) {
-      			slides[i].style.display = "none";
-  			}
-  			for (i = 0; i < dotsOfMaps.length; i++) {
-      			dotsOfMaps[i].className = dotsOfMaps[i].className.replace(" active", "");
-  			}
-  			slides[slideMapsIndex-1].style.display = "block";
-  			dotsOfMaps[slideMapsIndex-1].className += " active";
-		}
 // 		---------------------------------------------------------------------------------------
-// 		輪播分享Post
-		var slidePostsIndex = 1;
-		showPostsSlides(slidePostsIndex);
 
-		let dotsOfPosts = document.querySelectorAll(".dotOfPost");
-		for(let i = 0; i < dotsOfPosts.length; i++){
-			dotsOfPosts[i].addEventListener("click", function(){
-				currentPostsSlide(i + 1);
-			});
-		}
-
-		let prevPostsSlides = document.getElementById("prevPostsSlides");
-		let nextPostsSlides = document.getElementById("nextPostsSlides");
-		prevPostsSlides.addEventListener("click", function(){
-			plusPostsSlides(-1);
-		});
-		nextPostsSlides.addEventListener("click", function(){
-			plusPostsSlides(1);
-		});
-		
-		// Next/previous controls
-		function plusPostsSlides(n) {
-  			showPostsSlides(slidePostsIndex += n);
-		}
-
-		// Thumbnail image controls
-		function currentPostsSlide(n) {
-  			showPostsSlides(slidePostsIndex = n);
-		}
-
-		function showPostsSlides(n) {
-  			let i;
-  			let slides = document.getElementsByClassName("postSlides");
-  			let dotsOfPosts = document.getElementsByClassName("dotOfPost");
-  			if (n > slides.length) {slidePostsIndex = 1}
-  			if (n < 1) {slidePostsIndex = slides.length}
-  			for (i = 0; i < slides.length; i++) {
-      			slides[i].style.display = "none";
-  			}
-  			for (i = 0; i < dotsOfPosts.length; i++) {
-      			dotsOfPosts[i].className = dotsOfPosts[i].className.replace(" active", "");
-  			}
-  			slides[slidePostsIndex-1].style.display = "block";
-  			dotsOfPosts[slidePostsIndex-1].className += " active";
-		}
 	})
 	
 </script>
@@ -582,11 +494,62 @@
 					</div>
 <!-- 					---------------------------------------- -->
 					</div>
+					<script type="text/javascript">
+//			 			輪播地圖JS
+						var slideMapsIndex = 1;
+						showMapsSlides(slideMapsIndex);
+
+						let dotsOfMaps = document.querySelectorAll(".dotOfMap");
+						for(let i = 0; i < dotsOfMaps.length; i++){
+							dotsOfMaps[i].addEventListener("click", function(){
+								currentMapsSlide(i + 1);
+							});
+						}
+
+						let prevMapsSlides = document.getElementById("prevMapsSlides");
+						let nextMapsSlides = document.getElementById("nextMapsSlides");
+						prevMapsSlides.addEventListener("click", function(){
+							plusMapsSlides(-1);
+						});	
+						nextMapsSlides.addEventListener("click", function(){
+							plusMapsSlides(1);
+						});
+					
+						// Next/previous controls
+						function plusMapsSlides(n) {
+			  				showMapsSlides(slideMapsIndex += n);
+						}
+		
+						// Thumbnail image controls
+						function currentMapsSlide(n) {
+			  				showMapsSlides(slideMapsIndex = n);
+						}
+
+						function showMapsSlides(n) {
+			  				let i;
+			  				let slides = document.getElementsByClassName("mapSlides");
+			  				let dotsOfMaps = document.getElementsByClassName("dotOfMap");
+			  				if (n > slides.length) {slideMapsIndex = 1}
+			  					if (n < 1) {slideMapsIndex = slides.length}
+			  				for (i = 0; i < slides.length; i++) {
+			      				slides[i].style.display = "none";
+			  				}
+			  				for (i = 0; i < dotsOfMaps.length; i++) {
+			      				dotsOfMaps[i].className = dotsOfMaps[i].className.replace(" active", "");
+			  				}
+			  				slides[slideMapsIndex-1].style.display = "block";
+			  				dotsOfMaps[slideMapsIndex-1].className += " active";
+						}
+					</script>
+					
 						</c:when>
 						<c:otherwise>
-							<div>
-								<p>There is no favorite of map here.</p><br>
-								<a href="<c:url value='/showSportMapIndex'></c:url>">Click me to add some map.</a>
+							<div style="text-align: center;">
+								<a href="<c:url value='/showSportMapIndex'></c:url>">
+								<img class="addFavorite" src="${pageContext.request.contextPath}/images/customer/heart.png">
+								</a>
+								<br>
+								<p style="color: #325b43; font-family: Lobster; font-size: 18px;">No favorite map here.</p>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -598,11 +561,14 @@
 					<!-- 				--------------------------------- -->
 				</div>
 			</div>
-<!-- 			---------------------------------------------------------------------------------------------------------- -->
 			<div>
+<!-- 			---------------------------------------------------------------------------------------------------------- -->
 				<div class="customer-post">
 					<div id="customer-post-items">
 <!-- 						----------------------------------------------------------------------------------------- -->
+						<c:choose>
+						<c:when test="${!empty posts}">
+						
 						<div class="slideshow-container">
 						<a class="prev" id="prevPostsSlides">&#10094;</a>
 						<c:forEach var="post" items="${posts}">
@@ -643,17 +609,93 @@
 						</c:forEach>
 						</div>
 						</div>
-<!-- 						----------------------------------------------------------------------------------------- -->
+						
+						<script type="text/javascript">
+//				 			輪播分享Post
+							var slidePostsIndex = 1;
+							showPostsSlides(slidePostsIndex);
+
+							let dotsOfPosts = document.querySelectorAll(".dotOfPost");
+							for(let i = 0; i < dotsOfPosts.length; i++){
+								dotsOfPosts[i].addEventListener("click", function(){
+									currentPostsSlide(i + 1);
+								});
+							}
+
+							let prevPostsSlides = document.getElementById("prevPostsSlides");
+							let nextPostsSlides = document.getElementById("nextPostsSlides");
+							prevPostsSlides.addEventListener("click", function(){
+								plusPostsSlides(-1);
+							});
+							nextPostsSlides.addEventListener("click", function(){
+								plusPostsSlides(1);
+							});
+						
+							// Next/previous controls
+							function plusPostsSlides(n) {
+				  				showPostsSlides(slidePostsIndex += n);
+							}
+
+							// Thumbnail image controls
+							function currentPostsSlide(n) {
+				  				showPostsSlides(slidePostsIndex = n);
+							}
+
+							function showPostsSlides(n) {
+				  				let i;
+				  				let slides = document.getElementsByClassName("postSlides");
+				  				let dotsOfPosts = document.getElementsByClassName("dotOfPost");
+				  				if (n > slides.length) {slidePostsIndex = 1}
+				  				if (n < 1) {slidePostsIndex = slides.length}
+				  				for (i = 0; i < slides.length; i++) {
+				      				slides[i].style.display = "none";
+				  				}
+				  				for (i = 0; i < dotsOfPosts.length; i++) {
+				      				dotsOfPosts[i].className = dotsOfPosts[i].className.replace(" active", "");
+				  				}
+				  				slides[slidePostsIndex-1].style.display = "block";
+				  				dotsOfPosts[slidePostsIndex-1].className += " active";
+							}
+						</script>
+						
+						</c:when>
+						<c:otherwise>
+							<div style="text-align: center;">
+								<a href="<c:url value='/postIndex'></c:url>">
+								<img class="addFavoritePost" src="${pageContext.request.contextPath}/images/customer/remove-favorite.png">
+								</a>
+								<br>
+								<p style="color: #325b43; font-family: Lobster; font-size: 18px;">No favorite post here.</p>
+							</div>
+							<script type="text/javascript">
+								let addFavoritePost = document.querySelector(".addFavoritePost");
+								addFavoritePost.addEventListener("mouseover", function(){
+									this.src = "${pageContext.request.contextPath}/images/customer/add-favorite.png"
+								})
+								addFavoritePost.addEventListener("mouseout", function(){
+									this.src = "${pageContext.request.contextPath}/images/customer/remove-favorite.png"
+								})
+							</script>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
+<!-- 						----------------------------------------------------------------------------------------- -->
 				<div class="customer-information" >
 					<div class="customer-information-inside">
-					<c:forEach var="product" items="${products}">
+					<c:choose>
+						<c:when test="${!empty products}">
+
+
 <!-- 						single product -->
-					<div>
+					<div class="slideshow-container">
+						<a class="prev" id="prevProductsSlides" style="z-index: 9">&#10094;</a>
+					<c:forEach var="product" items="${products}">
+					<div class="mySlides fade-product productSlides">
+<!-- 					<div> -->
                         <div class="product">
                             <div class="product-img-wrap">
-                                <img src='<c:url value="/mall/getImage/${product.productId}"></c:url>' alt="img">
+                                <img style="height: 270px; width: 420px" src='<c:url value="/mall/getImage/${product.productId}"></c:url>' alt="img">
                                 <!-- Button trigger modal -->
                                 <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view">Quick View</button>
                             </div>
@@ -673,10 +715,87 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
+						</div>
+<!--                        </div> -->
                     </div>
 					</c:forEach>
+					<a class="next" id="nextProductsSlides">&#10095;</a>
+					<div style="text-align: center">
+						<c:forEach var="product" items="${products}">
+							<span class="dot dotOfProduct"></span> 
+						</c:forEach>
+					</div>
+					</div>
+					
+					<script type="text/javascript">
+//		 			輪播分享Product
+						var slideProductsIndex = 1;
+						showProductsSlides(slideProductsIndex);
+
+						let dotsOfProducts = document.querySelectorAll(".dotOfProduct");
+						for(let i = 0; i < dotsOfProducts.length; i++){
+							dotsOfProducts[i].addEventListener("click", function(){
+								currentProductsSlide(i + 1);
+							});
+						}
+
+						let prevProductsSlides = document.getElementById("prevProductsSlides");
+						let nextProductsSlides = document.getElementById("nextProductsSlides");
+						prevProductsSlides.addEventListener("click", function(){
+						plusProductsSlides(-1);
+						});
+						nextProductsSlides.addEventListener("click", function(){
+							plusProductsSlides(1);
+						});
+				
+						// Next/previous controls
+						function plusProductsSlides(n) {
+		  					showProductsSlides(slideProductsIndex += n);
+						}
+
+						// Thumbnail image controls
+						function currentProductsSlide(n) {
+		  					showProductsSlides(slideProductsIndex = n);
+						}
+
+						function showProductsSlides(n) {
+		  					let i;
+		  					let slides = document.getElementsByClassName("productSlides");
+		  					let dotsOfProducts = document.getElementsByClassName("dotOfProduct");
+		  					if (n > slides.length) {slideProductsIndex = 1}
+		  					if (n < 1) {slideProductsIndex = slides.length}
+		  					for (i = 0; i < slides.length; i++) {
+		      					slides[i].style.display = "none";
+		  					}
+		  					for (i = 0; i < dotsOfProducts.length; i++) {
+		      					dotsOfProducts[i].className = dotsOfProducts[i].className.replace(" active", "");
+		  					}
+		  					slides[slideProductsIndex-1].style.display = "block";
+		  					dotsOfProducts[slideProductsIndex-1].className += " active";
+						}
+					</script>
+					
+					</c:when>
+						<c:otherwise>
+							<div style="text-align: center;">
+								<a href="<c:url value='/mall/lists'></c:url>">
+								<img class="addFavoriteProduct" src="${pageContext.request.contextPath}/images/customer/remove-to-favorites.png">
+								</a>
+								<br>
+								<p style="color: #325b43; font-family: Lobster; font-size: 18px;">No favorite product here.</p>
+							</div>
+							<script type="text/javascript">
+//					 			收藏導向變更圖案
+								let addFavoriteProduct = document.querySelector(".addFavoriteProduct");
+								addFavoriteProduct.addEventListener("mouseover", function(){
+									this.src = "${pageContext.request.contextPath}/images/customer/add-to-favorites.png"
+								})
+								addFavoriteProduct.addEventListener("mouseout", function(){
+									this.src = "${pageContext.request.contextPath}/images/customer/remove-to-favorites.png"
+								})
+							</script>
+						</c:otherwise>
+						</c:choose>
 <!--                     --------------------------------- -->
 					</div>
 				</div>

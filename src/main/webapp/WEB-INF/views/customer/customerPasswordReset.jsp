@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,16 +14,17 @@
 		let xhr = new XMLHttpRequest();
 		
 		emailSubmit.addEventListener("click", function(){
-			let email = {"email" : emailInput};
-			let json = JSON.stringify(email);
-			
-			xhr.open('POST', "<c:url value='/passwordResetValidate/sendCustomerValidationEmail'/>" , true);
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(json);
+			console.log(emailInput.value);
+			console.log(1);
+			xhr.open('POST', "<c:url value='/passwordResetValidate/sendCustomerValidationEmail.do'/>" , true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.send("email=" + emailInput.value);
 			
 			xhr.onreadystatechange = function(){
-				let responseMessage = JSON.parse(xhr.responseText);
-				console.log(responseMessage);
+				if (xhr.readyState == 4 && xhr.status == 200){
+					let responseMessage = JSON.parse(xhr.responseText);					
+				}
+// 				console.log(responseMessage);
 			}
 		});
 	});
@@ -32,11 +34,11 @@
 </head>
 <body>
 	<div>
-		<form id="emailForm" action="">
-			<span>請輸入電子郵件以搜尋帳號</span>
-			<input id="emailInput" type="email" placeholder="email">
-			<button id="emailSubmit">送出</button>
-		</form>
+		
+		<span>請輸入電子郵件以搜尋帳號</span>
+		<input id="emailInput" type="email" placeholder="email">
+		<button id="emailSubmit">送出</button>
+		
 	</div>
 </body>
 </html>
