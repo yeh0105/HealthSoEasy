@@ -64,16 +64,91 @@ public class PostController {
 		System.err.println("進入查詢");
 		System.err.println("keyword="+keyword);
 		
-		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 
 		List<PostBean> postBeans = postService.findAllForKeyword(keyword);
-		System.err.println(postBeans);
+//		System.err.println(postBeans);
+		
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//		System.err.println("customerBean="+customerBean);
+		String post = "post";
+//		
+		for (PostBean postBean : postBeans) {
+			Integer postId = postBean.getPostId();
+			System.err.println("postId=" + postId);
 
+//			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+			if (customerBean != null) {
+				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
 
+//				System.err.println("originalCustomer=" + originalCustomer);
+				System.err.println("postId=" + postId);
+//				System.err.println("post=" + post);
+
+				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+				if (checkFavoriteBean != null) {
+					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+					// 4.將FavoriteStatus狀態存進model.addAttribute
+					postBean.setFavoriteStatus(true);
+				} else {
+					postBean.setFavoriteStatus(false);
+				}
+				System.err.println("FavoriteStatus="+postBean.getFavoriteStatus());
+
+			}
+
+		}
+		
 		model.addAttribute("postBeans", postBeans);
 
 		return "post/postByKeyword";
 	}
+//	// 文章模糊查詢
+//	@GetMapping(value = "/getAllPostsForKeyword")
+//	public String findAllForKeyword( @Param("keyword") String keyword, Model model) {
+//		
+//		System.err.println("進入查詢");
+//		System.err.println("keyword="+keyword);
+//		
+//		
+//		List<PostBean> postBeans = postService.findAllForKeyword(keyword);
+////		System.err.println(postBeans);
+//		
+//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+////		System.err.println("customerBean="+customerBean);
+//		String post = "post";
+////		
+//		for (PostBean postBean : postBeans) {
+//			Integer postId = postBean.getPostId();
+//			System.err.println("postId=" + postId);
+//			
+////			 1.判斷是否有登入，有就跳step2，沒有就FavoriteStatus=false
+//			if (customerBean != null) {
+//				CustomerBean originalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+//				FavoriteBean checkFavoriteBean = favoriteService.checkFavoriteBean(postId, post, originalCustomer);
+//				
+////				System.err.println("originalCustomer=" + originalCustomer);
+//				System.err.println("postId=" + postId);
+////				System.err.println("post=" + post);
+//				
+//				// 2.查詢有無收藏(需CustomerId、FavoriteCategory、FavoriteItem同時符合)
+//				if (checkFavoriteBean != null) {
+//					// 3.存在FavoriteStatus=True;不存在FavoriteStatus=False
+//					// 4.將FavoriteStatus狀態存進model.addAttribute
+//					postBean.setFavoriteStatus(true);
+//				} else {
+//					postBean.setFavoriteStatus(false);
+//				}
+//				System.err.println("FavoriteStatus="+postBean.getFavoriteStatus());
+//				
+//			}
+//			
+//		}
+//		
+//		model.addAttribute("postBeans", postBeans);
+//		
+//		return "post/postByKeyword";
+//	}
 
 	// 查詢所有文章的 TOP3
 	@GetMapping(value = "/getTop3Post", produces = { "application/json; charset=UTF-8" })

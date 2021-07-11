@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.soeasy.model.PostBean;
 import com.soeasy.model.PostCategoryBean;
-import com.soeasy.model.ProductBean;
 
 public interface PostRepository extends JpaRepository<PostBean, Integer> {
 
@@ -34,7 +33,7 @@ public interface PostRepository extends JpaRepository<PostBean, Integer> {
 			+ " OR p.postUploadDate Like %?1%" 
 			+ " OR p.postLike Like %?1%" 
 			+ " OR p.postStatus Like %?1%"
-			+ " OR p.customerBean.customerName Like %?1%")
+			+ " OR p.customerBean.customerNickname Like %?1%")
 	List<PostBean> findAllForKeyword(String keyword, Sort sort);
 
 //	List<PostBean> findByPostId(Integer postId);
