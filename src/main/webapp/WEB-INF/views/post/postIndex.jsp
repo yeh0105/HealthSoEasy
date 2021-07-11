@@ -468,8 +468,7 @@ document.addEventListener("DOMContentLoaded",function() {
 					<div class="span4">
 						<div>
 							<div class="span10">
-								<form class="form-search" method="get"
-									action="<c:url value='/PostController/getAllPostsForKeyword'/>">
+								<form class="form-search" method="get" action="<c:url value='/PostController/getAllPostsForKeyword'/>">
 									<input class="input-medium search-query" type="text" name="keyword"/>
 									<button type="submit" class="btn">Search</button>
 

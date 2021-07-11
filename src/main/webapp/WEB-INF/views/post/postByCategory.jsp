@@ -24,17 +24,18 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <style type="text/css">
-	.addbtn{
-		border-radius: 20px; 
-		border: 3px solid #28A745; 
-		background-color: transparent; 
-		padding: 1% 3%; 
-		font-family: Microsoft JhengHei;
-	}
-	.addbtn:hover{
-		background-color: #28A745; 
-		color:white;
-	}
+.addbtn {
+	border-radius: 20px;
+	border: 3px solid #28A745;
+	background-color: transparent;
+	padding: 1% 3%;
+	font-family: Microsoft JhengHei;
+}
+
+.addbtn:hover {
+	background-color: #28A745;
+	color: white;
+}
 </style>
 
 <script>
@@ -519,8 +520,9 @@
 						<div class="span4">
 							<div>
 								<div class="span10">
-									<form class="form-search">
-										<input class="input-medium search-query" type="text" />
+									<form class="form-search" method="get" action="<c:url value='/PostController/getAllPostsForKeyword'/>">
+										<input class="input-medium search-query" type="text"
+											name="keyword" />
 										<button type="submit" class="btn">Search</button>
 									</form>
 								</div>
