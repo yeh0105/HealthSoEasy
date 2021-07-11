@@ -235,3 +235,28 @@
 	align-items: center; 
 	justify-content: center;
 }
+
+.addFavorite {
+	width: 250px;
+	height: 250px;
+	margin: 0 0 10px 0;
+	opacity: 50%;
+}
+
+.addFavorite:hover {
+	opacity: 100%;
+}
+
+.addFavoriteProduct{
+	width: 250px;
+	height: 250px;
+	margin: 0 0 10px 0;
+}
+
+.addFavoritePost {
+	width: 250px;
+	height: 250px;
+	margin: 0 0 10px 0;
+}
+
+
