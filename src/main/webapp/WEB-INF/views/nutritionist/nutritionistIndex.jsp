@@ -14,104 +14,30 @@
 	rel="stylesheet" media="screen">
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/nutritionist/nutritionist_index.css"
+	rel="stylesheet">
 
 <title>營養師介紹</title>
-<style>
-#mainWrapper2 {
-	width: 80%;
-	padding-left: 10%;
-	padding-right: 10%;
-}
 
-body * {
-	font-family: '微軟正黑體';
-}
-
-#nutrit01 {
-	float: left;
-	width: 510px;
-	height: 450px;
-	background-color: #1d3b2a;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#nutritImage01 {
-	width: auto;
-	width: 70%;
-	height: 80%;
-	border: black 1px solid;
-}
-
-#nutrit02 {
-	float: right;
-	width: 670px;
-	height: 450px;
-}
-
-#nutrit03 {
-	float: left;
-	width: 1250px;
-	height: 650px;
-}
-
-#h3css{
-	color: #ff6666;
-	font-family: '微軟正黑體';
-	font-size: 24px;
-	font-weight:bold;
-}
-
-#h4css{
-	font-family: '微軟正黑體';
-	font-weight:bold;
-	color: #008000;
-}
-
-#content1 {
-	text-decoration: none;
-	font-family: '微軟正黑體';
-	
-	color: #008000;
-}
-
-#uk_breadcrumb {
-	flex-wrap: wrap;
-	list-style: none;
-	display: flex;
-	font-size: 18px;
-}
-
-#uk_breadcrumb li a {
-	text-decoration: none;
-	size: 20;
-}
-
-#dr_title {
-	color: #FF9900;
-	border-bottom: black 3px solid;
-	font-family: '微軟正黑體';
-	font-weight:bold;
-}
-
-#slim {
-	color: #800000;
-	float: left;
-	width: 25%;
-	text-align: center;
-	font-family: '微軟正黑體';
-}
-</style>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
-	<section>
-		<img
-			src="${pageContext.request.contextPath}/images/nutritionist/nutritionistHeader.png"
-			width="100%" height="100%">
-	</section>
+	
+	<br>
+		<section id="offer">
+			<div style="background-color: #C9D8BF; text-align: center;">
+				<div style="margin: 5% auto;">
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Nutritionist</h1>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						營養師職業的出現，是適應社會健康的需求而產生的。他們不但是食物的專家，更是營養檢測、營養強化、</p>
+
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						營養評估等領域的專家，幫助人們獲取健康。營養師的職業要求是專心專業服務於健康。</p>
+				</div>
+			</div>
+		</section>
+		
 	<div id='mainWrapper2'>
 
 		<section>
@@ -120,7 +46,7 @@ body * {
 				<ul id="uk_breadcrumb">
 					<li><a href='<c:url value='/'></c:url>'>首頁</a></li>
 					<li><a
-						href='<c:url value='/nutritionistController/getAllNutritionists' />'>&emsp;&frasl;&emsp;營養師列表</a></li>
+						href='<c:url value='/nutritionist'></c:url>'>&emsp;&frasl;&emsp;營養師列表</a></li>
 					<li>&emsp;&frasl;&emsp;營養師介紹</li>
 				</ul>
 			</div>
@@ -149,46 +75,46 @@ body * {
 				<h4 id="h4css">營養師達人減醣廚房用最新鮮的食材、用心的料理方式，推出忙碌上班族們省時又美味的減醣豪華餐！！配菜多樣化，餐餐減醣，減醣美味計畫就從現在開始！</h4>
 				<div id="slim">
 					<h4>A套餐</h4>
-					<h5>※商品名稱※</h5>
+					<h5>${productBean1.productName}</h5>
 					<button type="button">
 						<img
-							src="${pageContext.request.contextPath}/images/nutritionist/food_01.png">
+							src="<c:url value='/mall/getImage/${productBean1.productId}' />">
 					</button>
 					
-					<h5>價格:XXX元整</h5>
+					<h5>價格:${productBean1.productPrice}元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 				<div id="slim">
 					<h4>B套餐</h4>
-					<h5>※商品名稱※</h5>
+					<h5>${productBean2.productName}</h5>
 					<button type="button">
 						<img
-							src="${pageContext.request.contextPath}/images/nutritionist/food_02.png">
+							src="<c:url value='/mall/getImage/${productBean2.productId}' />">
 					</button>
 					
-					<h5>價格:XXX元整</h5>
+					<h5>價格:${productBean2.productPrice}元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 				<div id="slim">
 					<h4>C套餐</h4>
-					<h5>※商品名稱※</h5>
+					<h5>${productBean3.productName}</h5>
 					<button type="button">
 						<img
-							src="${pageContext.request.contextPath}/images/nutritionist/food_03.png">
+							src="<c:url value='/mall/getImage/${productBean3.productId}' />">
 					</button>
 					
-					<h5>價格:XXX元整</h5>
+					<h5>價格:${productBean3.productPrice}元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 				<div id="slim">
 					<h4>D套餐</h4>
-					<h5>※商品名稱※</h5>
+					<h5>${productBean4.productName}</h5>
 					<button type="button">
 						<img
-							src="${pageContext.request.contextPath}/images/nutritionist/food_04.png">
+							src="<c:url value='/mall/getImage/${productBean4.productId}' />">
 					</button>
 					
-					<h5>價格:XXX元整</h5>
+					<h5>價格:${productBean4.productPrice}元整</h5>
 					<button type="button">加入購物車</button>
 				</div>
 			</div>

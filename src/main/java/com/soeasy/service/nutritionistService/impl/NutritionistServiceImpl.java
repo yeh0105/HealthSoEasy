@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.soeasy.model.NutritionistBean;
 import com.soeasy.repository.nutritionistRepository.NutritionistRepository;
 import com.soeasy.service.nutritionistService.NutritionistService;
-import com.soeasy.service.postService.impl.PostServiceImpl;
 import com.soeasy.util.GlobalService;
 
 @Transactional
@@ -23,7 +22,7 @@ import com.soeasy.util.GlobalService;
 public class NutritionistServiceImpl implements NutritionistService {
 
 	// 建立Logger
-	private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(NutritionistServiceImpl.class);
 
 	private int recordsPerPage = GlobalService.NUTRITIONISTS_PER_PAGE;
 	private int totalPages = -1;
