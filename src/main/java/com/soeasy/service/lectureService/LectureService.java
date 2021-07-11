@@ -3,6 +3,7 @@ package com.soeasy.service.lectureService;
 import java.util.List;
 
 import com.soeasy.model.LectureBean;
+import com.soeasy.model.NutritionistBean;
 
 public interface LectureService {
 
@@ -27,4 +28,10 @@ public interface LectureService {
 	// 依據講座狀態自動進入輪播
 	List<LectureBean> findByLectureStatus(Integer lectureStatus);
 
+	// 查詢全部(有分頁)
+	List<LectureBean> getAllPageLecture(Integer pageNo);
+
+	Long getRecordCounts();
+
+	Integer getTotalPages();
 }
