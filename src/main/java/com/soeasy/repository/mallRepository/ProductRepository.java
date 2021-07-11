@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -21,6 +22,7 @@ public interface ProductRepository
 			+ " OR p.productDate Like %?1%"
 			+ " OR p.shopBean.shopName Like %?1%")
 	public Page<ProductBean> findAll(String keyword, Pageable pageable);
+	public List<ProductBean>findAll();
 	
 	//查詢分類，並會以分頁顯示
 	public Page<ProductBean> findByCategory(Integer category, Pageable pageable);

@@ -145,7 +145,7 @@ public class ShopProductController {
 				+ "細嚼慢品，菜根清香，肉味鮮甜。\r\n" + "食材鮮甜×簡單烹調×新鮮現做=營養滿分堅持新鮮現做，選購當季的食材，無隔夜菜，採預約制拒絕食材耗費。");
 		product.setCategory(2);
 		product.setProductAmount(120);
-		product.setProductCalories(450);
+		product.setProductCalories("450/份");
 		product.setProductPrice(120);
 		product.setProductCost(90);
 
@@ -264,7 +264,7 @@ public class ShopProductController {
 		return "redirect:/shop/shoplist";
 	}
 
-	// 修改時，送回含有會員資料的表單，讓使用者進行修改
+	// 修改時，送回含有資料的表單，讓使用者進行修改
 	// 由這個方法送回修改記錄的表單...
 	@GetMapping("/update/{productId}")
 	// 取得原始的productBean物件
@@ -304,30 +304,6 @@ public class ShopProductController {
 		return "redirect:/shop/shoplist";
 	}
 
-//		//上傳個人
-//		@PostMapping(value = "/getProductImage")
-//		public String ProductImg(@RequestParam("getProductImage") Integer productId, @RequestParam("getProductImage")MultipartFile productMultiImg) {
-//					
-//			ProductBean originalProduct = productService.findProductById(productId);
-////			//更新檢查訊息
-//			Map<String, String> updateMessage = new HashMap<String, String>();
-//			
-//			//處理圖片MultipartFile --> Blob
-//			if(productMultiImg != null && !productMultiImg.isEmpty()) {
-//				try {
-//					byte[] bImg = productMultiImg.getBytes();
-//					Blob blob = new SerialBlob(bImg);
-//					originalProduct.setProductImg(blob);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//					
-//			//save原始物件
-//			productService.save(originalProduct);
-//			updateMessage.put("updateSuccessMessage", "圖片更新成功");
-//			return "/mall/updateProduct";
-//		}
-//		
+
 
 }

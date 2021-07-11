@@ -331,7 +331,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <script src="js/mall-bootstrap.min.js" ></script>
  
  <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
- <script src="js/mall-bootstrap3.js"></script>
+ <script src="js/mall-bootstrap.js"></script>
 
 </body>
 </html>
