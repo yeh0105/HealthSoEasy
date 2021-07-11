@@ -222,12 +222,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				
 		<div class="btnBy2">
 			
-<!-- 			<div> -->
-<%-- 			<form> --%>
-<!-- 			<input name="" id="" type="text" placeholder="今天 想找什麼地點呢？"> -->
-<!-- 			<input type='submit' value="Go"> -->
-<%-- 			</form> --%>
-<!-- 			</div> -->		
+				
 
 <!-------------------------------------中間圖片區塊-開始--------------------------------- -->
 	
@@ -344,7 +339,15 @@ document.addEventListener("DOMContentLoaded", function(){
 				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=土城區' />"><button class="font1">土城區</button></a>
 			
 				<a	href="<c:url value='/sportMapController/displaySportMapsBySportMapAddress?sportMapAddress=永和區' />"><button class="font1">永和區</button></a>
-			</div>	
+			</div>
+			
+			<br>
+<!-- 			<div> -->
+<%-- 			<form> --%>
+<!-- 			<input name="" id="" type="text" placeholder="今天 想找什麼地點呢？"> -->
+			
+<%-- 			</form> --%>
+<!-- 			</div>		 -->
 			
 				
 		</div>

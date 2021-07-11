@@ -55,7 +55,7 @@
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
 			<a href='<c:url value='/'></c:url>'><button class="custom-btn btn-5">首頁</button></a> 
-			<a href='<c:url value='/lectureController/lectureIndex' />'><button class="custom-btn btn-5">講座介紹</button></a> 
+			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">講座介紹</button></a> 
 			<input type="text" class="search-bar" placeholder="搜尋講座">
 		</div>
 		<hr>

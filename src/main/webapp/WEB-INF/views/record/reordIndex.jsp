@@ -16,126 +16,29 @@
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="${pageContext.request.contextPath}/css/Record/record_index.css"
+	rel="stylesheet">
+
 <title>成果記錄</title>
-<style>
-#mainWrapper2 {
-	width: 80%;
-	padding-left: 10%;
-	padding-right: 10%;
-}
 
-body * {
-	font-family: '微軟正黑體';
-}
-
-#uk_breadcrumb {
-	flex-wrap: wrap;
-	list-style: none;
-	display: flex;
-	font-size: 18px;
-}
-
-#uk_breadcrumb li a {
-	text-decoration: none;
-}
-
-#h3css {
-	font-family: '微軟正黑體';
-	color: #FF4D00;
-}
-
-#h3css2 {
-	font-family: '微軟正黑體';
-	color: #007FFF;
-}
-
-#pcss {
-	font-family: '微軟正黑體';
-	color: #B22222;
-}
-
-#linechart {
-	width: 1200px;
-	height: 300px;
-}
-
-.thumbnail {
-	float: left;
-	width: 320px;
-	margin-left: 30px;
-	margin-right: 25px;
-	margin-top: 30px;
-}
-
-.page-icon {
-	margin: 20px 0 0 0;
-	/*設置距離頂部20像素*/
-	font-size: 0;
-	/*修復行內元素之間空隙間隔*/
-	text-align: center;
-	/*設置內容居中顯示*/
-}
-
-/*設置共有的的樣式佈局，主要是進行代碼優化，提高運行效率*/
-.page-icon a, .page-disabled, .page-next {
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 4px 10px 5px;
-	font-size: 14PX;
-	/*修復行內元素之間空隙間隔*/
-	margin-right: 10px;
-}
-
-/*對 a 標籤進行樣式佈局 */
-.page-icon a {
-	text-decoration: none;
-	/*取消鏈接的下劃線*/
-	color: #005aa0;
-}
-
-.page-current {
-	color: #ff6600;
-	padding: 4px 10px 5px;
-	font-size: 14PX;
-	/*修復行內元素之間空隙間隔*/
-}
-
-.page-disabled {
-	color: #ccc;
-}
-
-.page-next i, .page-disabled i {
-	cursor: pointer;
-	/*設置鼠標經過時的顯示狀態，這裏設置的是顯示狀態爲小手狀態*/
-	display: inline-block;
-	/*設置顯示的方式爲行內塊元素*/
-	width: 5px;
-	height: 9px;
-	background-image:
-		url(http://img.mukewang.com/547fdbc60001bab900880700.gif);
-	/*獲取圖標的背景鏈接*/
-}
-
-.page-disabled i {
-	background-position: -80px -608px;
-	margin-right: 3px;
-}
-
-.page-next i {
-	background-position: -62px -608px;
-	margin-left: 3px;
-}
-</style>
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 
-	<section>
-		<img
-			src="${pageContext.request.contextPath}/images/nutritionist/nutritionistHeader.png"
-			width="100%" height="100%">
-	</section>
+	<br>
+		<section id="offer">
+			<div style="background-color: #C9D8BF; text-align: center;">
+				<div style="margin: 5% auto;">
+					<h1 style="color: #1d3b2a; font-family: Caudex;">So Record</h1>
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						這邊成果紀錄日誌，是專為有心以健康的方式減重的人設計的。主要是記錄前10筆，希望從「飲食控制」和「多做運動」雙管齊下，達成健康減重的目標。</p>
+
+					<p style="color: #325b43; font-family: Lobster; font-size: 18px;">
+						當你記錄完日記，立刻針對你記錄的內容做小小分析，將這些分析當作之後數個星期的改進。每天記錄減重日記，讓你更清楚每天體重和生理的變化。</p>
+				</div>
+			</div>
+		</section>
 	<div id='mainWrapper2'>
 		<section>
 			<br>
@@ -146,17 +49,17 @@ body * {
 				</ul>
 			</div>
 			<hr>
-			<h4>成果記錄圖表</h4>
+			<h4>BMI成果記錄圖表</h4>
 			<div id="linechart">
 				<canvas id="myChart2"
 					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
-			<h4>成果記錄列表</h4>
+			<h4>體重成果記錄圖表</h4>
 			<div id="linechart">
 				<canvas id="myChart3"
 					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
-			<h4>成果記錄列表</h4>
+			<h4>成果記錄列表</h4>  
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
 					<th width='100'>日誌ID</th>
@@ -171,14 +74,14 @@ body * {
 					<tr>
 						<td style="text-align: center">${record.recordId}</td>
 						<td style="text-align: center">${record.customerBean.customerName}</td>
-						<td style="text-align: center">${record.recordHeight}</td>
-						<td style="text-align: center">${record.recordWeight}</td>
+						<td style="text-align: center">${record.recordHeight} 公分</td>
+						<td style="text-align: center">${record.recordWeight} 公斤</td>
 						<td style="text-align: center">${record.recordBmi}</td>
 						<td style="text-align: center">${record.recordDate}</td>
 
-						<td><a href="#">編輯</a></td>
+						<td><a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a></td>
 						<td><a class='deleteSportMap'
-							href="<c:url value='/recordController/deleteRecord/${record.recordId}' />">刪除</a></td>
+							href="<c:url value='/recordController/deleteRecord/${record.recordId}' />"><button>刪除</button></a></td>
 					</tr>
 				</c:forEach>
 
@@ -187,9 +90,9 @@ body * {
 			<br>
 
 			<div>
-				<a href="<c:url value='/recordController/addRecord'/>"><button>新增日誌</button></a>
+				
 <%-- 				<a href="<c:url value='/recordController/getAllRecords'/>"><button>所有日誌</button></a>  --%>
-				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button>會員日誌</button></a>
+<%-- 				<a href="<c:url value='/recordController/record/getRecordByCustomerId'/>"><button>會員日誌</button></a> --%>
 			</div>
 
 
@@ -204,7 +107,7 @@ body * {
 
 	<script>
 		var xmlhttp = new XMLHttpRequest();
-		var url = "http://localhost:8080/soeasy/recordController/record/getJsonRecordByCustomerId.json";
+		var url = "http://localhost:8080/soeasy/recordController/record/getTop10RecordByCustomerId.json";
 		xmlhttp.open("GET", url, true);
 		xmlhttp.send();
 

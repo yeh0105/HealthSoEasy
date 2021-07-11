@@ -4,7 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soeasy.model.LectureBean;
+import com.soeasy.model.NutritionistBean;
 import com.soeasy.service.lectureService.LectureService;
 import com.soeasy.util.GlobalService;
 
@@ -44,9 +48,9 @@ public class LectureController {
 	// 查詢單筆講座
 	@GetMapping(value = "/lecture/{lectureId}")
 	public String getOneByLectureId(@PathVariable("lectureId") Integer lectureId, Model model) {
-		LectureBean lectureBean = lectureService.getOneByLectureId(lectureId);
-		model.addAttribute("lectureBean", lectureBean);
-		return "/lecture/lectureIndex";
+		LectureBean oneLecture = lectureService.getOneByLectureId(lectureId);
+		model.addAttribute("oneLectureDetail", oneLecture);
+		return "/lecture/getOneLecture";
 	}
 
 	// 讀圖轉成位元組陣列
@@ -102,4 +106,30 @@ public class LectureController {
 		model.addAttribute("archivedLectures", archivedLectures);
 		return "/lecture/archivedLectures";
 	}
+	
+	// 查詢全部精彩回顧(分頁)(未完)
+		@GetMapping(value="/lecture/archivedLectures.json",produces = { "application/json; charset=UTF-8" })
+		public ResponseEntity<Map<String, Object>> getPageLecture(
+				@RequestParam(value = "pageNo", required = false, defaultValue = "1")Integer pageNo,
+				@RequestParam(value = "totalPage", required = false)Integer totalPage){
+			
+			if (pageNo == null) {
+				pageNo = 1; // 網址加?pageNo=測試
+			}
+			
+			if (totalPage == null) {
+				totalPage = lectureService.getTotalPages();
+			}
+			
+			Map<String, Object> lecturePage=new HashMap<>();
+			List<LectureBean> listTarget= lectureService.getAllPageLecture(pageNo);
+
+			lecturePage.put("currPage", String.valueOf(pageNo));
+			lecturePage.put("totalPage", totalPage);
+			lecturePage.put("lecturePage", lectureService.getAllPageLecture(pageNo));
+			
+			ResponseEntity<Map<String, Object>> re =new ResponseEntity<>(lecturePage, HttpStatus.OK);
+			System.out.println("re="+re);
+			return re;
+		}
 }

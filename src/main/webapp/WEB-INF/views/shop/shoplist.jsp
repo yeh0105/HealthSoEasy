@@ -59,7 +59,7 @@
  	<th> #ID</th>
  	<th>IMG</th>
  	<th>產品名稱</th>
- 	<th>產品分類</th>
+ 	<th >分類</th>
  	<th style="text-align:center">產品描述</th>
  	<th>熱量</th>
  	<th>產品庫存</th>
@@ -81,19 +81,38 @@
  <tr>
 
  <td>${product.productId}</td>
- <td><img class="media-object" style="weight:70px;height:70px"src="<c:url value='/shop/getImage/${product.productId}' />"
+ <td style="weight:60px;height:50px"><img class="media-object" style="weight:50px;height:50px" src="<c:url value='/shop/getImage/${product.productId}' />"
 	alt="Product Image"></td>
  <td>${product.productName}</td>
 <%--  <td>${product.category}</td> --%>
  <td>
-<c:choose>
-<c:when test="${product.category==1}"><span>海鮮餐盒</span></c:when>
-<c:when test="${product.category==2}"><span>雞肉餐盒</span></c:when>
-<c:when test="${product.category==3}"><span>豬肉餐盒</span></c:when>
-<c:when test="${product.category==4}"><span>牛肉餐盒</span></c:when>
-<c:when test="${product.category==5}"><span>素食餐盒</span></c:when>
-<c:when test="${product.category==6}"><span>生鮮食品</span></c:when>
-</c:choose>
+<div class="product-cell category">
+							<c:choose>
+								<c:when test="${product.category==1}">
+									<span>生鮮食品</span>
+								</c:when>
+								<c:when test="${product.category==2}">
+									<span>雞肉餐盒</span>
+								</c:when>
+								<c:when test="${product.category==3}">
+									<span>牛肉餐盒</span>
+								</c:when>
+								<c:when test="${product.category==4}">
+									<span>豬肉餐盒</span>
+								</c:when>
+								<c:when test="${product.category==5}">
+									<span>海鮮餐盒</span>
+								</c:when>
+								<c:when test="${product.category==6}">
+									<span>素食餐盒</span>
+								</c:when>
+								<c:when test="${product.category==7}">
+									<span>飲品</span>
+								</c:when>
+								<c:otherwise>
+									<span>未挑選</span>
+								</c:otherwise>
+							</c:choose>
  </td>
  
  <td>${product.productDescription}</td>

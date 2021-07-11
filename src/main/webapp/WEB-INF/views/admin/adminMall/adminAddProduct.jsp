@@ -228,6 +228,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  <form:input  path="productName" type="text"/>
  <form:errors path="productName" Class="form-control"/>
  </div>
+  <div class="form-group" >
+ <label>廠商 : </label>
+ <form:input  path="shopBean.shopId" type="text" value="${product.shopBean.shopId}" />
+ <form:errors path="shopBean.shopId" Class="form-control"/>
+ </div>
  
  <div class="form-group">
  <label >產品描述 : </label><form:textarea path='productDescription' type="text"  cols="60" rows="10"/>
@@ -254,12 +259,13 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
  <div class="form-group">
  <label >產品分類 : </label>
  <form:select path="category" type="text">
- <option value="1">海鮮餐盒</option>
- <option value="2">雞肉餐盒</option>
- <option value="3">豬肉餐盒</option>
- <option value="4">牛肉餐盒</option>
- <option value="5">素食餐盒</option>
- <option value="6">生鮮食品</option>
+  <option value=1>生鮮食品</option>
+ <option value=2>雞肉餐盒</option>
+ <option value=3>牛肉餐盒</option>
+ <option value=4>豬肉餐盒</option>
+ <option value=5>海鮮餐盒</option>
+ <option value=6>素食餐盒</option>
+ <option value=7>飲品</option>
  
  </form:select>
  

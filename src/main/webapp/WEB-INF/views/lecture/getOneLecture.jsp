@@ -31,7 +31,7 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'
 	crossorigin='anonymous'></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/lecture/lectureIndex.css">
+	href="${pageContext.request.contextPath}/css/lecture/lectureDetail.css">
 </head>
 
 <body>
@@ -60,7 +60,7 @@
 	<div id='pageWrapper'>
 		<div id='headerBlank'>
 			<a href='<c:url value='/'></c:url>'><button	class="custom-btn btn-5">首頁</button></a> 
-			<a href='<c:url value='/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
+			<a href='<c:url value='/lecturerController/lecturerIndex' />'><button class="custom-btn btn-5">講師介紹</button></a> 
 			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">進行中講座</button></a> 
 			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">即將舉辦講座</button></a>
 			<a href='<c:url value='/lectureController/lecture/archivedLectures' />'><button class="custom-btn btn-5">精彩回顧講座</button></a> 
@@ -70,53 +70,60 @@
 	</div>
 
 	
-	<!-- 進行中講座區 -->
+	<!-- 講座標題區 -->
 	<div id='pageWrapper'>
-		<div class="header-title">${lecture.lectureStatus} Lecture</div>
+		<div style="font-weight: bold; font-size: xx-large; line-height: 1.5" class="header-title">${oneLectureDetail.lectureTitle}</div>
 		<hr>
 
-		<!-------------------------------- 輪播測試區 -------------------------------->
-		<div class="wrapper">
-			<ul class="slides">
-		<c:forEach varStatus="" var='lecture' items='${lectures}'>
-				<li>
+		<!-------------------------------- 講座細節區 -------------------------------->
+<!-- 		<div class="wrapper"> -->
+<!-- 			<ul> -->
+<!-- 				<li> -->
 <!-- 					用box把圖片和文字包起來 -->
-					<div class="box">
-						<div class="lectureImg">
-							<img src="<c:url value='/lectureController/getLectureImage/${lecture.lectureId}' />" alt="">
-						</div>
-						<div class="boxRight">
-						<br>
-							<font class="lectureTitle">${lecture.lectureTitle}</font>
-							<p class="lectureDate">講座時間：<font>${lecture.lectureDate}</font></p>
-							<p class="lectureCategory">講座分類：<font>${lecture.lectureCategory == "Eat"? "飲食": "運動"}</font></p>
-							<p class="lectureContent">講座內容：<font>${fn:substring(lecture.lectureContent,0,200)}...</font></p>
-<%-- 							<p class=lectureStatus>講座狀態：<font>${lecture.lectureStatus == 2}</font></p> --%>
-																
-							<a href="<c:url value='/lectureController/lecture/${lecture.lectureId}' />"><button
-									class="custom2-btn btn-4">(查看更多...)</button></a>
-						</div>
+<!-- 					<div class="box"> -->
+					<div class="div1">
+							<div>
+								<p class="custom-eft eft12"><span>講座時間：</span></p> 
+								<span class="lectureDate">${oneLectureDetail.lectureDate}</span>
+							</div>
+							
+							<div>
+								<p class="custom-eft eft12"><span>講座分類：</span></p> 
+								<span class="lectureCategory">${oneLectureDetail.lectureCategory == "Eat"? "飲食": "運動"}</span>
+							</div>
+								
+							<div>
+								<p class="custom-eft eft12"><span>講座狀態：</span></p> 
+								<span class="lectureStatus">${(oneLectureDetail.lectureStatus == 1? "即將舉辦":(oneLectureDetail.lectureStatus == 2? "進行中":"精彩回顧"))}</span>
+							</div>
+							
+							<div>
+								<p class="custom-eft eft12"><span>講座內容：</span></p>
+							</div>
+							
+								<div class="div2">
+									<div class="lectureContent">
+									<span>${oneLectureDetail.lectureContent}</span>
+									</div>
+									
+									<br>
+									
+									<div class="lectureImg">
+										<img src="<c:url value='/lectureController/getLectureImage/${oneLectureDetail.lectureId}' />" alt="">
+									</div>
+								</div>
+							
 					</div>
+																
+<!-- 					</div> -->
 <!-- 					用box把圖片和文字包起來 -->
-				</li>
-						</c:forEach>
-			</ul>
+<!-- 				</li> -->
+<!-- 			</ul> -->
 			
-			<ul class="dot">
-			<c:forEach var='lecture' items='${lectures}'>
-				<li id="${lecture.lectureId}"></li>
-			</c:forEach>
-			</ul>
-			<div id="prevSlide" class="slide_btn">
-				<i class="fas fa-caret-left"></i>
-			</div>
-			<div id="nextSlide" class="slide_btn">
-				<i class="fas fa-caret-right"></i>
-			</div>
 		
-		</div>
+<!-- 		</div> -->
 		
-		
+		<!--  ------ -->
 		<hr>
 		<script
 			src="${pageContext.request.contextPath}/js/lecture/lectureIndex.js"></script>
@@ -124,22 +131,6 @@
 	</div>
 	
 	<!-- ------------------------------------------------------------------------------>
-
-	<!-- 即將舉辦講座區 -->
-	<div id='pageWrapper'>
-		<div class="header-title">Upcoming Lecture</div>
-		<hr>
-
-
-	</div>
-
-
-	<!-- 精采回顧區 -->
-	<div id='pageWrapper'>
-		<div class="header-title">Archived Lecture</div>
-		<hr>
-
-	</div>
 
 	<!-- 引入共同的頁尾  copy這行-->
 	<jsp:include page="/fragment/footer.jsp" />

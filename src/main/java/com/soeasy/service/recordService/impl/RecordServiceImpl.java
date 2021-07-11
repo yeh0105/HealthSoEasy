@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.soeasy.model.CustomerBean;
+import com.soeasy.model.PostBean;
 import com.soeasy.model.RecordBean;
 import com.soeasy.repository.recordRepository.RecordRepository;
 import com.soeasy.service.recordService.RecordService;
@@ -62,6 +63,20 @@ public class RecordServiceImpl implements RecordService {
 		
 		List<RecordBean> list = recordRepository.findByCustomerBean(customerBean,sort);
 		
+		return list;
+	}
+
+	@Override
+	public List<RecordBean> getTop10CustomerId(CustomerBean customerBean) {
+		Sort sort = Sort.by(Sort.Order.asc("recordDate"));
+		List<RecordBean> list = recordRepository.findByCustomerBean(customerBean,sort);
+		
+		if(list.size()>=10) {
+			List<RecordBean> newList = list.subList(0,10);
+			
+			return newList;
+			
+		}
 		return list;
 	}
 

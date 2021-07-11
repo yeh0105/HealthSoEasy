@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add SportMap</title>
+<title>Add Pic</title>
 
 <link href="${pageContext.request.contextPath}/css/admin.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -216,99 +216,65 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 
  
  <div class="well" >
-<%--  <form:form action="${pageContext.request.contextPath}/mall/addProduct" method="post"> --%>
- 
- <form:form  modelAttribute='product' enctype="multipart/form-data" method="post">
- 
-<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
-<!-- 而且method屬性必須是 "post" -->
+<form  action="${pageContext.request.contextPath }/admin/adminManage/UploadProductImg/${product.productId}"  enctype="multipart/form-data" method="post">
 
  <div class="form-group">
- <label>產品名稱 : </label>
- <form:input  path="productName" type="text"/>
- <form:errors path="productName" Class="form-control"/>
+ <label >圖片上傳</label>
+ <input name='file' type="file"/>
  </div>
  
- <div class="form-group">
- <label >產品描述 : </label><form:textarea path='productDescription' type="text"  cols="60" rows="10"/>
-  <form:errors path="productDescription" Class="form-control" />
- </div>
+
+<!--  <div class="form-group" > -->
+<!--  <label> </label> -->
+<%--  <form:input  path="productName" type="hidden"/> --%>
+<!--  </div> -->
+
  
- <div class="form-group">
- <label>產品價格 : </label>
- <form:input  path="productPrice" type="text"/>
- <form:errors path="productPrice" Class="form-control"/>
- </div>
+<!--  <div class="form-group" > -->
+<!--  <label> </label> -->
+<%--  <form:input  path="productPrice" type="hidden" /> --%>
+<!--  </div> -->
  
- <div class="form-group" >
- <label>廠商 : </label>
- <form:input  path="shopBean.shopId" type="text" value="${product.shopBean.shopId}" />
- <form:errors path="shopBean.shopId" Class="form-control"/>
- </div>
+<!--  <div class="form-group" style="hidden"> -->
+<%--  <label ></label><form:input path='productCalories' type="hidden" /> --%>
+<!--  </div> -->
  
- <div class="form-group">
- <label >產品熱量 : </label><form:input path='productCalories' type="text"/>
-  <form:errors path="productCalories" Class="form-control" />
- </div>
+<!--  <div class="form-group" style="hidden"> -->
+<!--  <label></label> -->
+<%--  <form:input  path="productAmount" type="hidden"/> --%>
+<!--  </div> -->
  
- <div class="form-group">
- <label>產品庫存 : </label>
- <form:input  path="productAmount" type="text"/>
- <form:errors path="productAmount" Class="form-control"/>
- </div>
+<!--  <div class="form-group" style="hidden"> -->
+<!--  <label ></label> -->
+<%--  <form:input  path="Category" type="hidden"/> --%>
+<!--   </div> -->
  
- <div class="form-group">
- <label >產品分類 : </label>
- <form:select path="category" type="text">
- <<c:if test="${product.category==1}"><option value=1>生鮮食品</option></c:if>
- <c:if test="${product.category==1}"><option value=1>雞肉餐盒</option></c:if>
- <c:if test="${product.category==2}"><option value=2>牛肉餐盒</option></c:if>
- <c:if test="${product.category==3}"><option value=3>豬肉餐盒</option></c:if>
- <c:if test="${product.category==4}"><option value=4>海鮮餐盒</option></c:if>
- <c:if test="${product.category==5}"><option value=5>素食餐盒</option></c:if>
- <c:if test="${product.category==7}"><option value=6>飲品</option></c:if>
- <option value=1>生鮮食品</option>
- <option value=2>雞肉餐盒</option>
- <option value=3>牛肉餐盒</option>
- <option value=4>豬肉餐盒</option>
- <option value=5>海鮮餐盒</option>
- <option value=6>素食餐盒</option>
- <option value=7>飲品</option>
+<!--  <div class="form-group" style="hidden"> -->
+<!--  <label></label> -->
+<%--  <form:input  path="productCost" type="hidden" /> --%>
+<!--  </div> -->
  
- </form:select>
+<!-- <!-- ------ 鎖住不給改 -------- --> -->
+<!--  <div class="form-group" > -->
+<!--  <label> </label> -->
+<%--  <form:input readonly="true"  path="productDate"  type="hidden"/> --%>
  
- </div>
+<!--  </div> -->
  
- <div class="form-group">
- <label>產品成本 : </label>
- <form:input  path="productCost" type="text"/>
- <form:errors path="productCost" Class="form-control"/>
- </div>
- 
- 
- <div class="form-group">
- <label>產品日期: </label>
- <form:input  path="productDate" type="date" />
- <form:errors path="productDate" Class="form-control"/>
- 
- </div>
+<!--  <div class="form-group" > -->
+<%--  <label > </label><form:input path='productDescription' type="hidden;"/> --%>
+<!--  </div> -->
   
 
- <div class="form-group" >
- <label >圖片上傳</label>
- <form:input path='productMultiImg' type="file"/>
-  <form:errors path="productMultiImg" Class="error" />
- </div>
  
  <p class="text-center">
- <input type="submit" value="Submit" class="btn btn-primary"/>
- <input type="reset" value="reset" class="btn btn-primary"/>
-  </p>
+ <button type=submit class="btn btn-primary">submit</button>
+ <button type=reset class="btn btn-primary">reset</button>
+ </p>
  
 
- </form:form>
-  </div>
-  </div>
+ </form>
+  
  
      
 <!-- --------------------------------一內容結尾---------------------------- -->

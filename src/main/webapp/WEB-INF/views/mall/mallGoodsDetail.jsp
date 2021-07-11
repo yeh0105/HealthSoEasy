@@ -47,9 +47,9 @@
 // 					console.log(favoriteJson);
 					//更改圖片
 					if (favoriteJson.favoriteExist){
-						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like2.png";
-					}else {
 						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like1.png";
+					}else {
+						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like2.png";
 
 					}
 					
@@ -153,29 +153,29 @@
 							<!-- 								=======best=========== -->
 							<div class="shop-widget b1">
 								<div class="shop-widget-title">
-									<h5>Related Product</h5>
+									<h5>Others From Shop</h5>
 								</div>
-								<c:forEach items="${sameCategory}" var="relatedCategory">
+								<c:forEach items="${sameShop}" var="relatedShop">
 									<div
 										class="product list-product d-flex align-items-center bg-white br-5 mb-30">
 										<div class="product-img-wrap">
 											<img
-												src="<c:url value='/mall/getImage/${relatedCategory.productId}' />"
+												src="<c:url value='/mall/getImage/${relatedShop.productId}' />"
 												alt="img">
 										</div>
 										<div class="product-content-wrap">
 											<div class="product-content">
 												<p>
-													<a href="<c:url value='/mall/lists/product/${relatedCategory.productId}'/>">${relatedCategory.productName} </a>
+													<a href="<c:url value='/mall/lists/product/${relatedShop.productId}'/>">${relatedShop.productName} </a>
 												</p>
 											</div>
 											<div class="product-action">
 												<a
-													href="<c:url value='/mall/cart/buy/${relatedCategory.productId}'/>"
+													href="<c:url value='/mall/cart/buy/${relatedShop.productId}'/>"
 													class="add-to-btn small-btn"> <i
 													class="flaticon-shopping-cart"></i> <span>Add to
 														Cart</span>
-													<h5 class="product-price">$${relatedCategory.productPrice}</h5>
+													<h5 class="product-price">$${relatedShop.productPrice}</h5>
 												</a>
 											</div>
 										</div>
@@ -286,7 +286,8 @@
 														<div class="floatR">
 															<button id="showFavorite">
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like2.png">
+																	src="${pageContext.request.contextPath}/images/mall/Like1.png">
+<!-- 																	2 是空心: 1 是實心 -->
 															</button>
 														</div>
 													</c:when>
@@ -294,7 +295,7 @@
 														<div class="floatR">
 															<button id="showFavorite">
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like1.png">
+																	src="${pageContext.request.contextPath}/images/mall/Like2.png">
 															</button>
 														</div>
 
@@ -393,29 +394,29 @@
 					<!-- ========================================================================================= -->
 
 					<div class="related-product mt-110 rmt-75">
-						<h4 class="mb-35">Others Form  Shop</h4>
+						<h4 class="mb-35">Related Product</h4>
 						<div class="row">
 
 							<!--single Product -->
-							<c:forEach items="${sameShop}" var="relatedShop">
+							<c:forEach items="${sameCategory}" var="relatedCategory">
 								<div class="col-xl-4 col-md-6 col-md-4 mb-30" >
 									<div class="product">
 										<div class="product-img-wrap" style="weight: 70px; height: 100px">
-											<img src="<c:url value='/mall/getImage/${relatedShop.productId}'/>" alt="img">
+											<img src="<c:url value='/mall/getImage/${relatedCategory.productId}'/>" alt="img">
 <!-- 											<button class="quick-view" type="button" data-toggle="modal" -->
 <!-- 												data-target="#quick-view">Quick View</button> -->
 										</div>
 										<div class="product-content-wrap">
 											<div class="product-content">
 												<p>
-													<a href="<c:url value='/mall/lists/product/${relatedShop.productId}'/>">${relatedShop.productName} </a>
+													<a href="<c:url value='/mall/lists/product/${relatedCategory.productId}'/>">${relatedCategory.productName} </a>
 												</p>
 											</div>
 											<div class="product-action">
-												<a href="<c:url value='/mall/cart/buy/${relatedShop.productId}'/>" class="add-to-btn small-btn"> <i
+												<a href="<c:url value='/mall/cart/buy/${relatedCategory.productId}'/>" class="add-to-btn small-btn"> <i
 													class="flaticon-shopping-cart"></i> <span>Add to
 														Cart</span>
-													<h5 class="product-price">$${relatedShop.productPrice}</h5>
+													<h5 class="product-price">$${relatedCategory.productPrice}</h5>
 												</a>
 												
 											</div>
@@ -581,7 +582,6 @@
 					<div class="col-lg-4 col-md-5 mb-20">
 						<div class="footer-widget form-widget ml-50 mr-20">
 							<h5 class="footer-title mb-20">Subscribe Our News Letter</h5>
-							<p>建置中</p>
 							<form class="subscribe">
 								<input type="email" placeholder="Your Email For Notify" required>
 								<button type="submit">Send</button>
@@ -594,18 +594,18 @@
 						<div class="footer-widget pament-widget">
 							<h5 class="footer-title mb-30">Payment</h5>
 							<ul class="list">
-								<li><a href="#"><img
+								<li><img
 										src="${pageContext.request.contextPath}/images/mall/pay-method/visa.png"
-										alt=""></a></li>
-								<li><a href="#"><img
+										alt=""></li>
+								<li><img
 										src="${pageContext.request.contextPath}/images/mall/pay-method/mastercard.png"
-										alt=""></a></li>
-								<li><a href="#"><img
+										alt=""></li>
+								<li><img
 										src="${pageContext.request.contextPath}/images/mall/pay-method/discover.png"
-										alt=""></a></li>
-								<li><a href="#"><img
+										alt=""></li>
+								<li><img
 										src="${pageContext.request.contextPath}/images/mall/pay-method/americanexpress.png"
-										alt=""></a></li>
+										alt=""></li>
 							</ul>
 						</div>
 					</div>

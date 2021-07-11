@@ -40,11 +40,12 @@ public class PasswordResetController {
 	private String fromEmail;
 	
 //	送出會員變更密碼信箱驗證
-	@PostMapping(value = "/sendCustomerValidationEmail", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody Map<String, String> sendCustomerValidationEmail(@RequestParam("email") String email, HttpServletRequest request){
+	@PostMapping(value = "/sendCustomerValidationEmail.do", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody Map<String, String> sendCustomerValidationEmail(@RequestParam(value = "email") String email, HttpServletRequest request){
+		System.out.println(email);
+		
 		Map<String, String> responseMessage = new HashMap<String, String>();
 		List<CustomerBean> customerBeans = customerService.findByCustomerEmail(email);
-		
 		if (customerBeans == null) {
 			responseMessage.put("responseMessage", "該信箱用戶不存在");
 		} else {

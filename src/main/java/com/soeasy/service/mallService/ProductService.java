@@ -35,6 +35,10 @@ public class ProductService {
 	}
 	
 	
+	
+	
+	
+	
 
 	//查詢分頁&排序 
 	public Page<ProductBean> findAllByPage(int pageNumber,String sortField, String sortDir,String keyword, Integer category) {
@@ -83,10 +87,11 @@ public class ProductService {
 	}
 	
 
-	public Integer find(Integer productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// 使用ID查詢一個產品
+
+		public List<ProductBean> findProductById1(Integer productId) {
+			return (List<ProductBean>) productRepository.findById(productId).get();
+		}
 
 	public Object findAllProduct() {
 		// TODO Auto-generated method stub
@@ -101,29 +106,43 @@ public class ProductService {
 				List<OrderDetailBean> newList = list.subList(1,6);
 				return newList;
 			}
+		
 			return list;
 		} 
+		
+		//尋找最新產品  
+		public List<ProductBean> findNewProduct(){
+			Sort sort = Sort.by(Sort.Order.desc("productId"));
+			List<ProductBean> list = productRepository.findAll(sort);	
+			
+			if(list.size()>=5) {
+				List<ProductBean> newList = list.subList(0,5);
+				return newList;
+			}
+			
+			return list;
+		} 
+		
 		
 		
 		//尋找相同類別的產品
 		public List<ProductBean> findByRelatedCategory(Integer category){
 			
 			List<ProductBean> list = productRepository.findBycategory(category);	
-			if(list.size()>=5) {
-				List<ProductBean> newList = list.subList(1,6);
+			if(list.size()>=4) {
+				List<ProductBean> newList = list.subList(0,4);
 				return newList;
 			}
+			if(list.size()==0) {
+				List<ProductBean> noList = findProductById1(1) ;
+				return noList;
+			}
+			
+		
+			
 			return list;
 		} 
 	
-		
-	
-		
-		
-		
-		
-		
-		
 		
 		
 		//以多個ID查詢多個商品

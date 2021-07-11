@@ -20,22 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "Product")
-public class ProductBean implements Serializable {
+
+public class ProductUpdateBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// @GeneratedValue：告訴此Column的生成方式
-	// GenerationType.IDENTITY 讓資料庫自己維護
 
 	private Integer productId;
 
 	private String productName;
 
-	@Column(length = 8000)
 	private String productDescription;
 
 	private Integer productPrice;
@@ -48,38 +42,23 @@ public class ProductBean implements Serializable {
 
 	private String productCategory;
 
-	// 判斷收藏
-	@Transient
-	private Boolean favoriteStatus;
-
-	@JsonIgnore
 	private Blob productImg;
 
-	@Transient
 	private MultipartFile productMultiImg;
-//	
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-	private Date productDate;
 
 	private Integer productCost;
-	// 廠商
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_shopId")
+	
 	private ShopBean shopBean;
-	
-	
-//	// 評價
-//		@OneToMany(fetch = FetchType.EAGER, mappedBy = "productBean", cascade = CascadeType.ALL)
-//		Set<OrderReviewBean> replyBeans = new LinkedHashSet<OrderReviewBean>();
+	private Date productDate;
 
 
-//	購物車	商品不需找回購物車	單向關聯	
-
-	// ------------------------------------------
-	public ProductBean() {
+	public Date getProductDate() {
+		return productDate;
 	}
-	// ------------------------------------------
+
+	public void setProductDate(Date productDate) {
+		this.productDate = productDate;
+	}
 
 	public Integer getProductId() {
 		return productId;
@@ -129,7 +108,22 @@ public class ProductBean implements Serializable {
 		this.productCalories = productCalories;
 	}
 
-//	==============ProductImg==================
+	public Integer getCategory() {
+		return category;
+	}
+
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
+
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
 	public Blob getProductImg() {
 		return productImg;
 	}
@@ -144,16 +138,6 @@ public class ProductBean implements Serializable {
 
 	public void setProductMultiImg(MultipartFile productMultiImg) {
 		this.productMultiImg = productMultiImg;
-	}
-
-//	==============(E)ProductImg======================
-
-	public Date getProductDate() {
-		return productDate;
-	}
-
-	public void setProductDate(Date productDate) {
-		this.productDate = productDate;
 	}
 
 	public Integer getProductCost() {
@@ -172,30 +156,31 @@ public class ProductBean implements Serializable {
 		this.shopBean = shopBean;
 	}
 
-	public Integer getCategory() {
-		return category;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setCategory(Integer category) {
+	public ProductUpdateBean(Integer productId, String productName, String productDescription, Integer productPrice,
+			Integer productAmount, String productCalories, Integer category, String productCategory, Blob productImg,
+			MultipartFile productMultiImg, Integer productCost, ShopBean shopBean) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.productAmount = productAmount;
+		this.productCalories = productCalories;
 		this.category = category;
-	}
-
-	public String getProductCategory() {
-		return productCategory;
-	}
-
-	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
+		this.productImg = productImg;
+		this.productMultiImg = productMultiImg;
+		this.productCost = productCost;
+		this.shopBean = shopBean;
 	}
 
-	public Boolean getFavoriteStatus() {
-		return favoriteStatus;
+	public ProductUpdateBean() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	public void setFavoriteStatus(Boolean favoriteStatus) {
-		this.favoriteStatus = favoriteStatus;
-	}
-
-//	===========
 
 }

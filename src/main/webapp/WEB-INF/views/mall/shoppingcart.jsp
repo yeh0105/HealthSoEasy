@@ -133,7 +133,7 @@
 
 
 					<div class="col-xl-4">
-						<div class="cart-total-price p-50">
+						<div class="cart-total-price p-50 ">
 							<h4 class="cart-heading">Order Summary</h4>
 							<div class="total-item-wrap">
 								<div class="total-item sub-total">
@@ -156,27 +156,7 @@
 									<span class="title mb-0">Total</span> <span class="price mb-0">${total+60}</span>
 								</div>
 							</div>
-							<div>
-							
-<!-- 		===========paypal==================================== -->
-							
-
-							<form method="post"
-								action="/soeasy/mall/pay" >
-<!-- 								<label for="amount">Amount</label> -->
-<!-- 								<input id="currency" name="currency" type="text" value="TWD" /> -->
-<!-- 								<input id="description" name="description" type="text"  /> -->
-
-								<button type="submit">
-									<img
-										src="${pageContext.request.contextPath}/images/mall/paypal.png"
-										width="100px;" height="70px;" />
-								</button>
-							</form>
-							
-		<!-- ===========paypal==================================== -->
-							
-							</div>
+							<div><br></div>
 							<div class="proceed-btn mt-30">
 								<a href="<c:url value='/mall/cart/checkout'/>"
 									class="theme-btn w-100 text-center br-10">Proceed Checkout</a>
@@ -219,7 +199,6 @@
 					<div class="col-lg-4 col-md-5 mb-20">
 						<div class="footer-widget form-widget ml-50 mr-20">
 							<h5 class="footer-title mb-20">Subscribe Our News Letter</h5>
-							<p>建置中</p>
 							<form class="subscribe">
 								<input type="email" placeholder="Your Email For Notify" required>
 								<button type="submit">Send</button>
