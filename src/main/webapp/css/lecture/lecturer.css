@@ -27,11 +27,11 @@ body{
     border: 1px solid grey;
     border-radius: 10px;
     position: relative;
-    width:38%;
+    width:42%;
     height:430px;
     overflow: hidden;
-    margin: 3% 3%;
-    margin-left:7%;
+    margin: 3% 0%;
+    margin-left: 5%;
     float: left;
 }
 ul{
@@ -81,13 +81,13 @@ li{
 	position:relative;
 }
 
-p{
-	color: darkgreen;
-	font-size: large;
-	font-weight:bold;
-	line-height: 1.5;
-	padding-top: 3%;
-}
+/* p{ */
+/* 	color: darkgreen; */
+/* 	font-size: large; */
+/* 	font-weight:bold; */
+/* 	line-height: 1.5; */
+/* 	padding-top: 3%; */
+/* } */
 
 font.lecturerName{
 	padding: 2% 5%;
@@ -284,7 +284,7 @@ background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
   height: 8px;
   width:90px; 
   background: #c2e7cb;
-  bottom: 9px;
+  bottom: 1px;
 }
  .eft12 span{
   cursor: pointer;
