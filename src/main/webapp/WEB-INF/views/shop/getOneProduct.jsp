@@ -19,33 +19,35 @@
 <jsp:include page="/fragment/header.jsp" />
  
  
- <div class="container" style="max-width:900px;">
+ <div class="container">
 <c:set var="product" value="${product}" ></c:set>
- <h2 class="page-header" style="margin-top:50px;">商品資訊 (
- <c:out value="${product.productName}"/> )</h2>
+ <h1 class="page-header" style="margin-top:50px;">商品資訊 (
+ <c:out value="${product.productName}"/> )</h1>
  
  
 <!--  ======圖片======================================= -->
  
- <div class="" style="display:inline-block;margin-left: 60px">
- <img src="<c:url value='/mall/getImage/${product.productId}' /> " style="height:300px;width:200px;"/>
+ <div style="display:inline-block;margin-left: 60px">
+ <img src="<c:url value='/mall/getImage/${product.productId}' /> " style="height:350px;width:350px;"/>
  </div>
  
 <!--   ======(End)圖片====================================== -->
  
  
  
- <div class="well" style="display:inline-block; height:300px;width:500px;margin-left: 20px;margin-top: 50px">
+ <div class="well" style="display:inline-block; height:600px;width:600px;margin-left: 20px;margin-top: 50px">
 
 <p><strong>產品ID:</strong><c:out value=" ${product.productId}"/></p>
 <p><strong>產品名稱:</strong><c:out value="${product.productName}"/></p>
 <p><strong>產品分類:</strong>
 <c:choose>
-<c:when test="${product.category==1}"><span>海鮮餐盒</span></c:when>
+<c:when test="${product.category==1}"><span>生鮮食品</span></c:when>
 <c:when test="${product.category==2}"><span>雞肉餐盒</span></c:when>
-<c:when test="${product.category==3}"><span>豬肉餐盒</span></c:when>
-<c:when test="${product.category==4}"><span>牛肉餐盒</span></c:when>
-<c:when test="${product.category==5}" ><span>素食餐盒</span></c:when>
+<c:when test="${product.category==3}"><span>牛肉餐盒</span></c:when>
+<c:when test="${product.category==4}"><span>豬肉餐盒</span></c:when>
+<c:when test="${product.category==5}" ><span>海鮮餐盒</span></c:when>
+<c:when test="${product.category==6}" ><span>素食餐盒</span></c:when>
+<c:when test="${product.category==7}" ><span>飲品</span></c:when>
 <c:otherwise> <span>未挑選</span></c:otherwise>
 </c:choose>
 
@@ -62,7 +64,7 @@
  </div>
  
  <br>
- <div class="" style="margin-bottom:70px auto;margin-left: 100px">
+ <div class="next" style="margin-bottom:70px auto;margin-left: 100px">
   <a href="<c:url value='/mall/lists/'/>"><button>previous page</button></a>
  </div>
  <br>

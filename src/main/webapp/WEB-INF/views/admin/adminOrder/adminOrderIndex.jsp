@@ -8,35 +8,35 @@
 <meta charset="UTF-8">
 <title>Admin Product</title>
 
-<link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">
+<link href="${pageContext.request.contextPath}/css/admin.css"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mall/bootstrap-v4.1.3.min.css"
+	type="text/css">
+<link
+	href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css"
+	rel="stylesheet" type="text/css">
 
 
 
 <script type="text/javascript">
-	window.onload = function(){
+	window.onload = function() {
 		let switch_moon = document.getElementById("switch_moon");
 		let xhr = new XMLHttpRequest();
-//		點擊日夜間模式設定session
-		switch_moon.addEventListener("click", function(){
+		//		點擊日夜間模式設定session
+		switch_moon.addEventListener("click", function() {
 			document.documentElement.classList.toggle('dark');
 			switch_moon.classList.toggle('active');
 			xhr.open("GET", "<c:url value='/admin/switchMode.json' />", true);
 			xhr.send();
 		})
-		
-		if("${switchMode}" == "" || "${switchMode}" == "sun"){
-		} else if("${switchMode}" == "moon"){
-			document.documentElement.classList.toggle('dark');			
+
+		if ("${switchMode}" == "" || "${switchMode}" == "sun") {
+		} else if ("${switchMode}" == "moon") {
+			document.documentElement.classList.toggle('dark');
 		}
 	}
-	
-	
-	
-	
-	
-
 </script>
 </head>
 <body>
@@ -143,12 +143,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 						<!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
 						<span>營養師</span>
 				</a></li>
-				<li class="sidebar-list-item">
-       			<a href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
-<!--            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
-          		<span>日誌</span>
-       			</a>
-     			</li> 
+				<li class="sidebar-list-item"><a
+					href="<c:url value="/admin/adminManage/adminRecord"></c:url>">
+						<!--            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
+						<span>日誌</span>
+				</a></li>
 				<li class="sidebar-list-item"><a
 					href="<c:url value="/admin/adminManage/adminPost"></c:url>"> <!--           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> -->
 						<span>分享</span>
@@ -181,96 +180,113 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 				</button>
 			</div>
 		</div>
-		
-<!--   ===================  新增 =========================================================================-->
+
+		<!--   ===================  新增 =========================================================================-->
 
 
-<!--   ===============(ENd) 新增 =========================================================================-->
+		<!--   ===============(ENd) 新增 =========================================================================-->
 
-<div class="app-content">
-    <h1 class="app-content-headerText">Order Management</h1>
-      <!--       月亮 -->
-<div>
-      <button class="mode-switch" title="Switch Theme" id="switch_moon">
-        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+		<div class="app-content">
+			<h1 class="app-content-headerText">Order Management</h1>
+			<!--       月亮 -->
+			<div>
+				<button class="mode-switch" title="Switch Theme" id="switch_moon">
+					<svg class="moon" fill="none" stroke="currentColor"
+						stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						width="24" height="24" viewBox="0 0 24 24">
           <defs></defs>
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
         </svg>
-      </button>
-</div> 
-    <div class="app-content-header" style="height:60px">
-    
+				</button>
+			</div>
+			<div class="app-content-header" style="height: 60px">
 
-<!--     搜尋 -->
 
-<div style="width:500px">
-<%-- 	<form action="<c:url value='/admin/adminManage/adminSportMap/search/'/>"> --%>
-     <input class="search-bar" placeholder="Search..." type="text" name="keyword" value="">&nbsp;
-	<input  class="app-content-headerButton" type="submit" value="確定查詢"/>
-	<input  class="app-content-headerButton" type="button" value="Reset" >		   	
-    
-<!--     </form> -->
- </div>
- <br>
- 
-     <a href="<c:url value="/admin/adminManage/#"></c:url>"><button class="app-content-headerButton">所有分類</button></a>
- 
- 
+				<!--     搜尋 -->
 
-<!-- 跳至所有分類       -->
-  <div>    
-      
-      <div class="app-content-actions-wrapper">
-        <div class="filter-button-wrapper">
-        
-<!--         過濾器 -->
-          <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
-          <div class="filter-menu">
-            <label>Category</label>
-            <select>
-              <option>All Categories</option>
-              <option>未付款</option>                     
-              <option>已付款</option>
-              
-            </select>
-            <label>Status</label>
-            <select>
-              <option>All Status</option>
-              <option>處理中</option>
-              <option>已完成</option>
-            </select>
-            <div class="filter-menu-buttons">
-              <button class="filter-button reset">
-                Reset
-              </button>
-              <button class="filter-button apply">
-                Apply
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="action-button list active" title="List View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        </button>
-        <button class="action-button grid" title="Grid View">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </button>
-      </div>
-      </div>
-    </div>
-	
-<!--  ===================== ============================================================================================-->
-									<!--   內容開始 -->
-<!--   ==========================================================================================================-->
+				<div style="width: 500px">
+					<%-- 	<form action="<c:url value='/admin/adminManage/adminSportMap/search/'/>"> --%>
+					<input class="search-bar" placeholder="Search..." type="text"
+						name="keyword" value="">&nbsp; <input
+						class="app-content-headerButton" type="submit" value="確定查詢" /> <input
+						class="app-content-headerButton" type="button" value="Reset">
+
+					<!--     </form> -->
+				</div>
+				<br> <a href="<c:url value="/admin/adminManage/#"></c:url>"><button
+						class="app-content-headerButton">所有分類</button></a>
+
+
+
+				<!-- 跳至所有分類       -->
+				<div>
+
+					<div class="app-content-actions-wrapper">
+						<div class="filter-button-wrapper">
+
+							<!--         過濾器 -->
+							<button class="action-button filter jsFilter">
+								<span>Filter</span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+									viewBox="0 0 24 24" fill="none" stroke="currentColor"
+									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+									class="feather feather-filter">
+									<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg>
+							</button>
+							<div class="filter-menu">
+								<label>Category</label> <select>
+									<option>All Categories</option>
+									<option>未付款</option>
+									<option>已付款</option>
+
+								</select> <label>Status</label> <select>
+									<option>All Status</option>
+									<option>處理中</option>
+									<option>已完成</option>
+								</select>
+								<div class="filter-menu-buttons">
+									<button class="filter-button reset">Reset</button>
+									<button class="filter-button apply">Apply</button>
+								</div>
+							</div>
+						</div>
+						<button class="action-button list active" title="List View">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-list">
+								<line x1="8" y1="6" x2="21" y2="6" />
+								<line x1="8" y1="12" x2="21" y2="12" />
+								<line x1="8" y1="18" x2="21" y2="18" />
+								<line x1="3" y1="6" x2="3.01" y2="6" />
+								<line x1="3" y1="12" x2="3.01" y2="12" />
+								<line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+						</button>
+						<button class="action-button grid" title="Grid View">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-grid">
+								<rect x="3" y="3" width="7" height="7" />
+								<rect x="14" y="3" width="7" height="7" />
+								<rect x="14" y="14" width="7" height="7" />
+								<rect x="3" y="14" width="7" height="7" /></svg>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!--  ===================== ============================================================================================-->
+			<!--   內容開始 -->
+			<!--   ==========================================================================================================-->
 
 			<div class="products-area-wrapper tableView">
-			
-			
-<!-- --------------------------------表頭-------------------------------------------- -->
+
+
+				<!-- --------------------------------表頭-------------------------------------------- -->
 				<div class="products-header">
 					<div class="product-cell stock">
-						訂單編號 <a
-							href="#">
+						訂單編號 <a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -281,8 +297,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 					</div>
 					<div class="product-cell date">
-						訂單日期 <a
-							href="#">
+						訂單日期 <a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -293,8 +308,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 					</div>
 					<div class="product-cell price">
-						訂單金額< <a
-							href="#">
+						訂單金額< <a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -306,8 +320,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					</div>
 
 					<div class="product-cell sales">
-						訂單狀態 <a
-							href="#">
+						訂單狀態 <a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -318,8 +331,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					</div>
 
 					<div class="product-cell sales">
-						付款狀態 <a
-							href="#">
+						付款狀態 <a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -331,8 +343,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 
 					<div class="product-cell stock">
-						會員名稱<a
-							href="#">
+						會員名稱<a href="#">
 							<button class="sort-button">
 								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
 									viewBox="0 0 512 512">
@@ -345,11 +356,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					<div class="product-cell price">Action</div>
 
 				</div>
-				
-<!--       --------------------------------表頭結束--------------------------------------------------------- -->
-				
-<!--       ----------------------一筆資料內容--開始----------------------------------------------------- -->
 				<c:forEach var='order' items="${order}">
+
+					<!--       --------------------------------表頭結束--------------------------------------------------------- -->
+
+					<!--       ----------------------一筆資料內容--開始----------------------------------------------------- -->
 					<div class="products-row">
 						<button class="cell-more-button">
 							<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
@@ -366,7 +377,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 						<div class="product-cell category">
 							<span class="cell-label">OrderId:</span> ${order.orderId}
 						</div>
-						
+
 						<div class="product-cell stock">
 							<span class="cell-label">Date:</span>${order.orderRegisterTime}
 						</div>
@@ -385,81 +396,102 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 							<span class="cell-label">CustomerId</span>${order.customerBean.customerName}
 						</div>
 
-<!-- 						      更新(JSP頁面建置)/刪除 按鈕 -->
+						<!-- 						      更新(JSP頁面建置)/刪除 按鈕 -->
 
 						<div>
 							<a
 								href="<c:url value='/admin/adminManage/adminOrder/detail/${order.orderId}'/>"><button
 									class="app-content-headerButton">Detail</button></a>
-						
+							<button data-bs-toggle="modal" type="button"
+								data-bs-target="#${order.orderId}">Action</button>
 							<a onclick="return del(this)"
 								href="<c:url value='/admin/adminManage/adminOrder/delete/${order.orderId}'/>"><button
 									class="app-content-headerButton">Delete</button></a>
 						</div>
 					</div>
+					<!-- 				      一筆資料內容--結尾 -->
+
+
+
+
+					<!-- 		=====================container================================== -->
+					<!-- =============================quick view=================================== -->
+					<div class="modal fade" id="quick-view${order.orderId}"
+						tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Modal title</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">...</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</c:forEach>
-<!-- 				      一筆資料內容--結尾 -->
 
 			</div>
 
 
 
-<!-- 		=====================container================================== -->
-	</div>
-	</div>
-	
-<!-- 		===================(End)container======================================= -->
+		</div>
+
+		<!-- 		===================(End)container======================================= -->
 
 
 
-	<!-- partial -->
-	<script src="${pageContext.request.contextPath}/js/admin.js"></script>>
-	<!-- 	---------------------用來接delete的post--------------------------	 -->
-	<form method='POST'>
-		<input type='hidden' name='_method' value='DELETE'>
-	</form>
+		<!-- partial -->
+		<script src="${pageContext.request.contextPath}/js/admin.js"></script>
+		>
+		<!-- 	---------------------用來接delete的post--------------------------	 -->
+		<form method='POST'>
+			<input type='hidden' name='_method' value='DELETE'>
+		</form>
 
-	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
+		<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 
-  <script type="text/javascript">
-	//將 get 請求轉換為 post 請求提交
-	function del(tag) {
-		//獲取當前請求路徑
-       var href = tag.href;
-       //提交
-       $("form").attr("action", href).submit();
-       return delmag();
-       
-       function delmag() {
-    	   var msg = "您確定要刪除嗎？";
-    	   if (confirm(msg)==true){
-    	   return true;
-    	   }else{
-    	   return false;
-    	   }
-    	   }
-     }
-  </script>
-	
-	
-	 <!-- ======================    綁定清除查詢 ================================-->
-  
-  
-  <script type="text/javascript">
-    function clearFilter(){
-		window.location='/soeasy/admin/adminManage/adminOrderIndex/';     
-    }
-  </script>
-  
-  <!-- ==========================   (End) 綁定清除查詢========================-->
-  
-	
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/mall-bootstrap.min.js" ></script>
- 
- <script src="https//ajax.google"></script><!-- 載入 jQuery 套件 -->
- <script src="js/mall-bootstrap3.js"></script>
+		<script type="text/javascript">
+			//將 get 請求轉換為 post 請求提交
+			function del(tag) {
+				//獲取當前請求路徑
+				var href = tag.href;
+				//提交
+				$("form").attr("action", href).submit();
+				return delmag();
 
+				function delmag() {
+					var msg = "您確定要刪除嗎？";
+					if (confirm(msg) == true) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+		</script>
+
+
+		<!-- ======================    綁定清除查詢 ================================-->
+
+
+		<script type="text/javascript">
+			function clearFilter() {
+				window.location = '/soeasy/admin/adminManage/adminOrderIndex/';
+			}
+		</script>
+
+		<!-- ==========================   (End) 綁定清除查詢========================-->
+
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
 </html>

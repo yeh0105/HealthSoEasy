@@ -99,19 +99,28 @@
 										</h5>
 									</div>
 									<ul>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><i class="flaticon-apple"></i>
-												Fruits and Vegetables</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><i
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><i
+												class="flaticon-apple"></i> Fruits and Vegetables</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><i
 												class="flaticon-chicken-hand-drawn-outline"></i> Chickenen
 												MealBox</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><i
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><i
 												class="flaticon-pressure-washer"></i> Beef Meal Box</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><i class="flaticon-pest"></i>
-												Pork Meal Boxl</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><i
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><i
+												class="flaticon-pest"></i> Pork Meal Boxl</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><i
 												class="flaticon-stationery"></i> Fish Meal Box</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><i class="flaticon-make-up"></i> Meal
-												Box for vagetarien</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><i
+												class="flaticon-make-up"></i> Meal Box for vagetarien</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=7'/>"><i
+												class="flaticon-make-up"></i> Meal Drinks</a></li>
 
 
 
@@ -121,7 +130,7 @@
 								<!-- 								=======best=========== -->
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
-										<h5>Newest Sale Today</h5>
+										<h5>Newest Product</h5>
 									</div>
 									<c:forEach items="${productTop3}" var="productTop">
 										<div
@@ -134,7 +143,8 @@
 											<div class="product-content-wrap">
 												<div class="product-content">
 													<p>
-														<a href="<c:url value='/mall/lists/product/${productTop.productId}'/>">${productTop.productName}
+														<a
+															href="<c:url value='/mall/lists/product/${productTop.productId}'/>">${productTop.productName}
 														</a>
 													</p>
 												</div>
@@ -170,7 +180,8 @@
 										Product
 									</h5>
 									<div class="sort-by">
-									<a href="<c:url value='/mall/lists/${currentPage}?sortField=productPrice&sortDir=${reverSortDir}'/>">
+										<a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=productPrice&sortDir=${reverSortDir}&category=${category}'/>">
 											Sort By Price <svg xmlns="http://www.w3.org/2000/svg"
 												width="15" height="15" viewBox="0 0 512 512">
 															<path fill="currentColor"
@@ -327,33 +338,33 @@
 																			<a
 																				href="<c:url value='/mall/cart/buy/${product.productId}'/>"
 																				class="theme-btn br-30 ml-20">Add to Cart</a>
-																			
-<!-- 																			<div class="add-wishlist"> -->
-<%-- 																				<c:choose> --%>
-<%-- 																					<c:when --%>
-<%-- 																						test="${productBean.favoriteStatus == true}"> --%>
-<!-- 																						<div class="floatR"> -->
-<!-- 																							<button id="showFavorite" -->
-<%-- 																								data-id="${product.productId}"> --%>
-<!-- 																								<img id="favoriteHeart" -->
-<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like1.png"> --%>
-<!-- 																							</button> -->
-<!-- 																						</div> -->
-<%-- 																					</c:when> --%>
-<%-- 																					<c:otherwise> --%>
-<!-- 																						<div class="floatR"> -->
-<!-- 																							<button id="showFavorite" -->
-<%-- 																								data-id="${product.productId}"> --%>
-<!-- 																								<img id="favoriteHeart" -->
-<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like2.png"> --%>
-<!-- 																							</button> -->
-<!-- 																						</div> -->
 
-<%-- 																					</c:otherwise> --%>
-<%-- 																				</c:choose> --%>
-<!-- 																			</div> -->
-																			
-																			
+																			<!-- 																			<div class="add-wishlist"> -->
+																			<%-- 																				<c:choose> --%>
+																			<%-- 																					<c:when --%>
+																			<%-- 																						test="${productBean.favoriteStatus == true}"> --%>
+																			<!-- 																						<div class="floatR"> -->
+																			<!-- 																							<button id="showFavorite" -->
+																			<%-- 																								data-id="${product.productId}"> --%>
+																			<!-- 																								<img id="favoriteHeart" -->
+																			<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like1.png"> --%>
+																			<!-- 																							</button> -->
+																			<!-- 																						</div> -->
+																			<%-- 																					</c:when> --%>
+																			<%-- 																					<c:otherwise> --%>
+																			<!-- 																						<div class="floatR"> -->
+																			<!-- 																							<button id="showFavorite" -->
+																			<%-- 																								data-id="${product.productId}"> --%>
+																			<!-- 																								<img id="favoriteHeart" -->
+																			<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like2.png"> --%>
+																			<!-- 																							</button> -->
+																			<!-- 																						</div> -->
+
+																			<%-- 																					</c:otherwise> --%>
+																			<%-- 																				</c:choose> --%>
+																			<!-- 																			</div> -->
+
+
 																		</div>
 																	</div>
 																</div>
@@ -386,40 +397,50 @@
 
 
 		<!-- ---------------------------控制分頁用----------------------------------- -->
-		<nav style="width: 100px; margin: 30px auto">
+		<nav style="width: 400px; margin-bottom: 120px; margin-left: 800px">
 
-			<ul class=pager>
+			<div class="btn-group ">
+
 
 				<!--  上頁 -->
-				<li class=previous><c:choose>
-						<c:when test="${currentPage > 1}">
-							<a
-								href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Previous</a>
-						</c:when>
-						<c:otherwise>
-							<a>Previous</a>
-						</c:otherwise>
-					</c:choose></li>
+				<c:choose>
+					<c:when test="${currentPage > 1}">
+						<a class="btn btn-info btn-sm"
+							href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Previous</a>
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-info btn-sm">Previous</a>
+					</c:otherwise>
+				</c:choose>
 				<!-- 上頁結束 -->
 
-				<li style="font-style: italic; color: #00477D">Page &nbsp;<c:out
-						value="${currentPage}" />&nbsp; of &nbsp;&nbsp;<c:out
-						value="${totalPages}" /></li>
+				&nbsp;
+				&nbsp;
+				<p style="font-style: italic; color: #00477D">
+					Page &nbsp;
+					<c:out value="${currentPage}" />
+					&nbsp; of &nbsp;&nbsp;
+					<c:out value="${totalPages}" />
+				</p>
+				&nbsp;
+				&nbsp;
+				
+
 
 
 				<!--  下頁 -->
-				<li class=next><c:choose>
-						<c:when test="${currentPage < totalPages}">
-							<a
-								href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Next</a>
-						</c:when>
-						<c:otherwise>
-							<a>Next</a>
-						</c:otherwise>
-					</c:choose></li>
+				<c:choose>
+					<c:when test="${currentPage < totalPages}">
+						<a class="btn btn-info btn-sm"
+							href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Next</a>
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-info btn-sm">Next</a>
+					</c:otherwise>
+				</c:choose>
 				<!-- 下頁結束 -->
 
-			</ul>
+			</div>
 		</nav>
 
 		<!-- ------------------------------控制分頁結束區塊--------------------------------- -->
@@ -459,7 +480,7 @@
 					<div class="col-lg-4 col-md-5 mb-20">
 						<div class="footer-widget form-widget ml-50 mr-20">
 							<h5 class="footer-title mb-20">Subscribe Our News Letter</h5>
-							<p>建置中</p>
+							=
 							<form class="subscribe">
 								<input type="email" placeholder="Your Email For Notify" required>
 								<button type="submit">Send</button>
@@ -472,18 +493,18 @@
 						<div class="footer-widget pament-widget">
 							<h5 class="footer-title mb-30">Payment</h5>
 							<ul class="list">
-								<li><a href="#"><img
-										src="${pageContext.request.contextPath}/images/mall/pay-method/visa.png"
-										alt=""></a></li>
-								<li><a href="#"><img
-										src="${pageContext.request.contextPath}/images/mall/pay-method/mastercard.png"
-										alt=""></a></li>
-								<li><a href="#"><img
-										src="${pageContext.request.contextPath}/images/mall/pay-method/discover.png"
-										alt=""></a></li>
-								<li><a href="#"><img
-										src="${pageContext.request.contextPath}/images/mall/pay-method/americanexpress.png"
-										alt=""></a></li>
+								<li><img
+									src="${pageContext.request.contextPath}/images/mall/pay-method/visa.png"
+									alt=""></li>
+								<li><img
+									src="${pageContext.request.contextPath}/images/mall/pay-method/mastercard.png"
+									alt=""></li>
+								<li><img
+									src="${pageContext.request.contextPath}/images/mall/pay-method/discover.png"
+									alt=""></li>
+								<li><img
+									src="${pageContext.request.contextPath}/images/mall/pay-method/americanexpress.png"
+									alt=""></li>
 							</ul>
 						</div>
 					</div>
@@ -542,7 +563,6 @@
 		function clearFilter() {
 			window.location = '/soeasy/mall/lists';
 		}
-		
 	</script>
 	<!-- ------------------------------用來接POST-------------------------------- -->
 	<form method='POST'>

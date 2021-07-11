@@ -7,9 +7,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -29,16 +27,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.FavoriteBean;
-import com.soeasy.model.PostBean;
 import com.soeasy.model.ProductBean;
-import com.soeasy.model.SportMapBean;
 import com.soeasy.model.Order.OrderDetailBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.favoriteService.FavoriteService;
@@ -126,7 +120,7 @@ public class ProductController {
 			    model.addAttribute("category",category);
 			    
 			    
-			    List<OrderDetailBean> list5 = productService.findNewestProduct();
+			    List<ProductBean> list5 = productService.findNewProduct();
 			    model.addAttribute("productTop3", list5);
 			    
 			    
@@ -245,7 +239,7 @@ public class ProductController {
 				+ "食材鮮甜×簡單烹調×新鮮現做=營養滿分堅持新鮮現做，選購當季的食材，無隔夜菜，採預約制拒絕食材耗費。");
 		product.setCategory(2);
 		product.setProductAmount(120);
-		product.setProductCalories(450);
+		product.setProductCalories("450");
 		product.setProductPrice(120);
 		product.setProductCost(90);
 		//product.setProductDate(java.sql.Date.valueOf("2021-07-20"));

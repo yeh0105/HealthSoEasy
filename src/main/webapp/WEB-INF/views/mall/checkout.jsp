@@ -66,7 +66,7 @@
 						<div class="checkout-form-wrap rmb-50">
 
 							<div class="cart-title">
-								<h4>Billing Details</h4>
+								<h4>CheckOut Details</h4>
 							</div>
 
 							<!-- Form Area Start -->
@@ -76,7 +76,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="f-name">姓名:</label> <input type="text"
-												class="form-control" id="f-name" placeholder="Jhon" required>
+												class="form-control" id="f-name" value="陳小明" required>
 										</div>
 									</div>
 
@@ -85,21 +85,21 @@
 										<div class="form-group">
 											<label for="street-address">Shipping Address*</label> <input
 												type="text" class="form-control" id="street-address"
-												placeholder="Enter Your Delivery Address" required>
+												placeholder="Enter Your Delivery Address" value="台北市復興南路一段390號2樓" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="phone-number">Phone Number*</label> <input
 												type="text" class="form-control" id="phone-number"
-												placeholder="+01 000...">
+												value="02 6631 6666">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="email">Email <span>(optional)</span></label> <input
 												type="email" class="form-control" id="email"
-												placeholder="eg: yourmail@gmail.com" required>
+												value="soeasyeeit127@gmail.com" required>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -135,9 +135,7 @@
 								<div class="total-item">
 									<span class="title">Shipping Cost</span> <span class="price">60</span>
 								</div>
-								<div class="total-item discount">
-									<span class="title">Discount</span> <span class="price">0</span>
-								</div>
+								
 								<div class="total-item total">
 									<span class="title">Total</span> <span class="price">${total+60}</span>
 								</div>
@@ -147,60 +145,60 @@
 							<div class="cart-title">
 								<h4 class="mb-25 mt-10">Payment</h4>
 							</div>
-							<ul id="accordionExample" class="mb-40">
+<!-- 							<ul id="accordionExample" class="mb-40"> -->
 
 
 
-								<!-- Default unchecked -->
+<!-- 								Default unchecked -->
 								
 
-								<!-- Default unchecked -->
-								<li class="custom-control custom-radio"><input type="radio"
-									class="custom-control-input" id="methodtwo"
-									name="defaultExampleRadios"> <label
-									class="custom-control-label collapsed" for="methodtwo"
-									data-toggle="collapse" data-target="#collapseTwo"
-									aria-controls="collapseTwo">Credit Card / Master Card</label>
+<!-- 								Default unchecked -->
+<!-- 								<li class="custom-control custom-radio"><input type="radio" -->
+<!-- 									class="custom-control-input" id="methodtwo" -->
+<!-- 									name="defaultExampleRadios"> <label -->
+<!-- 									class="custom-control-label collapsed" for="methodtwo" -->
+<!-- 									data-toggle="collapse" data-target="#collapseTwo" -->
+<!-- 									aria-controls="collapseTwo">Credit Card / Master Card</label> -->
 
-									<div id="collapseTwo" class="collapse"
-										data-parent="#accordionExample" style="">
-										<ul>
-											<li><a href="#"><img
-													src="assets/img/pay-method/visa.png" alt=""></a></li>
-											<li><a href="#"><img
-													src="assets/img/pay-method/mastercard.png" alt=""></a></li>
-											<li><a href="#"><img
-													src="assets/img/pay-method/discover.png" alt=""></a></li>
-											<li><a href="#"><img
-													src="assets/img/pay-method/americanexpress.png" alt=""></a></li>
-										</ul>
-									</div></li>
+<!-- 									<div id="collapseTwo" class="collapse" -->
+<!-- 										data-parent="#accordionExample" style=""> -->
+<!-- 										<ul> -->
+<!-- 											<li><a href="#"><img -->
+<!-- 													src="assets/img/pay-method/visa.png" alt=""></a></li> -->
+<!-- 											<li><a href="#"><img -->
+<!-- 													src="assets/img/pay-method/mastercard.png" alt=""></a></li> -->
+<!-- 											<li><a href="#"><img -->
+<!-- 													src="assets/img/pay-method/discover.png" alt=""></a></li> -->
+<!-- 											<li><a href="#"><img -->
+<!-- 													src="assets/img/pay-method/americanexpress.png" alt=""></a></li> -->
+<!-- 										</ul> -->
+<!-- 									</div></li> -->
 
-								<!-- Default unchecked -->
-								<li class="custom-control custom-radio"><input type="radio"
-									class="custom-control-input" id="methodthree"
-									name="defaultExampleRadios"> <label
-									class="custom-control-label collapsed" for="methodthree"
-									data-toggle="collapse" data-target="#collapsethree"
-									aria-controls="collapsethree">Cash On Delivery</label>
+<!-- 								Default unchecked -->
+<!-- 								<li class="custom-control custom-radio"><input type="radio" -->
+<!-- 									class="custom-control-input" id="methodthree" -->
+<!-- 									name="defaultExampleRadios"> <label -->
+<!-- 									class="custom-control-label collapsed" for="methodthree" -->
+<!-- 									data-toggle="co llapse" data-target="#collapsethree" -->
+<!-- 									aria-controls="collapsethree">Cash On Delivery</label> -->
 
-									<div id="collapsethree" class="collapse"
-										data-parent="#accordionExample" style="">
+<!-- 									<div id="collapsethree" class="collapse" -->
+<!-- 										data-parent="#accordionExample" style=""> -->
 										
-									</div></li>
+<!-- 									</div></li> -->
 							</ul>
 <!-- ===========paypal==================================== -->
 <form method="post" action="${pageContext.request.contextPath}/mall/pay">
 							<div class="checkout-btn text-center">
 								<button
-									class="theme-btn br-5 w-70" type="submit" style="background">(PALPAL)</button>
+									class="theme-btn br-5 w-70" type="submit" style="background">PALPAL</button>
 							</div>
 							</form>
 						
 							<br>
 							<div class="checkout-btn text-center">
 								<button
-									class="theme-btn br-5 w-70" type="submit">(綠界)Proceed Order</button>
+									class="theme-btn br-5 w-70" type="submit">貨到付款</button>
 							</div>
 						</div>
 					</div>

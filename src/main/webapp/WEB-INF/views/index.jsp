@@ -8,26 +8,31 @@
 <meta charset="UTF-8">
 <title>SOEASY</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/responsive.css">
 <link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->
 	<jsp:include page="/fragment/header.jsp" />
 	
-	<section class="hero-section" style="margin-bottom:50px">
-            	<div style="display: flex;justify-content:center;width: 100%;height: 750px;background-image: url('${pageContext.request.contextPath}/images/indexImg.jpg');background-repeat: no-repeat;background-position: center;">
+<!-- 	<section class="hero-section" style="margin-bottom:50px"> -->
+<%--             	<div style="display: flex;justify-content:center;height: 950px;background-image: url('${pageContext.request.contextPath}/images/indexImg.jpg');background-repeat: no-repeat;background-position: center;background-size: cover"> --%>
             
-                    <div class="container" style="margin-top:100px">
+<!--                     <div class="container" style="weight:500px"> -->
                           
-                        <div class="hero-inner">
-                            <h1 class=" light" style="padding-left:480px;">  <BR>
-                             <span>Health</span> <br>SO <br>EASY</h1>
-                            <p style="padding-left:485px;padding-top:70px;font-weight: bold;">為您的健康量身打造的綜合平台<br>
-                               </p>
+<!--                         <div  style="padding-left:610px;padding-top:200px;"> -->
+<!--                             <h1 style="color: #FFFFFF;">  <BR> -->
+<!--                              <span style="color: #3DCA79;">Health</span> <br>SO <br>EASY</h1><br> -->
+<!--                             <span style="font-weight: bold;">為您的健康量身打造的綜合平台 -->
+<!--                                </span> -->
                             
-                        </div>
-                    </div>
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!-- 	 </section> -->
+	<section class="hero-section" style="margin-bottom:50px">
+            	<div style="display: flex;justify-content:center;height: 900px;background-image: url('${pageContext.request.contextPath}/images/indexImgRev.jpg');background-repeat: no-repeat;background-position: center;background-size: cover">
+            
+                    
                 </div>
 	 </section>
 	 
