@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.soeasy.model.NutritionistBean;
 import com.soeasy.model.NutritionistCategoryBean;
 import com.soeasy.model.PostBean;
+import com.soeasy.model.ProductBean;
+import com.soeasy.service.mallService.ProductService;
 import com.soeasy.service.nutritionistService.NutritionistCategoryService;
 import com.soeasy.service.nutritionistService.NutritionistService;
 import com.soeasy.validator.nutritionistValidator.NutritionistValidator;
@@ -43,6 +46,9 @@ public class NutritionistIdController {
 
 	@Autowired
 	NutritionistService nutritionistService;
+	
+	@Autowired
+	ProductService productService; 
 
 	@Autowired
 	NutritionistCategoryService nutritionistCategoryService;
@@ -61,7 +67,31 @@ public class NutritionistIdController {
 	@GetMapping(value = "/nutritionist/{nutritionistId}")
 	public String getOneNutritionistById(@PathVariable("nutritionistId") Integer nutritionistId, Model model) {
 		NutritionistBean nutritionistBean = nutritionistService.findByNutritionistId(nutritionistId);
+		
+		Random r = new Random();
+		int[] sixNum = new int[4];
+		
+		for (int i=0; i<4; i++){
+			sixNum[i] = r.nextInt(4)+1;		// 將隨機數(1-10)放入 sixNum[i]
+			for (int j=0; j<i;){			// 與前數列比較，若有相同則再取亂數
+				if (sixNum[j]==sixNum[i]){	
+					sixNum[i] = r.nextInt(4)+1;
+					j=0;			// 避面重新亂數後又產生相同數字，若出現重覆，迴圈從頭開始重新比較所有數
+				}
+				else j++;			// 若都不重複則下一個數
+			}
+		}   
+		
+		ProductBean productBean1=productService.findProductById(sixNum[0]);
+		ProductBean productBean2=productService.findProductById(sixNum[1]);
+		ProductBean productBean3=productService.findProductById(sixNum[2]);
+		ProductBean productBean4=productService.findProductById(sixNum[3]);
+		
 		model.addAttribute("nutritionistBean", nutritionistBean);
+		model.addAttribute("productBean1", productBean1);
+		model.addAttribute("productBean2", productBean2);
+		model.addAttribute("productBean3", productBean3);
+		model.addAttribute("productBean4", productBean4);
 		return "/nutritionist/nutritionistIndex";
 	}
 

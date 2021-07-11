@@ -24,4 +24,7 @@ public interface RecordService {
 
 			//由customerId查詢
 			List<RecordBean> getCustomerId(CustomerBean customerBean);
+			
+			//由customerId查詢(依日期排序前10筆)
+			List<RecordBean> getTop10CustomerId(CustomerBean customerBean);
 }

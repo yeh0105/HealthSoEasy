@@ -34,7 +34,7 @@ public class RecordController {
 
 	@Autowired
 	RecordService recordService;
-	
+
 	@Autowired
 	CustomerService customerService;
 
@@ -55,31 +55,33 @@ public class RecordController {
 
 	// 由customerId查詢日誌
 	@GetMapping(value = "/record/getRecordByCustomerId")
-	public String getCustomerById( Model model) {
+	public String getCustomerById(Model model) {
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-		List<RecordBean> recordBean=recordService.getCustomerId(customerBean);
+		List<RecordBean> recordBean = recordService.getCustomerId(customerBean);
 		model.addAttribute("recordBean", recordBean);
 		return "/record/reordIndex";
 	}
-	
+
 	// 由customerId查詢日誌(json)
-	@GetMapping(value = "/record/getJsonRecordByCustomerId.json",produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<RecordBean> getJsonCustomerById( Model model) {
-		
-//		Map<String, Object> genderMap=new HashMap<>();
-		
+	@GetMapping(value = "/record/getJsonRecordByCustomerId.json", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<RecordBean> getJsonCustomerById(Model model) {
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
-		
-		System.out.println("customerBean="+customerBean);
-		
-		CustomerBean  recordCustomer= customerService.findByCustomerId(customerBean.getCustomerId());
-		
-		List<RecordBean> recordBean=recordService.getCustomerId(recordCustomer);
-		
-//		genderMap.put("recordBeans", recordBean);
-//		
-//		ResponseEntity<Map<String, Object>> re=new ResponseEntity<>(genderMap, HttpStatus.OK);
+		CustomerBean recordCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+
+		List<RecordBean> recordBean = recordService.getCustomerId(recordCustomer);
+
 		return recordBean;
+	}
+
+	// 由customerId查詢日誌(依日期排序前10筆)
+	@GetMapping(value = "/record/getTop10RecordByCustomerId.json", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<RecordBean> getTop10RecordByCustomerId(Model model) {
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		CustomerBean recordCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+
+		List<RecordBean> top10record = recordService.getTop10CustomerId(recordCustomer);
+
+		return top10record;
 	}
 
 	// 新增日誌，先送一個空白表單，並給予初值
@@ -119,14 +121,14 @@ public class RecordController {
 
 		}
 
-		return "redirect:/recordController/getAllRecords";
+		return "redirect:/recordController/record/getRecordByCustomerId";
 	}
-	
+
 	// 刪除日誌
 	@PostMapping("/deleteRecord/{recordId}")
 	public String deleteRecord(@PathVariable("recordId") Integer recordId) {
 		recordService.deleteByRecordId(recordId);
 		return "redirect:/recordController/record/getRecordByCustomerId";
 	}
-	
+
 }
