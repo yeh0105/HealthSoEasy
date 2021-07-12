@@ -129,7 +129,7 @@ public class AdminSportMap {
 	sportMapBean.setSportMapName("新店國民運動中心");
 	sportMapBean.setSportMapAddress("231新北市新店區北新路一段88巷12號");
 	sportMapBean.setSportMapInfo("由長佳機電工程股份有限公司取得OT經營權，本中心鄰近捷運綠線(新店區公所)，除了擁有25M游泳池、體適能中心、綜合球場..之外，更增設[兒童體操專門教室]，期望打造兒童運動的安全環境，並提供市民一個健康休閒的新去處");
-	sportMapBean.setSportMapScore(5);
+	sportMapBean.setSportMapScore(20);
 //	sportMapBean.setSportMapCategory(1);
 	sportMapBean.setSportMapMap("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7233.937528051018!2d121.54247222964078!3d24.967177355169582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34680192061b03d5%3A0x3c613171e5e81235!2z5paw5YyX5biC5paw5bqX5ZyL5rCR6YGL5YuV5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1625132585222!5m2!1szh-TW!2stw\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>");
 	//用Google embed Maps Api金鑰產生iframe
