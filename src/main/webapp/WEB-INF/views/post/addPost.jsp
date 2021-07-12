@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Share</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <style>
 span.error {
 	color: red;
