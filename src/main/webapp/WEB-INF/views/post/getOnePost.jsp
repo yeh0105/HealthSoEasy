@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Share</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <script type="text/javascript"
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript"

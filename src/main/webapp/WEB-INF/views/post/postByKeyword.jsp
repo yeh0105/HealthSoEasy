@@ -10,6 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Share</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">
@@ -186,7 +187,7 @@
 														${fn:substring(post.postContent,0,100)} ...
 														<!-- 													觀看單篇文章  -->
 														<a
-															href="<c:url value=' /PostNeedLoginController/getPost/1' />">>>>觀看更多
+															href="<c:url value='/PostNeedLoginController/getPost/${post.postId}' />">>>>觀看更多
 														</a>
 													</div>
 												</div>
