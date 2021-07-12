@@ -122,7 +122,7 @@
  <td>${product.productDate}</td>
  <td><a href="<c:url value='/shop/productdetail/${product.productId}'/>"><button>詳情</button></a>
  <a href="<c:url value='/shop/update/${product.productId}'/>"><button>更新</button></a>
- <a onclick="return del(this)" href="${pageContext.request.contextPath }/shop/delete/${product.productId}"><button >刪除</button></a></td>
+ <a class="deleteShop" href="${pageContext.request.contextPath }/shop/delete/${product.productId}"><button >刪除</button></a></td>
  </tr>
  
 
@@ -146,26 +146,24 @@
 <form action="#" method="POST">
     <input type="hidden" value="DELETE" name="_method" />
  </form>
-  <script type="text/javascript">
-	//將 get 請求轉換為 post 請求提交
-	function del(tag) {
-		//獲取當前請求路徑
-       var href = tag.href;
-       //提交
-       $("form").attr("action", href).submit();
-       return delmag();
-       
-       function delmag() {
-    	   var msg = "您確定要刪除這樣產品嗎？";
-    	   if (confirm(msg)==true){
-    	   return true;
-    	   }else{
-    	   return false;
-    	   }
-    	   }
-     }
-  </script>
-  
+ 
+ 
+<!--  ==================================================================== -->
+  <script>
+		$(document).ready(function() {
+			$('.deleteShop').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
+				}
+				return false;
+
+			});
+		})
+	</script>
+
   <!-- ======================    綁定清除查詢 ================================-->
   
   

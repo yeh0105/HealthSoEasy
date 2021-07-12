@@ -58,12 +58,12 @@
  <label >產品分類 : </label>
  <form:select path="category" type="text">
  <c:if test="${product.category==1}"><option value=1>生鮮食品</option></c:if>
- <c:if test="${product.category==1}"><option value=1>雞肉餐盒</option></c:if>
- <c:if test="${product.category==2}"><option value=2>牛肉餐盒</option></c:if>
- <c:if test="${product.category==3}"><option value=3>豬肉餐盒</option></c:if>
- <c:if test="${product.category==4}"><option value=4>海鮮餐盒</option></c:if>
- <c:if test="${product.category==5}"><option value=5>素食餐盒</option></c:if>
- <c:if test="${product.category==7}"><option value=6>飲品</option></c:if>
+ <c:if test="${product.category==2}"><option value=2>雞肉餐盒</option></c:if>
+ <c:if test="${product.category==3}"><option value=3>牛肉餐盒</option></c:if>
+ <c:if test="${product.category==4}"><option value=4>豬肉餐盒</option></c:if>
+ <c:if test="${product.category==5}"><option value=5>海鮮餐盒</option></c:if>
+ <c:if test="${product.category==6}"><option value=6>素食餐盒</option></c:if>
+ <c:if test="${product.category==7}"><option value=7>飲品</option></c:if>
  <option value=1>生鮮食品</option>
  <option value=2>雞肉餐盒</option>
  <option value=3>牛肉餐盒</option>
@@ -74,7 +74,6 @@
  
 
  </form:select>
- 
  
  <form:errors path="category" Class="form-control" />
  </div>
@@ -103,8 +102,8 @@
 
  <div class="form-group">
  <label >圖片上傳</label>
- <form:input path='productImg' type="file"/>
-  <form:errors path="productImg" Class="form-control" />
+ <form:input path='productMultiImg' type="file"/>
+ <form:errors path="productMultiImg" Class="form-control"/>
  </div>
  
  <p class="text-center">

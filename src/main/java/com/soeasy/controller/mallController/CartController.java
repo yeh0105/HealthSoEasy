@@ -233,8 +233,8 @@ public class CartController {
 			orderBean.setOrderRegisterTime(registerTime);
 			
 			//訂單狀態
-			orderBean.setOrderStatus("pending");
-			orderBean.setPayStatus("Unpaid");
+			orderBean.setOrderStatus("訂單處理中");
+			orderBean.setPayStatus("待付款");
 
 			// 保存訂單總金額		(預設運費60)
 			

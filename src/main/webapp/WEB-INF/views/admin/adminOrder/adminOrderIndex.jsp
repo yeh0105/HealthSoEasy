@@ -6,19 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Product</title>
+<title>Admin Order</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 
 <link href="${pageContext.request.contextPath}/css/admin.css"
 	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mall/bootstrap-v4.1.3.min.css"
-	type="text/css">
-<link
-	href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css"
-	rel="stylesheet" type="text/css">
-
-
 
 <script type="text/javascript">
 	window.onload = function() {
@@ -280,80 +284,43 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 			<!--   內容開始 -->
 			<!--   ==========================================================================================================-->
 
-			<div class="products-area-wrapper tableView">
+			<div class="products-area-wrapper tableView"">
 
 
 				<!-- --------------------------------表頭-------------------------------------------- -->
 				<div class="products-header">
-					<div class="product-cell stock">
-						訂單編號 <a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
-
+					<div class="product-cell price">
+						訂單編號								
 					</div>
 					<div class="product-cell date">
-						訂單日期 <a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
-
+						訂單日期 
 					</div>
-					<div class="product-cell price">
-						訂單金額< <a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
-
+					<div class="product-cell stock">
+						訂單金額
 					</div>
 
-					<div class="product-cell sales">
-						訂單狀態 <a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
+					<div class="product-cell stock">
+						訂單狀態 
 					</div>
 
-					<div class="product-cell sales">
-						付款狀態 <a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
+					<div class="product-cell stock">
+						付款狀態
 					</div>
 
 
 					<div class="product-cell stock">
-						會員名稱<a href="#">
-							<button class="sort-button">
-								<svg xmlns="http://www.w3.org/2000/svg" width="5" height="16"
-									viewBox="0 0 512 512">
-									<path fill="currentColor"
-										d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" /></svg>
-							</button>
-						</a>
+						會員名稱
+					</div>
+					<div class="product-cell stock">
+						電話
+					</div>
+					<div class="product-cell stock">
+						Email
 					</div>
 
+
 					<div class="product-cell price">Action</div>
+					<div class="product-cell price">Delete</div>
 
 				</div>
 				<c:forEach var='order' items="${order}">
@@ -361,50 +328,50 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 					<!--       --------------------------------表頭結束--------------------------------------------------------- -->
 
 					<!--       ----------------------一筆資料內容--開始----------------------------------------------------- -->
-					<div class="products-row">
-						<button class="cell-more-button">
-							<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-more-vertical">
-								<circle cx="12" cy="12" r="1" />
-								
-								<circle cx="12" cy="5" r="1" />
-								
-								<circle cx="12" cy="19" r="1" /></svg>
-						</button>
-
-						<div class="product-cell category">
-							<span class="cell-label">OrderId:</span> ${order.orderId}
+					<div class="products-row" style="text-align: center;">
+						
+						<div class="product-cell price" style="text-align: center;">
+							<span class="cell-label"></span> <a
+								href="<c:url value='/admin/adminManage/adminOrder/detail/${order.orderId}'/>"><span
+								style="text-align: center">${order.orderId}</span></a>
 						</div>
 
-						<div class="product-cell stock">
+						<div class="product-cell date" style="text-align: center;">
 							<span class="cell-label">Date:</span>${order.orderRegisterTime}
 						</div>
-						<div class="product-cell stock">
+						<div class="product-cell stock" style="text-align: center;">
 							<span class="cell-label">Total:</span>$${order.orderTotalPrice}
 						</div>
 
-						<div class="product-cell stock">
+						<div class="product-cell stock" style="text-align: center;">
 							<span class="cell-label">Status</span>${order.orderStatus}
 						</div>
-						<div class="product-cell stock">
+						<div class="product-cell stock" style="text-align: center;">
 							<span class="cell-label">PayStatus</span>${order.payStatus}
 						</div>
 
-						<div class="product-cell stock">
+						<div class="product-cell stock" style="text-align: center;">
 							<span class="cell-label">CustomerId</span>${order.customerBean.customerName}
 						</div>
+						<div class="product-cell stock" style="text-align: center;">
+							<span class="cell-label">CustomerPhone</span>${order.customerBean.customerPhone}
+						</div>
+						<div class="product-cell stock" style="text-align: center;">
+							<span class="cell-label">CustomerMail</span>${order.customerBean.customerEmail}
+						</div>
+
 
 						<!-- 						      更新(JSP頁面建置)/刪除 按鈕 -->
 
-						<div>
-							<a
-								href="<c:url value='/admin/adminManage/adminOrder/detail/${order.orderId}'/>"><button
-									class="app-content-headerButton">Detail</button></a>
-							<button data-bs-toggle="modal" type="button"
-								data-bs-target="#${order.orderId}">Action</button>
-							<a onclick="return del(this)"
+						<div class="product-cell price">
+
+							<button dtype="button" class="app-content-headerButton"
+								data-toggle="modal" data-target="#myModal${order.orderId}">Action</button>
+							<span></span>
+							
+							</div><div class="product-cell price">
+						
+							<a class="deleteOrder"
 								href="<c:url value='/admin/adminManage/adminOrder/delete/${order.orderId}'/>"><button
 									class="app-content-headerButton">Delete</button></a>
 						</div>
@@ -415,23 +382,90 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 
 					<!-- 		=====================container================================== -->
-					<!-- =============================quick view=================================== -->
-					<div class="modal fade" id="quick-view${order.orderId}"
-						tabindex="-1" role="dialog" aria-hidden="true">
+					<!-- ============================================================================== -->
+					<!-- quick view=-->
+					<!-- ================================================================ -->
+					<div class="modal fade" id="myModal${order.orderId}">
 						<div class="modal-dialog">
 							<div class="modal-content">
+
+								<!-- Modal Header -->
 								<div class="modal-header">
-									<h5 class="modal-title">Modal title</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
+									<img src="${pageContext.request.contextPath}/images/mall/icon/search2.png"><h4>訂單編號# ${order.orderId} </h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
-								<div class="modal-body">...</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+									<div class="container">
+
+										<div class="login-information bg-white">
+
+											<div>
+												<div class="card card-primary card-outline"></div>
+												<!-- /.card-body -->
+												<div class="card-body">
+													<div class="grid-btn">
+												<div>
+												<p>訂單日期:${order.orderRegisterTime}</p>
+												<p>訂單金額:$${order.orderTotalPrice}</p>
+												
+												</div>
+													
+														<div>
+															<h6>配送進度:&nbsp;${order.orderStatus}</h6>
+
+															<a
+																href="<c:url value="/admin/adminManage/adminOrder/deliver/${order.orderId}"/>">
+																<button class="app-content-headerButton"
+																	onclick="orderCheckOut()">出貨中</button>
+															</a>
+															<a
+																href="<c:url value="/admin/adminManage/adminOrder/status/${order.orderId}"/>">
+																<button class="app-content-headerButton"
+																	onclick="orderCheckDone()">配送完成</button>
+															</a> 
+														</div>
+
+														<br>
+														<div>
+															<h6>付款狀態:&nbsp;${order.payStatus}</h6>
+
+															<a
+																href="<c:url value="/admin/adminManage//adminOrder/unpaid/${order.orderId}"/>">
+																<button class="app-content-headerButton"
+																	onclick="orderCheckOut()">未付款</button>
+															</a> <a
+																href="<c:url value="/admin/adminManage/adminOrder/payStatus/${order.orderId}"/>">
+																<button class="app-content-headerButton"
+																	onclick="orderCheckOut()">&nbsp;已付款</button>
+															</a>
+
+														</div>
+													</div>
+													<table id="jqGrid" class="table table-bordered">
+
+													</table>
+													<div id="jqGridPager"></div>
+												</div>
+												<!-- /.card-body -->
+											</div>
+											<!--	===========================================================================================
+									(e)BUTTON 
+			==============================================================================================-->
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<!-- Modal footer -->
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">Close</button>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -457,25 +491,22 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 		<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 
-		<script type="text/javascript">
-			//將 get 請求轉換為 post 請求提交
-			function del(tag) {
-				//獲取當前請求路徑
-				var href = tag.href;
-				//提交
-				$("form").attr("action", href).submit();
-				return delmag();
 
-				function delmag() {
-					var msg = "您確定要刪除嗎？";
-					if (confirm(msg) == true) {
-						return true;
-					} else {
-						return false;
-					}
+		
+		<script>
+		$(document).ready(function() {
+			$('.deleteOrder').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
+
+					console.log(href);
 				}
-			}
-		</script>
+				return false;
+
+			});
+		})
+	</script>
 
 
 		<!-- ======================    綁定清除查詢 ================================-->

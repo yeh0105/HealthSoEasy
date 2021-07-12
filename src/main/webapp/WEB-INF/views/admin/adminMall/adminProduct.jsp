@@ -495,7 +495,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 						</div>
 
 						<div class="product-cell price">
-							<a onclick="return del(this)"
+							<a class="deleteProduct"
 								href="<c:url value='/admin/adminManage/adminDelete/${product.productId}'/>"><button
 									class="app-content-headerButton">Delete</button></a>
 						</div>
@@ -564,25 +564,21 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z" />
 
 	<!-- ----------------------------刪除單筆資料用-------------------------------- -->
 
-	<script type="text/javascript">
-		//將 get 請求轉換為 post 請求提交
-		function del(tag) {
-			//獲取當前請求路徑
-			var href = tag.href;
-			//提交
-			$("form").attr("action", href).submit();
-			return delmag();
+	<script>
+		$(document).ready(function() {
+			$('.deleteProduct').click(function() {
+				if (confirm('確定刪除此筆紀錄? ')) {
+					var href = $(this).attr('href');
+					$('form').attr('action', href).submit();
 
-			function delmag() {
-				var msg = "您確定要刪除這樣產品嗎？";
-				if (confirm(msg) == true) {
-					return true;
-				} else {
-					return false;
+					console.log(href);
 				}
-			}
-		}
+				return false;
+
+			});
+		})
 	</script>
+
 
 
 	<!-- ======================    綁定清除查詢 ================================-->
