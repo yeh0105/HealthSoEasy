@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +78,7 @@ public class LectureServiceImpl implements LectureService {
 			if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) >= 1) {
 				System.out.println("精彩回顧");
 				lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
-			} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) == 0) {
+			} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 14) == 0) {
 				System.out.println("現正進行");
 				lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
 			} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) < 0) {
@@ -92,7 +93,13 @@ public class LectureServiceImpl implements LectureService {
 	// 依據講座狀態自動進入輪播
 	@Override
 	public List<LectureBean> findByLectureStatus(Integer lectureStatus) {
-		return lectureRepository.findByLectureStatus(lectureStatus);
+		Sort sort = null;
+		if (lectureStatus == GlobalService.LECTURE_STATUS_ARCHIVED) {
+			sort = Sort.by(Sort.Order.desc("lectureDate"));
+		}else {
+			sort = Sort.by(Sort.Order.asc("lectureDate"));
+		}
+		return lectureRepository.findByLectureStatus(lectureStatus, sort);
 	}
 
 	//==================分頁區==================
