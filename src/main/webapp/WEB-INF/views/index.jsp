@@ -30,7 +30,7 @@
 <!--                 </div> -->
 <!-- 	 </section> -->
 	<section class="hero-section" style="margin-bottom:50px">
-            	<div style="display: flex;justify-content:center;height: 900px;background-image: url('${pageContext.request.contextPath}/images/indexImgRev.jpg');background-repeat: no-repeat;background-position: center;background-size: cover">
+            	<div style="display: flex;justify-content:center;height: 900px;background-image: url('${pageContext.request.contextPath}/images/indexImg2.jpg');background-repeat: no-repeat;background-position: center;background-size: cover">
             
                     
                 </div>
