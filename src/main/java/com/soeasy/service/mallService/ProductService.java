@@ -110,7 +110,7 @@ public class ProductService {
 			return list;
 		} 
 		
-		//尋找最新產品  
+		//尋找最新產品  (商品頁)
 		public List<ProductBean> findNewProduct(){
 			Sort sort = Sort.by(Sort.Order.desc("productId"));
 			List<ProductBean> list = productRepository.findAll(sort);	
@@ -122,6 +122,20 @@ public class ProductService {
 			
 			return list;
 		} 
+		
+		//尋找最新產品  (index)
+		public List<ProductBean> findNewProduct3(){
+			Sort sort = Sort.by(Sort.Order.desc("productId"));
+			List<ProductBean> list = productRepository.findAll(sort);	
+			
+			if(list.size()>=5) {
+				List<ProductBean> newList = list.subList(7,10);
+				return newList;
+			}
+			
+			return list;
+		} 
+
 		
 		
 		

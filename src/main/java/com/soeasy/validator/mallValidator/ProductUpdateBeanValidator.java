@@ -33,7 +33,7 @@ public class ProductUpdateBeanValidator implements Validator {
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productImg", "", "不得空白");
 		
 		if (productupdateBean.getProductDescription().length() > 800) {
-			errors.rejectValue("productMultiImg", "", "字數超過800");
+			errors.rejectValue("productDescription", "", "字數超過800");
 		}
 	}
 

@@ -44,8 +44,8 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
-								href="<c:url value='/mall'></c:url>" title="Mall">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Shop</li>
+								href="<c:url value='/mall/lists'></c:url>" title="Mall">Mall</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Product</li>
 						</ol>
 					</nav>
 				</div>
@@ -68,9 +68,10 @@
 				<form action="<c:url value='/mall/lists/1'/>" class="d-lg-block"
 					style="margin-left: 150px; margin-top: 50px">
 					<input type="hidden" name="sortField" value="${sortField}" /> <input
-						type="hidden" name="sortDir" value="${sortDir}" /> &nbsp; <input
+						type="hidden" name="sortDir" value="${sortDir}" /> <img src="${pageContext.request.contextPath}/images/mall/icon/search2.png"><input
 						type="text" name="keyword" value="${keyword}"
-						placeholder="Enter Searching" /> &nbsp; <input type="submit"
+						placeholder="Enter Searching" /> 
+						&nbsp;<input type="submit"
 						value="Search" class="theme-btn no-shadow bg-blue" /> &nbsp; <input
 						type="button" value="clear" onclick="clearFilter()"
 						class="theme-btn no-shadow bg-blue">
@@ -93,34 +94,40 @@
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
 										<h5>
-											<i><img
+											<img
 												src="${pageContext.request.contextPath}/images/mall/icon/list.png"
 												style="weight: 30px; height: 30px"></i>Categories
 										</h5>
 									</div>
 									<ul>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><i
-												class="flaticon-apple"></i> Fruits and Vegetables</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category1.png">
+												Foods and Vegetables</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><i
-												class="flaticon-chicken-hand-drawn-outline"></i> Chickenen
-												MealBox</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category5.png">
+												Chickenen MealBox</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><i
-												class="flaticon-pressure-washer"></i> Beef Meal Box</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category6.png">
+												Beef Meal Box</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><i
-												class="flaticon-pest"></i> Pork Meal Boxl</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category2.png">
+												Pork Meal Boxl</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><i
-												class="flaticon-stationery"></i> Fish Meal Box</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category7.png">
+												Fish Meal Box</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><i
-												class="flaticon-make-up"></i> Meal Box for vagetarien</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=7'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category8.png">
+												Drinks</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=7'/>"><i
-												class="flaticon-make-up"></i> Meal Drinks</a></li>
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category3.png">
+												Meal Box for vagetarien</a></li>
 
 
 
@@ -130,7 +137,9 @@
 								<!-- 								=======best=========== -->
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
-										<h5>Newest Product</h5>
+										<h5><img
+												src="${pageContext.request.contextPath}/images/mall/icon/list.png"
+												style="weight: 30px; height: 30px">Newest Product</h5>
 									</div>
 									<c:forEach items="${productTop3}" var="productTop">
 										<div
@@ -151,9 +160,9 @@
 												<div class="product-action">
 													<a
 														href="<c:url value='/mall/cart/buy/${productTop.productId}'/>"
-														class="add-to-btn small-btn"> <i
-														class="flaticon-shopping-cart"></i> <span>Add to
-															Cart</span>
+														class="add-to-btn small-btn"> <img
+														src="${pageContext.request.contextPath}/images/mall/icon/cart1.png">
+														<span>Add to Cart</span>
 														<h5 class="product-price">$${productTop.productPrice}</h5>
 													</a>
 												</div>
@@ -221,9 +230,9 @@
 												<div class="product-action">
 													<a
 														href="<c:url value='/mall/cart/buy/${product.productId}'/>"
-														class="add-to-btn small-btn"> <i
-														class="flaticon-shopping-cart"></i> <span>Add to
-															Cart</span>
+														class="add-to-btn small-btn"> <img
+														src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
+														<span>Add to Cart</span>
 														<h5 class="product-price">${product.productPrice}</h5>
 													</a>
 													<!-- 													====收藏商品=== -->
@@ -322,14 +331,15 @@
 
 																			<p>● 商品熱量:${product.productCalories} &nbsp;</p>
 																			<p>${product.productDescription}</p>
+
 																			<p style="text-align: right">--&nbsp; product
-																				provider: ${product.shopBean.shopName}</p>
+																				provider: ${product.shopBean.shopName} <img
+																				src="${pageContext.request.contextPath}/images/mall/icon/market.png"></p>
 																			<br />
 																		</div>
-
 																		<h6>
 																			Availability: <span>InStock &nbsp;( Amount:
-																				${product.productAmount})</span>
+																				${product.productAmount})</span> 
 																		</h6>
 																		<h4 class="price">$${product.productPrice}</h4>
 
@@ -338,6 +348,7 @@
 																			<a
 																				href="<c:url value='/mall/cart/buy/${product.productId}'/>"
 																				class="theme-btn br-30 ml-20">Add to Cart</a>
+
 
 																			<!-- 																			<div class="add-wishlist"> -->
 																			<%-- 																				<c:choose> --%>
@@ -397,7 +408,7 @@
 
 
 		<!-- ---------------------------控制分頁用----------------------------------- -->
-		<nav style="width: 400px; margin-bottom: 120px; margin-left: 800px">
+		<nav style="width: 400px; margin-bottom: 120px; margin-left: 720px">
 
 			<div class="btn-group ">
 
@@ -414,17 +425,15 @@
 				</c:choose>
 				<!-- 上頁結束 -->
 
-				&nbsp;
-				&nbsp;
+				&nbsp; &nbsp;
 				<p style="font-style: italic; color: #00477D">
 					Page &nbsp;
 					<c:out value="${currentPage}" />
 					&nbsp; of &nbsp;&nbsp;
 					<c:out value="${totalPages}" />
 				</p>
-				&nbsp;
-				&nbsp;
-				
+				&nbsp; &nbsp;
+
 
 
 
@@ -480,7 +489,7 @@
 					<div class="col-lg-4 col-md-5 mb-20">
 						<div class="footer-widget form-widget ml-50 mr-20">
 							<h5 class="footer-title mb-20">Subscribe Our News Letter</h5>
-							=
+							
 							<form class="subscribe">
 								<input type="email" placeholder="Your Email For Notify" required>
 								<button type="submit">Send</button>
