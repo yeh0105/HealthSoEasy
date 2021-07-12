@@ -11,20 +11,19 @@
 	document.addEventListener("DOMContentLoaded", function(){
 		let emailInput = document.getElementById("emailInput");
 		let emailSubmit = document.getElementById("emailSubmit");
+		let errortext = document.getElementById("errortext");
 		let xhr = new XMLHttpRequest();
 		
 		emailSubmit.addEventListener("click", function(){
-			console.log(emailInput.value);
-			console.log(1);
 			xhr.open('POST', "<c:url value='/passwordResetValidate/sendCustomerValidationEmail.do'/>" , true);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send("email=" + emailInput.value);
 			
 			xhr.onreadystatechange = function(){
 				if (xhr.readyState == 4 && xhr.status == 200){
-					let responseMessage = JSON.parse(xhr.responseText);					
+					let responseMessage = JSON.parse(xhr.responseText);		
+					errortext.innerHTML = responseMessage.responseMessage;
 				}
-// 				console.log(responseMessage);
 			}
 		});
 	});
@@ -38,7 +37,7 @@
 		<span>請輸入電子郵件以搜尋帳號</span>
 		<input id="emailInput" type="email" placeholder="email">
 		<button id="emailSubmit">送出</button>
-		
+		<span id="errortext"></span>
 	</div>
 </body>
 </html>
