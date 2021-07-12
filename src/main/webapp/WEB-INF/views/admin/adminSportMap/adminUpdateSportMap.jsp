@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Add SportMap</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
 

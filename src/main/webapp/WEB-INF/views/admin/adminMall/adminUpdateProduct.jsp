@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Update Product</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link href="${pageContext.request.contextPath}/css/admin.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" type="text/css">
