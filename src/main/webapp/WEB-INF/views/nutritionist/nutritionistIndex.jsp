@@ -19,7 +19,7 @@
 	rel="stylesheet">
 
 <title>營養師介紹</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 	<!-- 引入共同的頁首  copy這行-->

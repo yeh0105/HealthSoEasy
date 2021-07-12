@@ -11,6 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>MALL</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"

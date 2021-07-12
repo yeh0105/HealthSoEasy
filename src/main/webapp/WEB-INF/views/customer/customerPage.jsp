@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Personal Page</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link
 	href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css"
 	rel="stylesheet" media="screen">

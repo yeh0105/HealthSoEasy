@@ -15,7 +15,7 @@
 <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet"> -->
 <link href="${pageContext.request.contextPath}/css/sportMap_getOne.css" rel="stylesheet">
 <title>所有運動地點</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded",function(){
 		let showFavorite = document.getElementById("showFavorite");

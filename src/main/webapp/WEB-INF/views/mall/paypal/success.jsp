@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>check out success</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/responsive.css">
 

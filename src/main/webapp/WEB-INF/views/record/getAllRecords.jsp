@@ -17,6 +17,7 @@
 	src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <title>查詢全部營養師列表</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <style>
 #mainWrapper2 {
 	width: 80%;

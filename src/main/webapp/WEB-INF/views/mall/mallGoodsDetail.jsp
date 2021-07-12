@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>MALL-Goods Detail</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded",function(){
 		let showFavorite = document.getElementById("showFavorite");

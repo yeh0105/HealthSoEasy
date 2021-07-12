@@ -19,6 +19,7 @@
 	rel="stylesheet">
 	
 <title>查詢全部營養師列表(分頁)</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 
 <script >
 document.addEventListener("DOMContentLoaded",function() {

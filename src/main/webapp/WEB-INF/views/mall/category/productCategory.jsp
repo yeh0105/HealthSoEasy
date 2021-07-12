@@ -10,7 +10,7 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1;charset=utf-8">
 <title>productList</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">
 
  </head>

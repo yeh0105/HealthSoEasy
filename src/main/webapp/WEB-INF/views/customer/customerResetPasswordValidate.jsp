@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Reset Password</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function(){
 		let password = document.getElementById("password");

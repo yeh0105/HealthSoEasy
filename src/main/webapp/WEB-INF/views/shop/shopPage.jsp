@@ -118,6 +118,7 @@
 
 
 <title>廠商個人頁面</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 	<jsp:include page="/fragment/header.jsp" />

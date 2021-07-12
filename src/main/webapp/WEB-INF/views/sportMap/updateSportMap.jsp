@@ -16,6 +16,7 @@ span.error {
 </style>
 
 <title>單筆運動地點</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 

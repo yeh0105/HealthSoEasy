@@ -122,6 +122,7 @@ fieldset {
 
 
 <title>修改廠商個人資料</title>
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
 
