@@ -67,17 +67,17 @@ public class ProductController {
 	
 //	
 //	//商城頁面跳轉
-//		@RequestMapping("/")
-//		public String viewPage1(Model model){
-//			
-//			List<OrderDetailBean> list=productService.findNewestProduct();
-//			
-//			model.addAttribute("newest",list);
-//			System.out.println("最新的產品:"+list);
-//			return "mall/mallIndex";
-//			
-//			
-//		}
+		@RequestMapping("/mallIndex")
+		public String viewPage1(Model model){
+			
+			//印出最新上架的產品
+		    List<ProductBean> newlist = productService.findNewProduct3();
+		    model.addAttribute("newlist", newlist);
+			System.out.println("最新的產品:"+newlist);
+			return "mall/mallIndex";
+			
+			
+		}
 		
 		//商城頁面跳轉
 		@RequestMapping("/lists")
@@ -120,6 +120,7 @@ public class ProductController {
 			    model.addAttribute("category",category);
 			    
 			    
+			    //印出最新上架的產品
 			    List<ProductBean> list5 = productService.findNewProduct();
 			    model.addAttribute("productTop3", list5);
 			    

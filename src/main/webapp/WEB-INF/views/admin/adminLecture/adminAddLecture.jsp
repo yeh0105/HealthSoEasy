@@ -199,7 +199,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">&nbsp;
       <a href="<c:url value="/admin/adminManage/adminLecturer"></c:url>"><button class="app-content-headerButton">講師</button></a>&nbsp;
-      <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp;
+<%--       <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp; --%>
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -317,7 +317,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 					<tr>
 					<tr>
 						<td>講座內容：</td>
-						<td width='600'><form:input path='lectureContent' /> <form:errors path="lectureContent" cssClass="error" /></td>
+						<td width='600'><form:textarea path='lectureContent'  style="width: 100%; height: 300px; overflow-y: scroll;" /> <form:errors path="lectureContent" cssClass="error" /></td>
 					<tr>
 <!-- 					<tr> -->
 <!-- 						<td>講座狀態：</td> -->
@@ -325,8 +325,15 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!-- 					<tr> -->
 						<td>講座圖片：</td>
 						<td width='600'><form:input path="lectureMultiImg" type="file" style="width: 203px;"/> <form:errors path="lectureMultiImg" cssClass="error" /></td>
-						
 					</tr>
+					<tr>
+						<td>講座地址：</td>
+						<td width='600'><form:input path='lectureAddress' /> <form:errors path="lectureContent" cssClass="error" /></td>
+					<tr>
+						<td>講座地圖：</td>
+						<td width='600'><form:input path='lectureMap' /> <form:errors path="lectureContent" cssClass="error" /></td>
+					
+					
 					<tr>
 						<td><input type='submit' value="送出"></td>
 						<td><input type='reset' value="清除重填"></td>

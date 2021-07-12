@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>MALL</title>
+<title>ShoppingCart</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"
@@ -137,7 +137,7 @@
 							<h4 class="cart-heading">Order Summary</h4>
 							<div class="total-item-wrap">
 								<div class="total-item sub-total">
-									<span class="title">Total Item ${countItems} </span> <span
+									<span class="title">Total Item: &nbsp;${countItems} </span> <span
 										class="price">${total}</span>
 								</div>
 								<div class="total-item shipping">

@@ -47,6 +47,11 @@ public class LectureBean implements Serializable {
 	private Date lectureDate;
 
 	private Integer lectureStatus;
+	
+	private String lectureAddress;
+	
+	@Column(length = 1000)
+	private String lectureMap;
 
 	// 講座介紹類型
 	@Transient
@@ -133,6 +138,22 @@ public class LectureBean implements Serializable {
 
 	public void setLectureStatus(Integer lectureStatus) {
 		this.lectureStatus = lectureStatus;
+	}
+
+	public String getLectureAddress() {
+		return lectureAddress;
+	}
+
+	public void setLectureAddress(String lectureAddress) {
+		this.lectureAddress = lectureAddress;
+	}
+
+	public String getLectureMap() {
+		return lectureMap;
+	}
+
+	public void setLectureMap(String lectureMap) {
+		this.lectureMap = lectureMap;
 	}
 
 }

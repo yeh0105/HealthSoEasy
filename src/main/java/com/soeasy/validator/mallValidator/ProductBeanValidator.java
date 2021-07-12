@@ -29,13 +29,15 @@ public class ProductBeanValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCalories", "", "熱量要記得填寫喔");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productAmount", "", "庫存要記得填寫喔");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productCost", "", "成本要記得填寫喔");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shopBean.shopId", "", "shop要記得填寫喔");
+
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shopBean.shopId", "", "shop要記得填寫喔");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productImg", "", "不得空白");
 		if (product.getProductMultiImg().isEmpty()) {
 			errors.rejectValue("productMultiImg", "", "要記得上傳圖片喔");
 		}
 		if (product.getProductDescription().length() > 800) {
-			errors.rejectValue("productMultiImg", "", "字數超過800");
+			errors.rejectValue("productDescription", "", "字數超過800");
 		}
 	}
 

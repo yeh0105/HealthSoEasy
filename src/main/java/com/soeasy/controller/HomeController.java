@@ -57,7 +57,7 @@ public class HomeController {
 	@GetMapping("/mall")
 	public String MallIndex() {
 
-		return "mall/mallIndex";
+		return "redirect:/mall/mallIndex";
 	}
 
 	// 從SoEasy首頁跳至講座首頁
@@ -72,12 +72,6 @@ public class HomeController {
 //		model.addAttribute("archivedLectures", archivedLectures);
 		return "/lecture/lectureIndex";
 	}
-
-//	// 從SoEasy首頁跳至講師首頁
-//	@GetMapping("/lecturerIndex")
-//	public String lecturerIndex() {
-//		return "/lecturer/lecturerIndex";
-//	}
 	
 	// 從SoEasy首頁跳至文章首頁
 		@GetMapping("/admin/adminManage/adminArticle")

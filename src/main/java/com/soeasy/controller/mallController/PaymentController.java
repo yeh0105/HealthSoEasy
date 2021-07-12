@@ -128,7 +128,7 @@ public class PaymentController {
             OrderBean order = orderService.getMaxIdOrder();
             System.out.println("最新orderId:"+order+"會員:"+customerBean.getCustomerId());
 
-			order.setPayStatus("paid");
+			order.setPayStatus("已付款");
 			orderService.save(order);
 
 			
@@ -142,14 +142,41 @@ public class PaymentController {
     }
     
     
-    @GetMapping("/mall/status/{orderId}")
-	public String orderpay(@PathVariable("orderId") Integer orderId,Model model) {
-		OrderBean order = orderService.findByOrderId(orderId);
-		order.setPayStatus("Completed");
+//    //訂單完成設定
+//    @GetMapping("/mall/status")
+//	public String orderpay(@PathVariable("orderId") Integer orderId,Model model) {
+//		OrderBean order = orderService.findByOrderId(orderId);
+//		order.setPayStatus("已完成");
+//		orderService.save(order);
+//		
+//		return "/mall/paypal/success";
+//		
+//		
+//	}
+    
+    //使用貨到付款
+    @PostMapping("/mall/deliverPay")
+    public String deliveryPay(HttpSession session,Model model) {
+    	
+    	//根據最新的訂單ID 去修改付款狀態"貨到付款"
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+        OrderBean order = orderService.getMaxIdOrder();
+        System.out.println("最新orderId:"+order+"會員:"+customerBean.getCustomerId());
+
+		order.setPayStatus("貨到付款");
 		orderService.save(order);
 		
-		return "/mall/paypal/success";
-		
-		
-	}
+		//Remove cart
+		List<CartItem>cartTotalPrice=(List<CartItem>)session.getAttribute("cart");
+		session.removeAttribute("cart");
+        return "/mall/paypal/success";
+    	    	
+    	
+    }
+    
+    
+    
+    
+    
+    
 }

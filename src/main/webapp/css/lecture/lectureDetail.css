@@ -54,20 +54,20 @@ body{
 }
 
 .lectureImg{
-	max-width: 370px;
+	max-width: 100%;
 	max-height: auto;
-	padding-top: 7%;
+	padding-top: 5%;
 }
 
 .lectureDate{
-	font-family:monospace;
+	font-family:Varela Round;
 	color: #38ac55;
 	font-size: x-large;
 	font-weight:bold;
 	line-height: 1;
 }
 
-.lectureCategory, .lectureStatus{
+.lectureCategory, .lectureStatus, .lectureAddress{
 	color: #38ac55;
 	font-size: large;
 	font-weight:bold;

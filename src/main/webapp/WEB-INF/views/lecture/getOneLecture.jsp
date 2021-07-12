@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="css/categoryNav.css">
 <link href="css/header&footer.css" rel="stylesheet">
 
+<!-- 講座日期字型 -->
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
 <!-- 標題字型 -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap"
@@ -96,6 +99,12 @@
 								<p class="custom-eft eft12"><span>講座狀態：</span></p> 
 								<span class="lectureStatus">${(oneLectureDetail.lectureStatus == 1? "即將舉辦":(oneLectureDetail.lectureStatus == 2? "進行中":"精彩回顧"))}</span>
 							</div>
+								
+							<div>
+								<p class="custom-eft eft12"><span>講座地址：</span></p> 
+								<span class="lectureAddress">${oneLectureDetail.lectureAddress}</span> 
+									<div class="div2"> ${oneLectureDetail.lectureMap}</div>
+							</div>
 							
 							<div>
 								<p class="custom-eft eft12"><span>講座內容：</span></p>
@@ -103,10 +112,8 @@
 							
 								<div class="div2">
 									<div class="lectureContent">
-									<span>${oneLectureDetail.lectureContent}</span>
+										<span>${oneLectureDetail.lectureContent}</span>
 									</div>
-									
-									<br>
 									
 									<div class="lectureImg">
 										<img src="<c:url value='/lectureController/getLectureImage/${oneLectureDetail.lectureId}' />" alt="">

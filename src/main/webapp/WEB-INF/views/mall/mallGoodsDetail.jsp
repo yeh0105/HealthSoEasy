@@ -47,9 +47,9 @@
 // 					console.log(favoriteJson);
 					//更改圖片
 					if (favoriteJson.favoriteExist){
-						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like1.png";
+						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/icon/like1.png";
 					}else {
-						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/Like2.png";
+						favoriteHeart.src="${pageContext.request.contextPath}/images/mall/icon/like2.png";
 
 					}
 					
@@ -101,8 +101,8 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
-								href="<c:url value='/mall'></c:url>" title="Mall">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Shop</li>
+								href="<c:url value='/mall/lists'></c:url>" title="Mall">Mall</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Product</li>
 						</ol>
 					</nav>
 				</div>
@@ -126,25 +126,41 @@
 							<div class="shop-widget b1">
 								<div class="shop-widget-title">
 									<h5>
-										<i><img
-											src="${pageContext.request.contextPath}/images/mall/icon/list.png"
-											style="weight: 30px; height: 30px"></i>Categories
-									</h5>
-								</div>
-								<ul>
-									<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><i class="flaticon-apple"></i>
-												Fruits and Vegetables</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><i
-												class="flaticon-chicken-hand-drawn-outline"></i> Chickenen
-												MealBox</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><i
-												class="flaticon-pressure-washer"></i> Beef Meal Box</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><i class="flaticon-pest"></i>
-												Pork Meal Boxl</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><i
-												class="flaticon-stationery"></i> Fish Meal Box</a></li>
-										<li><a href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><i class="flaticon-make-up"></i> Meal
-												Box for vagetarien</a></li>
+															<h5>
+											<i><img
+												src="${pageContext.request.contextPath}/images/mall/icon/list.png"
+												style="weight: 30px; height: 30px"></i>Categories
+										</h5>
+									</div>
+									<ul>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category1.png">
+												Foods and Vegetables</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category5.png">
+												Chickenen MealBox</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category6.png">
+												Beef Meal Box</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category2.png">
+												Pork Meal Box</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category7.png">
+												Fish Meal Box</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=7'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category8.png">
+												Drinks</a></li>
+										<li><a
+											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=6'/>"><img
+												src="${pageContext.request.contextPath}/images/mall/icon/category3.png">
+												Meal Box for vagetarien</a></li>
 
 
 								</ul>
@@ -153,7 +169,9 @@
 							<!-- 								=======best=========== -->
 							<div class="shop-widget b1">
 								<div class="shop-widget-title">
-									<h5>Others From Shop</h5>
+									<h5><img
+												src="${pageContext.request.contextPath}/images/mall/icon/list.png"
+												style="weight: 30px; height: 30px">Others From Provider</h5>
 								</div>
 								<c:forEach items="${sameShop}" var="relatedShop">
 									<div
@@ -172,8 +190,8 @@
 											<div class="product-action">
 												<a
 													href="<c:url value='/mall/cart/buy/${relatedShop.productId}'/>"
-													class="add-to-btn small-btn"> <i
-													class="flaticon-shopping-cart"></i> <span>Add to
+													class="add-to-btn small-btn"> 
+													<img src="${pageContext.request.contextPath}/images/mall/icon/cart1.png"><span>Add to
 														Cart</span>
 													<h5 class="product-price">$${relatedShop.productPrice}</h5>
 												</a>
@@ -263,7 +281,8 @@
 											<p>● 商品熱量:${product.productCalories} &nbsp;</p>
 											<p>${product.productDescription}</p>
 											<p style="text-align: right">--&nbsp; product provider:
-												${product.shopBean.shopName}</p>
+												${product.shopBean.shopName}<img
+																				src="${pageContext.request.contextPath}/images/mall/icon/market.png"></p>
 											<br />
 										</div>
 
@@ -284,18 +303,18 @@
 												<c:choose>
 													<c:when test="${productBean.favoriteStatus == true}">
 														<div class="floatR">
-															<button id="showFavorite">
+															<button id="showFavorite" STYLE="background-color: transparent;"  >
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like1.png">
+																	src="${pageContext.request.contextPath}/images/mall/icon/like1.png">
 <!-- 																	2 是空心: 1 是實心 -->
 															</button>
 														</div>
 													</c:when>
 													<c:otherwise>
 														<div class="floatR">
-															<button id="showFavorite">
+															<button id="showFavorite" STYLE="background-color: transparent;" >
 																<img id="favoriteHeart"
-																	src="${pageContext.request.contextPath}/images/mall/Like2.png">
+																	src="${pageContext.request.contextPath}/images/mall/icon/like2.png">
 															</button>
 														</div>
 
@@ -320,17 +339,21 @@
 									<div class="tab-pane active" id="details">
 										<!--  廠商詳情 -->
 
-										<h5>${product.shopBean.shopName}</h5>
+										<h4><img src="${pageContext.request.contextPath}/images/mall/icon/shop.png">&nbsp;&nbsp;${product.shopBean.shopName}</h4>
+										<div>
 										<img style="weight: 500px; height: 400px"
 											src="<c:url value='/shopController/getShopImgById/${product.shopBean.shopId}'/>"
 											alt="shop Thumbnail Image" />
+											</div>
+											<br>
 
-										<h4>Cotact Info:</h4>
+										<h5> <img src="${pageContext.request.contextPath}/images/mall/icon/contact.png">
+										Cotact Info:</h5>
 										<p>
-											Email&nbsp;:&nbsp;<span>${product.shopBean.shopEmail}</span>
+											- Email&nbsp;:&nbsp;<span>${product.shopBean.shopEmail}</span>
 										</p>
 										<p>
-											Phone&nbsp;:&nbsp;<span>${product.shopBean.shopPhone}</span>
+											- Phone&nbsp;:&nbsp;<span>${product.shopBean.shopPhone}</span>
 										</p>
 
 									</div>
@@ -413,8 +436,7 @@
 												</p>
 											</div>
 											<div class="product-action">
-												<a href="<c:url value='/mall/cart/buy/${relatedCategory.productId}'/>" class="add-to-btn small-btn"> <i
-													class="flaticon-shopping-cart"></i> <span>Add to
+												<a href="<c:url value='/mall/cart/buy/${relatedCategory.productId}'/>" class="add-to-btn small-btn"><img src="${pageContext.request.contextPath}/images/mall/icon/cart3.png"><span>Add to
 														Cart</span>
 													<h5 class="product-price">$${relatedCategory.productPrice}</h5>
 												</a>

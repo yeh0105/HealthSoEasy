@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,13 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.soeasy.model.CustomerBean;
 import com.soeasy.model.ProductBean;
 import com.soeasy.model.ShopBean;
 import com.soeasy.service.mallService.ProductCategoryService;
 import com.soeasy.service.mallService.ProductService;
 import com.soeasy.service.shopService.ShopService;
 import com.soeasy.validator.mallValidator.ProductBeanValidator;
+import com.soeasy.validator.mallValidator.ProductUpdateBeanValidator;
 
 @Controller
 @RequestMapping("/shop")
@@ -164,7 +161,7 @@ public class ShopProductController {
 	public String addProduct(@ModelAttribute("product") /* @Valid */ ProductBean product, BindingResult result,
 			Model model, HttpServletRequest request, HttpSession session) {
 
-		model.addAttribute("categories", productCategoryService.findParentCategories());
+		//model.addAttribute("categories", productCategoryService.findParentCategories());
 
 		ProductBeanValidator validator = new ProductBeanValidator();
 		// 呼叫Validate進行資料檢查
@@ -189,7 +186,6 @@ public class ShopProductController {
 		}
 
 		// 儲存廠商ID
-
 		ShopBean shopBean = (ShopBean) model.getAttribute("shopSignInSuccess");
 		product.setShopBean(shopBean);
 
@@ -270,7 +266,6 @@ public class ShopProductController {
 	// 取得原始的productBean物件
 	public String showDataForm(@PathVariable("productId") Integer productId, Model model) {
 		ProductBean product = productService.findProductById(productId);
-
 		model.addAttribute("product", product);
 
 		return "shop/updateProduct";
@@ -280,26 +275,29 @@ public class ShopProductController {
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 	public String modify(@ModelAttribute("product") ProductBean product, BindingResult result, Model model,
 			@PathVariable Integer productId, HttpServletRequest request) {
+		
 
+		// 儲存廠商ID
+		ShopBean shopBean = (ShopBean) model.getAttribute("shopSignInSuccess");
+		product.setShopBean(shopBean);
+		
 		// 取得addProduct.jsp所送來的圖片資訊
-		MultipartFile picture = product.getProductMultiImg();
+				MultipartFile picture = product.getProductMultiImg();
 
-		// 建立Blob物件，交由 Hibernate 寫入資料庫
-		if (picture != null && !picture.isEmpty()) {
-			try {
-				byte[] b = picture.getBytes();
-				Blob blob = new SerialBlob(b);
-				product.setProductImg(blob);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-			}
-		}
-		try {
+				// 建立Blob物件，交由 Hibernate 寫入資料庫
+				if (picture != null && !picture.isEmpty()) {
+					try {
+						byte[] b = picture.getBytes();
+						Blob blob = new SerialBlob(b);
+						product.setProductImg(blob);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+					}
+				}
+				
 			productService.save(product);
-		} catch (org.hibernate.exception.ConstraintViolationException e) {
-			return "shop/shoplist";
-		}
+		
 
 		return "redirect:/shop/shoplist";
 	}

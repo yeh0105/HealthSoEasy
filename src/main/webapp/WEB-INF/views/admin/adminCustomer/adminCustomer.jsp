@@ -181,18 +181,35 @@
 		
 		function intitUploadImgbtns(){
 			//初始化上傳使用者頭貼按鈕
-			$(".uploadImgbtns").on("click", function(event){
-				console.log(this.dataset.imgid);
-//		 		送出表單鈕
-				let customerImgUploadId = document.getElementById("customerImgUploadId");
-				let customerImgUpload = document.getElementById("customerImgUpload");
-				customerImgUploadId.value = this.dataset.imgid;
-				customerImgUpload.click();
-				customerImgUpload.addEventListener("change", function(){
-					document.getElementById("customerImgSubmit").click();
+// 			$(".uploadImgbtns").on("click", function(event){
+// 				console.log(this.dataset.imgid);
+// //		 		送出表單鈕
+// 				let customerImgUploadId = document.getElementById("customerImgUploadId");
+// 				let customerImgUpload = document.getElementById("customerImgUpload");
+// 				customerImgUploadId.value = this.dataset.imgid;
+// 				customerImgUpload.click();
+// 				customerImgUpload.addEventListener("change", function(){
+// 					document.getElementById("customerImgSubmit").click();
 					
-				});
+// 				});
+// 			})
+			let uploadImgbtns = document.querySelectorAll(".uploadImgbtns");
+			console.log(uploadImgbtns);
+			uploadImgbtns.forEach(element => {
+				element.addEventListener("click", function(){
+					console.log(this.dataset.imgid);
+//			 		送出表單鈕
+					let customerImgUploadId = document.getElementById("customerImgUploadId");
+					let customerImgUpload = document.getElementById("customerImgUpload");
+					customerImgUploadId.value = this.dataset.imgid;
+					customerImgUpload.click();
+					customerImgUpload.addEventListener("change", function(){
+						document.getElementById("customerImgSubmit").click();
+						
+					});
+				})
 			})
+			
 		}
 		
 		//印出顧客會員健康資料

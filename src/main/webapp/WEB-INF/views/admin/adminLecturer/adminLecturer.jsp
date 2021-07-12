@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -203,7 +204,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 <!--     搜尋 -->
       <input class="search-bar" placeholder="Search..." type="text">&nbsp;
       <a href="<c:url value="/admin/adminManage/adminLecture"></c:url>"><button class="app-content-headerButton">講座</button></a>&nbsp;
-      <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp;
+<%--       <a href="<c:url value="/admin/adminManage/adminReservation"></c:url>"><button class="app-content-headerButton">講座預約</button></a>&nbsp; --%>
       <div class="app-content-actions-wrapper">
         <div class="filter-button-wrapper">
 <!--         過濾器 -->
@@ -269,7 +270,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
         <div class="product-cell price"><span class="cell-label">ID :</span>${lecturer.lecturerId}</div>
         <div class="product-cell category"><span class="cell-label">Name :</span>${lecturer.lecturerName}</div>
         <div class="product-cell sales"><span class="cell-label">Degree :</span>${lecturer.lecturerTalent}</div>
-        <div class="product-cell price"><span class="cell-label">Email :</span>${lecturer.lecturerExp}</div>
+        <div class="product-cell price"><span class="cell-label">Email :</span>${fn:substring(lecturer.lecturerExp,0,10)}</div>
         <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLecturerImage/${lecturer.lecturerId}' />" alt="lecturer"></div>
         
         <div class="product-cell price"><a href="<c:url value='/admin/adminManage/adminLecturer/updateLecturer/${lecturer.lecturerId}' />"><button class="app-content-headerButton">Update</button></a></div>                  
