@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soeasy.model.LectureBean;
-import com.soeasy.model.NutritionistBean;
 import com.soeasy.service.lectureService.LectureService;
 import com.soeasy.util.GlobalService;
 

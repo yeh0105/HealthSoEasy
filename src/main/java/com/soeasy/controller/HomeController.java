@@ -72,12 +72,6 @@ public class HomeController {
 //		model.addAttribute("archivedLectures", archivedLectures);
 		return "/lecture/lectureIndex";
 	}
-
-//	// 從SoEasy首頁跳至講師首頁
-//	@GetMapping("/lecturerIndex")
-//	public String lecturerIndex() {
-//		return "/lecturer/lecturerIndex";
-//	}
 	
 	// 從SoEasy首頁跳至文章首頁
 		@GetMapping("/admin/adminManage/adminArticle")

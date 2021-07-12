@@ -50,7 +50,7 @@ public class AdminLecture {
 	// 後台講座首頁
 	@GetMapping("/adminLecture")
 	public String adminLectureIndex(Model model) {
-		model.addAttribute("lectures", lectureService.getAllByLectureId());
+		model.addAttribute("lectures", lectureService.updateLectureStatus());
 		return "/admin/adminLecture/adminLecture";
 	}
 
@@ -104,13 +104,25 @@ public class AdminLecture {
 		if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) >= 1) {
 			System.out.println("精彩回顧");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
-		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) == 0) {
+		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 14) == 0) {
 			System.out.println("現正進行");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
 		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) < 0) {
 			System.out.println("即將舉辦");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
 		}
+		
+//		Date date = new Date(System.currentTimeMillis());
+//		if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) > 14) {
+//			System.out.println("即將舉辦");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
+//		} else if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) < 0) {
+//			System.out.println("精彩回顧");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
+//		} else if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) < 14) {
+//			System.out.println("現正進行");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
+//		}
 
 		lectureService.addLecture(lectureBean);
 
@@ -224,13 +236,24 @@ public class AdminLecture {
 		if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) >= 1) {
 			System.out.println("精彩回顧");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
-		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 1) == 0) {
+		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) / (86400000 * 14) == 0) {
 			System.out.println("現正進行");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
 		} else if ((date.getTime() - lectureBean.getLectureDate().getTime()) < 0) {
 			System.out.println("即將舉辦");
 			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
 		}
+//		Date date = new Date(System.currentTimeMillis());
+//		if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) > 14) {
+//			System.out.println("即將舉辦");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ARCHIVED);
+//		} else if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) < 0) {
+//			System.out.println("精彩回顧");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_UPCOMING);
+//		} else if (((lectureBean.getLectureDate().getTime() - date.getTime())  / 86400000) < 14) {
+//			System.out.println("現正進行");
+//			lectureBean.setLectureStatus(GlobalService.LECTURE_STATUS_ONGOING);
+//		}
 
 		lectureService.updateLecture(lectureBean);
 
