@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Product</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-bootstrap.min.css" href="${pageContext.request.contextPath}/css/mall/malladmin/mall-common.css" type="text/css">

@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Order Detail</title>
-
+<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <link href="${pageContext.request.contextPath}/css/admin.css"
 	rel="stylesheet">
 <link rel="stylesheet"
