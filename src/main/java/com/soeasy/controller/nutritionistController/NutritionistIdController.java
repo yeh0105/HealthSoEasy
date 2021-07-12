@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.soeasy.model.CartItem;
+import com.soeasy.model.CustomerBean;
 import com.soeasy.model.NutritionistBean;
 import com.soeasy.model.NutritionistCategoryBean;
 import com.soeasy.model.PostBean;
@@ -42,6 +47,7 @@ import com.soeasy.validator.nutritionistValidator.NutritionistValidator;
 
 @Controller
 @RequestMapping("/nutritionistController")
+@SessionAttributes("customerSignInSuccess")
 public class NutritionistIdController {
 
 	@Autowired
@@ -67,26 +73,24 @@ public class NutritionistIdController {
 	@GetMapping(value = "/nutritionist/{nutritionistId}")
 	public String getOneNutritionistById(@PathVariable("nutritionistId") Integer nutritionistId, Model model) {
 		NutritionistBean nutritionistBean = nutritionistService.findByNutritionistId(nutritionistId);
+		Random r = new Random();  //隨機宣告
 		
-		Random r = new Random();
-		int[] sixNum = new int[4];
+		List<ProductBean> chickenList=productService.findByRelatedCategory(2); //撈出商品種類2雞肉
+		List<ProductBean> beefList=productService.findByRelatedCategory(3);    //撈出商品種類3牛肉
+		chickenList.addAll(beefList);                                          //兩種類相加 
+		ProductBean productBean1= chickenList.get(r.nextInt(chickenList.size())); //隨機從兩種類抓一筆
 		
-		for (int i=0; i<4; i++){
-			sixNum[i] = r.nextInt(4)+1;		// 將隨機數(1-10)放入 sixNum[i]
-			for (int j=0; j<i;){			// 與前數列比較，若有相同則再取亂數
-				if (sixNum[j]==sixNum[i]){	
-					sixNum[i] = r.nextInt(4)+1;
-					j=0;			// 避面重新亂數後又產生相同數字，若出現重覆，迴圈從頭開始重新比較所有數
-				}
-				else j++;			// 若都不重複則下一個數
-			}
-		}   
+		List<ProductBean> porkList=productService.findByRelatedCategory(4);
+		List<ProductBean> FishList=productService.findByRelatedCategory(5);
+		porkList.addAll(FishList);
+		ProductBean productBean2=porkList.get(r.nextInt(porkList.size()));
 		
-		ProductBean productBean1=productService.findProductById(sixNum[0]);
-		ProductBean productBean2=productService.findProductById(sixNum[1]);
-		ProductBean productBean3=productService.findProductById(sixNum[2]);
-		ProductBean productBean4=productService.findProductById(sixNum[3]);
+		List<ProductBean> fruitList=productService.findByRelatedCategory(1);
+		ProductBean productBean3 = fruitList.get(r.nextInt(fruitList.size()));
 		
+		List<ProductBean> drinklist=productService.findByRelatedCategory(7);
+		ProductBean productBean4 = drinklist.get(r.nextInt(drinklist.size()));
+		 
 		model.addAttribute("nutritionistBean", nutritionistBean);
 		model.addAttribute("productBean1", productBean1);
 		model.addAttribute("productBean2", productBean2);
@@ -242,4 +246,50 @@ public class NutritionistIdController {
 		System.out.println("re="+re);
 		return re;
 	}
+	
+	
+//	===========================新增購物車內的項目==========================================	
+	@GetMapping("/buy/{productId}")
+	public String buy(@PathVariable("productId") Integer productId, 
+			HttpSession session,Model model,HttpServletRequest request) {
+
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+		
+		
+	
+		//  如果購物車是空的
+		if (session.getAttribute("cart")==null) {
+			List<CartItem> cart = new ArrayList<CartItem>();
+			cart.add(new CartItem(productService.findProductById(productId),1));
+			session.setAttribute("cart", cart);
+			}else {	
+				List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
+				int index = exists(productId,cart);
+				if(index==-1) {
+					//購物車可以可以再+1
+					cart.add(new CartItem(productService.findProductById(productId),1));
+				}else {
+					int newQuantity=cart.get(index).getCartQuantity()+1;
+					cart.get(index).setCartQuantity(newQuantity);
+					
+				}
+		}
+		String referer = request.getHeader("Referer"); 
+		return "redirect:"+ referer;
+		
+	}
+//	===========================(End)新增購物車內的項目==========================================	
+	private int exists(Integer productId,List<CartItem>cart) {
+		for(int i=0;i<cart.size();i++) {
+			if(cart.get(i).getProduct().getProductId()==productId) {
+				return i ;
+			}
+		}
+		return -1;
+	}
+	
 }
