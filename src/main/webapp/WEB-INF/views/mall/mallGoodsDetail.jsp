@@ -134,27 +134,27 @@
 									</div>
 									<ul>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=1'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=1'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category1.png">
 												Foods and Vegetables</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=2'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=2'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category5.png">
 												Chickenen MealBox</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=3'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=3'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category6.png">
 												Beef Meal Box</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=4'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=4'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category2.png">
-												Pork Meal Box</a></li>
+												Pork Meal Boxl</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=5'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=5'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category7.png">
 												Fish Meal Box</a></li>
 										<li><a
-											href="<c:url value='/mall/lists/${currentPage}?sortField=category&sortDir=${reverSortDir}&category=7'/>"><img
+											href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=7'/>"><img
 												src="${pageContext.request.contextPath}/images/mall/icon/category8.png">
 												Drinks</a></li>
 										<li><a
