@@ -89,7 +89,13 @@ public class ShopServiceImpl implements ShopService {
 				return newList;
 			}
 			return list;
-		} 
+		}
+		
+	//以email查詢廠商會員
+	@Override
+	public List<ShopBean> findByShopEmail(String shopEmail) {
+		return shopRepository.findByShopEmail(shopEmail);
+	} 
 
 	
 
