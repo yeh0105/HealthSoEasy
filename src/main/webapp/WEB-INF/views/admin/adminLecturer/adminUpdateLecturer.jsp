@@ -28,13 +28,8 @@
 			document.documentElement.classList.toggle('dark');			
 		}
 	}
-	
-	
-	
-	
-	
-
 </script>
+
 </head>
 <body>
 	<div class="app-container">
@@ -239,6 +234,11 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
     </div>
     
     <div class="products-area-wrapper tableView">
+    
+<!------------------------------------------------------------->
+<script src="${pageContext.request.contextPath}/js/lecture/adminLecturer.js"></script>
+<!------------------------------------------------------------->
+    
 <!--  --------------------------------內容開始--------------------------- -->
 	<div><a href="<c:url value="/admin/adminManage/adminLecture/lecturer" /> ">回上一頁</a></div>
 	<br>
