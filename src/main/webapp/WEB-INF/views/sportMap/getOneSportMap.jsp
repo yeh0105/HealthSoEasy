@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet"> -->
 <link href="${pageContext.request.contextPath}/css/sportMap_getOne.css" rel="stylesheet">
-<title>所有運動地點</title>
+<title>運動地點介紹</title>
 <link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded",function(){
