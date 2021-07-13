@@ -109,6 +109,14 @@ font.lecturerTalent, font.lecturerExp{
 /* 	font-weight:bold; */
 }
 
+font.lecturerExp{
+	padding-top: 3%;
+/* 	padding-left: 5%; */
+	color: darkgreen;
+	font-size: small;
+/* 	font-weight:bold; */
+}
+
 
 /* 表頭按鈕 */
 .custom-btn {

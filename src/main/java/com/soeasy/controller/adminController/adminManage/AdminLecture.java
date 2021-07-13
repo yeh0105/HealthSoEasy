@@ -60,14 +60,30 @@ public class AdminLecture {
 	public String showEmptyForm(Model model) {
 		LectureBean lectureBean = new LectureBean();
 		// 預設表單資料
-		lectureBean.setLectureTitle("12週居家徒手健身計畫");
-		lectureBean.setLectureCategory("運動");
-		lectureBean.setLectureContent(
-				"這是一門針對全身肌肉訓練的線上課程。它提供給日常忙碌、沒有時間或不想上健身房，想要在家自我訓練的人。你可以依照自己的時間，隨時開始這項計畫。我所設計的動作不需要任何健身設備，全程徒手就可以完成。\r\n"
-						+ "這門課程將透過12週的自主訓練，幫助你強化肌力、改善體能，並增強自我對肌肉的控制力，讓你減少腰痠背痛，進一步擁有緊實的曲線！<br>七年資深健身教練。深感健身對一般大眾有無窮的潛在效益，經營個人部落格「健美女大生」宣導正確觀念。靠著從小由媽媽淬煉出一手流利的文筆，碩士班訓練出的資訊統整與思辨能力，加上推廣健身的滿腔熱情，把艱澀的健身知識化為親切易讀、不失科學專業的文章，讓讀者深深受益。著有：《健身從深蹲開始》。");
-//				lectureBean.setLectureStatus("1");
+		lectureBean.setLectureTitle("正確飲食，讓您瘦的窈窕又健康");
+		lectureBean.setLectureContent("怎麼做才能才能瘦的健康？"
+				+ "<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;炎炎夏日即將到來，在身上衣服漸漸穿少的同時，冬天堆積在身上的肥肉、脂肪也一一現形。肥胖除了外表不美觀外，對身體健康也有很大的影響，高血脂、高血壓、糖尿病、痛風等心血管疾病都跟肥胖有很大的關聯。目前坊間的飲食減肥法五花八門，肥胖者其實很清楚是自己的飲食方式出了問題，但不知道該如何著手改變，才能健康的減重。減重飲食應以減少不必要熱量及攝取足夠營養素為原則，才能瘦的健康。<br>"
+				+ "<br>"
+				+ "健康減重的飲食技巧<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●選擇低熱量的食物：例如選擇瘦肉不吃肥肉。烹調方式以烤、滷、煮最好，少吃煎、炸類。以天然食材為主，減少攝取加工食品。多攝取富含膳食纖維的食物，例如以糙米飯取代白米飯、綠色蔬菜熱量低且纖維多，可增加攝取。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●食物種類應多元且均衡：減重飲食雖然熱量要減低，但營養也要充足，六大類食物都要均衡攝取，不能只吃一種食物，或完全不吃某種食物。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●每日三餐最適當：有人減肥飲食只吃一餐或兩餐，希望藉由餐數減少來減低熱量，這種方法能讓體重很快降下來，但往往瘦下來後很快又復胖，這是因為長期只吃一兩餐是不可能的，飲食習慣才是減肥的關鍵，所以建議一天吃三餐，但三餐進食適量適當，如此才能長久維持。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●進餐時細嚼慢嚥、定時定量：延長進餐時間，細嚼慢嚥品嚐每一口，好好享受用餐時光。固定時間及固定進食的量，盡量減少聚餐或吃到飽的邀約。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●餐間盡量不吃進熱量：餐間額外的熱量常是讓減肥者失敗的主因，養成餐間不吃零食的習慣，如果感到飢餓就喝白開水或無糖的飲品來增加飽足感。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;●減少酒類及含糖飲料：酒類與含糖飲料是減肥的大敵，酒類不管是薄酒或厚酒熱量都高，含糖飲料就算改成微糖，一杯的含糖量仍超過一日建議的糖分攝取量，建議改掉喝含糖飲料的習慣，酒類若是聚餐需要點到為止就好。<br>"
+				+ "<br>"
+				+ "&emsp;&emsp;健康正確的飲食習慣是減重最重要的課題，也是維持體重的不二法門，以上減重飲食的技巧只要能把握住且不間斷的實行，才能健康的瘦，快樂的瘦！");
+		lectureBean.setLectureAddress("106台北市大安區復興南路一段390號2樓");
+		lectureBean.setLectureMap("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57840.08173673962!2d121.50837927910156!3d25.033900700000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!2z6LOH562W5pyDIOaVuOS9jeaVmeiCsueglOeptuaJgCDmlbjkvY3kurrmiY3ln7nogrLkuK3lv4M!5e0!3m2!1szh-TW!2stw!4v1626009126439!5m2!1szh-TW!2stw\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>");
 		lectureBean.setLectureMultiImg(null);
-
 		model.addAttribute("lectureBean", lectureBean);
 
 		return "/admin/adminLecture/adminAddLecture";
