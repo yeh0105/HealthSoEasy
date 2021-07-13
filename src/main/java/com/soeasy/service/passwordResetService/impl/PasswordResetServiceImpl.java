@@ -1,6 +1,9 @@
 package com.soeasy.service.passwordResetService.impl;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +76,22 @@ public class PasswordResetServiceImpl implements PasswordResetService {
 
 	//驗證是否發送重製郵件，一天requestPerDay次，與上一次請求時間間隔interval分鐘
 	@Override
-	public Boolean sendValidateLimitation(String email, Long requestPerDay, Long interval) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean sendValidateLimitation(String email, String memberType, Long requestPerDay, Long interval) {
+		List<PasswordResetValidate> passwordResetValidates = passwordResetRepository.findByEmailAndMemberType(email, memberType);
+//		查無記錄，代表第一次申請
+		if(passwordResetValidates.isEmpty()) {
+			return true;
+		}
+//		有記錄，判斷頻繁申請與達到每日申請上限
+		java.util.Date now = new java.util.Date();
+		// java.util.Date -> java.time.LocalDate
+		LocalDate localDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		System.out.println("Date.valueOf(localDate)" + Date.valueOf(localDate));
+		// java.time.LocalDate -> java.sql.Date
+		Long countTodayValidate = passwordResetRepository.countByEmailAndMemberTypeAndModifiedTimeAfter(email, memberType, Date.valueOf(localDate));
+		System.out.println("countTodayValidate=" + countTodayValidate);
+		
+		return countTodayValidate <= requestPerDay;
 	}
 
 	//驗證連結是否失效，1.超時 2.舊連結被新的覆蓋

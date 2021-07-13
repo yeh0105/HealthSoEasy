@@ -20,6 +20,9 @@ public interface ShopService {
 	// ID查詢廠商會員
 	ShopBean findByShopId(Integer shopId);
 	
+	// email查詢廠商會員
+	List<ShopBean> findByShopEmail(String shopEmail);
+	
 	// 修改基本資料
 	void updateShop(ShopBean shop);
 

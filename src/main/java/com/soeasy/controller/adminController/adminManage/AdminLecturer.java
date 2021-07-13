@@ -51,7 +51,13 @@ public class AdminLecturer {
 		// 預設表單資料
 		lecturerBean.setLecturerName("peeta葛格");
 		lecturerBean.setLecturerTalent("健美先生、營養師");
-		lecturerBean.setLecturerExp("peeta fitness創辦者");
+		lecturerBean.setLecturerExp("●經歷<br>\r\n"
+				+ "　紐西蘭奧克蘭大學營養學系畢業<br>\r\n"
+				+ "<br>\r\n"
+				+ "●peeta Fitness創辦人<br>\r\n"
+				+ "<br>\r\n"
+				+ "●著有<br>\r\n"
+				+ "　《體態改造與生酮攻略！》");
 		lecturerBean.setLecturerMultiImg(null);
 
 		model.addAttribute("lecturerBean", lecturerBean);

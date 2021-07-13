@@ -34,7 +34,6 @@
 </head>
 <body>
 	<div>
-		
 		<span>請輸入電子郵件以搜尋帳號</span>
 		<input id="emailInput" type="email" placeholder="email">
 		<button id="emailSubmit">送出</button>

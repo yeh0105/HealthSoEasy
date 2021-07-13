@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soeasy.model.CustomerBean;
 import com.soeasy.model.PasswordResetValidate;
+import com.soeasy.model.ShopBean;
 import com.soeasy.service.customerService.CustomerService;
 import com.soeasy.service.passwordResetService.PasswordResetService;
 import com.soeasy.service.shopService.ShopService;
@@ -43,42 +44,42 @@ public class PasswordResetController {
 	
 //	送出會員變更密碼信箱驗證
 	@PostMapping(value = "/sendCustomerValidationEmail.do", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody Map<String, String> sendCustomerValidationEmail(@RequestParam(value = "email") String email, HttpServletRequest request){
+	public @ResponseBody Map<String, String> sendCustomerValidationEmail(@RequestParam(value = "email") String email, String memberType, HttpServletRequest request){
 		System.out.println(email);
 		
 		Map<String, String> responseMessage = new HashMap<String, String>();
 		List<CustomerBean> customerBeans = customerService.findByCustomerEmail(email);
 		System.out.println(customerBeans);
-		if (customerBeans.isEmpty()) {
+		if (customerBeans.isEmpty()) {//檢查是否有該信箱
 			responseMessage.put("responseMessage", "該信箱用戶不存在");
 		} else {
 			//尚未檢驗允許重製---未完成
-//			if(passwordResetService.sendValidateLimitation(email, 5L, 1L)) {
-//				//允許重製密碼
-//				
-//			}else {
-//				//一天申請超過五次，或一分鐘內連續送出
-//			}
+			if(passwordResetService.sendValidateLimitation(email, "customerPasswordReset", 5L, 1L)) {
+				//允許重製密碼
+				
+			}else {
+				//一天申請超過五次，或一分鐘內連續送出
+			}
 			
 			//產生重製密碼申請記錄
-			PasswordResetValidate passwordResetValidate = new PasswordResetValidate();
-			passwordResetService.insertCustomerResetRecord(passwordResetValidate, customerBeans.get(0), UUID.randomUUID().toString());
-
-			//設置郵件內容
-			String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
-			passwordResetEmail.setFrom(fromEmail);
-			passwordResetEmail.setTo(email);
-			passwordResetEmail.setSubject("[Soeasy健康平台]忘記密碼");
-			passwordResetEmail.setText("您正在申請重新設置密碼，請點擊此連結重製密碼:\n" 
-										+ appUrl 
-										+ "/soeasy/passwordResetValidate/resetPassword?token=" 
-										+ passwordResetValidate.getResetToken());
-			passwordResetService.sendPasswordResetEmail(passwordResetEmail);
-			
-			System.out.println(email);
-			System.out.println(appUrl);
-			responseMessage.put("responseMessage", "已送出密碼重置郵件，請至您的註冊信箱確認");
+//			PasswordResetValidate passwordResetValidate = new PasswordResetValidate();
+//			passwordResetService.insertCustomerResetRecord(passwordResetValidate, customerBeans.get(0), UUID.randomUUID().toString());
+//
+//			//設置郵件內容
+//			String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+//			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+//			passwordResetEmail.setFrom(fromEmail);
+//			passwordResetEmail.setTo(email);
+//			passwordResetEmail.setSubject("[Soeasy健康平台]忘記密碼");
+//			passwordResetEmail.setText("您正在申請重新設置密碼，請點擊此連結重製密碼:\n" 
+//										+ appUrl 
+//										+ "/soeasy/passwordResetValidate/resetPassword?token=" 
+//										+ passwordResetValidate.getResetToken());
+//			passwordResetService.sendPasswordResetEmail(passwordResetEmail);
+//			
+//			System.out.println(email);
+//			System.out.println(appUrl);
+//			responseMessage.put("responseMessage", "已送出密碼重置郵件，請至您的註冊信箱確認");
 		}
 		
 		
@@ -101,17 +102,31 @@ public class PasswordResetController {
 			responseMessage.put("responseMessage", "該重置請求不存在");
 		}else {
 			PasswordResetValidate passwordResetValidate = passwordResetValidates.get(0);
-			if(passwordResetValidate.getMemberType().equals("customerPasswordReset")) {//判斷email來自顧客或廠商
+			
+			//驗證連結失效------start
+			
+			if(passwordResetValidate.getMemberType().equals("customerPasswordReset")) {//email來自顧客
 				//以email取得會員
 				CustomerBean customer = customerService.findByCustomerEmail(passwordResetValidate.getEmail()).get(0);
 				if(password.equals(checkPassword)) {
 					customer.setCustomerPassword(password);
 					customerService.updateCustomer(customer);
 					responseMessage.put("responseMessage", "密碼更新成功");
+				} else {					
+					responseMessage.put("responseMessage", "確認密碼與密碼不一致");
 				}
-			}else if (passwordResetValidate.getMemberType().equals("shopPasswordReset")){
-				
+			}else if (passwordResetValidate.getMemberType().equals("shopPasswordReset")){//email來自廠商
+				//以email取得廠商
+				ShopBean shop = shopService.findByShopEmail(passwordResetValidate.getEmail()).get(0);
+				if(password.equals(checkPassword)) {
+					shop.setShopPassword(password);
+					shopService.updateShop(shop);
+					responseMessage.put("responseMessage", "密碼更新成功");
+				} else {					
+					responseMessage.put("responseMessage", "確認密碼與密碼不一致");
+				}
 			}
+			//驗證連結失效------end
 		}
 		
 		return responseMessage;

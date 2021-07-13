@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -269,7 +270,7 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
         </button>
         <div class="product-cell price"><span class="cell-label">ID :</span>${lecture.lectureId}</div>
-        <div class="product-cell category"><span class="cell-label">Title :</span>${lecture.lectureTitle}</div>
+        <div class="product-cell sales"><span class="cell-label">Content :</span>${fn:substring(lecture.lectureTitle,0,10)}...</div>
         <div class="product-cell status-cell"><span class="cell-label">Category :</span><span class="status active">${lecture.lectureCategory}</span></div>
         <div class="product-cell sales"><span class="cell-label">Content :</span>${fn:substring(lecture.lectureContent,0,10)}...</div>
         <div class="product-cell image"><img src="<c:url value='/admin/adminManage/getLectureImage/${lecture.lectureId}' />" alt="lecture"></div>

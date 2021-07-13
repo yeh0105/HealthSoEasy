@@ -18,7 +18,7 @@ public interface PasswordResetService {
     //以Token查詢重製申請記錄
     List<PasswordResetValidate> findUserByResetToken(String resetToken);
     //驗證是否發送重製郵件，一天requestPerDay次，與上一次請求時間間隔interval分鐘
-    Boolean sendValidateLimitation(String email, Long requestPerDay, Long interval);
+    Boolean sendValidateLimitation(String email, String memberType, Long requestPerDay, Long interval);
     //驗證連結是否失效，1.超時 2.舊連結被新的覆蓋
     Boolean validateLimitation(String email, Long requestPerDay, Long interval, String token);
 }

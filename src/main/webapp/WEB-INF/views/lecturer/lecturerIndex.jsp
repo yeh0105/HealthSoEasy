@@ -31,6 +31,7 @@
 	crossorigin="anonymous"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'
 	crossorigin='anonymous'></script>
+	
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/lecture/lecturer.css">
 </head>
 <body>
@@ -57,7 +58,7 @@
 		<div id='headerBlank'>
 			<a href='<c:url value='/'></c:url>'><button class="custom-btn btn-5">首頁</button></a> 
 			<a href='<c:url value='/lectureIndex' />'><button class="custom-btn btn-5">講座介紹</button></a> 
-			<input type="text" class="search-bar" placeholder="搜尋講座">
+			<input type="text" class="search-bar" placeholder="搜尋講師">
 		</div>
 		<hr>
 	</div>

@@ -98,7 +98,7 @@
 									講座分類：<font>${archivedLecture.lectureCategory == "Eat"? "飲食": "運動"}</font>
 								</p>
 								<p class="lectureContent">
-									講座內容：<font>${fn:substring(archivedLecture.lectureContent,0,150)}...</font>
+									講座內容：<font>${fn:substring(archivedLecture.lectureContent,0,100)}...</font>
 								</p>
 								<%-- 							<p class=lectureStatus>講座狀態：<font>${lecture.lectureStatus == 2}</font></p> --%>
 
