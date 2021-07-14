@@ -125,7 +125,7 @@
                 <form:errors path="shopSignInPassword" cssClass="error" />
                 <form:errors path="invalidCredentials" cssClass="error" />
                 
-                <a href="#" class="link">Forgot your password?</a>
+                <a href="<c:url value='/shopController/shopForgotPassword'></c:url>" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>
             </form:form>
         </div>
