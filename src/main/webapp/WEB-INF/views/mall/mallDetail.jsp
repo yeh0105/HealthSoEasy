@@ -8,7 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>MALL</title>
-<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
+<link rel='short icon'
+	href="${pageContext.request.contextPath}/favicon.ico" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"
@@ -69,10 +70,10 @@
 				<form action="<c:url value='/mall/lists/1'/>" class="d-lg-block"
 					style="margin-left: 150px; margin-top: 50px">
 					<input type="hidden" name="sortField" value="${sortField}" /> <input
-						type="hidden" name="sortDir" value="${sortDir}" /> <img src="${pageContext.request.contextPath}/images/mall/icon/search2.png"><input
+						type="hidden" name="sortDir" value="${sortDir}" /> <img
+						src="${pageContext.request.contextPath}/images/mall/icon/search2.png"><input
 						type="text" name="keyword" value="${keyword}"
-						placeholder="Enter Searching" /> 
-						&nbsp;<input type="submit"
+						placeholder="Enter Searching" /> &nbsp;<input type="submit"
 						value="Search" class="theme-btn no-shadow bg-blue" /> &nbsp; <input
 						type="button" value="clear" onclick="clearFilter()"
 						class="theme-btn no-shadow bg-blue">
@@ -138,9 +139,11 @@
 								<!-- 								=======best=========== -->
 								<div class="shop-widget b1">
 									<div class="shop-widget-title">
-										<h5><img
+										<h5>
+											<img
 												src="${pageContext.request.contextPath}/images/mall/icon/list.png"
-												style="weight: 30px; height: 30px">Newest Product</h5>
+												style="weight: 30px; height: 30px">Newest Product
+										</h5>
 									</div>
 									<c:forEach items="${productTop3}" var="productTop">
 										<div
@@ -159,13 +162,28 @@
 													</p>
 												</div>
 												<div class="product-action">
-													<a
-														href="<c:url value='/mall/cart/buy/${productTop.productId}'/>"
-														class="add-to-btn small-btn"> <img
-														src="${pageContext.request.contextPath}/images/mall/icon/cart1.png">
-														<span>Add to Cart</span>
-														<h5 class="product-price">$${productTop.productPrice}</h5>
-													</a>
+													<c:choose>
+														<c:when test="${productTop.productAmount>=1}">
+
+															<a
+																href="<c:url value='/mall/cart/buy/${productTop.productId}'/>"
+																class="add-to-btn small-btn"> <img
+																src="${pageContext.request.contextPath}/images/mall/icon/cart1.png">
+
+																<span>Add to Cart</span>
+																<h5 class="product-price">$${productTop.productPrice}</h5>
+															</a>
+														</c:when>
+														<c:when test="${productTop.productAmount<1}">
+															<i class="add-to-btn small-btn"> <img
+																src="${pageContext.request.contextPath}/images/mall/icon/cart1.png">
+
+																<span>Sold Out</span>
+																<h5 class="product-price">$${productTop.productPrice}</h5>
+															</i>
+
+														</c:when>
+													</c:choose>
 												</div>
 											</div>
 										</div>
@@ -228,19 +246,33 @@
 														</a>
 													</p>
 												</div>
+												<!-- =============================加入購物車_是否完售 -==================-->
 												<div class="product-action">
-													<a
-														href="<c:url value='/mall/cart/buy/${product.productId}'/>"
-														class="add-to-btn small-btn"> <img
-														src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
-														<span>Add to Cart</span>
-														<h5 class="product-price">${product.productPrice}</h5>
-													</a>
-													<!-- 													====收藏商品=== -->
-													<!-- 													<div class="add-wishlist"> -->
-													<!-- 														<i class="fa fa-heart-o"></i> -->
-													<!-- 													</div> -->
+													<c:choose>
+														<c:when test="${product.productAmount>=1}">
+
+															<a
+																href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+																class="add-to-btn small-btn"> <img
+																src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
+
+																<span>Add to Cart</span>
+																<h5 class="product-price">$${product.productPrice}</h5>
+															</a>
+														</c:when>
+														<c:when test="${product.productAmount<1}">
+															<i class="add-to-btn small-btn"> <img
+																src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
+
+																<span>Sold Out</span>
+																<h5 class="product-price">$${product.productPrice}</h5>
+															</i>
+
+														</c:when>
+													</c:choose>
 												</div>
+												<!-- =============================(E)加入購物車_是否完售 -==================-->
+
 											</div>
 
 										</div>
@@ -333,51 +365,46 @@
 																			<p>● 商品熱量:${product.productCalories} &nbsp;</p>
 																			<p>${product.productDescription}</p>
 
-																			<p style="text-align: right">--&nbsp; product
-																				provider: ${product.shopBean.shopName} <img
-																				src="${pageContext.request.contextPath}/images/mall/icon/market.png"></p>
+																			<p style="text-align: right">
+																				--&nbsp; product provider:
+																				${product.shopBean.shopName} <img
+																					src="${pageContext.request.contextPath}/images/mall/icon/market.png">
+																			</p>
 																			<br />
 																		</div>
-																		<h6>
-																			Availability: <span>InStock &nbsp;( Amount:
-																				${product.productAmount})</span> 
-																		</h6>
+																		<!-- 	=============//判斷是否售完 ==================-->
+																		<c:choose>
+																			<c:when test="${product.productAmount>=1}">
+																				<h6>
+																					Availability: <span>InStock &nbsp;( Amount:
+																						${product.productAmount})</span>
+																				</h6>
+																			</c:when>
+																			<c:when test="${product.productAmount<1}">
+																				<h5>我們正全力補貨中! &nbsp;也歡迎選購其他產品!</h5>
+
+																			</c:when>
+																		</c:choose>
+
+																		<!-- =========	(E)//判斷是否售完 =============-->
+
 																		<h4 class="price">$${product.productPrice}</h4>
+																		<!-- 	===========//判斷是否可以加入購物車========== -->
 
 																		<div class="product-spinner mt-20">
-
-																			<a
-																				href="<c:url value='/mall/cart/buy/${product.productId}'/>"
-																				class="theme-btn br-30 ml-20">Add to Cart</a>
-
-
-																			<!-- 																			<div class="add-wishlist"> -->
-																			<%-- 																				<c:choose> --%>
-																			<%-- 																					<c:when --%>
-																			<%-- 																						test="${productBean.favoriteStatus == true}"> --%>
-																			<!-- 																						<div class="floatR"> -->
-																			<!-- 																							<button id="showFavorite" -->
-																			<%-- 																								data-id="${product.productId}"> --%>
-																			<!-- 																								<img id="favoriteHeart" -->
-																			<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like1.png"> --%>
-																			<!-- 																							</button> -->
-																			<!-- 																						</div> -->
-																			<%-- 																					</c:when> --%>
-																			<%-- 																					<c:otherwise> --%>
-																			<!-- 																						<div class="floatR"> -->
-																			<!-- 																							<button id="showFavorite" -->
-																			<%-- 																								data-id="${product.productId}"> --%>
-																			<!-- 																								<img id="favoriteHeart" -->
-																			<%-- 																									src="${pageContext.request.contextPath}/images/mall/Like2.png"> --%>
-																			<!-- 																							</button> -->
-																			<!-- 																						</div> -->
-
-																			<%-- 																					</c:otherwise> --%>
-																			<%-- 																				</c:choose> --%>
-																			<!-- 																			</div> -->
-
-
+																			<c:choose>
+																				<c:when test="${product.productAmount>=1}">
+																					<a
+																						href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+																						class="theme-btn br-30 ml-20">Add to Cart</a>
+																				</c:when>
+																				<c:when test="${product.productAmount<1}">
+																					<i class="theme-btn no-shadow bg-blue">Sold Out</i>
+																				</c:when>
+																			</c:choose>
 																		</div>
+																		<!-- 	==========(E)//判斷是否可以加入購物車 ===========-->
+
 																	</div>
 																</div>
 															</div>
@@ -418,7 +445,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<a class="btn btn-info btn-sm"
-							href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Previous</a>
+							href="<c:url value='/mall/lists/${currentPage - 1}?sortField=${sortField}&sortDir=${SortDir}&category=${category}'/>">Previous</a>
 					</c:when>
 					<c:otherwise>
 						<a class="btn btn-info btn-sm">Previous</a>
@@ -442,7 +469,7 @@
 				<c:choose>
 					<c:when test="${currentPage < totalPages}">
 						<a class="btn btn-info btn-sm"
-							href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${SortDir}'/>">Next</a>
+							href="<c:url value='/mall/lists/${currentPage + 1}?sortField=${sortField}&sortDir=${SortDir}&category=${category}'/>">Next</a>
 					</c:when>
 					<c:otherwise>
 						<a class="btn btn-info btn-sm">Next</a>
@@ -490,7 +517,7 @@
 					<div class="col-lg-4 col-md-5 mb-20">
 						<div class="footer-widget form-widget ml-50 mr-20">
 							<h5 class="footer-title mb-20">Subscribe Our News Letter</h5>
-							
+
 							<form class="subscribe">
 								<input type="email" placeholder="Your Email For Notify" required>
 								<button type="submit">Send</button>
@@ -584,13 +611,13 @@
 	<script
 		src="${pageContext.request.contextPath}/js/mall/bootstrap-v4.1.3.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}js/mall/jquery.nice-select.min.js"></script>
+		src="${pageContext.request.contextPath}/js/mall/jquery.nice-select.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
-	<script src="${pageContext.request.contextPath}js/mall/slick.min.js"></script>
-	<script src="${pageContext.request.contextPath}js/mall/appear.js"></script>
+		src="${pageContext.request.contextPath}/js/mall/jquery.simpleLoadMore.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/mall/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/mall/appear.js"></script>
 	<!-- Custom script -->
-	<script src="${pageContext.request.contextPath}js/mall/js/script.js"></script>
+	<script src="${pageContext.request.contextPath}/js/mall/script.js"></script>
 </body>
 </html>
 

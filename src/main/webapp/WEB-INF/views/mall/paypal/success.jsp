@@ -34,13 +34,13 @@
             <!--==================================================================== 
             Start Banner Section
         =====================================================================-->
-        <section class="banner-section" style="background-image:url(${pageContext.request.contextPath}/images/mall/indexbanner1.jpg); margin-top:150px">
+        <section class="banner-section" style="background-image:url(${pageContext.request.contextPath}/images/mall/indexbanner3.jpg); margin-top:150px">
             <div class="container">
                 <div class="banner-inner text-center">
                     <h3 class="page-title">Thank you for your order</h3>
                     <nav aria-label="breadcrumb">
                     <br>
-                       <a href="<c:url value='/mall/order/history'/>" class="theme-btn">Order History</a>
+                       <a href="<c:url value='/mall/order/history'/>" class="theme-btn no-shadow bg-blue">Order History</a>
                        
                     </nav>
                 </div>
@@ -143,12 +143,12 @@
 <!-- jequery plugins -->
 <script src="${pageContext.request.contextPath}/js/mall/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/mall/bootstrap-v4.1.3.min.js"></script>
-<script src="${pageContext.request.contextPath}js/mall/jquery.nice-select.min.js"></script>
-<script src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
-<script src="${pageContext.request.contextPath}js/mall/slick.min.js"></script>
-<script src="${pageContext.request.contextPath}js/mall/appear.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/jquery.nice-select.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/jquery.simpleLoadMore.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/appear.js"></script>
 <!-- Custom script -->
-<script src="${pageContext.request.contextPath}js/mall/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/js/mall/js/script.js"></script>
  
 
 

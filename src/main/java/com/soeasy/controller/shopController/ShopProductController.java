@@ -141,7 +141,7 @@ public class ShopProductController {
 		product.setProductDescription("農夫彼得X健康餐盒\r\n" + "外送-外帶-內用(皆須預訂)\r\n" + "  吃得少不如吃得好，起初清淡，\r\n" + "回歸清爽無負擔。\r\n"
 				+ "細嚼慢品，菜根清香，肉味鮮甜。\r\n" + "食材鮮甜×簡單烹調×新鮮現做=營養滿分堅持新鮮現做，選購當季的食材，無隔夜菜，採預約制拒絕食材耗費。");
 		product.setCategory(2);
-		product.setProductAmount(120);
+		product.setProductAmount(100);
 		product.setProductCalories("450/份");
 		product.setProductPrice(120);
 		product.setProductCost(90);
@@ -283,6 +283,13 @@ public class ShopProductController {
 		
 		// 取得addProduct.jsp所送來的圖片資訊
 				MultipartFile picture = product.getProductMultiImg();
+				
+				ProductBeanValidator validator = new ProductBeanValidator();
+				// 呼叫Validate進行資料檢查
+				validator.validate(product, result);
+				if (result.hasErrors()) {
+					return "shop/updateProduct";
+				}
 
 				// 建立Blob物件，交由 Hibernate 寫入資料庫
 				if (picture != null && !picture.isEmpty()) {

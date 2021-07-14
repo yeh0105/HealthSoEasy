@@ -11,7 +11,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>MALL</title>
-<link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
+<link rel='short icon'
+	href="${pageContext.request.contextPath}/favicon.ico" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mall/style.css">
 <link rel="stylesheet"
@@ -73,9 +74,9 @@
 		<!--==================================================================== 
             End Hero Section
         =====================================================================-->
-        
-        
-        		
+
+
+
 
 		<!--==================================================================== 
            Start Delivery Process Section
@@ -131,9 +132,9 @@
 		<!--==================================================================== 
            End Delivery Process Section
        =====================================================================-->
-	
-        
-        <!--==================================================================== 
+
+
+		<!--==================================================================== 
             Start Made For You Section
         =====================================================================-->
 		<section class="made-for-product text-center pt-45 pb-20">
@@ -169,14 +170,34 @@
 											</a>
 										</p>
 									</div>
+									<!-- 	===========//判斷是否可以加入購物車========== -->
+
 									<div class="product-action">
-										<a href="<c:url value='/mall/cart/buy/${product.productId}'/>"
-											class="add-to-btn small-btn"> <img
-											src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
-											<span>Add to Cart</span>
-											<h5 class="product-price">${product.productPrice}</h5>
-										</a>
+										<c:choose>
+											<c:when test="${product.productAmount>=1}">
+
+												<a
+													href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+													class="add-to-btn small-btn"> <img
+													src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
+
+													<span>Add to Cart</span>
+													<h5 class="product-price">$${product.productPrice}</h5>
+												</a>
+											</c:when>
+											<c:when test="${product.productAmount<1}">
+												<i class="add-to-btn small-btn"> <img
+													src="${pageContext.request.contextPath}/images/mall/icon/cart3.png">
+
+													<span>Sold Out</span>
+													<h5 class="product-price">$${product.productPrice}</h5>
+												</i>
+
+											</c:when>
+										</c:choose>
 									</div>
+									<!-- 	===========(E) 判斷是否可以加入購物車========== -->
+
 								</div>
 
 							</div>
@@ -278,19 +299,40 @@
 																</p>
 																<br />
 															</div>
-															<h6>
-																Availability: <span>InStock &nbsp;( Amount:
-																	${product.productAmount})</span>
-															</h6>
+															<!-- 	//判斷是否售完 -->
+															<c:choose>
+																<c:when test="${product.productAmount>=1}">
+																	<h6>
+																		Availability: <span>InStock &nbsp;( Amount:
+																			${product.productAmount})</span>
+																	</h6>
+																</c:when>
+																<c:when test="${product.productAmount<1}">
+																	<h5>我們正全力補貨中! &nbsp;也歡迎選購其他產品</h5>
+
+																</c:when>
+															</c:choose>
+															<!-- =========	(E)//判斷是否售完 =============-->
+
+
 															<h4 class="price">$${product.productPrice}</h4>
 
+															<!-- 	===========//判斷是否可以加入購物車========== -->
+
 															<div class="product-spinner mt-20">
-
-																<a
-																	href="<c:url value='/mall/cart/buy/${product.productId}'/>"
-																	class="theme-btn br-30 ml-20">Add to Cart</a>
-
+																<c:choose>
+																	<c:when test="${product.productAmount>=1}">
+																		<a
+																			href="<c:url value='/mall/cart/buy/${product.productId}'/>"
+																			class="theme-btn br-30 ml-20">Add to Cart</a>
+																	</c:when>
+																	<c:when test="${product.productAmount<1}">
+																		<i class="theme-btn no-shadow bg-blue">Sold Out</i>
+																	</c:when>
+																</c:choose>
 															</div>
+															<!-- 	==========(E)//判斷是否可以加入購物車 ===========-->
+
 														</div>
 													</div>
 												</div>
@@ -304,8 +346,8 @@
 						</div>
 
 						<!--==================================== end product-quick-view //product-modal  ================-->
-			</c:forEach>
-<!-- 					進入商品頁 -->
+					</c:forEach>
+					<!-- 					進入商品頁 -->
 					<div class="blog-btn text-center w-100 mt-25 mb-30">
 						<a href="<c:url value='/mall/lists' />" class="theme-btn br-30">Browse
 							More</a>
@@ -315,16 +357,16 @@
 					<!--==================================== end product-quick-view //product-modal  ================-->
 
 
-			</div>
+				</div>
 		</section>
 
 		<!--==================================================================== 
             End Made For You Section
         =====================================================================-->
 
-	  
-        
-        	<!--==================================================================== 
+
+
+		<!--==================================================================== 
             Start categories-product Section
         =====================================================================-->
 		<section class="categories-section text-center pt-60 pb-30">
@@ -333,81 +375,87 @@
 					<h2>Shop By Categories</h2>
 				</div>
 				<div class="row">
-				
-<!-- 				分類 -->
+
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=1'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index5.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=1'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index5.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>Foods and Vegetables</span>
+								<br> <span>Foods and Vegetables</span>
 							</div>
 						</a>
 					</div>
-<!-- 				分類 -->
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=$desc&category=2'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index6.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=$desc&category=2'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index6.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>Chicken</span>
+								<br> <span>Chicken</span>
 							</div>
 						</a>
 					</div>
-<!-- 				分類 -->
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=3'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index7.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=3'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index7.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>Beef</span>
+								<br> <span>Beef</span>
 							</div>
 						</a>
 					</div>
-<!-- 				分類 -->
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=4'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index8.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=4'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index8.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>Pork</span>
+								<br> <span>Pork</span>
 							</div>
 						</a>
 					</div>
-<!-- 				分類 -->
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=5'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index9.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=5'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index9.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>SeaFoods</span>
+								<br> <span>SeaFoods</span>
 							</div>
 						</a>
 					</div>
-<!-- 				分類 -->
+					<!-- 				分類 -->
 
 					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-30">
-						<a href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=7'/>" class="categori-item bg-white br-5">
-								<img src="${pageContext.request.contextPath}/images/mall/icon/index10.png" alt="img">
-							<br>
+						<a
+							href="<c:url value='/mall/lists/1?sortField=category&sortDir=desc&category=7'/>"
+							class="categori-item bg-white br-5"> <img
+							src="${pageContext.request.contextPath}/images/mall/icon/index10.png"
+							alt="img"> <br>
 							<div class="categori-name">
-							<br>
-								<span>Drinks</span>
+								<br> <span>Drinks</span>
 							</div>
 						</a>
 					</div>
-					
-					
+
+
 				</div>
 
 			</div>
@@ -416,7 +464,7 @@
             End categories-product Section
         =====================================================================-->
 
-      
+
 
 
 
