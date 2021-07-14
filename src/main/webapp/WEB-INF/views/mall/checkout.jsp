@@ -320,14 +320,13 @@
 	<script
 		src="${pageContext.request.contextPath}/js/mall/bootstrap-v4.1.3.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}js/mall/jquery.nice-select.min.js"></script>
+		src="${pageContext.request.contextPath}/js/mall/jquery.nice-select.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}js/mall/jquery.simpleLoadMore.min.js"></script>
-	<script src="${pageContext.request.contextPath}js/mall/slick.min.js"></script>
-	<script src="${pageContext.request.contextPath}js/mall/appear.js"></script>
+		src="${pageContext.request.contextPath}/js/mall/jquery.simpleLoadMore.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/mall/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/mall/appear.js"></script>
 	<!-- Custom script -->
-	<script src="${pageContext.request.contextPath}js/mall/js/script.js"></script>
-
+	<script src="${pageContext.request.contextPath}/js/mall/script.js"></script>
 
 
 </body>

@@ -96,7 +96,7 @@ public class CartController {
 	}
 	
 	
-//	===========================新增購物車內的項目==========================================
+//	===========================新增購物車內的項目 to Malldetail 頁面==========================================
 	
 	@GetMapping("/buy/{productId}")
 	public String buy(@PathVariable("productId") Integer productId, 
@@ -107,6 +107,13 @@ public class CartController {
 		if (customerBean == null) {
 			return "redirect:/customerController/customerSignIn";
 		}
+		
+		//如果商品庫存<0 
+		
+				ProductBean product=productService.findProductById(productId);
+				if(product.getProductAmount()<1) {
+					return"redirect:/mall/lists";
+				}
 		
 		
 	
@@ -128,6 +135,49 @@ public class CartController {
 				}
 		}
 		return"redirect:/mall/lists";
+		
+	}
+	
+	
+//	===========================(End)新增購物車內的項目==========================================
+//	===========================新增購物車內的項目 to Goodsdetail 頁面==========================================
+	
+	@GetMapping("/buyFromGoods/{productId}")
+	public String buyFromGoods(@PathVariable("productId") Integer productId, 
+			HttpSession session,Model model) {
+		
+		// 登入攔截
+		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+		if (customerBean == null) {
+			return "redirect:/customerController/customerSignIn";
+		}
+		
+		//如果商品庫存<0 就無法加入購物車
+		
+		ProductBean product=productService.findProductById(productId);
+		if(product.getProductAmount()<1) {
+			return"redirect:/mall/lists/product/{productId}";
+		}
+
+		
+		//  如果購物車是空的
+		if (session.getAttribute("cart")==null) {
+			List<CartItem> cart = new ArrayList<CartItem>();
+			cart.add(new CartItem(productService.findProductById(productId),1));
+			session.setAttribute("cart", cart);
+		}else {	
+			List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
+			int index = exists(productId,cart);
+			if(index==-1) {
+				//購物車可以可以再+1
+				cart.add(new CartItem(productService.findProductById(productId),1));
+			}else {
+				int newQuantity=cart.get(index).getCartQuantity()+1;
+				cart.get(index).setCartQuantity(newQuantity);
+				
+			}
+		}
+		return"redirect:/mall/lists/product/{productId}";
 		
 	}
 	
@@ -181,26 +231,10 @@ public class CartController {
 	
 	
 	
-	//跳轉到結帳詳情
-	@GetMapping("checkoutinformation")
-	public String checkoutPage(Model model,HttpSession session) {
-
-		//顯示總價
-		double total=0;
-		
-		if(session.getAttribute("cart")!=null){
-			List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
-			for(CartItem item:cart) {
-				total +=item.getProduct().getProductPrice()*item.getCartQuantity();
-			}
-		}
-		model.addAttribute("total",total);
-		
-		return "/mall/checkout";
-	}
 	
 	
-//	=============================  結帳 (保存訂單並跳轉到paypal)    ==========================================
+	
+//	=============================  結帳 (保存訂單並前往到結帳頁)    ==========================================
 
 	@GetMapping("checkout")
 	public String checkout(Model model,HttpSession session){
@@ -255,7 +289,7 @@ public class CartController {
 			
 		//保存訂單細節=======
 				List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
-				
+						
 				for(CartItem item:cart) {
 					OrderDetailBean orderDetailBean = new OrderDetailBean();
 					orderDetailBean.setOrderBean(orderService.findByOrderId(orderBean.getOrderId()));
@@ -265,6 +299,28 @@ public class CartController {
 					orderDetailBean.setProductName(item.getProduct().getProductName());
 					
 					orderDetailService.save(orderDetailBean);
+					
+				
+					
+					ProductBean originalProduct=productService.findProductById(item.getProduct().getProductId());
+					Integer itemAmount=originalProduct.getProductAmount();
+					System.out.println("產品:"+item.getProduct().getProductName()+"產品的數量:"+itemAmount);
+					System.out.println("購物車的數量:"+item.getCartQuantity());
+					
+					Integer stock=itemAmount-item.getCartQuantity();
+					System.out.println("剩下的數量:"+stock);
+					
+					
+					//如果商品庫存<0 就會無法結帳
+					if(stock<0) {
+						return"mall/unStock";
+					}
+					
+					originalProduct.setProductAmount(stock);
+					productService.save(originalProduct);
+					System.out.println("保存好了");
+					
+					
 				}
 					
 				//Remove cart
@@ -272,7 +328,7 @@ public class CartController {
 				//return "/mall/checkoutThanks";
 					
 					//跳轉到paypal
-					return"redirect:/mall/cart/checkoutinformation";
+					return"redirect:/mall/cart/checkoutInformation";
 					//return"/mall/paypal/success";
 			}
 			
@@ -285,9 +341,31 @@ public class CartController {
 		
 	}
 	
-	
-	
 //	============================= (END 結帳    ==========================================
+
+//	=======================跳轉到結帳詳情=========================================
+	
+		@GetMapping("checkoutInformation")
+		public String checkoutPage(Model model,HttpSession session) {
+
+			//顯示總價
+			double total=0;
+			
+			if(session.getAttribute("cart")!=null){
+				List<CartItem>cart=(List<CartItem>)session.getAttribute("cart");
+				for(CartItem item:cart) {
+					total +=item.getProduct().getProductPrice()*item.getCartQuantity();
+				}
+			}
+			model.addAttribute("total",total);
+			
+			return "/mall/checkout";
+		}
+	
+	
+//		======================(E)跳轉到結帳詳情=========================================
+
+	
 
 	// 讀圖轉成位元組陣列
 		@RequestMapping(value = "/getImage/{productId}", method = RequestMethod.GET)
