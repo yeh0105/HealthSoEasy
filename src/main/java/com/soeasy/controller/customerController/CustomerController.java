@@ -76,12 +76,12 @@ public class CustomerController {
 		CustomerSignInBean customerSignInBean = new CustomerSignInBean();
 		String signMode = "sign_up";
 		
-		customerBean.setCustomerName("許宸瑜");
-		customerBean.setCustomerEmail("Flanlove@outlook.com");
+		customerBean.setCustomerName("方唐鏡");
+		customerBean.setCustomerEmail("fangTC2021@gmail.com");
 		customerBean.setCustomerPassword("ab1234");
 		customerBean.setCustomerCheckPassword("ab1234");
 		
-		customerSignInBean.setCustomerSignInEmail("Flanlove@outlook.com");
+		customerSignInBean.setCustomerSignInEmail("fangTC2021@gmail.com");
 		customerSignInBean.setCustomerSignInPassword("ab1234");
 		
 		model.addAttribute("customerBean", customerBean);
