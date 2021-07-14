@@ -87,6 +87,7 @@ public class FavoriteController {
 			favoriteMessage.put("favoriteExist", false);
 			authorCustomer.setCustomerScore(customerScore-1);
 		}
+		model.addAttribute("customerSignInSuccess", originalCustomer);
 		Integer count = favoriteService.countFavoriteItemIdAndFavoriteCategory(favoriteBean.getFavoriteItemId(),
 				favoriteBean.getFavoriteCategory());
 		originalPost.setPostLike(count);
@@ -122,6 +123,7 @@ public class FavoriteController {
 				favoriteMessage.put("favoriteExist", false);
 				authorCustomer.setCustomerScore(customerScore-1);
 			}
+			model.addAttribute("customerSignInSuccess", originalCustomer);
 			Integer count = favoriteService.countFavoriteItemIdAndFavoriteCategory(favoriteBean.getFavoriteItemId(),
 					favoriteBean.getFavoriteCategory());
 			originalReply.setReplyLike(count);
