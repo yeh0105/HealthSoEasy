@@ -19,7 +19,7 @@
 <link href="${pageContext.request.contextPath}/css/Record/record_index.css"
 	rel="stylesheet">
 
-<title>成果記錄</title>
+<title>成果記錄日誌</title>
 <link rel='short icon' href="${pageContext.request.contextPath}/favicon.ico"  />
 </head>
 <body>
@@ -49,17 +49,20 @@
 				</ul>
 			</div>
 			<hr>
-			<h4>BMI成果記錄圖表</h4>
+			<h4 style="color:#3DCA79;font-weight: bold;">一、BMI成果記錄圖表</h4>
 			<div id="linechart">
 				<canvas id="myChart2"
 					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
-			<h4>體重成果記錄圖表</h4>
+			<br>
+			<h4 style="color:#E800E8;font-weight: bold;">二、體重成果記錄圖表</h4>
 			<div id="linechart">
 				<canvas id="myChart3"
 					style="display: block; box-sizing: border-box; height: 300px; width: 1200px;"></canvas>
 			</div>
-			<h4>成果記錄列表</h4>  
+			<br>
+			<h4 style="color:#00AEAE;font-weight: bold;">三、成果記錄列表</h4>  
+			<div class="main">
 			<table border='1' cellpadding="3" cellspacing="1">
 				<tr>
 					<th width='100'>日誌ID</th>
@@ -87,6 +90,7 @@
 
 
 			</table>
+			</div>
 			<br>
 
 			<div>

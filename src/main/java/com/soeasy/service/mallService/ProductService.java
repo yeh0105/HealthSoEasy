@@ -164,4 +164,9 @@ public class ProductService {
 			return productRepository.findAllById(productItemIds);
 		}
 		
+		//相同類別的產品(Nutritionist用)
+		public List<ProductBean> findNutritionistByRelatedCategory(Integer category){
+			List<ProductBean> list = productRepository.findBycategory(category);	
+			return list;
+		} 
 }

@@ -75,20 +75,20 @@ public class NutritionistIdController {
 		NutritionistBean nutritionistBean = nutritionistService.findByNutritionistId(nutritionistId);
 		Random r = new Random();  //隨機宣告
 		
-		List<ProductBean> chickenList=productService.findByRelatedCategory(2); //撈出商品種類2雞肉
-		List<ProductBean> beefList=productService.findByRelatedCategory(3);    //撈出商品種類3牛肉
+		List<ProductBean> chickenList=productService.findNutritionistByRelatedCategory(2); //撈出商品種類2雞肉
+		List<ProductBean> beefList=productService.findNutritionistByRelatedCategory(3);    //撈出商品種類3牛肉
 		chickenList.addAll(beefList);                                          //兩種類相加 
 		ProductBean productBean1= chickenList.get(r.nextInt(chickenList.size())); //隨機從兩種類抓一筆
 		
-		List<ProductBean> porkList=productService.findByRelatedCategory(4);
-		List<ProductBean> FishList=productService.findByRelatedCategory(5);
+		List<ProductBean> porkList=productService.findNutritionistByRelatedCategory(4);
+		List<ProductBean> FishList=productService.findNutritionistByRelatedCategory(5);
 		porkList.addAll(FishList);
 		ProductBean productBean2=porkList.get(r.nextInt(porkList.size()));
 		
-		List<ProductBean> fruitList=productService.findByRelatedCategory(1);
+		List<ProductBean> fruitList=productService.findNutritionistByRelatedCategory(1);
 		ProductBean productBean3 = fruitList.get(r.nextInt(fruitList.size()));
 		
-		List<ProductBean> drinklist=productService.findByRelatedCategory(7);
+		List<ProductBean> drinklist=productService.findNutritionistByRelatedCategory(7);
 		ProductBean productBean4 = drinklist.get(r.nextInt(drinklist.size()));
 		 
 		model.addAttribute("nutritionistBean", nutritionistBean);

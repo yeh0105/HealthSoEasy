@@ -249,8 +249,8 @@ l19 20 3 -22 c2 -12 1 -28 -2 -36z"/>
 </div>
 <br>
 <div>
-		<fieldset style="width: 900px;">
-			<legend>新增營養師</legend>
+		<fieldset style="width: 900px;background-color: #f2f2f2;border-radius: 20px;">
+			<legend style="color:#3a7ca5;font-weight: bold;font-size: large;margin-bottom: 20px;">新增營養師</legend>
 			<form:form method="POST" action="add"
 				modelAttribute="nutritionistBean" enctype='multipart/form-data'>
 				<table>
