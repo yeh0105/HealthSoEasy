@@ -191,6 +191,8 @@ public class ProductController {
 		    			//3.存在FavoriteStatus=True;不存在FavoriteStatus=False
 		    			//4.將FavoriteStatus狀態存進model.addAttribute
 		    			product.setFavoriteStatus(true);
+				     	System.out.println("查詢出愛心是有的");     	
+
 		    			}
 //		    			sportMapBean.setFavoriteStatus(false);
 		    				
@@ -427,52 +429,6 @@ public class ProductController {
 		
 		// ==================(E)UPDATE===============================================
 
-		
-		
-		
-		
-		//===============查詢所有文章的 TOP3========================
-		
-//		
-//		// 查詢所有文章的 TOP3
-//		@GetMapping(value = "/getTop3Product")
-//		public @ResponseBody List<ProductBean> getTop3() {
-//
-//			List<PostBean> list = postService.findTop3();
-//
-//			return list;
-//		}
-		
-		//===================================================
-		
-		
-//		//上傳個人
-//		@PostMapping(value = "/getProductImage")
-//		public String ProductImg(@RequestParam("getProductImage") Integer productId, @RequestParam("getProductImage")MultipartFile productMultiImg) {
-//					
-//			ProductBean originalProduct = productService.findProductById(productId);
-////			//更新檢查訊息
-//			Map<String, String> updateMessage = new HashMap<String, String>();
-//			
-//			//處理圖片MultipartFile --> Blob
-//			if(productMultiImg != null && !productMultiImg.isEmpty()) {
-//				try {
-//					byte[] bImg = productMultiImg.getBytes();
-//					Blob blob = new SerialBlob(bImg);
-//					originalProduct.setProductImg(blob);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//					
-//			//save原始物件
-//			productService.save(originalProduct);
-//			updateMessage.put("updateSuccessMessage", "圖片更新成功");
-//			return "/mall/updateProduct";
-//		}
-//		
-		
-		
 		
 	
 

@@ -17,7 +17,7 @@
 		
 		emailSubmit.addEventListener("click", function(){
 			errortext.innerHTML = "請稍後";
-			xhr.open('POST', "<c:url value='/passwordResetValidate/sendCustomerValidationEmail.do'/>" , true);
+			xhr.open('POST', "<c:url value='/passwordResetValidate/sendShopValidationEmail.do'/>" , true);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send("email=" + emailInput.value);
 			

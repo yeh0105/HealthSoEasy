@@ -278,6 +278,12 @@ public class ShopController {
 		return "redirect:/shopController/showShopPage"; 
 	
 	}
+	
+	// 導向忘記密碼
+	@GetMapping("/shopForgotPassword")
+	public String shopForgotPassword() {
+		return "/shop/shopPasswordReset";
+	}
 //======================================================================	
 	
 }

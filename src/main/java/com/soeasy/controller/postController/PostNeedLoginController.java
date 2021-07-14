@@ -407,6 +407,7 @@ public class PostNeedLoginController {
 
 		// 會員積分為+10
 		originalBean.setCustomerScore(originalBean.getCustomerScore() + 10);
+		model.addAttribute("customerSignInSuccess", originalBean);
 
 		// 找出對應的PostCategory物件
 		PostCategoryBean postCategoryBean = postCategoryService

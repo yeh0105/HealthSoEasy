@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soeasy.model.CustomerBean;
@@ -53,7 +54,7 @@ public class AdminOrder {
 	
 	
 	// 刪除一筆紀錄
-			@GetMapping("/adminOrder/delete/{orderId}")
+			@PostMapping("/adminOrder/delete/{orderId}")
 			public String delete(@PathVariable("orderId") Integer orderId) {
 		       orderService.deleteById(orderId);
 	        	System.out.println("刪除訂單#"+orderId);

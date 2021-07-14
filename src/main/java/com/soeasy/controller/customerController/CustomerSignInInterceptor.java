@@ -23,18 +23,24 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 			"/sportMapNeedLogin/*",
 			"/favoriteController/*",
 			"/PostNeedLoginController/*",
-			"/ReplyNeedLoginController/*"
+			"/ReplyNeedLoginController/*",
+			"/mall/cart/index"
 	);
 	//需要登入但登入後不能跳轉 名單
 	List<String> postUrls = Arrays.asList(
 			"/favoriteController/*",
-			"/sportMapNeedLogin/getScore/*"
+			"/sportMapNeedLogin/getScore/*",
+			"/mall/buy/{productId}",
+			"/mall/buyFromGoods/{productId}"
 	);
 	//不需要登入但登入後需跳轉 名單
 	List<String> recordUrls = Arrays.asList(
 			"/sportMapController/sportMap/*",
 			"/postIndex",
-			"/postByCategory"
+			"/postByCategory",
+			"/mall/mallIndex",
+			"/mall/lists/",
+			"/nutritionistController/nutritionist/*"
 	);
 	String servletPath;
 	String contextPath;

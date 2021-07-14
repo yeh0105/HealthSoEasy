@@ -217,7 +217,7 @@ public class AdminProduct {
 
 	// 刪除一筆紀錄
 	// 送不出DELETE 先用product
-	@GetMapping("/adminDelete/{productId}")
+	@PostMapping("/adminDelete/{productId}")
 	public String delete(@PathVariable("productId") Integer productId) {
 		productService.deleteById(productId);
 		System.out.println("刪除products");
