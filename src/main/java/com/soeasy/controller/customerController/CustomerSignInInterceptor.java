@@ -39,7 +39,7 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 			"/postIndex",
 			"/postByCategory",
 			"/mall/mallIndex",
-			"/mall/lists/",
+			"/mall/lists/product",
 			"/nutritionistController/nutritionist/*"
 	);
 	String servletPath;
@@ -60,6 +60,7 @@ public class CustomerSignInInterceptor implements HandlerInterceptor {
 		servletPath = request.getServletPath();  
 		contextPath = request.getContextPath();
 		requestURI  = request.getRequestURI();
+		
 		
 		isRequestedSessionIdValid = request.isRequestedSessionIdValid();
 		

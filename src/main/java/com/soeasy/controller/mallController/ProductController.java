@@ -83,7 +83,7 @@ public class ProductController {
 		@RequestMapping("/lists")
 		public String viewPage(Model model){
 			String keyword = null;
-			return ListByPage(model,1,"productId","asc",keyword,null);
+			return ListByPage(model,1,"productId","desc",keyword,null);
 		}
 
 
