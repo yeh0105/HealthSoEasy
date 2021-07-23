@@ -256,9 +256,7 @@ public class PostNeedLoginController {
 		// 預設表單資料
 		ReplyBean replyBean = new ReplyBean();
 
-		replyBean.setReplyContent("　武藏：既然你誠心誠意的發問了\r\n" + "小次郎：我們就大發慈悲的告訴你\r\n" + "　武藏：為了防止世界被破壞\r\n"
-				+ "小次郎：為了守護世界的和平\r\n" + "　武藏：貫徹愛與真實的邪惡\r\n" + "小次郎：可愛又迷人的反派角色\r\n" + "　武藏：武藏！\r\n" + "小次郎：小次郎！\r\n"
-				+ "　武藏：我們是穿梭在銀河中的火箭隊\r\n" + "小次郎：白洞、白色的明天正等著我們\r\n" + "　喵喵：就是這樣喵！");
+		replyBean.setReplyContent("好友去呀!想參加!");
 
 		model.addAttribute("replyBean", replyBean);
 

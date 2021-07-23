@@ -57,17 +57,33 @@ public class PostController {
 	@Autowired
 	ServletContext context;
 
+//	// 積分
+//	@GetMapping(value = "/getNewScore")
+//	public String getNewScore(Model model) {
+//
+//		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
+//
+//		CustomerBean orginalCustomer = customerService.findByCustomerId(customerBean.getCustomerId());
+//
+//		Integer customerScore = orginalCustomer.getCustomerScore();
+//
+//		System.err.println("customerScore=" + customerScore);
+//
+//		model.addAttribute("customerScore", customerScore);
+//
+//		return "customer/customerPage";
+//	}
+
 	// 文章模糊查詢
 	@GetMapping(value = "/getAllPostsForKeyword")
-	public String findAllForKeyword( @Param("keyword") String keyword, Model model) {
-		
+	public String findAllForKeyword(@Param("keyword") String keyword, Model model) {
+
 		System.err.println("進入查詢");
-		System.err.println("keyword="+keyword);
-		
+		System.err.println("keyword=" + keyword);
 
 		List<PostBean> postBeans = postService.findAllForKeyword(keyword);
 //		System.err.println(postBeans);
-		
+
 		CustomerBean customerBean = (CustomerBean) model.getAttribute("customerSignInSuccess");
 //		System.err.println("customerBean="+customerBean);
 		String post = "post";
@@ -93,12 +109,12 @@ public class PostController {
 				} else {
 					postBean.setFavoriteStatus(false);
 				}
-				System.err.println("FavoriteStatus="+postBean.getFavoriteStatus());
+				System.err.println("FavoriteStatus=" + postBean.getFavoriteStatus());
 
 			}
 
 		}
-		
+
 		model.addAttribute("postBeans", postBeans);
 
 		return "post/postByKeyword";
